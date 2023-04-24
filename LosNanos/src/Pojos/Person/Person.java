@@ -1,4 +1,4 @@
-package Pojos;
+package Pojos.Person;
 
 import java.io.Serializable;
 import java.util.Objects;

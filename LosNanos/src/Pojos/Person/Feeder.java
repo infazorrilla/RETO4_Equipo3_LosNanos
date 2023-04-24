@@ -1,4 +1,4 @@
-package Pojos;
+package Pojos.Person;
 
 import java.util.Objects;
 
