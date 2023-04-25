@@ -1,15 +1,13 @@
-package ejemplo;
+package Gestor;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-import ejemplo.pojos.Alumno;
-import ejemplo.utils.DBUtils;
 
 // Clase para trabajar con la tabla alumno
-public class DBAccessExampleForDelete {
+public class GestorDelete {
 
 	// Modificamos la edad de un alumno
 	private void borrarPorNombre(Alumno ejemplo){

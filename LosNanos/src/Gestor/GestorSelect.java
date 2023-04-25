@@ -1,4 +1,4 @@
-package ejemplo;
+package Gestor;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,12 +7,9 @@ import java.sql.Statement;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 
-import ejemplo.menu.Menu;
-import ejemplo.pojos.Alumno;
-import ejemplo.utils.DBUtils;
 
 // Clase para trabajar con la tabla alumno
-public class DBAccessExampleForSelect {
+public class GestorSelect {
 
 	// Retorna todas las filas de la tabla alumno
 	// Si no hay nada, retorna NULL
