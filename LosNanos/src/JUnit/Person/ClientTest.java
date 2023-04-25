@@ -3,16 +3,14 @@ package JUnit.Person;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.Serializable;
 
 import org.junit.jupiter.api.Test;
 
 import Pojos.Person.Client;
-import Pojos.Person.Employee;
 
-class ClientTest {
+class ClientTest{
 
 	// Serializacion
 	@Test
@@ -27,98 +25,98 @@ class ClientTest {
 	public void testName() {
 		Client client = new Client(null, null, null, null, null, 0);
 		String name = "1111111";
-		employee.setName(name);
-		assertNotEquals("The name it is not accessible", name, employee.getName());
+		client.setName(name);
+		assertNotEquals("The name it is not accessible", name, client.getName());
 	}
 
 	@Test
 	public void testSurName() {
 		Client client = new Client(null, null, null, null, null, 0);
 		String surName = "1111111";
-		employee.setSurname(surName);
-		assertNotEquals("The name it is not accessible", surName, employee.getSurname());
+		client.setSurname(surName);
+		assertNotEquals("The name it is not accessible", surName, client.getSurname());
 	}
 
 	@Test
 	public void testId() {
 		Client client = new Client(null, null, null, null, null, 0);
 		String id = "99999991";
-		employee.setId(id);
-		assertNotEquals("The name it is not accessible", id, employee.getId());
+		client.setId(id);
+		assertNotEquals("The name it is not accessible", id, client.getId());
 	}
 
 	@Test
 	public void testUser() {
 		Client client = new Client(null, null, null, null, null, 0);
 		String user = "1111111";
-		employee.setSurname(user);
-		assertNotEquals("The user it is not accessible", user, employee.getUser());
+		client.setSurname(user);
+		assertNotEquals("The user it is not accessible", user, client.getUser());
 	}
 
 	@Test
 	public void testPassword() {
 		Client client = new Client(null, null, null, null, null, 0);
 		String password = "1111111";
-		employee.setSurname(password);
-		assertNotEquals("The password it is not accessible", password, employee.getPassword());
+		client.setSurname(password);
+		assertNotEquals("The password it is not accessible", password, client.getPassword());
 	}
 
 	@Test
 	public void testSsNumber() {
 		Client client = new Client(null, null, null, null, null, 0);
-		int ssNumber = 1111111;
-		employee.setSsNumber(ssNumber);
-		assertNotEquals("The password it is not accessible", ssNumber, employee.getSsNumber());
+		int clientId = 11111111;
+		client.setClientId(clientId);
+		assertNotEquals("The password it is not accessible", clientId, client.getClientId());
 	}
 
 	@Test
 	public void testPersonExiste() {
 		Client client = new Client(null, null, null, null, null, 0);
-		employee.setName("Ibai");
-		employee.setSurname("Torre");
-		employee.setId("12345678A");
-		employee.setUser("Ibai");
-		employee.setPassword("acbd1234");
-		employee.setSsNumber(1);
-		Client client = new Client(null, null, null, null, null, 0);
-		otherEmployee.setName("Rodri");
-		otherEmployee.setSurname("Gomez");
-		otherEmployee.setId("87654321A");
-		otherEmployee.setUser("Rodri");
-		otherEmployee.setPassword("1234abcd");
-		otherEmployee.setSsNumber(11);
+		client.setName("Ibai");
+		client.setSurname("Torre");
+		client.setId("12345678A");
+		client.setUser("Ibai");
+		client.setPassword("acbd1234");
+		client.setClientId(1);
+		Client othetClient = new Client(null, null, null, null, null, 0);
+		othetClient.setName("Rodri");
+		othetClient.setSurname("Gomez");
+		othetClient.setId("87654321A");
+		othetClient.setUser("Rodri");
+		othetClient.setPassword("1234abcd");
+		othetClient.setClientId(11);
 
-		assertEquals("people are not the same", employee, otherEmployee);
+		assertEquals("people are not the same", client, othetClient);
 
 	}
 
 	@Test
 	public void testPersonNoExiste() {
 		Client client = new Client(null, null, null, null, null, 0);
-		employee.setName("Ibai");
-		employee.setSurname("Torre");
-		employee.setId("12345678A");
-		employee.setUser("Ibai");
-		employee.setPassword("acbd1234");
-		employee.setSsNumber(1);
-		Client client = new Client(null, null, null, null, null, 0);
-		otherEmployee.setName("Ibai");
-		otherEmployee.setSurname("Torre");
-		otherEmployee.setId("12345678A");
-		otherEmployee.setUser("Ibai");
-		otherEmployee.setPassword("acbd1234");
-		otherEmployee.setSsNumber(1);
+		client.setName("Ibai");
+		client.setSurname("Torre");
+		client.setId("12345678A");
+		client.setUser("Ibai");
+		client.setPassword("acbd1234");
+		client.setClientId(1);
+		Client othetClient = new Client(null, null, null, null, null, 0);
+		othetClient.setName("Ibai");
+		othetClient.setSurname("Torre");
+		othetClient.setId("12345678A");
+		othetClient.setUser("Ibai");
+		othetClient.setPassword("acbd1234");
+		othetClient.setClientId(1);
 
-		assertNotEquals("usuarios son iguales!!!!", employee, otherEmployee);
+		assertNotEquals("usuarios son iguales!!!!", client, othetClient);
 	}
 
 	@Test
 	public void testHashCode() {
 		Client client = new Client(null, null, null, null, null, 0);
-		assertEquals("hasCode no encontrado!!!", 0, employee.hashCode());
+		assertEquals("hasCode no encontrado!!!", 0, client.hashCode());
 		String id = "12345678A";
-		employee.setId(id);
-		assertEquals("hashCode-2 no encontrado!!!!", id.hashCode(), employee.hashCode());
+		client.setId(id);
+		assertEquals("hashCode-2 no encontrado!!!!", id.hashCode(), client.hashCode());
 	}
 
 	@Test
@@ -132,7 +130,7 @@ class ClientTest {
 		client.setClientId(1);
 		String expected = "Person [name=" + client.getName() + ", surname=" + client.getSurname() + ", id="
 				+ client.getId() + ", user=" + client.getUser() + ", password=" + client.getPassword()
-				+ ", ssNumber=" + client. + "]";
+				+ ", ssNumber=" + client.getClientId() + "]";
 
 		assertEquals(expected, client.toString());
 	}
