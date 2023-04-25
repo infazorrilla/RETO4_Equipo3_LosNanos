@@ -1,4 +1,4 @@
-package ejemplo.utils;
+package utils;
 
 // Configuraciones necesarias para la Base de Datos de MySql
 public class DBUtils {

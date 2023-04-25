@@ -2,6 +2,9 @@ package Gestor;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import utils.DBUtils;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 

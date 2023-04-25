@@ -268,15 +268,14 @@ public class managerBoss {
 				int ssNumber = resultSet.getInt("ssNumber");
 				String specializedAnimalType = resultSet.getString("specializedAnimalType");
 
-				vet.setName(name);
-				vet.setSurname(surName);
-				vet.setId(id);
-				vet.setUser(user);
-				vet.setPassword(password);
-				vet.setSsNumber(ssNumber);
-				vet.setSpecializedAnimalType(specializedAnimalType);
+				feeder.setName(name);
+				feeder.setSurname(surName);
+				feeder.setId(id);
+				feeder.setUser(user);
+				feeder.setPassword(password);
+				feeder.setSsNumber(ssNumber);
 
-				ret.add(vet);
+				ret.add(Feeder);
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Error con la BBDD - " + sqle.getMessage());
