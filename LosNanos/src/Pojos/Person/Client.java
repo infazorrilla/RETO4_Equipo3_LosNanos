@@ -2,12 +2,12 @@ package Pojos.Person;
 
 import java.util.Objects;
 
-public class Cliente extends Person {
+public class Client extends Person {
 
 	private int clientId;
 	private static final long serialVersionUID = 6499057011243982254L;
 
-	public Cliente(String name, String surname, String id, String user, String password, int clientId) {
+	public Client(String name, String surname, String id, String user, String password, int clientId) {
 		super(name, surname, id, user, password);
 
 		this.clientId = clientId;
@@ -41,7 +41,7 @@ public class Cliente extends Person {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		Client other = (Client) obj;
 		return clientId == other.clientId;
 	}
 
