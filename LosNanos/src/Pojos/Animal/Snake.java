@@ -13,9 +13,9 @@ public class Snake extends Reptile{
 	
 
 
-	public Snake(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			boolean vaccinated, String diet, Date shedSkin, boolean poisonus, int zoneId) {
-		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin);
+	public Snake(int id, String name, String scientificName, float height, float weight, String bornDate,
+			int i, String diet, String shedSkin, boolean poisonus, int zoneId) {
+		super(id, name, scientificName, height, weight, bornDate, i, diet, shedSkin);
 		this.poisonus = poisonus;
 		this.zoneId = zoneId;
 	}

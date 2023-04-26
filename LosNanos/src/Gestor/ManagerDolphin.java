@@ -40,7 +40,7 @@ public class ManagerDolphin {
 					dolphin.getHeight() + "', '" + 
 					dolphin.getWeight() + "', '" + 
 					dolphin.getBornDate() + "', '" + 
-					dolphin.isVaccinated() + "', '" + 
+					dolphin.getVaccinated() + "', '" + 
 					dolphin.getDiet() + "', '" + 
 					dolphin.getAnimalTipe() + "', '" + 
 					dolphin.getZoneId() + "', '" + 
@@ -158,8 +158,8 @@ public ArrayList <Dolphin> getDolphin (){
             String scientifiName = resultSet.getString("scientifiName");
             float height = resultSet.getFloat("height");
             float weight = resultSet.getFloat("weight");
-            Date bornDate = resultSet.getDate("bornDate");
-            boolean vaccinated = resultSet.getBoolean("vaccinated");
+            String bornDate = resultSet.getString("bornDate");
+            int vaccinated = resultSet.getInt("vaccinated");
             String diet = resultSet.getString("diet");
             String animalTipe = resultSet.getString("animalTipe");
             int zoneId = resultSet.getInt("ZoneId");

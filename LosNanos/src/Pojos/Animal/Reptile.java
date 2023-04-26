@@ -8,22 +8,34 @@ public abstract class Reptile extends Animal{
 
 	private static final long serialVersionUID = 7761481468131552098L;
 	
-	private Date shedSkin;
+	private String shedSkin;
 
 
-	public Reptile(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			boolean vaccinated, String diet, Date shedSkin) {
-		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet);
+	public Reptile(int id, String name, String scientificName, float height, float weight, String bornDate,
+			int i, String diet, String shedSkin) {
+		super(id, name, scientificName, height, weight, bornDate, i, diet);
 		this.shedSkin = shedSkin;
 	}
 
-	public Date getShedSkin() {
+
+
+	public String getShedSkin() {
 		return shedSkin;
 	}
 
-	public void setShedSkin(Date shedSkin) {
+
+
+	public void setShedSkin(String shedSkin) {
 		this.shedSkin = shedSkin;
 	}
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
 
 	@Override
 	public int hashCode() {

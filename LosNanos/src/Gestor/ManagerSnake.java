@@ -33,11 +33,10 @@ public class ManagerSnake {
 			statement = connection.createStatement();
 
 			// Montamos la SQL
-			String sql = "insert into snakecomplete (name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin, zoneId, poisonus) VALUES ('"
+			String sql = "insert into reptile (name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin) VALUES ('"
 					+ snake.getName() + "', '" + snake.getScientificName() + "', '" + snake.getHeight() + "', '"
-					+ snake.getWeight() + "', '" + snake.getBornDate() + "', '" + snake.isVaccinated() + "', '"
-					+ snake.getDiet() + "', '" + snake.getShedSkin() + "', '" + snake.getZoneId() + "', '"
-					+ snake.isPoisonus() + "')";
+					+ snake.getWeight() + "', '" + snake.getBornDate() + "', '" + snake.getVaccinated() + "', '"
+					+ snake.getDiet() + "', '" + snake.getShedSkin() + "')";
 
 			// La ejecutamos...
 			statement.executeUpdate(sql);
@@ -81,7 +80,7 @@ public class ManagerSnake {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "delete from snakecomplete where nombre = ?";
+			String sql = "delete from reptile where name = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, snake.getName());
 
@@ -115,7 +114,7 @@ public class ManagerSnake {
 		ArrayList<Snake> ret = null;
 
 		// SQL que queremos lanzar
-		String sql = "select * from sanakecomplete";
+		String sql = "select * from reptile";
 
 		// La conexion con BBDD
 		Connection connection = null;
@@ -144,25 +143,24 @@ public class ManagerSnake {
 				if (null == ret)
 					ret = new <Snake>ArrayList();
 
-				Snake snake = new Snake(0, sql, sql, 0, 0, null, false, null, null, false, 0);
+				Snake snake = new Snake(0, sql, sql, 0, 0, sql, 0, sql, null, false, 0);
 
 				// Sacamos las columnas del RS
 				int id = resultSet.getInt("id");
 				String name = resultSet.getString("name");
-				String scientifiName = resultSet.getString("scientifiName");
+				String scientificName = resultSet.getString("scientificName");
 				float height = resultSet.getFloat("height");
 				float weight = resultSet.getFloat("weight");
-				Date bornDate = resultSet.getDate("bornDate");
-				boolean vaccinated = resultSet.getBoolean("vaccinated");
+				String bornDate = resultSet.getString("bornDate");
+				int vaccinated = resultSet.getInt("vaccinated");
 				String diet = resultSet.getString("diet");
-				Date shedSkin = resultSet.getDate("shedSkin");
+				String shedSkin = resultSet.getString("shedSkin");
 				int zoneId = resultSet.getInt("ZoneId");
-				boolean poisonus = resultSet.getBoolean("poisonus");
 
 				// Metemos los datos a Ejemplo
 				snake.setId(id);
 				snake.setName(name);
-				snake.setScientificName(scientifiName);
+				snake.setScientificName(scientificName);
 				snake.setHeight(height);
 				snake.setWeight(weight);
 				snake.setBornDate(bornDate);
@@ -170,7 +168,6 @@ public class ManagerSnake {
 				snake.setDiet(diet);
 				snake.setShedSkin(shedSkin);
 				snake.setZoneId(zoneId);
-				snake.setPoisonus(poisonus);
 
 				// Lo guardamos en ret
 				ret.add(snake);
