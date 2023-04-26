@@ -16,7 +16,7 @@ import utils.DBUtils;
 public class ManagerDolphin {
 
 	// Inserta un alumno
-	private void insertDolphin(Dolphin dolphin){
+	public void insertDolphin(Dolphin dolphin){
 		
 		// La conexion con BBDD
 		Connection connection = null;
@@ -74,7 +74,7 @@ public class ManagerDolphin {
 	
 	
 	
-private void borrarPorNombre(Dolphin dolphin){
+public void deleteDolphin(Dolphin dolphin){
 		
 		// La conexion con BBDD
 		Connection connection = null;
@@ -118,7 +118,7 @@ private void borrarPorNombre(Dolphin dolphin){
 		}
 	}
 
-private ArrayList <Dolphin> getDolphin (){
+public ArrayList <Dolphin> getDolphin (){
 	ArrayList <Dolphin> ret = null;
 	
 	// SQL que queremos lanzar
@@ -161,7 +161,7 @@ private ArrayList <Dolphin> getDolphin (){
             float weight = resultSet.getFloat("weight");
             Date bornDate = resultSet.getDate("bornDate");
             boolean vaccinated = resultSet.getBoolean("vaccinated");
-            String diet = resultSet.getString("diet");
+            Diet diet = resultSet.getDiet("diet");
             String animalTipe = resultSet.getString("animalTipe");
             int zoneId = resultSet.getInt("ZoneId");
             int durationUnderWater = resultSet.getInt("durationUnderWater");
