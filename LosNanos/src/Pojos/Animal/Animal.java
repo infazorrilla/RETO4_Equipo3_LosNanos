@@ -15,14 +15,12 @@ public abstract class Animal implements Serializable {
 	private float weight = 0;
 	private Date bornDate;
 	private boolean vaccinated = false;
-	public enum Diet {CARNIBVOROUS, HERBIVOROUS};
-	private Diet diet = null;
+	private String diet = null;
 
 	
 
 	public Animal(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			boolean vaccinated, Diet diet) {
-		super();
+			boolean vaccinated, String diet) {
 		this.id = id;
 		this.name = name;
 		this.scientificName = scientificName;
@@ -32,6 +30,7 @@ public abstract class Animal implements Serializable {
 		this.vaccinated = vaccinated;
 		this.diet = diet;
 	}
+
 
 
 	public int getId() {
@@ -39,9 +38,11 @@ public abstract class Animal implements Serializable {
 	}
 
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 
 
 	public String getName() {
@@ -49,9 +50,11 @@ public abstract class Animal implements Serializable {
 	}
 
 
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 
 	public String getScientificName() {
@@ -59,9 +62,11 @@ public abstract class Animal implements Serializable {
 	}
 
 
+
 	public void setScientificName(String scientificName) {
 		this.scientificName = scientificName;
 	}
+
 
 
 	public float getHeight() {
@@ -69,9 +74,11 @@ public abstract class Animal implements Serializable {
 	}
 
 
+
 	public void setHeight(float height) {
 		this.height = height;
 	}
+
 
 
 	public float getWeight() {
@@ -79,9 +86,11 @@ public abstract class Animal implements Serializable {
 	}
 
 
+
 	public void setWeight(float weight) {
 		this.weight = weight;
 	}
+
 
 
 	public Date getBornDate() {
@@ -89,9 +98,11 @@ public abstract class Animal implements Serializable {
 	}
 
 
+
 	public void setBornDate(Date bornDate) {
 		this.bornDate = bornDate;
 	}
+
 
 
 	public boolean isVaccinated() {
@@ -99,19 +110,23 @@ public abstract class Animal implements Serializable {
 	}
 
 
+
 	public void setVaccinated(boolean vaccinated) {
 		this.vaccinated = vaccinated;
 	}
 
 
-	public Diet getDiet() {
+
+	public String getDiet() {
 		return diet;
 	}
 
 
-	public void setDiet(Diet diet) {
+
+	public void setDiet(String diet) {
 		this.diet = diet;
 	}
+
 
 
 	public static long getSerialversionuid() {
@@ -119,10 +134,12 @@ public abstract class Animal implements Serializable {
 	}
 
 
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(bornDate, diet, height, id, name, scientificName, vaccinated, weight);
 	}
+
 
 
 	@Override
@@ -134,11 +151,12 @@ public abstract class Animal implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Animal other = (Animal) obj;
-		return Objects.equals(bornDate, other.bornDate) && diet == other.diet
+		return Objects.equals(bornDate, other.bornDate) && Objects.equals(diet, other.diet)
 				&& Float.floatToIntBits(height) == Float.floatToIntBits(other.height) && id == other.id
 				&& Objects.equals(name, other.name) && Objects.equals(scientificName, other.scientificName)
 				&& vaccinated == other.vaccinated && Float.floatToIntBits(weight) == Float.floatToIntBits(other.weight);
 	}
+
 
 
 	@Override
@@ -147,6 +165,7 @@ public abstract class Animal implements Serializable {
 				+ ", weight=" + weight + ", bornDate=" + bornDate + ", vaccinated=" + vaccinated + ", diet=" + diet
 				+ "]";
 	}
+
 
 	
 	

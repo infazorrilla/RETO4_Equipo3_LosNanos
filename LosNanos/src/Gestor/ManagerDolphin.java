@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Pojos.Animal.Animal.Diet;
 import Pojos.Animal.Dolphin;
 import utils.DBUtils;
 
@@ -161,7 +160,7 @@ public ArrayList <Dolphin> getDolphin (){
             float weight = resultSet.getFloat("weight");
             Date bornDate = resultSet.getDate("bornDate");
             boolean vaccinated = resultSet.getBoolean("vaccinated");
-            Diet diet = resultSet.getDiet("diet");
+            String diet = resultSet.getString("diet");
             String animalTipe = resultSet.getString("animalTipe");
             int zoneId = resultSet.getInt("ZoneId");
             int durationUnderWater = resultSet.getInt("durationUnderWater");

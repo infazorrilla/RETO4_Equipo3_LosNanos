@@ -9,13 +9,12 @@ public class Dolphin extends Aquatic{
 	private static final long serialVersionUID = 2131101451801639958L;
 	
 	private int durationUnderWater = 0;
+	private int zoneId = 0;
 
 	public Dolphin(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			boolean vaccinated, Diet diet, AnimalTipe animalTipe, int zoneId) {
-		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe, zoneId);
-		// TODO Auto-generated constructor stub
+			boolean vaccinated, String diet, String animalTipe, int zoneId) {
+		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe);
 	}
-
 
 	public int getDurationUnderWater() {
 		return durationUnderWater;
@@ -25,11 +24,23 @@ public class Dolphin extends Aquatic{
 		this.durationUnderWater = durationUnderWater;
 	}
 
+	public int getZoneId() {
+		return zoneId;
+	}
+
+	public void setZoneId(int zoneId) {
+		this.zoneId = zoneId;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(durationUnderWater);
+		result = prime * result + Objects.hash(durationUnderWater, zoneId);
 		return result;
 	}
 
@@ -42,13 +53,16 @@ public class Dolphin extends Aquatic{
 		if (getClass() != obj.getClass())
 			return false;
 		Dolphin other = (Dolphin) obj;
-		return durationUnderWater == other.durationUnderWater;
+		return durationUnderWater == other.durationUnderWater && zoneId == other.zoneId;
 	}
 
 	@Override
 	public String toString() {
-		return "Dolphin [durationUnderWater=" + durationUnderWater + "]";
+		return "Dolphin [durationUnderWater=" + durationUnderWater + ", zoneId=" + zoneId + "]";
 	}
+
+
+
 	
 	
 
