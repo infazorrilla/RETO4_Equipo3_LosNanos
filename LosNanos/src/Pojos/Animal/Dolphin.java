@@ -6,20 +6,16 @@ import java.util.Objects;
 public class Dolphin extends Aquatic{
 
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2131101451801639958L;
 	
 	private int durationUnderWater = 0;
 
-
 	public Dolphin(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			boolean vaccinated, Diet diet, AnimalTipe animalTipe, int durationUnderWater) {
-		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe);
-		this.durationUnderWater = durationUnderWater;
-
+			boolean vaccinated, Diet diet, AnimalTipe animalTipe, int zoneId) {
+		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe, zoneId);
+		// TODO Auto-generated constructor stub
 	}
+
 
 	public int getDurationUnderWater() {
 		return durationUnderWater;
