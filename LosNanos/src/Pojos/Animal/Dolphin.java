@@ -11,8 +11,8 @@ public class Dolphin extends Aquatic{
 	private int durationUnderWater = 0;
 	private int zoneId = 0;
 
-	public Dolphin(int id, String name, String scientificName, float height, float weight, String bornDate,
-			boolean vaccinated, String diet, String animalTipe, int zoneId) {
+	public Dolphin(int id, String name, String scientificName, float height, float weight, Date bornDate,
+			int vaccinated, String diet, String animalTipe, int zoneId) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe);
 	}
 

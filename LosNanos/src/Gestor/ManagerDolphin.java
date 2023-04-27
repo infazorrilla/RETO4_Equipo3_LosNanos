@@ -14,26 +14,21 @@ import utils.DBUtils;
 
 public class ManagerDolphin {
 
-	// Inserta un alumno
 	public void insertDolphin(Dolphin dolphin){
 		
-		// La conexion con BBDD
+
 		Connection connection = null;
 		
-		// Vamos a lanzar una sentencia SQL contra la BBDD
+
 		Statement statement = null;
 		
 		try {
-			// El Driver que vamos a usar
 			Class.forName(DBUtils.DRIVER);
 			
-			// Abrimos la conexion con BBDD
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			
-			// Vamos a lanzar la sentencia...
 			statement = connection.createStatement();
 			
-			// Montamos la SQL 
 			String sql = "insert into dolphincomplete (name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe, zoneId, durationUnderWater) VALUES ('" +  
 					dolphin.getName() + "', '" + 
 					dolphin.getScientificName() + "', '" + 
@@ -150,7 +145,7 @@ public ArrayList <Dolphin> getDolphin (){
 			if (null == ret)
 				ret = new <Dolphin> ArrayList ();
 			
-			Dolphin dolphin = new Dolphin (0, sql, sql, 0, 0, null, false, null, null, 0);
+			Dolphin dolphin = new Dolphin (0, sql, sql, 0, 0, null, 0, sql, sql, 0);
 			
 			// Sacamos las columnas del RS
 			int id = resultSet.getInt("id");
@@ -158,7 +153,7 @@ public ArrayList <Dolphin> getDolphin (){
             String scientifiName = resultSet.getString("scientifiName");
             float height = resultSet.getFloat("height");
             float weight = resultSet.getFloat("weight");
-            String bornDate = resultSet.getString("bornDate");
+            Date bornDate = resultSet.getDate("bornDate");
             int vaccinated = resultSet.getInt("vaccinated");
             String diet = resultSet.getString("diet");
             String animalTipe = resultSet.getString("animalTipe");
