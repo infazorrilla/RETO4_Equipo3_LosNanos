@@ -1,4 +1,4 @@
-package Gestor;
+package Manager;
 
 import java.sql.Connection;
 
@@ -13,7 +13,7 @@ import utils.DBUtils;
 
 import java.sql.PreparedStatement;
 
-public class GestorZoo {
+public class ManagerZoo {
 	
 	public ArrayList<Zoo> selectZoo(){
 		ArrayList<Zoo> ret = null;

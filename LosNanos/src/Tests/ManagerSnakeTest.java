@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import org.junit.jupiter.api.Test;
 
-import Gestor.ManagerSnake;
+import Manager.ManagerSnake;
 import Pojos.Animal.Snake;
 
 class ManagerSnakeTest {

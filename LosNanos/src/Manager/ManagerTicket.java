@@ -1,4 +1,4 @@
-package Gestor;
+package Manager;
 
 import java.sql.Connection;
 
@@ -16,7 +16,7 @@ import utils.DBUtils;
 
 import java.sql.PreparedStatement;
 
-public class GestorTickets {
+public class ManagerTicket {
 
 	public ArrayList<Ticket> selectTicket(){
 		ArrayList<Ticket> ret = null;
