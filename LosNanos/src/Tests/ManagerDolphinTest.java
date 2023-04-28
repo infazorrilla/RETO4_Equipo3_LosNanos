@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import Manager.ManagerDolphin;
-import Manager.ManagerSnake;
 import Pojos.Animal.Dolphin;
-import Pojos.Animal.Snake;
-
 
 class ManagerDolphinTest {
 
