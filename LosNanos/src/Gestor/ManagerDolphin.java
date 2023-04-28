@@ -35,7 +35,7 @@ public class ManagerDolphin {
 			java.sql.Date sqlDate = new java.sql.Date(dolphin.getBornDate().getTime());
 
 			
-			String sql = "insert into aquatic (name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe) VALUES ('" + 
+			String sql = "insert into aquatic (name, scientificName, height, weight, bornDate, vaccinated, diet, zoneId, animalTipe) VALUES ('" + 
 					dolphin.getName() + "', '" + 
 					dolphin.getScientificName() + "', '" + 
 					dolphin.getHeight() + "', '" + 
@@ -43,17 +43,17 @@ public class ManagerDolphin {
 					sqlDate + "', '" + 
 					dolphin.getVaccinated() + "', '" + 
 					dolphin.getDiet() + "', '" + 
+					dolphin.getZoneId() + "', '" + 
 					dolphin.getAnimalTipe() + "')";
 			
-//			String sql2 = "insert into dolphincomplete (id, zoneId, durationUnderWater) VALUES ('" + 
-//					dolphin.id() + "', '" + 
-//					dolphin.getZoneId() + "', '" + 
-//					dolphin.getDurationUnderWater() + "')";
+			String sql2 = "insert into dolphin (id_dolphin, zoneId, durationUnderWater) VALUES ('" + 
+					dolphin.getId_dolphin() + "', '" + 
+					dolphin.getDurationUnderWater() + "')";
 			
 			
 			// La ejecutamos...
 			statement.executeUpdate(sql);
-//			statement.executeUpdate(sql2);
+			statement.executeUpdate(sql2);
 
 			
 		} catch (SQLException sqle) {  
@@ -127,7 +127,7 @@ public ArrayList <Dolphin> getDolphin (){
 	ArrayList <Dolphin> ret = null;
 	
 	// SQL que queremos lanzar
-	String sql = "select * from aquatic";
+	String sql = "select * from dolphinComplete";
 	
 	// La conexion con BBDD
 	Connection connection = null;
@@ -156,7 +156,7 @@ public ArrayList <Dolphin> getDolphin (){
 			if (null == ret)
 				ret = new <Dolphin> ArrayList ();
 			
-			Dolphin dolphin = new Dolphin (0, sql, sql, 0, 0, null, 0, sql, sql, 0);
+			Dolphin dolphin = new Dolphin (0, sql, sql, 0, 0, null, 0, sql, sql, 0, 0, 0);
 			
 			// Sacamos las columnas del RS
 			int id = resultSet.getInt("id");
@@ -168,8 +168,9 @@ public ArrayList <Dolphin> getDolphin (){
             int vaccinated = resultSet.getInt("vaccinated");
             String diet = resultSet.getString("diet");
             String animalTipe = resultSet.getString("animalTipe");
-//            int zoneId = resultSet.getInt("ZoneId");
-//            int durationUnderWater = resultSet.getInt("durationUnderWater");
+            int zoneId = resultSet.getInt("ZoneId");
+            int durationUnderWater = resultSet.getInt("durationUnderWater");
+            int id_dolphin = resultSet.getInt("id_dolphin");
 
             
             
@@ -183,8 +184,9 @@ public ArrayList <Dolphin> getDolphin (){
             dolphin.setVaccinated(vaccinated);
             dolphin.setDiet(diet);
             dolphin.setAnimalTipe(animalTipe);
-//            dolphin.setZoneId(zoneId);
-//            dolphin.setDurationUnderWater(durationUnderWater);
+            dolphin.setZoneId(zoneId);
+            dolphin.setDurationUnderWater(durationUnderWater);
+            dolphin.setId_dolphin(id_dolphin);
             
             // Lo guardamos en ret
             ret.add(dolphin);

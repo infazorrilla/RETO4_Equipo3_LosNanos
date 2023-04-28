@@ -11,11 +11,13 @@ public class Aquatic extends Animal {
 	private static final long serialVersionUID = -8764208574991894358L;
 
 	private String animalTipe = null;
+	private int zoneId = 0;
 
 	public Aquatic(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			int vaccinated, String diet, String animalTipe) {
+			int vaccinated, String diet, String animalTipe, int zoneId) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet);
 		this.animalTipe = animalTipe;
+		this.zoneId = zoneId;
 	}
 
 	public String getAnimalTipe() {
@@ -27,6 +29,14 @@ public class Aquatic extends Animal {
 		this.animalTipe = animalTipe;
 	}
 
+
+	public int getZoneId() {
+		return zoneId;
+	}
+
+	public void setZoneId(int zoneId) {
+		this.zoneId = zoneId;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
