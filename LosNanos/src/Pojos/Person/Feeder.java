@@ -6,25 +6,27 @@ public class Feeder extends Employee {
 
 	private static final long serialVersionUID = -6021696531239581430L;
 
-	private enum SpecializedDiet {
-		CARNIVOROUS, HERBIVOROUS
-	};
-
-	private SpecializedDiet specializedDiet = null;
+	private String SpecializedDiet;
 
 	public Feeder(String name, String surname, String id, String user, String password, int ssNumber,
-			SpecializedDiet specializedDiet) {
-		super(name, surname, id, user, password, ssNumber);
-		this.specializedDiet = specializedDiet;
+			String specializedDiet) {
+		super(name, surname, id, user, password, ssNumber, ssNumber);
+		this.SpecializedDiet = specializedDiet;
 	}
 
-	public SpecializedDiet getSpecializedDiet() {
-		return specializedDiet;
+
+
+	public String getSpecializedDiet() {
+		return SpecializedDiet;
 	}
 
-	public void setSpecializedDiet(SpecializedDiet specializedDiet) {
-		this.specializedDiet = specializedDiet;
+
+
+	public void setSpecializedDiet(String specializedDiet) {
+		SpecializedDiet = specializedDiet;
 	}
+
+
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -34,7 +36,7 @@ public class Feeder extends Employee {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(specializedDiet);
+		result = prime * result + Objects.hash(SpecializedDiet);
 		return result;
 	}
 
@@ -47,12 +49,12 @@ public class Feeder extends Employee {
 		if (getClass() != obj.getClass())
 			return false;
 		Feeder other = (Feeder) obj;
-		return specializedDiet == other.specializedDiet;
+		return SpecializedDiet == other.SpecializedDiet;
 	}
 
 	@Override
 	public String toString() {
-		return "Feeder [specializedDiet=" + specializedDiet + "]";
+		return "Feeder [specializedDiet=" + SpecializedDiet + "]";
 	}
 
 }

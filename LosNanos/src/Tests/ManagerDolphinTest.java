@@ -22,7 +22,7 @@ class ManagerDolphinTest {
 		ManagerDolphin managerDolphin = new ManagerDolphin();
 		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
 		Date date = format.parse("12/03/2016");
-		Dolphin dolphinus = new Dolphin (4, "Carlos", "Dolphinus", 10, 10, date, 0, "Carnivorous", "mammals", 2, 100, 1);
+		Dolphin dolphinus = new Dolphin (4, "Carlos", "Dolphinus", 10, 10, date, 0, "Carnivorous", "mammals", 1, 100, 2);
 		managerDolphin.insertDolphin(dolphinus);
 		ArrayList<Dolphin> dolphin = managerDolphin.getDolphin();
         managerDolphin.deleteDolphin(dolphinus);
@@ -34,7 +34,7 @@ class ManagerDolphinTest {
 		ManagerDolphin managerDolphin = new ManagerDolphin();
 		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
 		Date date = format.parse("12/03/2016");
-		Dolphin dolphinus = new Dolphin (4, "Carlos", "Dolphinus", 10, 10, date, 0, "Carnivorous", "mammals", 2, 100, 1);
+		Dolphin dolphinus = new Dolphin (4, "Carlos", "Dolphinus", 10, 10, date, 0, "Carnivorous", "mammals", 1, 100, 2);
 		managerDolphin.insertDolphin(dolphinus);
         ArrayList<Dolphin> dolphin = managerDolphin.getDolphin();
 			String animal = dolphin.get(0).getName();
@@ -50,7 +50,7 @@ class ManagerDolphinTest {
 		ManagerDolphin managerDolphin = new ManagerDolphin();
 		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
 		Date date = format.parse("12/03/2016");
-		Dolphin dolphinus = new Dolphin (4, "Carlos", "Dolphinus", 10, 10, date, 0, "Carnivorous", "mammals", 2, 100, 1);
+		Dolphin dolphinus = new Dolphin (4, "Carlos", "Dolphinus", 10, 10, date, 0, "Carnivorous", "mammals", 2, 100, 2);
         managerDolphin.deleteDolphin(dolphinus);
         ArrayList<Dolphin> dolphin = managerDolphin.getDolphin();
 		assertNull(dolphin);

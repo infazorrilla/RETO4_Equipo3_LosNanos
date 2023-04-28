@@ -6,10 +6,12 @@ public abstract class Employee extends Person {
 
 	private static final long serialVersionUID = 148854585781764229L;
 	private int ssNumber;
+	private int idZoo;
 
-	public Employee(String name, String surname, String id, String user, String password, int ssNumber) {
+	public Employee(String name, String surname, String id, String user, String password, int ssNumber, int idZoo) {
 		super(name, surname, id, user, password);
 		this.ssNumber = ssNumber;
+		this.idZoo = idZoo;
 	}
 
 	public int getSsNumber() {
@@ -18,6 +20,15 @@ public abstract class Employee extends Person {
 
 	public void setSsNumber(int ssNumber) {
 		this.ssNumber = ssNumber;
+	}
+	
+
+	public int getIdZoo() {
+		return idZoo;
+	}
+
+	public void setIdZoo(int idZoo) {
+		this.idZoo = idZoo;
 	}
 
 	public static long getSerialversionuid() {

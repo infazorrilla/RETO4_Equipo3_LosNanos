@@ -9,7 +9,7 @@ public class Vet extends Employee {
 
 	public Vet(String name, String surname, String id, String user, String password, int ssNumber,
 			String specializedAnimalType) {
-		super(name, surname, id, user, password, ssNumber);
+		super(name, surname, id, user, password, ssNumber, ssNumber);
 		this.specializedAnimalType = specializedAnimalType;
 	}
 

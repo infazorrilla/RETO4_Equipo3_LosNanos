@@ -9,7 +9,7 @@ public class Boss extends Employee {
 
 	public Boss(String name, String surname, String id, String user, String password, int ssNumber,
 			int employeeNumCharge) {
-		super(name, surname, id, user, password, ssNumber);
+		super(name, surname, id, user, password, ssNumber, employeeNumCharge);
 		this.employeeNumCharge = employeeNumCharge;
 	}
 
