@@ -16,7 +16,7 @@ import utils.DBUtils;
 
 import java.sql.PreparedStatement;
 
-public class ManagerTickets {
+public class ManagerTicket {
 
 	public ArrayList<Ticket> selectTicket(){
 		ArrayList<Ticket> ret = null;
