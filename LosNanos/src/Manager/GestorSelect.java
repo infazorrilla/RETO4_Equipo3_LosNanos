@@ -1,4 +1,4 @@
-package Gestor;
+package Manager;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

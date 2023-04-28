@@ -1,22 +1,21 @@
-package Gestor;
+package Manager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
-import utils.DBUtils;
-
+import java.sql.Statement;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 
-public class GestorUpdate {
-	
-	private void modificarEdad(Alumno ejemplo, int nuevaEdad){
+// Clase para trabajar con la tabla alumno
+public class GestorInsert {
+
+	// Inserta un alumno
+	private void insertEjemplo(Alumno alumno){
 		
 		// La conexion con BBDD
 		Connection connection = null;
 		
 		// Vamos a lanzar una sentencia SQL contra la BBDD
-		PreparedStatement  preparedStatement  = null;
+		Statement statement = null;
 		
 		try {
 			// El Driver que vamos a usar
@@ -25,14 +24,17 @@ public class GestorUpdate {
 			// Abrimos la conexion con BBDD
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			
-			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update t_alumno set edad = ? where nombre = ?";
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt (1, nuevaEdad);
-			preparedStatement.setString (2, ejemplo.getNombre());
+			// Vamos a lanzar la sentencia...
+			statement = connection.createStatement();
+			
+			// Montamos la SQL 
+			String sql = "insert into t_alumno (nombre, apellidos, edad) VALUES ('" +  
+					alumno.getNombre() + "', '" + 
+					alumno.getApellidos() + "', '" + 
+					alumno.getEdad() + "')";
 			
 			// La ejecutamos...
-			preparedStatement.executeUpdate();
+			statement.executeUpdate(sql);
 			
 		} catch (SQLException sqle) {  
 			System.out.println("Error con la BBDD - " + sqle.getMessage());
@@ -41,8 +43,8 @@ public class GestorUpdate {
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
-				if (preparedStatement != null) 
-					preparedStatement.close(); 
+				if (statement != null) 
+					statement.close(); 
 			} catch(Exception e){ 
 				// No hace falta				
 			};
@@ -56,14 +58,14 @@ public class GestorUpdate {
 	}
 
 	public static void main(String[] args) {
-		DBAccessExampleForUpdate dBAccessExample = new DBAccessExampleForUpdate();
+		DBAccessExampleForInsert dBAccessExample = new DBAccessExampleForInsert();
 		
-		// Nuevo Ejemplo a insertar...
+		// Nuevo alumno a insertar...
 		Alumno alumno = new Alumno ();
-		alumno.setNombre("Andres");
-		alumno.setApellidos("Dominguez");
-		alumno.setEdad(25);
+		alumno.setNombre("Pablo");
+		alumno.setApellidos("Martinez");
+		alumno.setEdad(23);
 		
-		dBAccessExample.modificarEdad(alumno, 50);
+		dBAccessExample.insertEjemplo(alumno);
 	}
 }

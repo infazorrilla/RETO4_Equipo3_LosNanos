@@ -1,16 +1,16 @@
-package Gestor;
+package Manager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import utils.DBUtils;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-
-// Clase para trabajar con la tabla alumno
-public class GestorDelete {
-
-	// Modificamos la edad de un alumno
-	private void borrarPorNombre(Alumno ejemplo){
+public class GestorUpdate {
+	
+	private void modificarEdad(Alumno ejemplo, int nuevaEdad){
 		
 		// La conexion con BBDD
 		Connection connection = null;
@@ -26,9 +26,10 @@ public class GestorDelete {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "delete from t_alumno where nombre = ?";
+			String sql = "update t_alumno set edad = ? where nombre = ?";
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString (1, ejemplo.getNombre());
+			preparedStatement.setInt (1, nuevaEdad);
+			preparedStatement.setString (2, ejemplo.getNombre());
 			
 			// La ejecutamos...
 			preparedStatement.executeUpdate();
@@ -55,7 +56,7 @@ public class GestorDelete {
 	}
 
 	public static void main(String[] args) {
-		DBAccessExampleForDelete dBAccessExample = new DBAccessExampleForDelete();
+		DBAccessExampleForUpdate dBAccessExample = new DBAccessExampleForUpdate();
 		
 		// Nuevo Ejemplo a insertar...
 		Alumno alumno = new Alumno ();
@@ -63,6 +64,6 @@ public class GestorDelete {
 		alumno.setApellidos("Dominguez");
 		alumno.setEdad(25);
 		
-		dBAccessExample.borrarPorNombre(alumno);
+		dBAccessExample.modificarEdad(alumno, 50);
 	}
 }

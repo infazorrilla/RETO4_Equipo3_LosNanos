@@ -1,4 +1,4 @@
-package Gestor;
+package Manager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +12,7 @@ import utils.DBUtils;
 import Pojos.Person.Feeder;
 import Pojos.Person.Vet;
 
-public class managerBoss {
+public class ManagerBoss {
 
 	private void insertVet(Vet vet) {
 

@@ -1,21 +1,22 @@
-package Gestor;
+package Manager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
 
 // Clase para trabajar con la tabla alumno
-public class GestorInsert {
+public class GestorDelete {
 
-	// Inserta un alumno
-	private void insertEjemplo(Alumno alumno){
+	// Modificamos la edad de un alumno
+	private void borrarPorNombre(Alumno ejemplo){
 		
 		// La conexion con BBDD
 		Connection connection = null;
 		
 		// Vamos a lanzar una sentencia SQL contra la BBDD
-		Statement statement = null;
+		PreparedStatement  preparedStatement  = null;
 		
 		try {
 			// El Driver que vamos a usar
@@ -24,17 +25,13 @@ public class GestorInsert {
 			// Abrimos la conexion con BBDD
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			
-			// Vamos a lanzar la sentencia...
-			statement = connection.createStatement();
-			
-			// Montamos la SQL 
-			String sql = "insert into t_alumno (nombre, apellidos, edad) VALUES ('" +  
-					alumno.getNombre() + "', '" + 
-					alumno.getApellidos() + "', '" + 
-					alumno.getEdad() + "')";
+			// Montamos la SQL. Las ? se rellenan a continuacion
+			String sql = "delete from t_alumno where nombre = ?";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString (1, ejemplo.getNombre());
 			
 			// La ejecutamos...
-			statement.executeUpdate(sql);
+			preparedStatement.executeUpdate();
 			
 		} catch (SQLException sqle) {  
 			System.out.println("Error con la BBDD - " + sqle.getMessage());
@@ -43,8 +40,8 @@ public class GestorInsert {
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
-				if (statement != null) 
-					statement.close(); 
+				if (preparedStatement != null) 
+					preparedStatement.close(); 
 			} catch(Exception e){ 
 				// No hace falta				
 			};
@@ -58,14 +55,14 @@ public class GestorInsert {
 	}
 
 	public static void main(String[] args) {
-		DBAccessExampleForInsert dBAccessExample = new DBAccessExampleForInsert();
+		DBAccessExampleForDelete dBAccessExample = new DBAccessExampleForDelete();
 		
-		// Nuevo alumno a insertar...
+		// Nuevo Ejemplo a insertar...
 		Alumno alumno = new Alumno ();
-		alumno.setNombre("Pablo");
-		alumno.setApellidos("Martinez");
-		alumno.setEdad(23);
+		alumno.setNombre("Andres");
+		alumno.setApellidos("Dominguez");
+		alumno.setEdad(25);
 		
-		dBAccessExample.insertEjemplo(alumno);
+		dBAccessExample.borrarPorNombre(alumno);
 	}
 }
