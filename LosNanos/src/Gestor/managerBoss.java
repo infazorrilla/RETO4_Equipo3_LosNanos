@@ -275,7 +275,7 @@ public class managerBoss {
 				feeder.setPassword(password);
 				feeder.setSsNumber(ssNumber);
 
-				ret.add(Feeder);
+				ret.add(feeder);
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Error con la BBDD - " + sqle.getMessage());
@@ -299,7 +299,6 @@ public class managerBoss {
 					connection.close();
 			} catch (Exception e) {
 			}
-			;
 		}
 		return ret;
 	}
