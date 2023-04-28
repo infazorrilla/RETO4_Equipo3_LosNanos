@@ -96,7 +96,7 @@ public void deleteDolphin(Dolphin dolphin){
 			
 			// Montamos la SQL. Las ? se rellenan a continuacion
 			String name = dolphin.getName();
-			String sql = "delete from dolphincomplete where nombre =" + name;
+			String sql = "delete from aquatic where name =" + name;
 			preparedStatement = connection.prepareStatement(sql);
 			
 			// La ejecutamos...
@@ -127,7 +127,7 @@ public ArrayList <Dolphin> getDolphin (){
 	ArrayList <Dolphin> ret = null;
 	
 	// SQL que queremos lanzar
-	String sql = "select * from dolphincomplete";
+	String sql = "select * from aquatic";
 	
 	// La conexion con BBDD
 	Connection connection = null;
@@ -161,30 +161,30 @@ public ArrayList <Dolphin> getDolphin (){
 			// Sacamos las columnas del RS
 			int id = resultSet.getInt("id");
             String name = resultSet.getString("name");
-            String scientifiName = resultSet.getString("scientifiName");
+            String scientificName = resultSet.getString("scientificName");
             float height = resultSet.getFloat("height");
             float weight = resultSet.getFloat("weight");
             Date bornDate = resultSet.getDate("bornDate");
             int vaccinated = resultSet.getInt("vaccinated");
             String diet = resultSet.getString("diet");
             String animalTipe = resultSet.getString("animalTipe");
-            int zoneId = resultSet.getInt("ZoneId");
-            int durationUnderWater = resultSet.getInt("durationUnderWater");
+//            int zoneId = resultSet.getInt("ZoneId");
+//            int durationUnderWater = resultSet.getInt("durationUnderWater");
 
             
             
             // Metemos los datos a Ejemplo
             dolphin.setId(id);
             dolphin.setName(name);
-            dolphin.setScientificName(scientifiName);
+            dolphin.setScientificName(scientificName);
             dolphin.setHeight(height);
             dolphin.setWeight(weight);
             dolphin.setBornDate(bornDate);
             dolphin.setVaccinated(vaccinated);
             dolphin.setDiet(diet);
             dolphin.setAnimalTipe(animalTipe);
-            dolphin.setZoneId(zoneId);
-            dolphin.setDurationUnderWater(durationUnderWater);
+//            dolphin.setZoneId(zoneId);
+//            dolphin.setDurationUnderWater(durationUnderWater);
             
             // Lo guardamos en ret
             ret.add(dolphin);

@@ -17,7 +17,17 @@ import Pojos.Animal.Snake;
 
 class ManagerDolphinTest {
 
-
+	@Test
+	public void getDolphin() throws ParseException {
+		ManagerDolphin managerDolphin = new ManagerDolphin();
+		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
+		Date date = format.parse("12/03/2016");
+		Dolphin dolphinus = new Dolphin (4, "Carlos", "Dolphinus", 10, 10, date, 0, "Carnivorous", "mammals", 2);
+		managerDolphin.insertDolphin(dolphinus);
+		ArrayList<Dolphin> dolphin = managerDolphin.getDolphin();
+        managerDolphin.deleteDolphin(dolphinus);
+		assertNotNull(dolphin);
+	}
 	
 	@Test
 	public void inserDolphin() throws ParseException {
@@ -33,23 +43,16 @@ class ManagerDolphinTest {
 		
 	}
 	
-	@Test
-	public void getDolphin() {
-		ManagerDolphin managerDolphin = new ManagerDolphin();
-		ArrayList<Dolphin> dolphin = managerDolphin.getDolphin();
-		for (int i = 0; i < dolphin.size(); i++) {
-			System.out.print(dolphin.get(i).getName());
-		}
-		assertNotNull(dolphin);
-	}
+
 	
 	@Test
-	public void deleteDolphin() {
+	public void deleteDolphin() throws ParseException {
 		ManagerDolphin managerDolphin = new ManagerDolphin();
-		ArrayList<Dolphin> dolphines = managerDolphin.getDolphin();
-		for (int i = 0; i < dolphines.size(); i++) {
-			Dolphin dolphin = dolphines.get(i);
-        managerDolphin.deleteDolphin(dolphin);
+		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
+		Date date = format.parse("12/03/2016");
+		Dolphin dolphinus = new Dolphin (4, "Carlos", "Dolphinus", 10, 10, date, 0, "Carnivorous", "mammals", 2);
+        managerDolphin.deleteDolphin(dolphinus);
+        ArrayList<Dolphin> dolphin = managerDolphin.getDolphin();
 		assertNull(dolphin);
 		
 	}
@@ -57,4 +60,3 @@ class ManagerDolphinTest {
 }
 	
 
-}
