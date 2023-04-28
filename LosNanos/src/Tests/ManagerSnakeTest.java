@@ -30,8 +30,6 @@ class ManagerSnakeTest {
 		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
 		Date dates = format.parse("12/03/2016");
 		Snake snakeus = new Snake (1, "Carlos", "Indian Snake", 20, 20, dates, 1, "Carnivorous" , "2022-04-14", false, 1);
-		System.out.print(snakeus.getName());
-		System.out.print(snakeus);
 		managerSnake.insertSnake(snakeus);
         ArrayList<Snake> snake = managerSnake.getSnake();
 			String animal = snake.get(0).getName();

@@ -35,7 +35,7 @@ public class ManagerDolphin {
 			java.sql.Date sqlDate = new java.sql.Date(dolphin.getBornDate().getTime());
 
 			
-			String sql = "insert into aquatic (name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe, zoneId, durationUnderWater) VALUES ('" + 
+			String sql = "insert into aquatic (name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe) VALUES ('" + 
 					dolphin.getName() + "', '" + 
 					dolphin.getScientificName() + "', '" + 
 					dolphin.getHeight() + "', '" + 

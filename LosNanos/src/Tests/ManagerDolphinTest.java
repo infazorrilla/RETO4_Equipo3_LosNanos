@@ -17,6 +17,22 @@ import Pojos.Animal.Snake;
 
 class ManagerDolphinTest {
 
+
+	
+	@Test
+	public void inserDolphin() throws ParseException {
+		ManagerDolphin managerDolphin = new ManagerDolphin();
+		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
+		Date date = format.parse("12/03/2016");
+		Dolphin dolphinus = new Dolphin (4, "Carlos", "Dolphinus", 10, 10, date, 0, "Carnivorous", "mammals", 2);
+		managerDolphin.insertDolphin(dolphinus);
+        ArrayList<Dolphin> dolphin = managerDolphin.getDolphin();
+			String animal = dolphin.get(0).getName();
+			assertEquals(animal, "Carlos");
+		
+		
+	}
+	
 	@Test
 	public void getDolphin() {
 		ManagerDolphin managerDolphin = new ManagerDolphin();
@@ -25,20 +41,6 @@ class ManagerDolphinTest {
 			System.out.print(dolphin.get(i).getName());
 		}
 		assertNotNull(dolphin);
-	}
-	
-	@Test
-	public void inserDolphin() throws ParseException {
-		ManagerDolphin managerDolphin = new ManagerDolphin();
-		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
-		Date date = format.parse("12/03/2016");
-		Dolphin dolphinus = new Dolphin (4, "Carlos", "Dolphinus", 10, 10, date, 0, "Carniborous", "mammals", 2);
-		managerDolphin.insertDolphin(dolphinus);
-        ArrayList<Dolphin> dolphin = managerDolphin.getDolphin();
-			String animal = dolphin.get(0).getName();
-			assertEquals(animal, "Carlos");
-		
-		
 	}
 	
 	@Test
