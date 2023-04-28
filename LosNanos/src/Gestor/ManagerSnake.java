@@ -33,9 +33,14 @@ public class ManagerSnake {
 			statement = connection.createStatement();
 
 			// Montamos la SQL
+			
+			
+			java.sql.Date sqlDate = new java.sql.Date(snake.getBornDate().getTime());
+			
+			
 			String sql = "insert into reptile (name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin) VALUES ('"
 					+ snake.getName() + "', '" + snake.getScientificName() + "', '" + snake.getHeight() + "', '"
-					+ snake.getWeight() + "', '" + snake.getBornDate() + "', '" + snake.getVaccinated() + "', '"
+					+ snake.getWeight() + "', '" + sqlDate + "', '" + snake.getVaccinated() + "', '"
 					+ snake.getDiet() + "', '" + snake.getShedSkin() + "')";
 
 			// La ejecutamos...
@@ -80,9 +85,9 @@ public class ManagerSnake {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "delete from reptile where name = ?";
+			String name = snake.getName();
+			String sql = "delete from reptile where name =" + name;
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, snake.getName());
 
 			// La ejecutamos...
 			preparedStatement.executeUpdate();
@@ -143,7 +148,7 @@ public class ManagerSnake {
 				if (null == ret)
 					ret = new <Snake>ArrayList();
 
-				Snake snake = new Snake(0, sql, sql, 0, 0, sql, 0, sql, null, false, 0);
+				Snake snake = new Snake(0, sql, sql, 0, 0, null, 0, sql, sql, false, 0);
 
 				// Sacamos las columnas del RS
 				int id = resultSet.getInt("id");
@@ -151,7 +156,7 @@ public class ManagerSnake {
 				String scientificName = resultSet.getString("scientificName");
 				float height = resultSet.getFloat("height");
 				float weight = resultSet.getFloat("weight");
-				String bornDate = resultSet.getString("bornDate");
+				Date bornDate = resultSet.getDate("bornDate");
 				int vaccinated = resultSet.getInt("vaccinated");
 				String diet = resultSet.getString("diet");
 				String shedSkin = resultSet.getString("shedSkin");

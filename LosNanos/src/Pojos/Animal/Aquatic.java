@@ -15,6 +15,7 @@ public class Aquatic extends Animal {
 	public Aquatic(int id, String name, String scientificName, float height, float weight, Date bornDate,
 			int vaccinated, String diet, String animalTipe) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet);
+		this.animalTipe = animalTipe;
 	}
 
 	public String getAnimalTipe() {

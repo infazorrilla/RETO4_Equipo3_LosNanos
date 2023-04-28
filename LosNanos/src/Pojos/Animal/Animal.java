@@ -17,10 +17,19 @@ public abstract class Animal implements Serializable {
 	private int vaccinated = 0;;
 	private String diet = null;
 
-	
 
-	public Animal(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			int vaccinated, String diet) {
+
+	public Animal(int id, String name, String scientificName, float height, float weight, Date bornDate, int vaccinated,
+			String diet) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.scientificName = scientificName;
+		this.height = height;
+		this.weight = weight;
+		this.bornDate = bornDate;
+		this.vaccinated = vaccinated;
+		this.diet = diet;
 	}
 
 

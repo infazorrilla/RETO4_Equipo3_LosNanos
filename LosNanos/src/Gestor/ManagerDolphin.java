@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import Pojos.Animal.Dolphin;
@@ -29,21 +32,29 @@ public class ManagerDolphin {
 			
 			statement = connection.createStatement();
 			
-			String sql = "insert into dolphincomplete (name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe, zoneId, durationUnderWater) VALUES ('" +  
+			java.sql.Date sqlDate = new java.sql.Date(dolphin.getBornDate().getTime());
+
+			
+			String sql = "insert into aquatic (name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe, zoneId, durationUnderWater) VALUES ('" + 
 					dolphin.getName() + "', '" + 
 					dolphin.getScientificName() + "', '" + 
 					dolphin.getHeight() + "', '" + 
 					dolphin.getWeight() + "', '" + 
-					dolphin.getBornDate() + "', '" + 
+					sqlDate + "', '" + 
 					dolphin.getVaccinated() + "', '" + 
 					dolphin.getDiet() + "', '" + 
-					dolphin.getAnimalTipe() + "', '" + 
-					dolphin.getZoneId() + "', '" + 
-					dolphin.getDurationUnderWater() + "')";
+					dolphin.getAnimalTipe() + "')";
+			
+//			String sql2 = "insert into dolphincomplete (id, zoneId, durationUnderWater) VALUES ('" + 
+//					dolphin.id() + "', '" + 
+//					dolphin.getZoneId() + "', '" + 
+//					dolphin.getDurationUnderWater() + "')";
 			
 			
 			// La ejecutamos...
 			statement.executeUpdate(sql);
+//			statement.executeUpdate(sql2);
+
 			
 		} catch (SQLException sqle) {  
 			System.out.println("Error con la BBDD - " + sqle.getMessage());
@@ -84,9 +95,9 @@ public void deleteDolphin(Dolphin dolphin){
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "delete from dolphincomplete where nombre = ?";
+			String name = dolphin.getName();
+			String sql = "delete from dolphincomplete where nombre =" + name;
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString (1, dolphin.getName());
 			
 			// La ejecutamos...
 			preparedStatement.executeUpdate();
@@ -205,4 +216,5 @@ public ArrayList <Dolphin> getDolphin (){
 	}
 	return ret;
 }
+
 }

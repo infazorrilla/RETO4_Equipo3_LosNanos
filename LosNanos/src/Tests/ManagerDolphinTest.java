@@ -32,7 +32,7 @@ class ManagerDolphinTest {
 		ManagerDolphin managerDolphin = new ManagerDolphin();
 		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
 		Date date = format.parse("12/03/2016");
-		Dolphin dolphinus = new Dolphin (1, "Carlos", "Dolphinus", 10, 10, date, 1, "Carniborous", "mammals", 1);
+		Dolphin dolphinus = new Dolphin (4, "Carlos", "Dolphinus", 10, 10, date, 0, "Carniborous", "mammals", 2);
 		managerDolphin.insertDolphin(dolphinus);
         ArrayList<Dolphin> dolphin = managerDolphin.getDolphin();
 			String animal = dolphin.get(0).getName();
