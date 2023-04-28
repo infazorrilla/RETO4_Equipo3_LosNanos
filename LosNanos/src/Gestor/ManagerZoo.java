@@ -13,7 +13,7 @@ import utils.DBUtils;
 
 import java.sql.PreparedStatement;
 
-public class ManagementZoo {
+public class ManagerZoo {
 	
 	public ArrayList<Zoo> selectZoo(){
 		ArrayList<Zoo> ret = null;
