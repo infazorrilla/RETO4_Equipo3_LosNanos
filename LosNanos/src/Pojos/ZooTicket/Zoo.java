@@ -5,15 +5,15 @@ import java.util.Objects;
 public class Zoo{
 
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private int Id;
 	private String name;
 	private String location;
 	
 	public int getId() {
-		return id;
+		return Id;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.Id = id;
 	}
 	public String getName() {
 		return name;
@@ -34,7 +34,7 @@ public class Zoo{
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, location, name);
+		return Objects.hash(Id, location, name);
 	}
 	
 	
@@ -47,12 +47,12 @@ public class Zoo{
 		if (getClass() != obj.getClass())
 			return false;
 		Zoo other = (Zoo) obj;
-		return id == other.id && Objects.equals(location, other.location) && Objects.equals(name, other.name);
+		return Id == other.Id && Objects.equals(location, other.location) && Objects.equals(name, other.name);
 	}
 	
 	@Override
 	public String toString() {
-		return "Zoo [id=" + id + ", name=" + name + ", location=" + location + "]";
+		return "Zoo [id=" + Id + ", name=" + name + ", location=" + location + "]";
 	}
 	
 	
