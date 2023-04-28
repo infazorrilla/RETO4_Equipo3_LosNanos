@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import Pojos.ZooTicket.Zoo;
+import Manager.ManagerZoo;
 
 class ManagerZooTest {
 	
-	Zoo zoo = new Zoo();
+	ManagerZoo managerzoo = new ManagerZoo();
 	
 	@Test
 	public void selectZoo() {

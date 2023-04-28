@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import Gestor.ManagerDolphin;
-import Gestor.ManagerSnake;
+import Manager.ManagerDolphin;
+import Manager.ManagerSnake;
 import Pojos.Animal.Dolphin;
 import Pojos.Animal.Snake;
 
