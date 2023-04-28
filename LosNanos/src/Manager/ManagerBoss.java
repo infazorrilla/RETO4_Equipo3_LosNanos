@@ -8,299 +8,195 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Pojos.Animal.Dolphin;
+import Pojos.Person.Boss;
 import utils.DBUtils;
-import Pojos.Person.Feeder;
-import Pojos.Person.Vet;
 
 public class ManagerBoss {
 
-	private void insertVet(Vet vet) {
+public void insertBoss(Boss boss){	
 
 		Connection connection = null;
+		
 		Statement statement = null;
-
+		
 		try {
 			Class.forName(DBUtils.DRIVER);
-
+			
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-
+			
 			statement = connection.createStatement();
-
-			String sql = "insert into vetcomplete (name, surname, id, user, password, ssNumber, SpecializedAnimalType) VALUES ('"
-					+ vet.getName() + "', '" + vet.getSurname() + "', '" + vet.getId() + vet.getUser() + "', '"
-					+ vet.getPassword() + "', '" + vet.getSsNumber() + "', '" + vet.getSpecializedAnimalType() + "')";
-
+			
+			String sql = "insert into employee (name, surname, id, user, password, ssNumber, idZoo) VALUES ('" + 
+					boss.getName() + "', '" + 
+					boss.getSurname() + "', '" + 
+					boss.getId() + "', '" + 
+					boss.getUser() + "', '" + 
+					boss.getPassword() + "', '" + 
+					boss.getSsNumber() + "', '" + 
+					boss.getIdZoo() + "')";
+			
+			String sql2 = "insert into boss (ssNumber, employeeNumCharge) VALUES ('" + 
+					boss.getSsNumber() + "', '" + 
+					boss.getEmployeeNumCharge() + "')";
+			
+			
+			// La ejecutamos...
 			statement.executeUpdate(sql);
+			statement.executeUpdate(sql2);
 
-		} catch (SQLException sqle) {
+			
+		} catch (SQLException sqle) {  
 			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
+		} catch(Exception e){ 
 			System.out.println("Error generico - " + e.getMessage());
 		} finally {
+			// Cerramos al reves de como las abrimos
 			try {
-				if (statement != null)
-					statement.close();
-			} catch (Exception e) {
-			}
-			;
+				if (statement != null) 
+					statement.close(); 
+			} catch(Exception e){ 
+				// No hace falta				
+			};
 			try {
-				if (connection != null)
-					connection.close();
-			} catch (Exception e) {
-			}
-			;
+				if (connection != null) 
+					connection.close(); 
+			} catch(Exception e){ 
+				// No hace falta
+			};					
 		}
 	}
 
-	private void insertFeeder(Feeder feeder) {
-
-		Connection connection = null;
-		Statement statement = null;
-
-		try {
-			Class.forName(DBUtils.DRIVER);
-
-			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-
-			statement = connection.createStatement();
-
-			String sql = "insert into feedercomplete (name, surname, id, user, password, ssNumber, SpecializedDiet) VALUES ('"
-					+ feeder.getName() + "', '" + feeder.getSurname() + "', '" + feeder.getId() + feeder.getUser()
-					+ "', '" + feeder.getPassword() + "', '" + feeder.getSsNumber() + "', '"
-					+ feeder.getSpecializedDiet() + "')";
-
-			statement.executeUpdate(sql);
-
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
-		} finally {
-			try {
-				if (statement != null)
-					statement.close();
-			} catch (Exception e) {
-			}
-			;
-			try {
-				if (connection != null)
-					connection.close();
-			} catch (Exception e) {
-			}
-			;
-		}
-	}
-
-	private void borrarVet(Vet vet) {
-
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-
-		try {
-			Class.forName(DBUtils.DRIVER);
-
-			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-
-			String sql = "delete from vetcomplete where name= ";
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, vet.getName());
-
-			preparedStatement.executeUpdate();
-
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} catch (Exception e) {
-			}
-			;
-			try {
-				if (connection != null)
-					connection.close();
-			} catch (Exception e) {
-			}
-			;
-		}
-	}
-
-	private void borrarFeeder(Feeder feeder) {
-
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-
-		try {
-			Class.forName(DBUtils.DRIVER);
-
-			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-
-			String sql = "delete from feedercomplete where name= ";
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, feeder.getName());
-
-			preparedStatement.executeUpdate();
-
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} catch (Exception e) {
-			}
-			;
-			try {
-				if (connection != null)
-					connection.close();
-			} catch (Exception e) {
-			}
-			;
-		}
-	}
-
-	private ArrayList<Vet> selectVet() {
-		ArrayList<Vet> ret = null;
-
-		String sql = "select * from vetcomplete";
-
-		Connection connection = null;
-
-		Statement statement = null;
-
-		ResultSet resultSet = null;
-
-		try {
-			Class.forName(DBUtils.DRIVER);
-
-			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(sql);
-
-			while (resultSet.next()) {
-
-				if (null == ret)
-					ret = new <Vet>ArrayList();
-
-				Vet vet = new Vet(sql, sql, sql, sql, sql, 0, sql);
-
-				String name = resultSet.getString("name");
-				String surName = resultSet.getString("surName");
-				String id = resultSet.getString("id");
-				String user = resultSet.getString("user");
-				String password = resultSet.getString("password");
-				int ssNumber = resultSet.getInt("ssNumber");
-				String specializedAnimalType = resultSet.getString("specializedAnimalType");
-
-				vet.setName(name);
-				vet.setSurname(surName);
-				vet.setId(id);
-				vet.setUser(user);
-				vet.setPassword(password);
-				vet.setSsNumber(ssNumber);
-				vet.setSpecializedAnimalType(specializedAnimalType);
-
-				ret.add(vet);
-			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
-		} finally {
-			try {
-				if (resultSet != null)
-					resultSet.close();
-			} catch (Exception e) {
-			}
-			;
-			try {
-				if (statement != null)
-					statement.close();
-			} catch (Exception e) {
-			}
-			;
-			try {
-				if (connection != null)
-					connection.close();
-			} catch (Exception e) {
-			}
-			;
-		}
-		return ret;
-	}
+public ArrayList <Boss> getBoss (){
+	ArrayList <Boss> ret = null;
 	
-	private ArrayList<Feeder> selectFeeder() {
-		ArrayList<Feeder> ret = null;
+	// SQL que queremos lanzar
+	String sql = "select * from bossComplete";
+	
+	// La conexion con BBDD
+	Connection connection = null;
+	
+	// Vamos a lanzar una sentencia SQL contra la BBDD
+	// Result set va a contener todo lo que devuelve la BBDD
+	Statement statement = null;
+	ResultSet resultSet = null;
+	
+	try {
+		// El Driver que vamos a usar
+		Class.forName(DBUtils.DRIVER);
+		
+		// Abrimos la conexion con BBDD
+		connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+		
+		// Vamos a lanzar la sentencia...
+		statement = connection.createStatement();
+		resultSet = statement.executeQuery(sql);
+		
+		// No es posible saber cuantas cosas nos ha devuelto el resultSet.
+		// Hay que ir 1 por 1 y guardandolo todo en su objeto Ejemplo correspondiente
+		while(resultSet.next()) {
+			
+			// Si es necesario, inicializamos la lista
+			if (null == ret)
+				ret = new <Boss> ArrayList ();
+			
+			Boss boss = new Boss (sql, sql, sql, sql, sql, 0, 0);
+			
+			// Sacamos las columnas del RS
+			String id = resultSet.getString("id");
+            String name = resultSet.getString("name");
+            String surname = resultSet.getString("surname");
+            String user = resultSet.getString("user");
+            String password = resultSet.getString("password");
+            int ssNumber = resultSet.getInt("ssNumber");
+            int idZoo = resultSet.getInt("idZoo");
+            int employeeNumCharge = resultSet.getInt("employeeNumCharge");
 
-		String sql = "select * from vetcomplete";
-
-		Connection connection = null;
-
-		Statement statement = null;
-
-		ResultSet resultSet = null;
-
-		try {
-			Class.forName(DBUtils.DRIVER);
-
-			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(sql);
-
-			while (resultSet.next()) {
-
-				if (null == ret)
-					ret = new <Feeder>ArrayList();
-
-				Feeder feeder = new Feeder(sql, sql, sql, sql, sql, 0, null);
-
-				String name = resultSet.getString("name");
-				String surName = resultSet.getString("surName");
-				String id = resultSet.getString("id");
-				String user = resultSet.getString("user");
-				String password = resultSet.getString("password");
-				int ssNumber = resultSet.getInt("ssNumber");
-				String specializedAnimalType = resultSet.getString("specializedAnimalType");
-
-				feeder.setName(name);
-				feeder.setSurname(surName);
-				feeder.setId(id);
-				feeder.setUser(user);
-				feeder.setPassword(password);
-				feeder.setSsNumber(ssNumber);
-
-				ret.add(feeder);
-			}
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
-		} finally {
-			try {
-				if (resultSet != null)
-					resultSet.close();
-			} catch (Exception e) {
-			}
-			;
-			try {
-				if (statement != null)
-					statement.close();
-			} catch (Exception e) {
-			}
-			;
-			try {
-				if (connection != null)
-					connection.close();
-			} catch (Exception e) {
-			}
+          
+            
+            // Metemos los datos a Ejemplo
+            boss.setId(id);
+            boss.setName(name);
+            boss.setSurname(surname);
+            boss.setUser(user);
+            boss.setPassword(password);
+            boss.setSsNumber(ssNumber);
+            boss.setIdZoo(idZoo);
+            boss.setEmployeeNumCharge(employeeNumCharge);
+      
+            
+            // Lo guardamos en ret
+            ret.add(boss);
 		}
-		return ret;
+	} catch (SQLException sqle) {  
+		System.out.println("Error con la BBDD - " + sqle.getMessage());
+	} catch(Exception e){ 
+		System.out.println("Error generico - " + e.getMessage());
+	} finally {
+		// Cerramos al reves de como las abrimos
+		try {
+			if (resultSet != null) 
+				resultSet.close(); 
+		} catch(Exception e){ 
+			// No hace falta 
+		};
+		try {
+			if (statement != null) 
+				statement.close(); 
+		} catch(Exception e){ 
+			// No hace falta				
+		};
+		try {
+			if (connection != null) 
+				connection.close(); 
+		} catch(Exception e){ 
+			// No hace falta
+		};					
 	}
+	return ret;
+}
 
+public void deleteBoss(Boss boss){
+	
+	// La conexion con BBDD
+	Connection connection = null;
+	
+	// Vamos a lanzar una sentencia SQL contra la BBDD
+	PreparedStatement  preparedStatement  = null;
+	
+	try {
+		// El Driver que vamos a usar
+		Class.forName(DBUtils.DRIVER);
+		
+		// Abrimos la conexion con BBDD
+		connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+		
+		// Montamos la SQL. Las ? se rellenan a continuacion
+		String id = boss.getId();
+		String sql = "delete from employee where id =" + id;
+		preparedStatement = connection.prepareStatement(sql);
+		
+		// La ejecutamos...
+		preparedStatement.executeUpdate();
+		
+	} catch (SQLException sqle) {  
+		System.out.println("Error con la BBDD - " + sqle.getMessage());
+	} catch(Exception e){ 
+		System.out.println("Error generico - " + e.getMessage());
+	} finally {
+		// Cerramos al reves de como las abrimos
+		try {
+			if (preparedStatement != null) 
+				preparedStatement.close(); 
+		} catch(Exception e){ 
+			// No hace falta				
+		};
+		try {
+			if (connection != null) 
+				connection.close(); 
+		} catch(Exception e){ 
+			// No hace falta
+		};					
+	}
+}
 }

@@ -1,4 +1,4 @@
-package Gestor;
+package Manager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,11 +8,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Pojos.Person.Client;
+import Pojos.Person.Feeder;
 import utils.DBUtils;
 
-public class ManagerClient {
-	public void insertClient(Client client){	
+public class ManagerFeeder {
+	public void insertFeeder(Feeder feeder){	
 
 		Connection connection = null;
 		
@@ -25,17 +25,23 @@ public class ManagerClient {
 			
 			statement = connection.createStatement();
 			
-			String sql = "insert into client (name, surname, id, user, password, clientID) VALUES ('" + 
-					client.getName() + "', '" + 
-					client.getSurname() + "', '" + 
-					client.getId() + "', '" + 
-					client.getUser() + "', '" + 
-					client.getPassword() + "', '" + 
-					client.getClientId() + "')";
+			String sql = "insert into employee (name, surname, id, user, password, ssNumber, idZoo) VALUES ('" + 
+					feeder.getName() + "', '" + 
+					feeder.getSurname() + "', '" + 
+					feeder.getId() + "', '" + 
+					feeder.getUser() + "', '" + 
+					feeder.getPassword() + "', '" + 
+					feeder.getSsNumber() + "', '" + 
+					feeder.getIdZoo() + "')";
 			
-						
+			String sql2 = "insert into feeder (ssNumber, specialzedDiet) VALUES ('" + 
+					feeder.getSsNumber() + "', '" + 
+					feeder.getSpecializedDiet() + "')";
+			
+			
 			// La ejecutamos...
 			statement.executeUpdate(sql);
+			statement.executeUpdate(sql2);
 
 			
 		} catch (SQLException sqle) {  
@@ -59,11 +65,11 @@ public class ManagerClient {
 		}
 	}
 
-public ArrayList <Client> getClient (){
-	ArrayList <Client> ret = null;
+public ArrayList <Feeder> getFeeder (){
+	ArrayList <Feeder> ret = null;
 	
 	// SQL que queremos lanzar
-	String sql = "select * from client";
+	String sql = "select * from feederComplete";
 	
 	// La conexion con BBDD
 	Connection connection = null;
@@ -90,9 +96,9 @@ public ArrayList <Client> getClient (){
 			
 			// Si es necesario, inicializamos la lista
 			if (null == ret)
-				ret = new <Client> ArrayList ();
+				ret = new <Feeder> ArrayList ();
 			
-			Client client = new Client (sql, sql, sql, sql, sql, 0);
+			Feeder feeder = new Feeder (sql, sql, sql, sql, sql, 0, sql);
 			
 			// Sacamos las columnas del RS
 			String id = resultSet.getString("id");
@@ -100,23 +106,25 @@ public ArrayList <Client> getClient (){
             String surname = resultSet.getString("surname");
             String user = resultSet.getString("user");
             String password = resultSet.getString("password");
-            int clientId = resultSet.getInt("clientId");
-
+            int ssNumber = resultSet.getInt("ssNumber");
+            int idZoo = resultSet.getInt("idZoo");
+            String specializedDiet = resultSet.getString("specializedDiet");
 
           
             
             // Metemos los datos a Ejemplo
-            client.setId(id);
-            client.setName(name);
-            client.setSurname(surname);
-            client.setUser(user);
-            client.setPassword(password);
-            client.setClientId(clientId);
-
+            feeder.setId(id);
+            feeder.setName(name);
+            feeder.setSurname(surname);
+            feeder.setUser(user);
+            feeder.setPassword(password);
+            feeder.setSsNumber(ssNumber);
+            feeder.setIdZoo(idZoo);
+            feeder.setSpecializedDiet(specializedDiet);
       
             
             // Lo guardamos en ret
-            ret.add(client);
+            ret.add(feeder);
 		}
 	} catch (SQLException sqle) {  
 		System.out.println("Error con la BBDD - " + sqle.getMessage());
@@ -146,7 +154,7 @@ public ArrayList <Client> getClient (){
 	return ret;
 }
 
-public void deleteClient(Client client){
+public void deleteFedeer(Feeder fedeer){
 	
 	// La conexion con BBDD
 	Connection connection = null;
@@ -162,8 +170,8 @@ public void deleteClient(Client client){
 		connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 		
 		// Montamos la SQL. Las ? se rellenan a continuacion
-		int id = client.getClientId();
-		String sql = "delete from client where id =" + id;
+		String id = fedeer.getId();
+		String sql = "delete from employee where id =" + id;
 		preparedStatement = connection.prepareStatement(sql);
 		
 		// La ejecutamos...
