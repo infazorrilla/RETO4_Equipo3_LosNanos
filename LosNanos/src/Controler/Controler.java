@@ -1,7 +1,9 @@
 package Controler;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import Manager.People.ManagerBoss;
 import Manager.People.ManagerClient;
@@ -46,7 +48,7 @@ public class Controler {
 		int ret = 0;
 		ret = checkBoss(user, password);
 		if (ret == 0) {
-			ret = checkClient(user, password);	
+			ret = checkClient(user, password);
 			if (ret == 0) {
 				ret = checkFeeder(user, password);
 				if (ret == 0) {
@@ -57,7 +59,7 @@ public class Controler {
 
 		return ret;
 	}
-	
+
 	public int checkBoss(String user, String password) {
 		int ret = 0;
 		ManagerBoss managerBoss = new ManagerBoss();
@@ -68,14 +70,14 @@ public class Controler {
 				boolean pas = checkPassword(password, passBoss);
 				if (pas == true) {
 					ret = 1;
-				}else {
+				} else {
 					ret = 0;
 				}
 			}
 		}
 		return ret;
 	}
-	
+
 	public int checkClient(String user, String password) {
 		int ret = 0;
 		ManagerClient managerClient = new ManagerClient();
@@ -86,14 +88,14 @@ public class Controler {
 				boolean pas = checkPassword(password, passClient);
 				if (pas == true) {
 					ret = 2;
-				}else {
+				} else {
 					ret = 0;
 				}
 			}
 		}
 		return ret;
 	}
-	
+
 	public int checkFeeder(String user, String password) {
 		int ret = 0;
 		ManagerFeeder managerFeeder = new ManagerFeeder();
@@ -104,14 +106,14 @@ public class Controler {
 				boolean pas = checkPassword(password, passFeeder);
 				if (pas == true) {
 					ret = 3;
-				}else {
+				} else {
 					ret = 0;
 				}
 			}
 		}
 		return ret;
 	}
-	
+
 	public int checkVet(String user, String password) {
 		int ret = 0;
 		ManagerVet managerVet = new ManagerVet();
@@ -122,26 +124,23 @@ public class Controler {
 				boolean pas = checkPassword(password, passVet);
 				if (pas == true) {
 					ret = 4;
-				}else {
+				} else {
 					ret = 0;
 				}
 			}
 		}
 		return ret;
 	}
-	
+
 	public boolean checkPassword(String password, String passBoss) {
 		boolean ret = false;
 		if (passBoss.equalsIgnoreCase(password)) {
 			ret = true;
 		}
 		return ret;
-		
+
 	}
-	
-	
-	
-	
+
 	public void takeUserPass(String user, String password) {
 		ManagerBoss managerBoss = new ManagerBoss();
 		for (int i = 0; i < managerBoss.getBoss().size(); i++) {
@@ -152,4 +151,56 @@ public class Controler {
 		}
 
 	}
+
+	public void getTableEmployee(DefaultTableModel model, JTable table) {
+		getTableBoss(model, table);
+		getTableFeeder(model, table);
+		getTableVet(model, table);
+		getTableClient(model, table);
+
+	}
+
+	public void getTableBoss(DefaultTableModel model, JTable table) {
+		ManagerBoss managerBoss = new ManagerBoss();
+		for (int i = 0; i < managerBoss.getBoss().size(); i++) {
+			int empNumCharg = managerBoss.getBoss().get(i).getEmployeeNumCharge();
+			String numCharge = String.valueOf(empNumCharg);
+			model.addRow(new String[] { managerBoss.getBoss().get(i).getName(),
+					managerBoss.getBoss().get(i).getSurname(), managerBoss.getBoss().get(i).getId(),
+					managerBoss.getBoss().get(i).getUser(), managerBoss.getBoss().get(i).getPassword(), numCharge });
+		}
+
+	}
+
+	public void getTableFeeder(DefaultTableModel model, JTable table) {
+		ManagerFeeder managerFeeder = new ManagerFeeder();
+		for (int i = 0; i < managerFeeder.getFeeder().size(); i++) {
+			model.addRow(new String[] { managerFeeder.getFeeder().get(i).getName(),
+					managerFeeder.getFeeder().get(i).getSurname(), managerFeeder.getFeeder().get(i).getId(),
+					managerFeeder.getFeeder().get(i).getUser(), managerFeeder.getFeeder().get(i).getPassword(),
+					managerFeeder.getFeeder().get(i).getSpecializedDiet() });
+		}
+
+	}
+
+	public void getTableVet(DefaultTableModel model, JTable table) {
+		ManagerVet managerVet = new ManagerVet();
+		for (int i = 0; i < managerVet.getVet().size(); i++) {
+			model.addRow(new String[] { managerVet.getVet().get(i).getName(), managerVet.getVet().get(i).getSurname(),
+					managerVet.getVet().get(i).getId(), managerVet.getVet().get(i).getUser(),
+					managerVet.getVet().get(i).getPassword(), managerVet.getVet().get(i).getSpecializedAnimalType() });
+		}
+
+	}
+
+	public void getTableClient(DefaultTableModel model, JTable table) {
+		ManagerClient managerClient = new ManagerClient();
+		for (int i = 0; i < managerClient.getClient().size(); i++) {
+			model.addRow(new String[] { managerClient.getClient().get(i).getName(), managerClient.getClient().get(i).getSurname(),
+					managerClient.getClient().get(i).getId(), managerClient.getClient().get(i).getUser(),
+					managerClient.getClient().get(i).getPassword() });
+		}
+
+	}
+	
 }

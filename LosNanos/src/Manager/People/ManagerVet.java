@@ -31,8 +31,7 @@ public class ManagerVet {
 					vet.getId() + "', '" + 
 					vet.getUser() + "', '" + 
 					vet.getPassword() + "', '" + 
-					vet.getSsNumber() + "', '" + 
-					vet.getIdZoo() + "')";
+					vet.getSsNumber() + "')";
 			
 			String sql2 = "insert into vet (ssNumber, specializedAnimalType) VALUES ('" + 
 					vet.getSsNumber() + "', '" + 
@@ -107,7 +106,6 @@ public ArrayList <Vet> getVet (){
             String user = resultSet.getString("user");
             String password = resultSet.getString("password");
             int ssNumber = resultSet.getInt("ssNumber");
-            int idZoo = resultSet.getInt("idZoo");
             String specializedAnimalType = resultSet.getString("specializedAnimalType");
 
           
@@ -119,7 +117,6 @@ public ArrayList <Vet> getVet (){
             vet.setUser(user);
             vet.setPassword(password);
             vet.setSsNumber(ssNumber);
-            vet.setIdZoo(idZoo);
             vet.setSpecializedAnimalType(specializedAnimalType);
       
             

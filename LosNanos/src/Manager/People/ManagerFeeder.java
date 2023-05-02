@@ -31,8 +31,7 @@ public class ManagerFeeder {
 					feeder.getId() + "', '" + 
 					feeder.getUser() + "', '" + 
 					feeder.getPassword() + "', '" + 
-					feeder.getSsNumber() + "', '" + 
-					feeder.getIdZoo() + "')";
+					feeder.getSsNumber() + "')";
 			
 			String sql2 = "insert into feeder (ssNumber, specialzedDiet) VALUES ('" + 
 					feeder.getSsNumber() + "', '" + 
@@ -107,7 +106,6 @@ public ArrayList <Feeder> getFeeder (){
             String user = resultSet.getString("user");
             String password = resultSet.getString("password");
             int ssNumber = resultSet.getInt("ssNumber");
-            int idZoo = resultSet.getInt("idZoo");
             String specializedDiet = resultSet.getString("specializedDiet");
 
           
@@ -119,7 +117,6 @@ public ArrayList <Feeder> getFeeder (){
             feeder.setUser(user);
             feeder.setPassword(password);
             feeder.setSsNumber(ssNumber);
-            feeder.setIdZoo(idZoo);
             feeder.setSpecializedDiet(specializedDiet);
       
             
