@@ -1,4 +1,4 @@
-package Tests;
+package Tests.Person;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.text.ParseException;
