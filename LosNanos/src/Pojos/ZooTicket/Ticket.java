@@ -46,4 +46,8 @@ public class Ticket implements Serializable{
 	public String toString() {
 		return "Ticket [id=" + idTicket + ", buyDate=" + buyDate + "]";
 	}
+	public Ticket get(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
