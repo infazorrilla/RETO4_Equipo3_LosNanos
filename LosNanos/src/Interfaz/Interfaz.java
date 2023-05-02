@@ -20,8 +20,8 @@ import java.awt.Color;
 public class Interfaz {
 
 	private JFrame frame;
-	private JTextField txtUser;
-	private JTextField txtPassword;
+	private JTextField usrTfLogin;
+	private JTextField passTfLogin;
 
 	/**
 	 * Launch the application.
@@ -65,43 +65,43 @@ public class Interfaz {
 		Title.setBounds(352, 23, 118, 84);
 		jpLogin.add(Title);
 		
-		txtUser = new JTextField();
-		txtUser.setText("User");
-		txtUser.setToolTipText("User");
-		txtUser.setHorizontalAlignment(SwingConstants.CENTER);
-		txtUser.setFont(new Font("Arial", Font.PLAIN, 20));
-		txtUser.setBounds(285, 194, 265, 31);
-		jpLogin.add(txtUser);
-		txtUser.setColumns(10);
+		usrTfLogin = new JTextField();
+		usrTfLogin.setText("User");
+		usrTfLogin.setToolTipText("User");
+		usrTfLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		usrTfLogin.setFont(new Font("Arial", Font.PLAIN, 20));
+		usrTfLogin.setBounds(285, 194, 265, 31);
+		jpLogin.add(usrTfLogin);
+		usrTfLogin.setColumns(10);
 		
-		txtPassword = new JTextField();
-		txtPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		txtPassword.setFont(new Font("Arial", Font.PLAIN, 18));
-		txtPassword.setText("Password");
-		txtPassword.setColumns(10);
-		txtPassword.setBounds(285, 276, 265, 31);
-		jpLogin.add(txtPassword);
+		passTfLogin = new JTextField();
+		passTfLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		passTfLogin.setFont(new Font("Arial", Font.PLAIN, 18));
+		passTfLogin.setText("Password");
+		passTfLogin.setColumns(10);
+		passTfLogin.setBounds(285, 276, 265, 31);
+		jpLogin.add(passTfLogin);
 		
-		JButton btnNewButton = new JButton("Register");
-		btnNewButton.setBackground(new Color(240, 240, 240));
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(227, 376, 118, 42);
-		jpLogin.add(btnNewButton);
+		JButton regTfLogin = new JButton("Register");
+		regTfLogin.setBackground(new Color(240, 240, 240));
+		regTfLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		regTfLogin.setBounds(227, 376, 118, 42);
+		jpLogin.add(regTfLogin);
 		
-		JButton btnNewButton_1 = new JButton("Enter");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton enterTfLogin = new JButton("Enter");
+		enterTfLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton_1.setBounds(475, 376, 118, 42);
-		jpLogin.add(btnNewButton_1);
+		enterTfLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		enterTfLogin.setBounds(475, 376, 118, 42);
+		jpLogin.add(enterTfLogin);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(0, 0, 848, 491);
-		jpLogin.add(lblNewLabel);
+		JLabel backgroundLogin = new JLabel("");
+		backgroundLogin.setBounds(0, 0, 848, 491);
+		jpLogin.add(backgroundLogin);
 		
-		addImage(jpLogin, lblNewLabel, "Photos/panda.jpg");
+		addImage(jpLogin, backgroundLogin, "Photos/panda.jpg");
 		
 
 		
