@@ -1,4 +1,4 @@
-package Manager;
+package Manager.Animals;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -146,9 +146,9 @@ public class ManagerSnake {
 
 				// Si es necesario, inicializamos la lista
 				if (null == ret)
-					ret = new <Snake>ArrayList();
+					ret = new ArrayList<Snake>();
 
-				Snake snake = new Snake(0, sql, sql, 0, 0, null, 0, sql, sql, false, 0);
+				Snake snake = new Snake();
 
 				// Sacamos las columnas del RS
 				int id = resultSet.getInt("id");

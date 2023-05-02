@@ -1,4 +1,4 @@
-package Manager;
+package Manager.Animals;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -7,9 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import Pojos.Animal.Dolphin;
@@ -154,9 +151,9 @@ public ArrayList <Dolphin> getDolphin (){
 			
 			// Si es necesario, inicializamos la lista
 			if (null == ret)
-				ret = new <Dolphin> ArrayList ();
+				ret = new ArrayList<Dolphin>();
 			
-			Dolphin dolphin = new Dolphin (0, sql, sql, 0, 0, null, 0, sql, sql, 0, 0, 0);
+			Dolphin dolphin = new Dolphin();
 			
 			// Sacamos las columnas del RS
 			int id = resultSet.getInt("id");
