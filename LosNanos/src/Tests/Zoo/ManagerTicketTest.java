@@ -24,7 +24,7 @@ class ManagerTicketTest {
 	}
 
 	@Test
-	public void insertTicket() throws ParseException {
+	public void inserTicket() throws ParseException {
 		ManagerTicket managerTicket = new ManagerTicket();
 		Ticket ticket = new Ticket();
 		managerTicket.insertTicket(ticket);
