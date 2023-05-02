@@ -5,11 +5,11 @@ import java.util.Objects;
 
 public class Zone implements Serializable {
 
-	private static final long serialVersionUID = -9022103785689291546L;
-	private int id = 0;
-	private String extension;
-	private int animalsNumber = 0;
-	private int speciesNumber = 0;
+	protected static final long serialVersionUID = -9022103785689291546L;
+	protected int id = 0;
+	protected String extension;
+	protected int animalsNumber = 0;
+	protected int speciesNumber = 0;
 
 	public Zone(int id, String extension, int animalsNumber, int speciesNumber) {
 		super();

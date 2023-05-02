@@ -9,8 +9,6 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.xml.crypto.Data;
-
 import Pojos.ZooTicket.Ticket;
 import utils.DBUtils;
 
@@ -49,7 +47,7 @@ public class ManagerTicket {
 				int idTicket = resultSet.getInt("idTicket");
 				
 				ticket.setBuyDate(buyDate);
-				ticket.setIdTicket(idTicket);
+				ticket.setId(idTicket);
 				
 				ret.add(ticket);
 				
@@ -82,5 +80,10 @@ public class ManagerTicket {
 				;
 			}
 			return ret;
+	}
+
+	public void insertTicket(Ticket ticket) {
+		// TODO Auto-generated method stub
+		
 	}
 }

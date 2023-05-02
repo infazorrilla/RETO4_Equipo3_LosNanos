@@ -24,6 +24,7 @@ public class Controler {
 				password };
 
 		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Cliente", JOptionPane.OK_CANCEL_OPTION);
+<<<<<<< HEAD
 
 		if (option == JOptionPane.OK_OPTION) {
 			if (name.getText().isEmpty() || surname.getText().isEmpty() || id.getText().isEmpty()
@@ -50,6 +51,14 @@ public class Controler {
 		ArrayList<Boss> boss = managerBoss.getBoss();
 		for (int i = 0; i < boss.size(); i++) {
 			String userBoss = boss.getUser();
+=======
+	
+	
+		if (option == JOptionPane.OK_OPTION) {
+	      JOptionPane.showMessageDialog(null, "You chose yes!");
+	    }
+	}
+>>>>>>> branch 'main' of https://github.com/infazorrilla/RETO4_Equipo3_LosNanos.git
 }
 		 
 	}

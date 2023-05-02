@@ -6,15 +6,15 @@ import java.util.Objects;
 
 public abstract class Animal implements Serializable {
 
-	private static final long serialVersionUID = -710553172728332503L;
-	private int id = 0;
-	private String name = null;
-	private String scientificName = null;
-	private float height = 0;
-	private float weight = 0;
-	private Date bornDate;
-	private int vaccinated = 0;;
-	private String diet = null;
+	protected static final long serialVersionUID = -710553172728332503L;
+	protected int id = 0;
+	protected String name = null;
+	protected String scientificName = null;
+	protected float height = 0;
+	protected float weight = 0;
+	protected Date bornDate;
+	protected int vaccinated = 0;;
+	protected String diet = null;
 
 	public Animal(int id, String name, String scientificName, float height, float weight, Date bornDate, int vaccinated,
 			String diet) {

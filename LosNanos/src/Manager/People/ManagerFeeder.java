@@ -1,4 +1,4 @@
-package Manager;
+package Manager.People;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -96,9 +96,9 @@ public ArrayList <Feeder> getFeeder (){
 			
 			// Si es necesario, inicializamos la lista
 			if (null == ret)
-				ret = new <Feeder> ArrayList ();
+				ret = new  ArrayList<Feeder> ();
 			
-			Feeder feeder = new Feeder (sql, sql, sql, sql, sql, 0, sql);
+			Feeder feeder = new Feeder();
 			
 			// Sacamos las columnas del RS
 			String id = resultSet.getString("id");

@@ -21,6 +21,7 @@ public class ManagerZoo {
 		String sql = "";
 		
 		Connection connection = null;
+		
 		Statement statement = null;
 
 		ResultSet resultSet = null;

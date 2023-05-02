@@ -1,4 +1,4 @@
-package Manager;
+package Manager.People;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,13 +8,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Pojos.Animal.Dolphin;
-import Pojos.Person.Boss;
+import Pojos.Person.Vet;
 import utils.DBUtils;
 
-public class ManagerBoss {
-
-public void insertBoss(Boss boss){	
+public class ManagerVet {
+	public void insertVet(Vet vet){	
 
 		Connection connection = null;
 		
@@ -28,17 +26,17 @@ public void insertBoss(Boss boss){
 			statement = connection.createStatement();
 			
 			String sql = "insert into employee (name, surname, id, user, password, ssNumber, idZoo) VALUES ('" + 
-					boss.getName() + "', '" + 
-					boss.getSurname() + "', '" + 
-					boss.getId() + "', '" + 
-					boss.getUser() + "', '" + 
-					boss.getPassword() + "', '" + 
-					boss.getSsNumber() + "', '" + 
-					boss.getIdZoo() + "')";
+					vet.getName() + "', '" + 
+					vet.getSurname() + "', '" + 
+					vet.getId() + "', '" + 
+					vet.getUser() + "', '" + 
+					vet.getPassword() + "', '" + 
+					vet.getSsNumber() + "', '" + 
+					vet.getIdZoo() + "')";
 			
-			String sql2 = "insert into boss (ssNumber, employeeNumCharge) VALUES ('" + 
-					boss.getSsNumber() + "', '" + 
-					boss.getEmployeeNumCharge() + "')";
+			String sql2 = "insert into vet (ssNumber, specializedAnimalType) VALUES ('" + 
+					vet.getSsNumber() + "', '" + 
+					vet.getSpecializedAnimalType() + "')";
 			
 			
 			// La ejecutamos...
@@ -67,11 +65,11 @@ public void insertBoss(Boss boss){
 		}
 	}
 
-public ArrayList <Boss> getBoss (){
-	ArrayList <Boss> ret = null;
+public ArrayList <Vet> getVet (){
+	ArrayList <Vet> ret = null;
 	
 	// SQL que queremos lanzar
-	String sql = "select * from bossComplete";
+	String sql = "select * from vetComplete";
 	
 	// La conexion con BBDD
 	Connection connection = null;
@@ -98,9 +96,9 @@ public ArrayList <Boss> getBoss (){
 			
 			// Si es necesario, inicializamos la lista
 			if (null == ret)
-				ret = new <Boss> ArrayList ();
+				ret = new ArrayList<Vet> ();
 			
-			Boss boss = new Boss (sql, sql, sql, sql, sql, 0, 0);
+			Vet vet = new Vet();
 			
 			// Sacamos las columnas del RS
 			String id = resultSet.getString("id");
@@ -110,23 +108,23 @@ public ArrayList <Boss> getBoss (){
             String password = resultSet.getString("password");
             int ssNumber = resultSet.getInt("ssNumber");
             int idZoo = resultSet.getInt("idZoo");
-            int employeeNumCharge = resultSet.getInt("employeeNumCharge");
+            String specializedAnimalType = resultSet.getString("specializedAnimalType");
 
           
             
             // Metemos los datos a Ejemplo
-            boss.setId(id);
-            boss.setName(name);
-            boss.setSurname(surname);
-            boss.setUser(user);
-            boss.setPassword(password);
-            boss.setSsNumber(ssNumber);
-            boss.setIdZoo(idZoo);
-            boss.setEmployeeNumCharge(employeeNumCharge);
+            vet.setId(id);
+            vet.setName(name);
+            vet.setSurname(surname);
+            vet.setUser(user);
+            vet.setPassword(password);
+            vet.setSsNumber(ssNumber);
+            vet.setIdZoo(idZoo);
+            vet.setSpecializedAnimalType(specializedAnimalType);
       
             
             // Lo guardamos en ret
-            ret.add(boss);
+            ret.add(vet);
 		}
 	} catch (SQLException sqle) {  
 		System.out.println("Error con la BBDD - " + sqle.getMessage());
@@ -156,7 +154,7 @@ public ArrayList <Boss> getBoss (){
 	return ret;
 }
 
-public void deleteBoss(Boss boss){
+public void deleteVet(Vet vet){
 	
 	// La conexion con BBDD
 	Connection connection = null;
@@ -172,7 +170,7 @@ public void deleteBoss(Boss boss){
 		connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 		
 		// Montamos la SQL. Las ? se rellenan a continuacion
-		String id = boss.getId();
+		String id = vet.getId();
 		String sql = "delete from employee where id =" + id;
 		preparedStatement = connection.prepareStatement(sql);
 		
