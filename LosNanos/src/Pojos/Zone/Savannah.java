@@ -3,27 +3,26 @@ package Pojos.Zone;
 import java.util.Objects;
 
 public class Savannah extends Zone {
-	
 
 	private static final long serialVersionUID = 1565125195990152251L;
 	private int treeNumber = 0;
 
-	
 	public Savannah(int id, String extension, int animalsNumber, int speciesNumber, int treeNumber) {
 		super(id, extension, animalsNumber, speciesNumber);
 		this.treeNumber = treeNumber;
 	}
 
+	public Savannah() {
+
+	}
 
 	public int getTreeNumber() {
 		return treeNumber;
 	}
 
-
 	public void setTreeNumber(int treeNumber) {
 		this.treeNumber = treeNumber;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -32,7 +31,6 @@ public class Savannah extends Zone {
 		result = prime * result + Objects.hash(treeNumber);
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -46,11 +44,9 @@ public class Savannah extends Zone {
 		return treeNumber == other.treeNumber;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Savannah [treeNumber=" + treeNumber + "]";
 	}
 
-	
 }

@@ -3,10 +3,7 @@ package Pojos.Animal;
 import java.util.Date;
 import java.util.Objects;
 
-
 public class Aquatic extends Animal {
-
-
 
 	private static final long serialVersionUID = -8764208574991894358L;
 
@@ -19,16 +16,18 @@ public class Aquatic extends Animal {
 		this.animalTipe = animalTipe;
 		this.zoneId = zoneId;
 	}
+	
+	public Aquatic() {
+		
+	}
 
 	public String getAnimalTipe() {
 		return animalTipe;
 	}
 
-
 	public void setAnimalTipe(String animalTipe) {
 		this.animalTipe = animalTipe;
 	}
-
 
 	public int getZoneId() {
 		return zoneId;
@@ -42,7 +41,6 @@ public class Aquatic extends Animal {
 		return serialVersionUID;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -50,7 +48,6 @@ public class Aquatic extends Animal {
 		result = prime * result + Objects.hash(animalTipe);
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -64,17 +61,9 @@ public class Aquatic extends Animal {
 		return Objects.equals(animalTipe, other.animalTipe);
 	}
 
-
 	@Override
 	public String toString() {
 		return "Aquatic [animalTipe=" + animalTipe + "]";
 	}
-
-
-
-	
-
-	
-
 
 }

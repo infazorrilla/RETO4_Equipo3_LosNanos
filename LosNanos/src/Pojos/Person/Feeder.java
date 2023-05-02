@@ -14,19 +14,17 @@ public class Feeder extends Employee {
 		this.SpecializedDiet = specializedDiet;
 	}
 
+	public Feeder() {
 
+	}
 
 	public String getSpecializedDiet() {
 		return SpecializedDiet;
 	}
 
-
-
 	public void setSpecializedDiet(String specializedDiet) {
 		SpecializedDiet = specializedDiet;
 	}
-
-
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

@@ -13,6 +13,9 @@ public class Boss extends Employee {
 		this.employeeNumCharge = employeeNumCharge;
 	}
 
+	public Boss() {
+		
+	}
 	public int getEmployeeNumCharge() {
 		return employeeNumCharge;
 	}

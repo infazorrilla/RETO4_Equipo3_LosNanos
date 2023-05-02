@@ -13,6 +13,10 @@ public abstract class Employee extends Person {
 		this.ssNumber = ssNumber;
 		this.idZoo = idZoo;
 	}
+	
+	public Employee() {
+		
+	}
 
 	public int getSsNumber() {
 		return ssNumber;
