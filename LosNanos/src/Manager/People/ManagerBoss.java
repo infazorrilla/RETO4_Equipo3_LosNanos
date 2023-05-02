@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Pojos.Person.Boss;
+import Pojos.Person.Employee;
 import utils.DBUtils;
 
 public class ManagerBoss {
@@ -70,8 +71,7 @@ public ArrayList <Boss> getBoss (){
 	ArrayList <Boss> ret = null;
 	
 	// SQL que queremos lanzar
-	//String sql = "select * from bossComplete";
-	String sql = "select * from Employee, Boss";
+	String sql = "select * from bossComplete";
 	
 	// La conexion con BBDD
 	Connection connection = null;
@@ -109,7 +109,7 @@ public ArrayList <Boss> getBoss (){
             String user = resultSet.getString("user");
             String password = resultSet.getString("password");
             int ssNumber = resultSet.getInt("ssNumber");
-           // int id_zoo = resultSet.getInt("id_zoo");
+            // int id_zoo = resultSet.getInt("id_zoo");
             int employeeNumCharge = resultSet.getInt("employeeNumCharge");
 
           

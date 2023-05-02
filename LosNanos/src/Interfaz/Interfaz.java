@@ -5,12 +5,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -62,6 +63,26 @@ public class Interfaz {
 		frame.getContentPane().add(jpLogin);
 		jpLogin.setLayout(null);
 		
+		JPanel jpBoss = new JPanel();
+		jpBoss.setBounds(0, 0, 848, 501);
+		frame.getContentPane().add(jpBoss);
+		jpBoss.setLayout(null);
+		
+		JPanel jpClient = new JPanel();
+		jpClient.setBounds(0, 0, 848, 501);
+		frame.getContentPane().add(jpClient);
+		jpClient.setLayout(null);
+		
+		JPanel jpFeeder = new JPanel();
+		jpFeeder.setBounds(0, 0, 848, 501);
+		frame.getContentPane().add(jpFeeder);
+		jpFeeder.setLayout(null);
+		
+		JPanel jpVet = new JPanel();
+		jpVet.setBounds(0, 0, 848, 501);
+		frame.getContentPane().add(jpVet);
+		jpVet.setLayout(null);
+		
 		JLabel Title = new JLabel("Zoo");
 		Title.setFont(new Font("Tahoma", Font.BOLD, 60));
 		Title.setBounds(352, 23, 118, 84);
@@ -102,8 +123,27 @@ public class Interfaz {
 				Controler controler = new Controler();
 				String user = usrTfLogin.getText();
 				String password = passTfLogin.getText();
-
-				controler.checkLogin(user, password);
+				int finalUser = controler.checkUser(user, password);
+				
+				switch (finalUser) {
+				case 0:
+					panelLogin(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+					JOptionPane.showMessageDialog(null, "Contraseña Erronea", null, JOptionPane.ERROR_MESSAGE);
+					break;
+				case 1:
+					panelBoss(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+					break;
+				case 2:
+					panelClient(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+					break;
+				case 3:
+					panelFeeder(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+					break;
+				case 4:
+					panelVet(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+					break;
+				}
+				
 			}
 		});
 		enterTfLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -116,19 +156,17 @@ public class Interfaz {
 		
 		addImage(jpLogin, backgroundLogin, "Photos/panda.jpg");
 		
-		JPanel jpClient = new JPanel();
-		jpClient.setBounds(0, 0, 848, 501);
-		frame.getContentPane().add(jpClient);
-		jpClient.setLayout(null);
+		JLabel lblNewLabel_3 = new JLabel("Vet");
+		lblNewLabel_3.setBounds(401, 231, 45, 13);
+		jpVet.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_2 = new JLabel("Feeder");
+		lblNewLabel_2.setBounds(396, 92, 45, 13);
+		jpFeeder.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_1 = new JLabel("Client");
 		lblNewLabel_1.setBounds(383, 159, 45, 13);
 		jpClient.add(lblNewLabel_1);
-		
-		JPanel jpBoss = new JPanel();
-		jpBoss.setBounds(0, 0, 848, 501);
-		frame.getContentPane().add(jpBoss);
-		jpBoss.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Boss");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -139,6 +177,55 @@ public class Interfaz {
 		
 
 	}
+	
+	public void panelBoss(JPanel jpLogin, JPanel jpClient, JPanel jpBoss, JPanel jpFeeder, JPanel jpVet) {
+		jpBoss.setVisible(true);
+		jpClient.setVisible(false);
+		jpFeeder.setVisible(false);
+		jpVet.setVisible(false);
+		jpLogin.setVisible(false);
+	}
+	
+	public void panelClient(JPanel jpLogin, JPanel jpClient, JPanel jpBoss, JPanel jpFeeder, JPanel jpVet) {
+		jpBoss.setVisible(false);
+		jpClient.setVisible(true);
+		jpFeeder.setVisible(false);
+		jpVet.setVisible(false);
+		jpLogin.setVisible(false);
+
+		
+	}
+	
+	public void panelFeeder(JPanel jpLogin, JPanel jpClient, JPanel jpBoss, JPanel jpFeeder, JPanel jpVet) {
+		jpBoss.setVisible(false);
+		jpClient.setVisible(false);
+		jpFeeder.setVisible(true);
+		jpVet.setVisible(false);
+		jpLogin.setVisible(false);
+
+		
+	}
+	
+	public void panelVet(JPanel jpLogin, JPanel jpClient, JPanel jpBoss, JPanel jpFeeder, JPanel jpVet) {
+		jpBoss.setVisible(false);
+		jpClient.setVisible(false);
+		jpFeeder.setVisible(false);
+		jpVet.setVisible(true);
+		jpLogin.setVisible(false);
+
+		
+	}
+	
+	public void panelLogin(JPanel jpLogin, JPanel jpClient, JPanel jpBoss, JPanel jpFeeder, JPanel jpVet) {
+		jpBoss.setVisible(false);
+		jpClient.setVisible(false);
+		jpFeeder.setVisible(false);
+		jpVet.setVisible(false);
+		jpLogin.setVisible(true);
+
+		
+	}
+	
 	
 	private void addImage(JPanel panel, JLabel label, String path) {
 		ImageIcon icon = new ImageIcon(path);
