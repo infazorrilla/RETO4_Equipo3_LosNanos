@@ -6,9 +6,9 @@ import java.util.Objects;
 public abstract class TerrestrialMammarian extends Animal {
 
 
-	private static final long serialVersionUID = -2801285273629005682L;
+	protected static final long serialVersionUID = -2801285273629005682L;
 
-	private String hairColor = null;
+	protected String hairColor = null;
 
 	public TerrestrialMammarian(int id, String name, String scientificName, float height, float weight, Date bornDate,
 			int vaccinated, String diet, String hairColor) {

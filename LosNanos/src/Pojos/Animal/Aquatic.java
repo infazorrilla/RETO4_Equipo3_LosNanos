@@ -5,10 +5,10 @@ import java.util.Objects;
 
 public class Aquatic extends Animal {
 
-	private static final long serialVersionUID = -8764208574991894358L;
+	protected static final long serialVersionUID = -8764208574991894358L;
 
-	private String animalTipe = null;
-	private int zoneId = 0;
+	protected String animalTipe = null;
+	protected int zoneId = 0;
 
 	public Aquatic(int id, String name, String scientificName, float height, float weight, Date bornDate,
 			int vaccinated, String diet, String animalTipe, int zoneId) {

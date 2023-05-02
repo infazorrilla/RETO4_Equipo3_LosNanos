@@ -5,9 +5,9 @@ import java.util.Objects;
 
 public abstract class Reptile extends Animal {
 
-	private static final long serialVersionUID = 7761481468131552098L;
+	protected static final long serialVersionUID = 7761481468131552098L;
 
-	private String shedSkin;
+	protected String shedSkin;
 
 	public Reptile(int id, String name, String scientificName, float height, float weight, Date bornDate,
 			int vaccinated, String diet, String shedSkin) {
