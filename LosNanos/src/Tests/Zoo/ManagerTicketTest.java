@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import Manager.ManagerTicket;
+import Manager.Zoo.ManagerTicket;
 import Pojos.ZooTicket.Ticket;
 
 class ManagerTicketTest {

@@ -1,4 +1,4 @@
-package Manager;
+package Manager.Zoo;
 
 import java.sql.Connection;
 
