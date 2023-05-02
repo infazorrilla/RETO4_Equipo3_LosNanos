@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import Manager.ManagerBoss;
-import Manager.ManagerClient;
+import Manager.People.ManagerBoss;
+import Manager.People.ManagerClient;
 import Pojos.Person.Boss;
 import Pojos.Person.Client;
 
@@ -46,10 +46,12 @@ public class Controler {
 
 	public void checkLogin(String user, String password) {
 		ManagerBoss managerBoss = new ManagerBoss();
-
-		ArrayList<Boss> boss = managerBoss.getBoss();
-		for (int i = 0; i < boss.size(); i++) {
+		ArrayList<Boss> bosses = managerBoss.getBoss();
+		for (int i = 0; i < bosses.size(); i++) {
+			Boss boss = new Boss();
 			String userBoss = boss.getUser();
+			System.out.print(bosses);
+			System.out.print(userBoss);
 }
 		 
 	}

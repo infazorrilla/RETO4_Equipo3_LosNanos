@@ -6,16 +6,16 @@ public abstract class Employee extends Person {
 
 	protected static final long serialVersionUID = 148854585781764229L;
 	protected int ssNumber;
-	protected int idZoo;
+	protected int id_zoo;
 
 	public Employee(String name, String surname, String id, String user, String password, int ssNumber, int idZoo) {
 		super(name, surname, id, user, password);
 		this.ssNumber = ssNumber;
-		this.idZoo = idZoo;
+		this.id_zoo = id_zoo;
 	}
-	
+
 	public Employee() {
-		
+
 	}
 
 	public int getSsNumber() {
@@ -25,14 +25,13 @@ public abstract class Employee extends Person {
 	public void setSsNumber(int ssNumber) {
 		this.ssNumber = ssNumber;
 	}
-	
 
-	public int getIdZoo() {
-		return idZoo;
+	public int getId_zoo() {
+		return id_zoo;
 	}
 
-	public void setIdZoo(int idZoo) {
-		this.idZoo = idZoo;
+	public void setId_zoo(int id_zoo) {
+		this.id_zoo = id_zoo;
 	}
 
 	public static long getSerialversionuid() {
