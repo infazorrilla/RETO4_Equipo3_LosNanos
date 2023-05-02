@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public abstract class Employee extends Person {
 
-	private static final long serialVersionUID = 148854585781764229L;
-	private int ssNumber;
-	private int idZoo;
+	protected static final long serialVersionUID = 148854585781764229L;
+	protected int ssNumber;
+	protected int idZoo;
 
 	public Employee(String name, String surname, String id, String user, String password, int ssNumber, int idZoo) {
 		super(name, surname, id, user, password);
