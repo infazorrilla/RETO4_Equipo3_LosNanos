@@ -8,11 +8,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import Pojos.ZooTicket.Zoo;
-import utils.DBUtils;
 
 class ManagerZooTest {
 	
-	private void insertZoo(Zoo zoo) {
+	private void insertZoo() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -36,9 +35,9 @@ class ManagerZooTest {
 	public void inserBoss() throws ParseException {
 		ManagerZooTest managerZoo = new ManagerZooTest();
 		Zoo zoo= new Zoo();
-		managerZoo.insertZoo(zoo);
+		managerZoo.insertZoo();
 		ArrayList<Zoo> Zoo = managerZoo.getZoo();
-		String name = Zoo.get(0).getName();
+		Zoo.get(0).getName();
 		assertEquals(zoo, "Los Nanos");
 
 	}
@@ -47,7 +46,7 @@ class ManagerZooTest {
 	@Test
 	public void deleteZoo() throws ParseException {
 		ManagerZooTest managerZoo = new ManagerZooTest();
-		Zoo zoo = new Zoo();
+		new Zoo();
 		managerZoo.deleteZoo();
 		ArrayList<Zoo> boss = managerZoo.getZoo();
 		assertNull(boss);
