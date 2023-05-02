@@ -37,7 +37,6 @@ class ManagerDolphinTest {
 			String animal = dolphin.get(0).getName();
 			assertEquals(animal, "Carlos");
 		
-		
 	}
 	
 
