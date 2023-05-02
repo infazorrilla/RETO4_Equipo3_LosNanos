@@ -2,16 +2,19 @@ package Pojos.Zone;
 
 import java.util.Objects;
 
-public class Swamp extends Zone{
-
+public class Swamp extends Zone {
 
 	private static final long serialVersionUID = 7920840047200955197L;
 	private float waterSurface = 0;
-	
+
 	public Swamp(int id, String extension, int animalsNumber, int speciesNumber, float waterSurface) {
 		super(id, extension, animalsNumber, speciesNumber);
-		this.waterSurface =	waterSurface;
-		}
+		this.waterSurface = waterSurface;
+	}
+
+	public Swamp() {
+
+	}
 
 	public float getWaterSurface() {
 		return waterSurface;
@@ -45,6 +48,5 @@ public class Swamp extends Zone{
 	public String toString() {
 		return "Swamp [waterSurface=" + waterSurface + "]";
 	}
-	
-	
+
 }

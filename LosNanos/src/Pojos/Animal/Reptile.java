@@ -3,39 +3,33 @@ package Pojos.Animal;
 import java.util.Date;
 import java.util.Objects;
 
-public abstract class Reptile extends Animal{
-
+public abstract class Reptile extends Animal {
 
 	private static final long serialVersionUID = 7761481468131552098L;
-	
+
 	private String shedSkin;
 
-
 	public Reptile(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			int i, String diet, String shedSkin) {
-		super(id, name, scientificName, height, weight, bornDate, i, diet);
+			int vaccinated, String diet, String shedSkin) {
+		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet);
 		this.shedSkin = shedSkin;
 	}
 
+	public Reptile() {
 
+	}
 
 	public String getShedSkin() {
 		return shedSkin;
 	}
 
-
-
 	public void setShedSkin(String shedSkin) {
 		this.shedSkin = shedSkin;
 	}
 
-
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -62,5 +56,4 @@ public abstract class Reptile extends Animal{
 		return "Reptile [shedSkin=" + shedSkin + "]";
 	}
 
-	
 }

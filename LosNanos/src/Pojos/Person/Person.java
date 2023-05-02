@@ -20,6 +20,10 @@ public abstract class Person implements Serializable {
 		this.password = password;
 	}
 
+	public Person() {
+
+	}
+
 	public String getName() {
 		return name;
 	}

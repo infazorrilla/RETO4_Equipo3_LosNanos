@@ -15,6 +15,10 @@ public class Dolphin extends Aquatic{
 			int vaccinated, String diet, String animalTipe, int zoneId, int durationUnderWater, int id_dolphin) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe, zoneId);
 	}
+	
+	public Dolphin() {
+		
+	}
 
 	public int getDurationUnderWater() {
 		return durationUnderWater;

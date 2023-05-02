@@ -12,6 +12,10 @@ public class Client extends Person {
 
 		this.clientId = clientId;
 	}
+	
+	public Client() {
+		
+	}
 
 	public int getClientId() {
 		return clientId;

@@ -3,54 +3,43 @@ package Pojos.Animal;
 import java.util.Date;
 import java.util.Objects;
 
-public class Snake extends Reptile{
-
+public class Snake extends Reptile {
 
 	private static final long serialVersionUID = -58749026852993665L;
 
 	private boolean poisonus = false;
 	private int zoneId = 0;
-	
 
-
-	public Snake(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			int i, String diet, String shedSkin, boolean poisonus, int zoneId) {
+	public Snake(int id, String name, String scientificName, float height, float weight, Date bornDate, int i,
+			String diet, String shedSkin, boolean poisonus, int zoneId) {
 		super(id, name, scientificName, height, weight, bornDate, i, diet, shedSkin);
 		this.poisonus = poisonus;
 		this.zoneId = zoneId;
 	}
 
+	public Snake() {
 
+	}
 
 	public boolean isPoisonus() {
 		return poisonus;
 	}
 
-
-
 	public void setPoisonus(boolean poisonus) {
 		this.poisonus = poisonus;
 	}
-
-
 
 	public int getZoneId() {
 		return zoneId;
 	}
 
-
-
 	public void setZoneId(int zoneId) {
 		this.zoneId = zoneId;
 	}
 
-
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -59,8 +48,6 @@ public class Snake extends Reptile{
 		result = prime * result + Objects.hash(poisonus, zoneId);
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -74,17 +61,9 @@ public class Snake extends Reptile{
 		return poisonus == other.poisonus && zoneId == other.zoneId;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Snake [poisonus=" + poisonus + ", zoneId=" + zoneId + "]";
 	}
-	
-	
-
-
-	
-	
 
 }

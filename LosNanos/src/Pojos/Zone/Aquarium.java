@@ -4,15 +4,17 @@ import java.util.Objects;
 
 public class Aquarium extends Zone {
 
-
-
 	private static final long serialVersionUID = 491335310290568936L;
 	private float waterTemp = 0;
 
 	public Aquarium(int id, String extension, int animalsNumber, int speciesNumber, float waterTemp) {
 		super(id, extension, animalsNumber, speciesNumber);
 		this.waterTemp = waterTemp;
-		}
+	}
+
+	public Aquarium() {
+
+	}
 
 	public float getWaterTemp() {
 		return waterTemp;
@@ -47,6 +49,4 @@ public class Aquarium extends Zone {
 		return "Aquarium [waterTemp=" + waterTemp + "]";
 	}
 
-	
-	
 }

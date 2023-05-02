@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 
+import Controler.Controler;
+
 public class Interfaz {
 
 	private JFrame frame;
@@ -83,6 +85,12 @@ public class Interfaz {
 		jpLogin.add(passTfLogin);
 		
 		JButton regTfLogin = new JButton("Register");
+		regTfLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controler controler = new Controler();
+				controler.clientRegister();
+			}
+		});
 		regTfLogin.setBackground(new Color(240, 240, 240));
 		regTfLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		regTfLogin.setBounds(227, 376, 118, 42);

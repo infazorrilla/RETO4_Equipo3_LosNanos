@@ -3,33 +3,29 @@ package Pojos.Animal;
 import java.util.Date;
 import java.util.Objects;
 
-public class Giraffe extends TerrestrialMammarian{
-
+public class Giraffe extends TerrestrialMammarian {
 
 	private static final long serialVersionUID = -880259951743115792L;
-	
+
 	private int neckLength = 0;
 
-
-
-
-
 	public Giraffe(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			boolean vaccinated, Diet diet, String hairColor, int neckLength) {
+			int vaccinated, String diet, String hairColor, int neckLength) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, hairColor);
 		this.neckLength = neckLength;
 	}
-
+	
+	public Giraffe() {
+		
+	}
 
 	public int getNeckLength() {
 		return neckLength;
 	}
 
-
 	public void setNeckLength(int neckLength) {
 		this.neckLength = neckLength;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -38,7 +34,6 @@ public class Giraffe extends TerrestrialMammarian{
 		result = prime * result + Objects.hash(neckLength);
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -52,12 +47,9 @@ public class Giraffe extends TerrestrialMammarian{
 		return neckLength == other.neckLength;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Giraffe [neckLength=" + neckLength + "]";
 	}
-	
-	
 
 }

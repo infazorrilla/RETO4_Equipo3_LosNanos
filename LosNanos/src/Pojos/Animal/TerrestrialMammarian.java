@@ -11,9 +11,13 @@ public abstract class TerrestrialMammarian extends Animal {
 	private String hairColor = null;
 
 	public TerrestrialMammarian(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			boolean vaccinated, Diet diet, String hairColor) {
+			int vaccinated, String diet, String hairColor) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet);
 		this.hairColor = hairColor;
+	}
+	
+	public TerrestrialMammarian() {
+		
 	}
 
 	public String getHairColor() {

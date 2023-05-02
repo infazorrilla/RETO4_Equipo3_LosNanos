@@ -13,6 +13,10 @@ public class Vet extends Employee {
 		this.specializedAnimalType = specializedAnimalType;
 	}
 
+	public Vet() {
+
+	}
+
 	public String getSpecializedAnimalType() {
 		return specializedAnimalType;
 	}

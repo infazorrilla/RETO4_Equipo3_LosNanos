@@ -3,21 +3,23 @@ package Pojos.Animal;
 import java.util.Date;
 import java.util.Objects;
 
-public class Cheetah extends TerrestrialMammarian{
+public class Cheetah extends TerrestrialMammarian {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4763177983261767278L;
-	
-	private int maxSpeed =0;
 
-
+	private int maxSpeed = 0;
 
 	public Cheetah(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			boolean vaccinated, Diet diet, String hairColor, int maxSpeed) {
+			int vaccinated, String diet, String hairColor, int maxSpeed) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, hairColor);
 		this.maxSpeed = maxSpeed;
+	}
+
+	public Cheetah() {
+
 	}
 
 	public int getMaxSpeed() {
@@ -52,7 +54,5 @@ public class Cheetah extends TerrestrialMammarian{
 	public String toString() {
 		return "Cheetah [maxSpeed=" + maxSpeed + "]";
 	}
-	
-	
 
 }

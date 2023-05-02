@@ -3,19 +3,20 @@ package Pojos.Animal;
 import java.util.Date;
 import java.util.Objects;
 
-public class Crocodile extends Reptile{
-
+public class Crocodile extends Reptile {
 
 	private static final long serialVersionUID = 3493391510682934125L;
 
 	private int teethNumber = 0;
 
-
-
 	public Crocodile(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			boolean vaccinated, Diet diet, Date shedSkin, int teethNumber) {
+			int vaccinated, String diet, String shedSkin, int teethNumber) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin);
 		this.teethNumber = teethNumber;
+
+	}
+
+	public Crocodile() {
 
 	}
 
@@ -51,6 +52,5 @@ public class Crocodile extends Reptile{
 	public String toString() {
 		return "Crocodile [teethNumber=" + teethNumber + "]";
 	}
-	
-	
+
 }
