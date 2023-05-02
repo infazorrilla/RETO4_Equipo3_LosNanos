@@ -21,5 +21,5 @@ public class Controler {
 		if (option == JOptionPane.OK_OPTION) {
 	      JOptionPane.showMessageDialog(null, "You chose yes!");
 	    }
-
+	}
 }
