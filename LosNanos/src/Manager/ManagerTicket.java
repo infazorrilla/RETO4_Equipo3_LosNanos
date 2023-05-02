@@ -83,4 +83,9 @@ public class ManagerTicket {
 			}
 			return ret;
 	}
+
+	public void insertTicket(Ticket ticket) {
+		// TODO Auto-generated method stub
+		
+	}
 }

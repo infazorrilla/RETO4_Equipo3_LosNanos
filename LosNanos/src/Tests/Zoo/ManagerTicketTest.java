@@ -2,6 +2,7 @@ package Tests.Zoo;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -23,27 +24,11 @@ class ManagerTicketTest {
 	}
 
 	@Test
-	public void inserBoss() throws ParseException {
+	public void insertTicket() throws ParseException {
 		ManagerTicket managerTicket = new ManagerTicket();
 		Ticket ticket = new Ticket();
 		managerTicket.insertTicket(ticket);
-		String empleado = ticket.get(0).getName();
-		assertEquals();
-
+		Date buyDate = (Date) ticket.get(0).getBuyDate();
+		equals(ticket);
 	}
-
-	@Test
-	public void deleteBoss() throws ParseException {
-		ManagerTicket managerTicket = new ManagerTicket();
-		Boss bosses = new Boss("Ibai", "Torre", "12345678A", "ibai", "abcd1234", 1, 1);
-		managerBoss.deleteBoss(bosses);
-		ArrayList<Boss> boss = managerBoss.getBoss();
-		assertNull(boss);
-
-	}
-}
-
-	
-	}
-
 }
