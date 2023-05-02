@@ -63,6 +63,7 @@ public class Interfaz {
 		frame.getContentPane().add(jpLogin);
 		jpLogin.setLayout(null);
 		
+		
 		JPanel jpBoss = new JPanel();
 		jpBoss.setBounds(0, 0, 848, 501);
 		frame.getContentPane().add(jpBoss);
@@ -84,11 +85,14 @@ public class Interfaz {
 		jpVet.setLayout(null);
 		
 		JLabel Title = new JLabel("Zoo");
+		Title.setForeground(new Color(255, 255, 255));
 		Title.setFont(new Font("Tahoma", Font.BOLD, 60));
 		Title.setBounds(352, 23, 118, 84);
 		jpLogin.add(Title);
 		
 		usrTfLogin = new JTextField();
+		usrTfLogin.setForeground(new Color(255, 255, 255));
+		usrTfLogin.setBackground(new Color(201, 190, 190));
 		usrTfLogin.setText("User");
 		usrTfLogin.setToolTipText("User");
 		usrTfLogin.setHorizontalAlignment(SwingConstants.CENTER);
@@ -98,6 +102,8 @@ public class Interfaz {
 		usrTfLogin.setColumns(10);
 		
 		passTfLogin = new JTextField();
+		passTfLogin.setForeground(new Color(255, 255, 255));
+		passTfLogin.setBackground(new Color(201, 190, 190));
 		passTfLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		passTfLogin.setFont(new Font("Arial", Font.PLAIN, 18));
 		passTfLogin.setText("Password");
@@ -106,18 +112,21 @@ public class Interfaz {
 		jpLogin.add(passTfLogin);
 		
 		JButton regTfLogin = new JButton("Register");
+		regTfLogin.setForeground(new Color(255, 255, 255));
 		regTfLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controler controler = new Controler();
 				controler.clientRegister();
 			}
 		});
-		regTfLogin.setBackground(new Color(240, 240, 240));
+		regTfLogin.setBackground(new Color(201, 190, 190));
 		regTfLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		regTfLogin.setBounds(227, 376, 118, 42);
 		jpLogin.add(regTfLogin);
 		
 		JButton enterTfLogin = new JButton("Enter");
+		enterTfLogin.setForeground(new Color(255, 255, 255));
+		enterTfLogin.setBackground(new Color(201, 190, 190));
 		enterTfLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controler controler = new Controler();
@@ -153,8 +162,7 @@ public class Interfaz {
 		JLabel backgroundLogin = new JLabel("");
 		backgroundLogin.setBounds(0, 0, 848, 491);
 		jpLogin.add(backgroundLogin);
-		
-		addImage(jpLogin, backgroundLogin, "Photos/panda.jpg");
+		addImage(jpLogin, backgroundLogin, "src/Photos/panda.jpg");
 		
 		JLabel lblNewLabel_3 = new JLabel("Vet");
 		lblNewLabel_3.setBounds(401, 231, 45, 13);
