@@ -99,6 +99,11 @@ public class Interfaz {
 		JButton enterTfLogin = new JButton("Enter");
 		enterTfLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Controler controler = new Controler();
+				String user = usrTfLogin.getText();
+				String password = passTfLogin.getText();
+
+				controler.checkLogin(user, password);
 			}
 		});
 		enterTfLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -110,6 +115,25 @@ public class Interfaz {
 		jpLogin.add(backgroundLogin);
 		
 		addImage(jpLogin, backgroundLogin, "Photos/panda.jpg");
+		
+		JPanel jpClient = new JPanel();
+		jpClient.setBounds(0, 0, 848, 501);
+		frame.getContentPane().add(jpClient);
+		jpClient.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("Client");
+		lblNewLabel_1.setBounds(383, 159, 45, 13);
+		jpClient.add(lblNewLabel_1);
+		
+		JPanel jpBoss = new JPanel();
+		jpBoss.setBounds(0, 0, 848, 501);
+		frame.getContentPane().add(jpBoss);
+		jpBoss.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Boss");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setBounds(367, 114, 189, 101);
+		jpBoss.add(lblNewLabel);
 		
 
 		

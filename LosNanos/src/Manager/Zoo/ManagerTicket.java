@@ -1,4 +1,4 @@
-package Manager;
+package Manager.Zoo;
 
 import java.sql.Connection;
 
@@ -7,21 +7,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.util.ArrayList;
+import java.util.Date;
 
-import Pojos.ZooTicket.Zoo;
+import Pojos.ZooTicket.Ticket;
 import utils.DBUtils;
 
 import java.sql.PreparedStatement;
 
-public class ManagerZoo {
-	
-	public ArrayList<Zoo> selectZoo(){
-		ArrayList<Zoo> ret = null;
+public class ManagerTicket {
+
+	public ArrayList<Ticket> selectTicket(){
+		ArrayList<Ticket> ret = null;
 		
 		String sql = "";
 		
 		Connection connection = null;
-		
 		Statement statement = null;
 
 		ResultSet resultSet = null;
@@ -38,49 +38,52 @@ public class ManagerZoo {
 			
 			while (resultSet.next()) {
 				
-				
 				if (null == ret)
-					ret = new ArrayList<Zoo>();
+					ret = new ArrayList<Ticket>();
 
-				Zoo zoo= new Zoo();
+				Ticket ticket = new Ticket();
 
-				String location = resultSet.getString("location");
-				int id = resultSet.getInt("id");
-				String name = resultSet.getString("name");
+				Date buyDate = resultSet.getDate("buyDate");
+				int idTicket = resultSet.getInt("idTicket");
 				
-				zoo.setLocation(location);
-				zoo.setId(id);
-				zoo.setName(name);
+				ticket.setBuyDate(buyDate);
+				ticket.setId(idTicket);
 				
-				ret.add(zoo);
+				ret.add(ticket);
 				
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Error con la BBDD - " + sqle.getMessage());
 		} catch (Exception e) {
 			System.out.println("Error generico - " + e.getMessage());
-		} finally {
-			try {
-				if (resultSet != null)
-					resultSet.close();
-			} catch (Exception e) {
+			} finally {
+				try {
+					if (resultSet != null)
+						resultSet.close();
+				} catch (Exception e) {
 
+				}
+				;
+				try {
+					if (statement != null)
+						statement.close();
+				} catch (Exception e) {
+				
+				}
+				;
+				try {
+					if (connection != null)
+						connection.close();
+				} catch (Exception e) {
+				
+				}
+				;
 			}
-			;
-			try {
-				if (statement != null)
-					statement.close();
-			} catch (Exception e) {
-			
-			}
-			;
-			try {
-				if (connection != null)
-					connection.close();
-			} catch (Exception e) {
-			
-			}
-		}
-		return ret;
+			return ret;
+	}
+
+	public void insertTicket(Ticket ticket) {
+		// TODO Auto-generated method stub
+		
 	}
 }

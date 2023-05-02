@@ -5,12 +5,12 @@ import java.util.Objects;
 
 public abstract class Person implements Serializable {
 
-	private static final long serialVersionUID = 3183063123012135015L;
-	private String name;
-	private String surname;
-	private String id;
-	private String user;
-	private String password;
+	protected static final long serialVersionUID = 3183063123012135015L;
+	protected String name;
+	protected String surname;
+	protected String id;
+	protected String user;
+	protected String password;
 
 	public Person(String name, String surname, String id, String user, String password) {
 		this.name = name;

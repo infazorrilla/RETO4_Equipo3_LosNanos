@@ -6,10 +6,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
-
-import Manager.ManagerBoss;
-import Manager.ManagerClient;
-import Pojos.Person.Boss;
+import Manager.People.ManagerClient;
 import Pojos.Person.Client;
 
 class ManagerClienteTest {
