@@ -346,8 +346,7 @@ public class Interfaz {
 	    JFrame frame = new JFrame("Ejemplo JComboBox");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.add(cbBossZones);
-	    frame.pack();
-	    frame.setVisible(true);
+
 
 		JLabel lblBossSeeZone = new JLabel("Zones");
 		lblBossSeeZone.setForeground(new Color(255, 255, 255));
