@@ -13,26 +13,22 @@ class ManagerZooTest {
 	
 	private void insertZoo() {
 		// TODO Auto-generated method stub
-		
-	}
-	private ArrayList<Zoo> getZoo() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Test
-	public void getBoss() {
+	public ArrayList<Zoo> getZoo() {
 		ManagerZooTest managerZoo = new ManagerZooTest();
 		ArrayList<Zoo> zoo = managerZoo.getZoo();
 		for (int i = 0; i < zoo.size(); i++) {
 			System.out.print(zoo.get(i).getName());
 		}
 		assertNotNull(zoo, "Los Nanos");
+		return zoo;
 	}
 
 
 	@Test
-	public void inserBoss() throws ParseException {
+	public void inserZoo() throws ParseException {
 		ManagerZooTest managerZoo = new ManagerZooTest();
 		Zoo zoo= new Zoo();
 		managerZoo.insertZoo();
