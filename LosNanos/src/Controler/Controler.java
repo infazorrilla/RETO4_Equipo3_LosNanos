@@ -215,15 +215,14 @@ public class Controler {
 			break;
 		case "Snake":
 			getSelectedSnake(model, table);
-			break;
 		case "Crocodile":
-//			getSelectedCrocodile();
+			getSelectedCrocodile(model, table);
 			break;
 		case "Giraffe":
-//			getSelectedGiraffe();
+			getSelectedGiraffe(model, table);
 			break;
 		case "Cheetah":
-//			getSelectedCheetah();
+			getSelectedCheetah(model, table);
 			break;
 		}
 	}
