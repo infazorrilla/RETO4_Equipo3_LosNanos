@@ -67,26 +67,32 @@ public class Interfaz {
 		jpLogin.setBounds(0, 10, 848, 491);
 		frame.getContentPane().add(jpLogin);
 		jpLogin.setLayout(null);
+		jpLogin.setVisible(true);
 
 		JPanel jpClient = new JPanel();
 		jpClient.setBounds(0, 0, 848, 501);
 		frame.getContentPane().add(jpClient);
 		jpClient.setLayout(null);
+		jpClient.setVisible(false);
 
 		JPanel jpFeeder = new JPanel();
 		jpFeeder.setBounds(0, 0, 848, 501);
 		frame.getContentPane().add(jpFeeder);
 		jpFeeder.setLayout(null);
+		jpFeeder.setVisible(false);
 
 		JPanel jpVet = new JPanel();
 		jpVet.setBounds(0, 0, 848, 501);
 		frame.getContentPane().add(jpVet);
 		jpVet.setLayout(null);
-		
+		jpVet.setVisible(false);
+
 		JPanel jpBoss = new JPanel();
 		jpBoss.setBounds(0, 0, 848, 501);
 		frame.getContentPane().add(jpBoss);
 		jpBoss.setLayout(null);
+		jpBoss.setVisible(false);
+
 
 		final DefaultTableModel model;
 		model = new DefaultTableModel();
@@ -291,6 +297,11 @@ public class Interfaz {
 		jpBoss.add(btnBossSeeClient);
 
 		JComboBox cbBossAnimals = new JComboBox();
+		cbBossAnimals.addItem("Dolphin");
+		cbBossAnimals.addItem("Snake");
+		cbBossAnimals.addItem("Cocodrile");
+		cbBossAnimals.addItem("Giraffe");
+		cbBossAnimals.addItem("Cheetah");
 		cbBossAnimals.setBackground(new Color(235, 199, 150));
 		cbBossAnimals.setForeground(new Color(255, 255, 255));
 		cbBossAnimals.setBounds(78, 412, 272, 21);
@@ -315,6 +326,33 @@ public class Interfaz {
 		jpBoss.add(lblBossSeeZone);
 
 		JButton btBossSeeAnimal = new JButton("Search");
+		btBossSeeAnimal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controler controler = new Controler();
+				String box = (String)cbBossAnimals.getSelectedItem();
+				model.setRowCount(0);
+				model.setColumnCount(0);
+				switch (box) {
+				case "Dolphin":
+					dolphinModel(model);
+					break;
+				case "Snake":
+					snakeModel(model);
+					break;
+				case "Crocodile":
+//					crocodileModel(model);
+				case "Giraffe":
+//					giraffeModel(model);
+				case "Cheetah":
+//					cheetahModel(model);
+				}
+				model.setRowCount(0);
+				model.setColumnCount(0);
+				controler.getSelectedAnimal(box, model, table);
+			}
+
+
+		});
 		btBossSeeAnimal.setBackground(new Color(235, 199, 150));
 		btBossSeeAnimal.setForeground(new Color(255, 255, 255));
 		btBossSeeAnimal.setBounds(172, 443, 85, 21);
@@ -376,6 +414,32 @@ public class Interfaz {
 		jpVet.setVisible(false);
 		jpLogin.setVisible(true);
 
+	}
+	
+	private void dolphinModel(DefaultTableModel model) {
+		model.addColumn("Id");
+		model.addColumn("Name");
+		model.addColumn("ScientificName");
+		model.addColumn("Height");
+		model.addColumn("Weight");
+		model.addColumn("Born-Date");
+		model.addColumn("Vaccinated");				
+		model.addColumn("Diet");	
+		model.addColumn("ZoneId");
+		model.addColumn("Animal-Tipe");	
+	}
+	
+	private void snakeModel(DefaultTableModel model) {
+		model.addColumn("Id");
+		model.addColumn("Name");
+		model.addColumn("ScientificName");
+		model.addColumn("Height");
+		model.addColumn("Weight");
+		model.addColumn("Born-Date");
+		model.addColumn("Vaccinated");				
+		model.addColumn("Diet");	
+		model.addColumn("ZoneId");
+		model.addColumn("shed-Skin");	
 	}
 
 	private void addImage(JPanel panel, JLabel label, String path) {
