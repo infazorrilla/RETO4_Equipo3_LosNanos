@@ -306,7 +306,7 @@ public class Controller {
 
 		ManagerClient managerClient = new ManagerClient();
 		managerClient.deleteClient(id);
-	} 
+	}
 
 	public void addOption() {
 		String[] options = { "Employee", "Animal" };
@@ -392,6 +392,63 @@ public class Controller {
 							weightFloat, date, vaccinatedInt, diet.getSelectedItem().toString(), animalTipe.getText(),
 							zoneIdInt, durationUnderWaterInt, 0);
 					managerDolphin.insertDolphin(dolphinToIsert);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+
+	}
+
+	public void addSnake() {
+		JTextField name = new JTextField();
+		JTextField scientificName = new JTextField();
+		JTextField height = new JTextField();
+		JTextField weight = new JTextField();
+		JTextField bornDate = new JTextField();
+		JTextField vaccinated = new JTextField();
+		JComboBox diet = new JComboBox();
+		diet.addItem("Carnivorous");
+		diet.addItem("Herbivorous");
+		JTextField shedSkin = new JTextField();
+		JTextField zoneId = new JTextField();
+		JTextField poisonus = new JTextField();
+
+		Object[] message = { "Name: *", name, "ScientificName: *", scientificName, "Height: *", height, "Weight: *",
+				weight, "Born-Date *", bornDate, "Vacinated: *", vaccinated, "Diet: *", diet, "ShedSkin: *", shedSkin,
+				"ZoneId: *", zoneId, "Poisonus: *", poisonus };
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Cliente", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || scientificName.getText().isEmpty() || height.getText().isEmpty()
+					|| weight.getText().isEmpty() || bornDate.getText().isEmpty() || vaccinated.getText().isEmpty()
+					|| shedSkin.getText().isEmpty() || zoneId.getText().isEmpty() || poisonus.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					ManagerSnake managerSnake = new ManagerSnake();
+					String heightString = height.getText();
+					float heightFloat = Float.valueOf(heightString);
+					String weightString = weight.getText();
+					float weightFloat = Float.valueOf(weightString);
+					String DateBorn = bornDate.getText();
+					SimpleDateFormat formatBorn = new SimpleDateFormat("dd/MM/yyyy");
+					java.util.Date dateBorn = formatBorn.parse(DateBorn);
+					String vaccinatedString = vaccinated.getText();
+					int vaccinatedInt = checkBooleanTwo(vaccinatedString);
+					String zoneIdString = vaccinated.getText();
+					String DateSkin = shedSkin.getText();
+					SimpleDateFormat formatSkin = new SimpleDateFormat("dd/MM/yyyy");
+					java.util.Date dateSkin = formatSkin.parse(DateSkin);
+					int zoneIdInt = Integer.valueOf(zoneIdString);
+					String poisonusString = poisonus.getText();
+					int poisonusInt = checkBooleanTwo(poisonusString);
+
+					Snake snakeToIsert = new Snake(0, name.getText(), scientificName.getText(), heightFloat,
+							weightFloat, dateBorn, vaccinatedInt, diet.getSelectedItem().toString(), dateSkin,
+							zoneIdInt, poisonusInt, 0);
+					managerSnake.insertSnake(snakeToIsert);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
 				}
