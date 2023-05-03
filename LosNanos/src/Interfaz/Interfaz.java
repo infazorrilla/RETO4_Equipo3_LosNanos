@@ -338,16 +338,6 @@ public class Interfaz {
 		cbBossZones.setForeground(new Color(255, 255, 255));
 		cbBossZones.setBounds(367, 412, 272, 21);
 		jpBoss.add(cbBossZones);
-		
-	    cbBossZones.addItem("Acuario");
-	    cbBossZones.addItem("Sabana");
-	    cbBossZones.addItem("Pantano");
-
-	    JFrame frame = new JFrame("Ejemplo JComboBox");
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.add(cbBossZones);
-	    frame.pack();
-	    frame.setVisible(true);
 
 		JLabel lblBossSeeZone = new JLabel("Zones");
 		lblBossSeeZone.setForeground(new Color(255, 255, 255));
