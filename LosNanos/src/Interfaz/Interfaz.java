@@ -352,9 +352,7 @@ public class Interfaz {
 				case "Cheetah":
 //					cheetahModel(model);
 				}
-
 			}
-
 
 		});
 		btBossSeeAnimal.setBackground(new Color(235, 199, 150));
