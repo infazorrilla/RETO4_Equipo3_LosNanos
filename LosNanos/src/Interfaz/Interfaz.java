@@ -19,7 +19,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 
-import Controler.Controler;
+import Controller.Controller;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
@@ -96,13 +96,7 @@ public class Interfaz {
 
 		final DefaultTableModel model;
 		model = new DefaultTableModel();
-
-		model.addColumn("Name");
-		model.addColumn("Surname");
-		model.addColumn("Id");
-		model.addColumn("User");
-		model.addColumn("Password");
-		model.addColumn("Special");
+		personModel(model);
 
 		JLabel Title = new JLabel("Zoo");
 		Title.setForeground(new Color(255, 255, 255));
@@ -135,8 +129,8 @@ public class Interfaz {
 		regTfLogin.setForeground(new Color(255, 255, 255));
 		regTfLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controler controler = new Controler();
-				controler.clientRegister();
+				Controller controller = new Controller();
+				controller.clientRegister();
 			}
 		});
 		regTfLogin.setBackground(new Color(201, 190, 190));
@@ -149,10 +143,10 @@ public class Interfaz {
 		enterTfLogin.setBackground(new Color(201, 190, 190));
 		enterTfLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controler controler = new Controler();
+				Controller controller = new Controller();
 				String user = usrTfLogin.getText();
 				String password = passTfLogin.getText();
-				int finalUser = controler.checkUser(user, password);
+				int finalUser = controller.checkUser(user, password);
 
 				switch (finalUser) {
 				case 0:
@@ -161,7 +155,7 @@ public class Interfaz {
 					break;
 				case 1:
 					panelBoss(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
-					controler.getTableEmployee(model, table);
+					controller.getTableEmployee(model, table);
 					break;
 				case 2:
 					panelClient(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
@@ -219,9 +213,11 @@ public class Interfaz {
 		btnBossSeeBoss.setForeground(new Color(255, 255, 255));
 		btnBossSeeBoss.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controler controler = new Controler();
+				Controller controller = new Controller();
 				model.setRowCount(0);
-				controler.getTableBoss(model, table);
+				model.setColumnCount(0);
+				personModel(model);
+				controller.getTableBoss(model, table);
 			}
 		});
 		btnBossSeeBoss.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -233,9 +229,11 @@ public class Interfaz {
 		btnBossSeeFedeer.setForeground(new Color(255, 255, 255));
 		btnBossSeeFedeer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controler controler = new Controler();
+				Controller controller = new Controller();
 				model.setRowCount(0);
-				controler.getTableFeeder(model, table);
+				model.setColumnCount(0);
+				personModel(model);
+				controller.getTableFeeder(model, table);
 
 			}
 		});
@@ -248,9 +246,11 @@ public class Interfaz {
 		btnBossSeeVet.setForeground(new Color(255, 255, 255));
 		btnBossSeeVet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controler controler = new Controler();
+				Controller controller = new Controller();
 				model.setRowCount(0);
-				controler.getTableVet(model, table);
+				model.setColumnCount(0);
+				personModel(model);
+				controller.getTableVet(model, table);
 			}
 		});
 		btnBossSeeVet.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -262,6 +262,8 @@ public class Interfaz {
 		btnBossAddEmployee.setForeground(new Color(255, 255, 255));
 		btnBossAddEmployee.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				controller.addOption();
 			}
 		});
 		btnBossAddEmployee.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -287,9 +289,11 @@ public class Interfaz {
 		btnBossSeeClient.setForeground(new Color(255, 255, 255));
 		btnBossSeeClient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controler controler = new Controler();
+				Controller Controller = new Controller();
 				model.setRowCount(0);
-				controler.getTableClient(model, table);
+				model.setColumnCount(0);
+				personModel(model);
+				Controller.getTableClient(model, table);
 			}
 		});
 		btnBossSeeClient.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -328,16 +332,18 @@ public class Interfaz {
 		JButton btBossSeeAnimal = new JButton("Search");
 		btBossSeeAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controler controler = new Controler();
+				Controller controller = new Controller();
 				String box = (String)cbBossAnimals.getSelectedItem();
 				model.setRowCount(0);
 				model.setColumnCount(0);
 				switch (box) {
 				case "Dolphin":
 					dolphinModel(model);
+					controller.getSelectedDolphin(box, model, table);
 					break;
 				case "Snake":
 					snakeModel(model);
+					controller.getSelectedSnake(box, model, table);
 					break;
 				case "Crocodile":
 //					crocodileModel(model);
@@ -346,9 +352,7 @@ public class Interfaz {
 				case "Cheetah":
 //					cheetahModel(model);
 				}
-				model.setRowCount(0);
-				model.setColumnCount(0);
-				controler.getSelectedAnimal(box, model, table);
+
 			}
 
 
@@ -441,6 +445,16 @@ public class Interfaz {
 		model.addColumn("ZoneId");
 		model.addColumn("shed-Skin");	
 	}
+
+	private void personModel(DefaultTableModel model) {
+		model.addColumn("Name");
+		model.addColumn("Surname");
+		model.addColumn("Id");
+		model.addColumn("User");
+		model.addColumn("Password");
+		model.addColumn("Special");
+	}
+	
 
 	private void addImage(JPanel panel, JLabel label, String path) {
 		ImageIcon icon = new ImageIcon(path);
