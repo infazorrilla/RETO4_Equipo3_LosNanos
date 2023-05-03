@@ -1,4 +1,4 @@
-package Controler;
+package Controller;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -16,7 +16,7 @@ import Manager.People.ManagerFeeder;
 import Manager.People.ManagerVet;
 import Pojos.Person.Client;
 
-public class Controler {
+public class Controller {
 
 	public void clientRegister() {
 		JTextField name = new JTextField();
@@ -208,27 +208,9 @@ public class Controler {
 
 	}
 
-	public void getSelectedAnimal(String box, DefaultTableModel model, JTable table) {
-		switch (box) {
-		case "Dolphin":
-			getSelectedDolphin(model, table);
-			break;
-		case "Snake":
-			getSelectedSnake(model, table);
-			break;
-		case "Crocodile":
-//			getSelectedCrocodile();
-			break;
-		case "Giraffe":
-//			getSelectedGiraffe();
-			break;
-		case "Cheetah":
-//			getSelectedCheetah();
-			break;
-		}
-	}
 
-	private void getSelectedDolphin(DefaultTableModel model, JTable table) {
+
+	public void getSelectedDolphin(String box, DefaultTableModel model, JTable table) {
 		ManagerDolphin managerDolphin = new ManagerDolphin();
 		for (int i = 0; i < managerDolphin.getDolphin().size(); i++) {
 			int idInt = managerDolphin.getDolphin().get(i).getId();
@@ -251,7 +233,7 @@ public class Controler {
 
 	}
 	
-	private void getSelectedSnake(DefaultTableModel model, JTable table) {
+	public void getSelectedSnake(String box, DefaultTableModel model, JTable table) {
 		ManagerSnake managerSnake = new ManagerSnake();
 		for (int i = 0; i < managerSnake.getSnake().size(); i++) {
 			int idInt = managerSnake.getSnake().get(i).getId();
@@ -283,4 +265,50 @@ public class Controler {
 		}
 		return ret;
 	}
+	
+	public void addOption() {
+		  String[] options = {"Employee", "Animal"}; 
+          int result = JOptionPane.showOptionDialog(
+             null,
+             "What do you want to add?", 
+             "Add",            
+             JOptionPane.YES_NO_OPTION,
+             JOptionPane.QUESTION_MESSAGE,
+             null,     
+             options,  
+             options[0] 
+          );
+          if (result == 0) {
+        	  String[] optionsEmployee = {"Boss", "Fedeer", "Vet"}; 
+              int resultEmployee = JOptionPane.showOptionDialog(
+                 null,
+                 "What kind of employee?", 
+                 "Add",            
+                 JOptionPane.YES_NO_OPTION,
+                 JOptionPane.QUESTION_MESSAGE,
+                 null,     
+                 optionsEmployee,  
+                 options[0] 
+              );
+          }
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
