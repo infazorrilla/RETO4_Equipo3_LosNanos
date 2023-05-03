@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Pojos.Person.Boss;
+import Pojos.Person.Employee;
 import utils.DBUtils;
 
 public class ManagerBoss {
@@ -26,14 +27,14 @@ public void insertBoss(Boss boss){
 			
 			statement = connection.createStatement();
 			
-			String sql = "insert into employee (name, surname, id, user, password, ssNumber, idZoo) VALUES ('" + 
+			String sql = "insert into employee (name, surname, id, user, password, ssNumber, id_zoo) VALUES ('" + 
 					boss.getName() + "', '" + 
 					boss.getSurname() + "', '" + 
 					boss.getId() + "', '" + 
 					boss.getUser() + "', '" + 
 					boss.getPassword() + "', '" + 
 					boss.getSsNumber() + "', '" + 
-					boss.getIdZoo() + "')";
+					boss.getId_zoo() + "')";
 			
 			String sql2 = "insert into boss (ssNumber, employeeNumCharge) VALUES ('" + 
 					boss.getSsNumber() + "', '" + 
@@ -108,7 +109,7 @@ public ArrayList <Boss> getBoss (){
             String user = resultSet.getString("user");
             String password = resultSet.getString("password");
             int ssNumber = resultSet.getInt("ssNumber");
-            int idZoo = resultSet.getInt("idZoo");
+            // int id_zoo = resultSet.getInt("id_zoo");
             int employeeNumCharge = resultSet.getInt("employeeNumCharge");
 
           
@@ -120,7 +121,7 @@ public ArrayList <Boss> getBoss (){
             boss.setUser(user);
             boss.setPassword(password);
             boss.setSsNumber(ssNumber);
-            boss.setIdZoo(idZoo);
+           // boss.setId_zoo(id_zoo);
             boss.setEmployeeNumCharge(employeeNumCharge);
       
             
