@@ -287,7 +287,7 @@ public class Controller {
                  JOptionPane.YES_NO_OPTION,
                  JOptionPane.QUESTION_MESSAGE,
                  null,     
-                 optionsEmployee,  
+                 optionsEmployee,
                  options[0] 
               );
         }
