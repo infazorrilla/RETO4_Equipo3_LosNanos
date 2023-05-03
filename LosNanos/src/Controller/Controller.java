@@ -306,7 +306,7 @@ public class Controller {
 
 		ManagerClient managerClient = new ManagerClient();
 		managerClient.deleteClient(id);
-	}
+	} 
 
 	public void addOption() {
 		String[] options = { "Employee", "Animal" };
