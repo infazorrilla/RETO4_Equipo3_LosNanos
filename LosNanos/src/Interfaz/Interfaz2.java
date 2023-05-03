@@ -26,7 +26,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 
-public class Interfaz {
+public class Interfaz2 {
 
 	private JFrame frame;
 	private JTextField usrTfLogin;
@@ -41,7 +41,7 @@ public class Interfaz {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Interfaz window = new Interfaz();
+					Interfaz2 window = new Interfaz2();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +53,7 @@ public class Interfaz {
 	/**
 	 * Create the application.
 	 */
-	public Interfaz() {
+	public Interfaz2() {
 		initialize();
 	}
 

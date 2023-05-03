@@ -3,7 +3,6 @@ package Controller;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -15,10 +14,9 @@ import Manager.People.ManagerBoss;
 import Manager.People.ManagerClient;
 import Manager.People.ManagerFeeder;
 import Manager.People.ManagerVet;
-import Pojos.Animal.Dolphin;
 import Pojos.Person.Client;
 
-public class Controller {
+public class Controller2 {
 
 	public void clientRegister() {
 		JTextField name = new JTextField();
@@ -267,14 +265,15 @@ public class Controller {
 		return ret;
 	}
 
-	private int checkBooleanTwo(String vaccinatedString) {
-		int ret;
-		if (vaccinatedString == "Yes") {
-			ret = 1;
-		} else {
-			ret = 0;
+	public void addOption() {
+		String[] options = { "Employee", "Animal" };
+		int result = JOptionPane.showOptionDialog(null, "What do you want to add?", "Add", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if (result == 0) {
+			String[] optionsEmployee = { "Boss", "Fedeer", "Vet" };
+			int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of employee?", "Add",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsEmployee, options[0]);
 		}
-		return ret;
 	}
 
 	public void questionSure(String type, String id) {
@@ -307,97 +306,4 @@ public class Controller {
 		ManagerClient managerClient = new ManagerClient();
 		managerClient.deleteClient(id);
 	}
-
-	public void addOption() {
-		String[] options = { "Employee", "Animal" };
-		int result = JOptionPane.showOptionDialog(null, "What do you want to add?", "Add", JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-		if (result == 0) {
-			addOptionEmployee();
-		} else if (result == 1) {
-			addOptionAnimal();
-		}
-	}
-
-	private void addOptionEmployee() {
-		String[] optionsEmployee = { "Boss", "Fedeer", "Vet" };
-		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of employee?", "Add",
-				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsEmployee, optionsEmployee[0]);
-	}
-
-	private void addOptionAnimal() {
-		String[] optionsAnimal = { "Dolphin", "Crocodile", "Snake", "Giraffe", "Cheetah" };
-		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of Animal?", "Add",
-				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsAnimal, optionsAnimal[0]);
-
-		switch (resultEmployee) {
-		case 0:
-			addDolphin();
-			break;
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			break;
-		}
-	}
-
-	public void addDolphin() {
-		JTextField name = new JTextField();
-		JTextField scientificName = new JTextField();
-		JTextField height = new JTextField();
-		JTextField weight = new JTextField();
-		JTextField bornDate = new JTextField();
-		JTextField vaccinated = new JTextField();
-		JComboBox diet = new JComboBox();
-		diet.addItem("Carnivorous");
-		diet.addItem("Herbivorous");
-		JTextField animalTipe = new JTextField();
-		JTextField zoneId = new JTextField();
-		JTextField durationUnderWater = new JTextField();
-
-		Object[] message = { "Name: *", name, "ScientificName: *", scientificName, "Height: *", height, "Weight: *",
-				weight, "Born-Date *", bornDate, "Vacinated: *", vaccinated, "Diet: *", diet, "Animal-Tipe: *",
-				animalTipe, "ZoneId: *", zoneId, "Duration Under Water: *", durationUnderWater };
-
-		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Cliente", JOptionPane.OK_CANCEL_OPTION);
-
-		if (option == JOptionPane.OK_OPTION) {
-			if (name.getText().isEmpty() || scientificName.getText().isEmpty() || height.getText().isEmpty()
-					|| weight.getText().isEmpty() || bornDate.getText().isEmpty() || vaccinated.getText().isEmpty()
-					|| animalTipe.getText().isEmpty() || zoneId.getText().isEmpty()
-					|| durationUnderWater.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
-			} else {
-				try {
-					ManagerDolphin managerDolphin = new ManagerDolphin();
-					String heightString = height.getText();
-					float heightFloat = Float.valueOf(heightString);
-					String weightString = height.getText();
-					float weightFloat = Float.valueOf(weightString);
-					String DateString = height.getText();
-					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-					java.util.Date date = format.parse(DateString);
-					String vaccinatedString = vaccinated.getText();
-					int vaccinatedInt = checkBooleanTwo(vaccinatedString);
-					String zoneIdString = vaccinated.getText();
-					int zoneIdInt = Integer.valueOf(zoneIdString);
-					String durationUnderWaterString = vaccinated.getText();
-					int durationUnderWaterInt = Integer.valueOf(durationUnderWaterString);
-
-					Dolphin dolphinToIsert = new Dolphin(0, name.getText(), scientificName.getText(), heightFloat,
-							weightFloat, date, vaccinatedInt, diet.getSelectedItem().toString(), animalTipe.getText(),
-							zoneIdInt, durationUnderWaterInt, 0);
-					managerDolphin.insertDolphin(dolphinToIsert);
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
-				}
-			}
-		}
-
-	}
-
 }
