@@ -20,7 +20,6 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 
 import Controller.Controller;
-import Controller.Controller2;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -214,8 +213,8 @@ public class Interfaz {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tm = (DefaultTableModel) table.getModel();
 				String id = String.valueOf(tm.getValueAt(table.getSelectedRow(), 2));
-				Controller2 controller2 = new Controller2();
-				controller2.questionSure(type, id);
+				Controller controller = new Controller();
+				controller.questionSure(type, id);
 			}
 		});
 		btnBossDelete.setBackground(new Color(235, 199, 150));
@@ -304,11 +303,11 @@ public class Interfaz {
 		btnBossSeeClient.setForeground(new Color(255, 255, 255));
 		btnBossSeeClient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Controller Controller = new Controller();
+				Controller controller = new Controller();
 				model.setRowCount(0);
 				model.setColumnCount(0);
 				personModel(model);
-				Controller.getTableClient(model, table);
+				controller.getTableClient(model, table);
 				btnBossDelete.setEnabled(true);
 				type = "Client";
 			}
