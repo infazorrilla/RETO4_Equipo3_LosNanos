@@ -21,6 +21,11 @@ public class Client extends Person {
 		this.clientId = clientId;
 		this.zoo = zoo;
 	}
+	
+	public Client(String name, String surname, String id, String user, String password, int clientId) {
+		super(name, surname, id, user, password);
+		this.clientId = clientId;
+	}
 
 	public Client() {
 		super();
