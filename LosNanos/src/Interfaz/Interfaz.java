@@ -66,7 +66,7 @@ public class Interfaz {
 		frame.getContentPane().setLayout(null);
 
 		JPanel jpLogin = new JPanel();
-		jpLogin.setBounds(0, 10, 848, 491);
+		jpLogin.setBounds(0, 0, 848, 501);
 		frame.getContentPane().add(jpLogin);
 		jpLogin.setLayout(null);
 		jpLogin.setVisible(true);
@@ -176,7 +176,7 @@ public class Interfaz {
 		jpLogin.add(enterTfLogin);
 
 		JLabel backgroundLogin = new JLabel("");
-		backgroundLogin.setBounds(0, 0, 848, 491);
+		backgroundLogin.setBounds(0, -49, 848, 503);
 		jpLogin.add(backgroundLogin);
 		addImage(jpLogin, backgroundLogin, "src/Photos/panda.jpg");
 
@@ -384,9 +384,21 @@ public class Interfaz {
 		jpBoss.add(btBossSeeZone);
 
 		JLabel lbBossBackground = new JLabel("");
-		lbBossBackground.setBounds(0, 0, 848, 501);
+		lbBossBackground.setBounds(-59, 0, 848, 501);
 		jpBoss.add(lbBossBackground);
 		addImage(jpBoss, lbBossBackground, "src/Photos/lion.png");
+		
+		JButton btnBossLogout = new JButton("LogOut");
+		btnBossLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Controller controller = new Controller();
+				controller.questionLogOut(jpBoss, jpLogin);
+				
+			}
+		});
+		btnBossLogout.setBounds(749, 11, 89, 23);
+		jpBoss.add(btnBossLogout);
 
 	}
 
