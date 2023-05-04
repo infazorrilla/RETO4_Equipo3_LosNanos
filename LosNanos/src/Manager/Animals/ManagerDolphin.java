@@ -61,9 +61,7 @@ public class ManagerDolphin implements ManagerInterface<Dolphin>{
 	            int vaccinated = resultSet.getInt("vaccinated");
 	            String diet = resultSet.getString("diet");
 	            String animalTipe = resultSet.getString("animalTipe");
-	            int zoneId = resultSet.getInt("ZoneId");
 	            int durationUnderWater = resultSet.getInt("durationUnderWater");
-	            int id_dolphin = resultSet.getInt("id_dolphin");
 
 	            
 	            
@@ -76,10 +74,8 @@ public class ManagerDolphin implements ManagerInterface<Dolphin>{
 	            dolphin.setBornDate(bornDate);
 	            dolphin.setVaccinated(vaccinated);
 	            dolphin.setDiet(diet);
-	            dolphin.setAnimalTipe(animalTipe);
-	            dolphin.setZoneId(zoneId);
+	            dolphin.setAnimalType(animalTipe);
 	            dolphin.setDurationUnderWater(durationUnderWater);
-	            dolphin.setId_dolphin(id_dolphin);
 	            
 	            // Lo guardamos en ret
 	            ret.add(dolphin);
@@ -116,61 +112,59 @@ public class ManagerDolphin implements ManagerInterface<Dolphin>{
 	
 	@Override
 	public void insert(Dolphin dolphin) throws SQLException, Exception {
-		Connection connection = null;
-		
-
-		Statement statement = null;
-		
-		try {
-			Class.forName(DBUtils.DRIVER);
-			
-			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			
-			statement = connection.createStatement();
-			
-			java.sql.Date sqlDate = new java.sql.Date(dolphin.getBornDate().getTime());
-
-			
-			String sql = "insert into aquatic (name, scientificName, height, weight, bornDate, vaccinated, diet, zoneId, animalTipe) VALUES ('" + 
-					dolphin.getName() + "', '" + 
-					dolphin.getScientificName() + "', '" + 
-					dolphin.getHeight() + "', '" + 
-					dolphin.getWeight() + "', '" + 
-					sqlDate + "', '" + 
-					dolphin.getVaccinated() + "', '" + 
-					dolphin.getDiet() + "', '" + 
-					dolphin.getZoneId() + "', '" + 
-					dolphin.getAnimalTipe() + "')";
-			
-			String sql2 = "insert into dolphin (id_dolphin, zoneId, durationUnderWater) VALUES ('" + 
-					dolphin.getId_dolphin() + "', '" + 
-					dolphin.getDurationUnderWater() + "')";
-			
-			
-			// La ejecutamos...
-			statement.executeUpdate(sql);
-			statement.executeUpdate(sql2);
-
-			
-		} catch (SQLException sqle) {  
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch(Exception e){ 
-			System.out.println("Error generico - " + e.getMessage());
-		} finally {
-			// Cerramos al reves de como las abrimos
-			try {
-				if (statement != null) 
-					statement.close(); 
-			} catch(Exception e){ 
-				// No hace falta				
-			};
-			try {
-				if (connection != null) 
-					connection.close(); 
-			} catch(Exception e){ 
-				// No hace falta
-			};					
-		}
+//		Connection connection = null;
+//		
+//
+//		Statement statement = null;
+//		
+//		try {
+//			Class.forName(DBUtils.DRIVER);
+//			
+//			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+//			
+//			statement = connection.createStatement();
+//			
+//			java.sql.Date sqlDate = new java.sql.Date(dolphin.getBornDate().getTime());
+//
+//			
+//			String sql = "insert into aquatic (name, scientificName, height, weight, bornDate, vaccinated, diet, zoneId, animalTipe) VALUES ('" + 
+//					dolphin.getName() + "', '" + 
+//					dolphin.getScientificName() + "', '" + 
+//					dolphin.getHeight() + "', '" + 
+//					dolphin.getWeight() + "', '" + 
+//					sqlDate + "', '" + 
+//					dolphin.getVaccinated() + "', '" + 
+//					dolphin.getDiet() + "', '" + 
+//					dolphin.getAnimalType() + "')";
+//			
+//			String sql2 = "insert into dolphin (id_dolphin, zoneId, durationUnderWater) VALUES ('" + 
+//					dolphin.getDurationUnderWater() + "')";
+//			
+//			
+//			// La ejecutamos...
+//			statement.executeUpdate(sql);
+//			statement.executeUpdate(sql2);
+//
+//			
+//		} catch (SQLException sqle) {  
+//			System.out.println("Error con la BBDD - " + sqle.getMessage());
+//		} catch(Exception e){ 
+//			System.out.println("Error generico - " + e.getMessage());
+//		} finally {
+//			// Cerramos al reves de como las abrimos
+//			try {
+//				if (statement != null) 
+//					statement.close(); 
+//			} catch(Exception e){ 
+//				// No hace falta				
+//			};
+//			try {
+//				if (connection != null) 
+//					connection.close(); 
+//			} catch(Exception e){ 
+//				// No hace falta
+//			};					
+//		}
 	}
 	
 	
@@ -225,6 +219,64 @@ public class ManagerDolphin implements ManagerInterface<Dolphin>{
 						// No hace falta
 					};					
 				}
+	}
+	
+	public void insertDolphin(Dolphin dolphin, int id) {
+		Connection connection = null;
+		
+
+		Statement statement = null;
+		
+		try {
+			Class.forName(DBUtils.DRIVER);
+			
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			
+			statement = connection.createStatement();
+			
+			java.sql.Date sqlDate = new java.sql.Date(dolphin.getBornDate().getTime());
+
+			
+			String sql = "insert into aquatic (id, name, scientificName, height, weight, bornDate, vaccinated, diet, zoneId, animalTipe) VALUES ('" + 
+					id + "', '" + 
+					dolphin.getName() + "', '" + 
+					dolphin.getScientificName() + "', '" + 
+					dolphin.getHeight() + "', '" + 
+					dolphin.getWeight() + "', '" + 
+					sqlDate + "', '" + 
+					dolphin.getVaccinated() + "', '" + 
+					dolphin.getDiet() + "', '" + 
+					dolphin.getAnimalType() + "')";
+			
+			String sql2 = "insert into dolphin (id_dolphin, zoneId, durationUnderWater) VALUES ('" + 
+					id + "', '" + 
+					dolphin.getDurationUnderWater() + "')";
+			
+			
+			// La ejecutamos...
+			statement.executeUpdate(sql);
+			statement.executeUpdate(sql2);
+
+			
+		} catch (SQLException sqle) {  
+			System.out.println("Error con la BBDD - " + sqle.getMessage());
+		} catch(Exception e){ 
+			System.out.println("Error generico - " + e.getMessage());
+		} finally {
+			// Cerramos al reves de como las abrimos
+			try {
+				if (statement != null) 
+					statement.close(); 
+			} catch(Exception e){ 
+				// No hace falta				
+			};
+			try {
+				if (connection != null) 
+					connection.close(); 
+			} catch(Exception e){ 
+				// No hace falta
+			};					
+		}
 	}
 
 }
