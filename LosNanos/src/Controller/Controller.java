@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +17,7 @@ import Manager.People.ManagerClient;
 import Manager.People.ManagerFeeder;
 import Manager.People.ManagerVet;
 import Pojos.Animal.Dolphin;
+import Pojos.Animal.Snake;
 import Pojos.Person.Client;
 
 public class Controller {
@@ -282,7 +284,7 @@ public class Controller {
 		int result = JOptionPane.showOptionDialog(null, "Are you sure?", "Sure", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		if (result == 0) {
-			if (type == "Boss") {
+			if (type == "Boss" && type == "Fedder" && type == "Vet") {
 
 				deleteEmployee(id);
 
@@ -343,6 +345,20 @@ public class Controller {
 		case 4:
 			break;
 		}
+	}
+
+	public void questionLogOut(JPanel jpBoss, JPanel jpLogin) {
+		String[] options = { "LogOut", "No" };
+		int result = JOptionPane.showOptionDialog(null, "LogOut?", "Sure", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if (result == 0) {
+			jpBoss.setVisible(false);
+			jpLogin.setVisible(true);
+			
+		}else if(result==1) {
+			
+		}
+
 	}
 
 	public void addDolphin() {
