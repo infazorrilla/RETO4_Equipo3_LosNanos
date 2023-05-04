@@ -16,6 +16,7 @@ import Manager.People.ManagerClient;
 import Manager.People.ManagerFeeder;
 import Manager.People.ManagerVet;
 import Pojos.Animal.Dolphin;
+import Pojos.Animal.Snake;
 import Pojos.Person.Client;
 
 public class Controller {

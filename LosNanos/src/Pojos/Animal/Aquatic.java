@@ -3,38 +3,46 @@ package Pojos.Animal;
 import java.util.Date;
 import java.util.Objects;
 
+import Pojos.Zone.Aquarium;
+
 public class Aquatic extends Animal {
 
 	protected static final long serialVersionUID = -8764208574991894358L;
 
-	protected String animalTipe = null;
-	protected int zoneId = 0;
-
-	public Aquatic(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			int vaccinated, String diet, String animalTipe, int zoneId) {
-		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet);
-		this.animalTipe = animalTipe;
-		this.zoneId = zoneId;
-	}
+	protected String animalType = null;
 	
+	/*
+	 * Existe una relacion 1:N con Aquarium
+	 */
+	
+	protected Aquarium aquarium = null;
+
+	
+	public Aquatic(int id, String name, String scientificName, float height, float weight, Date bornDate,
+			int vaccinated, String diet, String animalType, Aquarium aquarium) {
+		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet);
+		this.animalType = animalType;
+		this.aquarium = aquarium;
+	}
+
 	public Aquatic() {
-		
+		super();
 	}
 
-	public String getAnimalTipe() {
-		return animalTipe;
+	public String getAnimalType() {
+		return animalType;
 	}
 
-	public void setAnimalTipe(String animalTipe) {
-		this.animalTipe = animalTipe;
+	public void setAnimalType(String animalType) {
+		this.animalType = animalType;
 	}
 
-	public int getZoneId() {
-		return zoneId;
+	public Aquarium getAquarium() {
+		return aquarium;
 	}
 
-	public void setZoneId(int zoneId) {
-		this.zoneId = zoneId;
+	public void setAquarium(Aquarium aquarium) {
+		this.aquarium = aquarium;
 	}
 
 	public static long getSerialversionuid() {
@@ -45,7 +53,7 @@ public class Aquatic extends Animal {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(animalTipe);
+		result = prime * result + Objects.hash(animalType, aquarium);
 		return result;
 	}
 
@@ -58,12 +66,16 @@ public class Aquatic extends Animal {
 		if (getClass() != obj.getClass())
 			return false;
 		Aquatic other = (Aquatic) obj;
-		return Objects.equals(animalTipe, other.animalTipe);
+		return Objects.equals(animalType, other.animalType) && Objects.equals(aquarium, other.aquarium);
 	}
 
 	@Override
 	public String toString() {
-		return "Aquatic [animalTipe=" + animalTipe + "]";
+		return "Aquatic [animalType=" + animalType + ", aquarium=" + aquarium + ", id=" + id + ", name=" + name
+				+ ", scientificName=" + scientificName + ", height=" + height + ", weight=" + weight + ", bornDate="
+				+ bornDate + ", vaccinated=" + vaccinated + ", diet=" + diet + "]";
 	}
 
+	
+	
 }

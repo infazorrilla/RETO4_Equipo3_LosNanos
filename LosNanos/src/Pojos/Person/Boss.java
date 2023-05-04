@@ -1,27 +1,46 @@
 package Pojos.Person;
 
+import java.util.ArrayList;
 import java.util.Objects;
+
+import Pojos.ZooTicket.Zoo;
 
 public class Boss extends Employee {
 
 	private static final long serialVersionUID = -3650945065686945377L;
-	private int employeeNumCharge;
+	private int employeeNumCharge = 0;
+	
+	/*
+	 * Existe una relacion 1:N con Employee
+	 */
+	
+	private ArrayList<Employee> employees = null;
 
-	public Boss(String name, String surname, String id, String user, String password, int ssNumber,
-			int employeeNumCharge) {
-		super(name, surname, id, user, password, ssNumber, employeeNumCharge);
+	public Boss(String name, String surname, String id, String user, String password, int ssNumber, Zoo zoo,
+			int employeeNumCharge, ArrayList<Employee> employees) {
+		super(name, surname, id, user, password, ssNumber, zoo);
 		this.employeeNumCharge = employeeNumCharge;
+		this.employees = employees;
 	}
 
 	public Boss() {
-		
+		super();
 	}
+
 	public int getEmployeeNumCharge() {
 		return employeeNumCharge;
 	}
 
 	public void setEmployeeNumCharge(int employeeNumCharge) {
 		this.employeeNumCharge = employeeNumCharge;
+	}
+
+	public ArrayList<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(ArrayList<Employee> employees) {
+		this.employees = employees;
 	}
 
 	public static long getSerialversionuid() {
@@ -32,7 +51,7 @@ public class Boss extends Employee {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(employeeNumCharge);
+		result = prime * result + Objects.hash(employeeNumCharge, employees);
 		return result;
 	}
 
@@ -45,12 +64,14 @@ public class Boss extends Employee {
 		if (getClass() != obj.getClass())
 			return false;
 		Boss other = (Boss) obj;
-		return employeeNumCharge == other.employeeNumCharge;
+		return employeeNumCharge == other.employeeNumCharge && Objects.equals(employees, other.employees);
 	}
 
 	@Override
 	public String toString() {
-		return "Boss [employeeNumCharge=" + employeeNumCharge + "]";
+		return "Boss [employeeNumCharge=" + employeeNumCharge + ", employees=" + employees + ", ssNumber=" + ssNumber
+				+ ", zoo=" + zoo + ", name=" + name + ", surname=" + surname + ", id=" + id + ", user=" + user
+				+ ", password=" + password + "]";
 	}
-
+	
 }

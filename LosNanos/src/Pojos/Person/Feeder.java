@@ -2,20 +2,22 @@ package Pojos.Person;
 
 import java.util.Objects;
 
+import Pojos.ZooTicket.Zoo;
+
 public class Feeder extends Employee {
 
 	private static final long serialVersionUID = -6021696531239581430L;
 
-	private String SpecializedDiet;
+	private String SpecializedDiet = null;
 
-	public Feeder(String name, String surname, String id, String user, String password, int ssNumber,
+	public Feeder(String name, String surname, String id, String user, String password, int ssNumber, Zoo zoo,
 			String specializedDiet) {
-		super(name, surname, id, user, password, ssNumber, ssNumber);
-		this.SpecializedDiet = specializedDiet;
+		super(name, surname, id, user, password, ssNumber, zoo);
+		SpecializedDiet = specializedDiet;
 	}
 
 	public Feeder() {
-
+		super();
 	}
 
 	public String getSpecializedDiet() {
@@ -47,12 +49,13 @@ public class Feeder extends Employee {
 		if (getClass() != obj.getClass())
 			return false;
 		Feeder other = (Feeder) obj;
-		return SpecializedDiet == other.SpecializedDiet;
+		return Objects.equals(SpecializedDiet, other.SpecializedDiet);
 	}
 
 	@Override
 	public String toString() {
-		return "Feeder [specializedDiet=" + SpecializedDiet + "]";
+		return "Feeder [SpecializedDiet=" + SpecializedDiet + ", ssNumber=" + ssNumber + ", zoo=" + zoo + ", name="
+				+ name + ", surname=" + surname + ", id=" + id + ", user=" + user + ", password=" + password + "]";
 	}
 
 }

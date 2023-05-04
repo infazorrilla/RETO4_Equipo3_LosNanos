@@ -3,6 +3,8 @@ package Pojos.Animal;
 import java.util.Date;
 import java.util.Objects;
 
+import Pojos.Zone.Swamp;
+
 public class Crocodile extends Reptile {
 
 	private static final long serialVersionUID = 3493391510682934125L;
@@ -10,14 +12,13 @@ public class Crocodile extends Reptile {
 	private int teethNumber = 0;
 
 	public Crocodile(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			int vaccinated, String diet, String shedSkin, int teethNumber) {
-		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin);
+			int vaccinated, String diet, String shedSkin, Swamp swamp, int teethNumber) {
+		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin, swamp);
 		this.teethNumber = teethNumber;
-
 	}
 
 	public Crocodile() {
-
+		super();
 	}
 
 	public int getTeethNumber() {
@@ -26,6 +27,10 @@ public class Crocodile extends Reptile {
 
 	public void setTeethNumber(int teethNumber) {
 		this.teethNumber = teethNumber;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
@@ -50,7 +55,9 @@ public class Crocodile extends Reptile {
 
 	@Override
 	public String toString() {
-		return "Crocodile [teethNumber=" + teethNumber + "]";
+		return "Crocodile [teethNumber=" + teethNumber + ", shedSkin=" + shedSkin + ", swamp=" + swamp + ", id=" + id
+				+ ", name=" + name + ", scientificName=" + scientificName + ", height=" + height + ", weight=" + weight
+				+ ", bornDate=" + bornDate + ", vaccinated=" + vaccinated + ", diet=" + diet + "]";
 	}
 
 }
