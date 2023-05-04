@@ -8,6 +8,8 @@ public interface ManagerInterface<T> {
 	public ArrayList<T> selectAll () throws SQLException, Exception;
 	
 	public void insert (T t) throws SQLException, Exception;
+	
+	public void insertAnimal (T t, int id) throws SQLException, Exception;
 
 	public void update (T t) throws SQLException, Exception;
 	
