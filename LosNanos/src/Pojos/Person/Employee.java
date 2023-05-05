@@ -25,6 +25,11 @@ public abstract class Employee extends Person {
 		super();
 	}
 
+	public Employee(String name, String surname, String id, String user, String password, int ssNumber) {
+		super(name, surname, id, user, password);
+		this.ssNumber = ssNumber;
+	}
+
 	public int getSsNumber() {
 		return ssNumber;
 	}

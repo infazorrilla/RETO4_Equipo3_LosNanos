@@ -185,9 +185,10 @@ public class ManagerCrocodile implements ManagerInterface<Crocodile> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update CrocodileComplete set name = ?, surname = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, shedSkin = ?,  teethNumber = ? where id = ?";
+			String sql = "update CrocodileComplete set name = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, shedSkin = ?,  teethNumber = ? where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, crocodile.getName());
+			preparedStatement.setString(1, crocodile.getScientificName());
 			preparedStatement.setFloat(2, crocodile.getHeight());
 			preparedStatement.setFloat(3, crocodile.getWeight());
 			preparedStatement.setDate(4, bornDate);

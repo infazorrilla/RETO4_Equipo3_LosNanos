@@ -507,20 +507,25 @@ public class Controller {
 		JTextField user = new JTextField();
 		JTextField password = new JTextField();
 
-		Object[] message = { "Name: *", name, "Surname: *", surname, "Id: *", id, "User: *", user, "Password *",
-				password };
+		JTextField employeeNumCharge = new JTextField();
+		JTextField ssNumber = new JTextField();
 
-		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Cliente", JOptionPane.OK_CANCEL_OPTION);
+		Object[] message = { "Name: *", name, "Surname: *", surname, "Id: *", id, "User: *", user, "Password *",
+				password, "Social Security Number *", ssNumber, "employeeNumCharge *", employeeNumCharge};
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Jefe", JOptionPane.OK_CANCEL_OPTION);
 
 		if (option == JOptionPane.OK_OPTION) {
 			if (name.getText().isEmpty() || surname.getText().isEmpty() || id.getText().isEmpty()
-					|| user.getText().isEmpty() || password.getText().isEmpty()) {
+					|| user.getText().isEmpty() || password.getText().isEmpty() || ssNumber.getText().isEmpty() || employeeNumCharge.getText().isEmpty() ) {
 				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
 			} else {
 				try {
 					ManagerBoss managerBoss= new ManagerBoss();
+					int ssNumberInt = Integer.parseInt(ssNumber.getText());
+					int employeeNumChargeInt = Integer.parseInt(employeeNumCharge.getText());
 					Boss bossToInsert = new Boss(name.getText(), surname.getText(), id.getText(), user.getText(),
-							password.getText(), 0);
+							password.getText(), ssNumberInt, employeeNumChargeInt);
 					managerBoss.insert(bossToInsert);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
