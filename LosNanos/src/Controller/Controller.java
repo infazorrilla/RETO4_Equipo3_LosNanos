@@ -32,7 +32,10 @@ import Pojos.Animal.Crocodile;
 import Pojos.Animal.Dolphin;
 import Pojos.Animal.Giraffe;
 import Pojos.Animal.Snake;
+import Pojos.Person.Boss;
 import Pojos.Person.Client;
+import Pojos.Person.Feeder;
+import Pojos.Person.Vet;
 import Pojos.Zone.Aquarium;
 import Pojos.Zone.Savannah;
 import Pojos.Zone.Swamp;
@@ -187,46 +190,73 @@ public class Controller {
 	}
 
 	public void getTableBoss(DefaultTableModel model, JTable table) {
-		ManagerBoss managerBoss = new ManagerBoss();
-		for (int i = 0; i < managerBoss.selectAll().size(); i++) {
-			int empNumCharg = managerBoss.selectAll().get(i).getEmployeeNumCharge();
-			String numCharge = String.valueOf(empNumCharg);
-			model.addRow(new String[] { managerBoss.selectAll().get(i).getName(),
-					managerBoss.selectAll().get(i).getSurname(), managerBoss.selectAll().get(i).getId(),
-					managerBoss.selectAll().get(i).getUser(), managerBoss.selectAll().get(i).getPassword(),
-					numCharge });
+		ArrayList<Boss> boss = null;
+		ManagerBoss managerFeeder = new ManagerBoss();
+		try {
+
+			boss = managerFeeder.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < boss.size(); i++) {
+			model.addRow(
+					new Object[] { boss.get(i).getName(), boss.get(i).getSurname(), boss.get(i).getId(),
+							boss.get(i).getUser(), boss.get(i).getPassword(), boss.get(i).getEmployeeNumCharge()});
 		}
 
 	}
-
+	
 	public void getTableFeeder(DefaultTableModel model, JTable table) {
+		ArrayList<Feeder> feeder = null;
 		ManagerFeeder managerFeeder = new ManagerFeeder();
-		for (int i = 0; i < managerFeeder.selectAll().size(); i++) {
-			model.addRow(new String[] { managerFeeder.selectAll().get(i).getName(),
-					managerFeeder.selectAll().get(i).getSurname(), managerFeeder.selectAll().get(i).getId(),
-					managerFeeder.selectAll().get(i).getUser(), managerFeeder.selectAll().get(i).getPassword(),
-					managerFeeder.selectAll().get(i).getSpecializedDiet() });
+		try {
+
+			feeder = managerFeeder.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < feeder.size(); i++) {
+			model.addRow(
+					new Object[] { feeder.get(i).getName(), feeder.get(i).getSurname(), feeder.get(i).getId(),
+							feeder.get(i).getUser(), feeder.get(i).getPassword(), feeder.get(i).getSpecializedDiet()});
 		}
 
 	}
-
+	
 	public void getTableVet(DefaultTableModel model, JTable table) {
+		ArrayList<Vet> vet = null;
 		ManagerVet managerVet = new ManagerVet();
-		for (int i = 0; i < managerVet.selectAll().size(); i++) {
-			model.addRow(new String[] { managerVet.selectAll().get(i).getName(),
-					managerVet.selectAll().get(i).getSurname(), managerVet.selectAll().get(i).getId(),
-					managerVet.selectAll().get(i).getUser(), managerVet.selectAll().get(i).getPassword(),
-					managerVet.selectAll().get(i).getSpecializedAnimalType() });
+		try {
+
+			vet = managerVet.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < vet.size(); i++) {
+			model.addRow(
+					new Object[] { vet.get(i).getName(), vet.get(i).getSurname(), vet.get(i).getId(),
+							vet.get(i).getUser(), vet.get(i).getPassword(), vet.get(i).getSpecializedAnimalType()});
 		}
 
 	}
 
 	public void getTableClient(DefaultTableModel model, JTable table) {
+		ArrayList<Client> client = null;
 		ManagerClient managerClient = new ManagerClient();
-		for (int i = 0; i < managerClient.getClient().size(); i++) {
-			model.addRow(new String[] { managerClient.getClient().get(i).getName(),
-					managerClient.getClient().get(i).getSurname(), managerClient.getClient().get(i).getId(),
-					managerClient.getClient().get(i).getUser(), managerClient.getClient().get(i).getPassword() });
+		try {
+
+			client = managerClient.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < client.size(); i++) {
+			model.addRow(
+					new Object[] { client.get(i).getName(), client.get(i).getSurname(), client.get(i).getId(),
+							client.get(i).getUser(), client.get(i).getPassword()});
 		}
 
 	}
