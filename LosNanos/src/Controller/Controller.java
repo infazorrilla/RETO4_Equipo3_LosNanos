@@ -246,26 +246,48 @@ public class Controller {
 
 	}
 
-	public void getSelectedSnake(String box, DefaultTableModel model, JTable table) {
-		ManagerSnake managerSnake = new ManagerSnake();
-		for (int i = 0; i < managerSnake.selectAll().size(); i++) {
-			int idInt = managerSnake.selectAll().get(i).getId();
-			String id = String.valueOf(idInt);
-			float heightInt = managerSnake.selectAll().get(i).getHeight();
-			String height = String.valueOf(heightInt);
-			float weightInt = managerSnake.selectAll().get(i).getWeight();
-			String weight = String.valueOf(weightInt);
-			int zoneInt = managerSnake.selectAll().get(i).getId();
-			String zoneId = String.valueOf(zoneInt);
-			int bolean = managerSnake.selectAll().get(i).getVaccinated();
-			String vaccinated = checkBoolean(bolean);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-			String dateBorn = sdf.format(managerSnake.selectAll().get(i).getBornDate());
-			String dateSkin = sdf.format(managerSnake.selectAll().get(i).getShedSkin());
+//	public void getSelectedSnake(String box, DefaultTableModel model, JTable table) {
+//		ManagerSnake managerSnake = new ManagerSnake();
+//		for (int i = 0; i < managerSnake.selectAll().size(); i++) {
+//			int idInt = managerSnake.selectAll().get(i).getId();
+//			String id = String.valueOf(idInt);
+//			float heightInt = managerSnake.selectAll().get(i).getHeight();
+//			String height = String.valueOf(heightInt);
+//			float weightInt = managerSnake.selectAll().get(i).getWeight();
+//			String weight = String.valueOf(weightInt);
+//			int zoneInt = managerSnake.selectAll().get(i).getId();
+//			String zoneId = String.valueOf(zoneInt);
+//			int bolean = managerSnake.selectAll().get(i).getVaccinated();
+//			String vaccinated = checkBoolean(bolean);
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+//			String dateBorn = sdf.format(managerSnake.selectAll().get(i).getBornDate());
+//			String dateSkin = sdf.format(managerSnake.selectAll().get(i).getShedSkin());
+//
+//			model.addRow(new String[] { id, managerSnake.selectAll().get(i).getName(),
+//					managerSnake.selectAll().get(i).getScientificName(), height, weight, dateBorn, vaccinated,
+//					managerSnake.selectAll().get(i).getDiet(), zoneId, dateSkin });
+//		}
+//
+//	}
 
-			model.addRow(new String[] { id, managerSnake.selectAll().get(i).getName(),
-					managerSnake.selectAll().get(i).getScientificName(), height, weight, dateBorn, vaccinated,
-					managerSnake.selectAll().get(i).getDiet(), zoneId, dateSkin });
+	public void getSelectedSnake(String box, DefaultTableModel model, JTable table) {
+		ArrayList<Snake> snakes = null;
+
+		try {
+			ManagerSnake managerSnake = new ManagerSnake();
+
+			snakes = managerSnake.selectAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < snakes.size(); i++) {
+			model.addRow(new Object[] { snakes.get(i).getId(), snakes.get(i).getName(), snakes.get(i).getScientificName(),
+					snakes.get(i).getHeight(), snakes.get(i).getWeight(), snakes.get(i).getBornDate(),
+					snakes.get(i).getVaccinated(), snakes.get(i).getDiet(), snakes.get(i).getShedSkin() });
 		}
 
 	}
@@ -309,9 +331,9 @@ public class Controller {
 
 	public void getTableSavannah(DefaultTableModel model, JTable table) {
 		ArrayList<Savannah> savannahs = null;
-		ManagerSavannah managerSavannah= new ManagerSavannah();
+		ManagerSavannah managerSavannah = new ManagerSavannah();
 		try {
-			
+
 			savannahs = managerSavannah.selectAll();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -321,8 +343,7 @@ public class Controller {
 			e.printStackTrace();
 		}
 		for (int i = 0; i < savannahs.size(); i++) {
-			model.addRow(new Object[] {savannahs.get(i).getExtension(),
-					savannahs.get(i).getAnimalsNumber()});
+			model.addRow(new Object[] { savannahs.get(i).getExtension(), savannahs.get(i).getAnimalsNumber() });
 		}
 	}
 
