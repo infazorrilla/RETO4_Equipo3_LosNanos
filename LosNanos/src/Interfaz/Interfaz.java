@@ -524,7 +524,6 @@ public class Interfaz {
 		model.addColumn("Born-Date");
 		model.addColumn("Vaccinated");
 		model.addColumn("Diet");
-		model.addColumn("ZoneId");
 		model.addColumn("Animal-Tipe");
 	}
 
@@ -537,7 +536,6 @@ public class Interfaz {
 		model.addColumn("Born-Date");
 		model.addColumn("Vaccinated");
 		model.addColumn("Diet");
-		model.addColumn("ZoneId");
 		model.addColumn("shed-Skin");
 	}
 
