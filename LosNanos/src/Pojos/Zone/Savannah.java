@@ -1,19 +1,32 @@
 package Pojos.Zone;
 
+import java.util.ArrayList;
 import java.util.Objects;
+
+import Pojos.Animal.TerrestrialMammarian;
+import Pojos.ZooTicket.Zoo;
 
 public class Savannah extends Zone {
 
 	private static final long serialVersionUID = 1565125195990152251L;
 	private int treeNumber = 0;
+	
+	/*
+	 * Existe una relacion N:1 con TerrestrialMammarian
+	 */
+	
+	protected ArrayList<TerrestrialMammarian> terrestrialMammarians = null;
+	
 
-	public Savannah(int id, String extension, int animalsNumber, int speciesNumber, int treeNumber) {
-		super(id, extension, animalsNumber, speciesNumber);
+	public Savannah(int id, String extension, int animalsNumber, int speciesNumber, Zoo zoo, int treeNumber,
+			ArrayList<TerrestrialMammarian> terrestrialMammarians) {
+		super(id, extension, animalsNumber, speciesNumber, zoo);
 		this.treeNumber = treeNumber;
+		this.terrestrialMammarians = terrestrialMammarians;
 	}
 
 	public Savannah() {
-
+		super();
 	}
 
 	public int getTreeNumber() {
@@ -24,11 +37,23 @@ public class Savannah extends Zone {
 		this.treeNumber = treeNumber;
 	}
 
+	public ArrayList<TerrestrialMammarian> getTerrestrialMammarians() {
+		return terrestrialMammarians;
+	}
+
+	public void setTerrestrialMammarians(ArrayList<TerrestrialMammarian> terrestrialMammarians) {
+		this.terrestrialMammarians = terrestrialMammarians;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(treeNumber);
+		result = prime * result + Objects.hash(terrestrialMammarians, treeNumber);
 		return result;
 	}
 
@@ -41,12 +66,15 @@ public class Savannah extends Zone {
 		if (getClass() != obj.getClass())
 			return false;
 		Savannah other = (Savannah) obj;
-		return treeNumber == other.treeNumber;
+		return Objects.equals(terrestrialMammarians, other.terrestrialMammarians) && treeNumber == other.treeNumber;
 	}
 
 	@Override
 	public String toString() {
-		return "Savannah [treeNumber=" + treeNumber + "]";
+		return "Savannah [treeNumber=" + treeNumber + ", terrestrialMammarians=" + terrestrialMammarians + ", id=" + id
+				+ ", extension=" + extension + ", animalsNumber=" + animalsNumber + ", speciesNumber=" + speciesNumber
+				+ ", zoo=" + zoo + "]";
 	}
+
 
 }

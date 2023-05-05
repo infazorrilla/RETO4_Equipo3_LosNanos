@@ -7,119 +7,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import Manager.ManagerInterface;
 import Pojos.Animal.Snake;
 import utils.DBUtils;
 
-public class ManagerSnake {
-	// Inserta un alumno
-	public void insertSnake(Snake snake) {
+public class ManagerSnake implements ManagerInterface<Snake> {
 
-		// La conexion con BBDD
-		Connection connection = null;
-
-		// Vamos a lanzar una sentencia SQL contra la BBDD
-		Statement statement = null;
-
-		try {
-			// El Driver que vamos a usar
-			Class.forName(DBUtils.DRIVER);
-
-			// Abrimos la conexion con BBDD
-			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-
-			// Vamos a lanzar la sentencia...
-			statement = connection.createStatement();
-
-			// Montamos la SQL
-			
-			
-			java.sql.Date sqlDate = new java.sql.Date(snake.getBornDate().getTime());
-			
-			
-			String sql = "insert into reptile (name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin) VALUES ('"
-					+ snake.getName() + "', '" + snake.getScientificName() + "', '" + snake.getHeight() + "', '"
-					+ snake.getWeight() + "', '" + sqlDate + "', '" + snake.getVaccinated() + "', '"
-					+ snake.getDiet() + "', '" + snake.getShedSkin() + "')";
-
-			// La ejecutamos...
-			statement.executeUpdate(sql);
-
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
-		} finally {
-			// Cerramos al reves de como las abrimos
-			try {
-				if (statement != null)
-					statement.close();
-			} catch (Exception e) {
-				// No hace falta
-			}
-			;
-			try {
-				if (connection != null)
-					connection.close();
-			} catch (Exception e) {
-				// No hace falta
-			}
-			;
-		}
-	}
-
-	public void deleteSnake(Snake snake) {
-
-		// La conexion con BBDD
-		Connection connection = null;
-
-		// Vamos a lanzar una sentencia SQL contra la BBDD
-		PreparedStatement preparedStatement = null;
-
-		try {
-			// El Driver que vamos a usar
-			Class.forName(DBUtils.DRIVER);
-
-			// Abrimos la conexion con BBDD
-			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-
-			// Montamos la SQL. Las ? se rellenan a continuacion
-			String name = snake.getName();
-			String sql = "delete from reptile where name =" + name;
-			preparedStatement = connection.prepareStatement(sql);
-
-			// La ejecutamos...
-			preparedStatement.executeUpdate();
-
-		} catch (SQLException sqle) {
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch (Exception e) {
-			System.out.println("Error generico - " + e.getMessage());
-		} finally {
-			// Cerramos al reves de como las abrimos
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} catch (Exception e) {
-				// No hace falta
-			}
-			;
-			try {
-				if (connection != null)
-					connection.close();
-			} catch (Exception e) {
-				// No hace falta
-			}
-			;
-		}
-	}
-
-	public ArrayList<Snake> getSnake() {
+	@Override
+	public ArrayList<Snake> selectAll() {
 		ArrayList<Snake> ret = null;
 
 		// SQL que queremos lanzar
-		String sql = "select * from reptile";
+		String sql = "select * from snakeComplete";
 
 		// La conexion con BBDD
 		Connection connection = null;
@@ -159,8 +61,8 @@ public class ManagerSnake {
 				Date bornDate = resultSet.getDate("bornDate");
 				int vaccinated = resultSet.getInt("vaccinated");
 				String diet = resultSet.getString("diet");
-				String shedSkin = resultSet.getString("shedSkin");
-				int zoneId = resultSet.getInt("ZoneId");
+				Date shedSkin = resultSet.getDate("shedSkin");
+				Boolean poisonus = resultSet.getBoolean("poisonus");
 
 				// Metemos los datos a Ejemplo
 				snake.setId(id);
@@ -172,7 +74,7 @@ public class ManagerSnake {
 				snake.setVaccinated(vaccinated);
 				snake.setDiet(diet);
 				snake.setShedSkin(shedSkin);
-				snake.setZoneId(zoneId);
+				snake.setPoisonus(poisonus);
 
 				// Lo guardamos en ret
 				ret.add(snake);
@@ -206,5 +108,164 @@ public class ManagerSnake {
 			;
 		}
 		return ret;
+	}
+
+	@Override
+	public void insert(Snake snake) {
+		Connection connection = null;
+
+		Statement statement = null;
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+			statement = connection.createStatement();
+
+			java.sql.Date sqlDateBorn = new java.sql.Date(snake.getBornDate().getTime());
+			java.sql.Date sqlDateSkin = new java.sql.Date(snake.getShedSkin().getTime());
+
+			String sql = "insert into reptile (id, name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin) VALUES ('"
+					+ snake.getId() + "', '" + snake.getName() + "', '" + snake.getScientificName() + "', '"
+					+ snake.getHeight() + "', '" + snake.getWeight() + "', '" + sqlDateBorn + "', '"
+					+ snake.getVaccinated() + "', '" + snake.getDiet() + "', '" + sqlDateSkin + "')";
+
+			String sql2 = "insert into snake (id_snake, poisonus) VALUES ('" + snake.getId() + "', '"
+					+ snake.isPoisonus() + "')";
+
+			// La ejecutamos...
+			statement.executeUpdate(sql);
+			statement.executeUpdate(sql2);
+
+		} catch (SQLException sqle) {
+			System.out.println("Error con la BBDD - " + sqle.getMessage());
+		} catch (Exception e) {
+			System.out.println("Error generico - " + e.getMessage());
+		} finally {
+			// Cerramos al reves de como las abrimos
+			try {
+				if (statement != null)
+					statement.close();
+			} catch (Exception e) {
+				// No hace falta
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+				// No hace falta
+			}
+			;
+		}
+	}
+
+	@Override
+	public void update(Snake snake) {
+
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String formattedDateBorn = simpleDateFormat.format(snake.getBornDate());
+		java.sql.Date bornDate = java.sql.Date.valueOf(formattedDateBorn);
+
+		String formattedDateSkin = simpleDateFormat.format(snake.getShedSkin());
+		java.sql.Date shedSkin = java.sql.Date.valueOf(formattedDateSkin);
+
+		// La conexion con BBDD
+		Connection connection = null;
+
+		// Vamos a lanzar una sentencia SQL contra la BBDD
+		PreparedStatement preparedStatement = null;
+
+		try {
+			// El Driver que vamos a usar
+			Class.forName(DBUtils.DRIVER);
+
+			// Abrimos la conexion con BBDD
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+			// Montamos la SQL. Las ? se rellenan a continuacion
+			String sql = "update SnakeComplete set name = ?, surname = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, shedSkin = ?,  poisonus = ? where id = ?";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, snake.getName());
+			preparedStatement.setFloat(2, snake.getHeight());
+			preparedStatement.setFloat(3, snake.getWeight());
+			preparedStatement.setDate(4, bornDate);
+			preparedStatement.setInt(5, snake.getVaccinated());
+			preparedStatement.setString(6, snake.getDiet());
+			preparedStatement.setDate(7, shedSkin);
+			preparedStatement.setBoolean(8, snake.isPoisonus());
+			preparedStatement.setInt(9, snake.getId());
+
+			// La ejecutamos...
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException sqle) {
+			System.out.println("Error con la BBDD - " + sqle.getMessage());
+		} catch (Exception e) {
+			System.out.println("Error generico - " + e.getMessage());
+		} finally {
+			// Cerramos al reves de como las abrimos
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} catch (Exception e) {
+				// No hace falta
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+				// No hace falta
+			}
+			;
+		}
+	}
+
+	@Override
+	public void delete(Snake snake) throws SQLException, Exception {
+		// La conexion con BBDD
+		Connection connection = null;
+
+		// Vamos a lanzar una sentencia SQL contra la BBDD
+		PreparedStatement preparedStatement = null;
+
+		try {
+			// El Driver que vamos a usar
+			Class.forName(DBUtils.DRIVER);
+
+			// Abrimos la conexion con BBDD
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+			// Montamos la SQL. Las ? se rellenan a continuacion
+			String sql = "delete from reptile where id = ?";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, snake.getId());
+
+			// La ejecutamos...
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException sqle) {
+			System.out.println("Error con la BBDD - " + sqle.getMessage());
+		} catch (Exception e) {
+			System.out.println("Error generico - " + e.getMessage());
+		} finally {
+			// Cerramos al reves de como las abrimos
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} catch (Exception e) {
+				// No hace falta
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+				// No hace falta
+			}
+			;
+		}
 	}
 }

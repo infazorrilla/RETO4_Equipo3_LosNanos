@@ -2,20 +2,27 @@ package Pojos.Person;
 
 import java.util.Objects;
 
+import Pojos.ZooTicket.Zoo;
+
 public abstract class Employee extends Person {
 
 	protected static final long serialVersionUID = 148854585781764229L;
-	protected int ssNumber;
-	protected int id_zoo;
+	protected int ssNumber = 0;
+	
+	/*
+	 * Existe una relacion 1:N con Zoo
+	 */
+	
+	protected Zoo zoo = null;
 
-	public Employee(String name, String surname, String id, String user, String password, int ssNumber, int idZoo) {
+	public Employee(String name, String surname, String id, String user, String password, int ssNumber, Zoo zoo) {
 		super(name, surname, id, user, password);
 		this.ssNumber = ssNumber;
-		this.id_zoo = id_zoo;
+		this.zoo = zoo;
 	}
 
 	public Employee() {
-
+		super();
 	}
 
 	public int getSsNumber() {
@@ -26,12 +33,12 @@ public abstract class Employee extends Person {
 		this.ssNumber = ssNumber;
 	}
 
-	public int getId_zoo() {
-		return id_zoo;
+	public Zoo getZoo() {
+		return zoo;
 	}
 
-	public void setId_zoo(int id_zoo) {
-		this.id_zoo = id_zoo;
+	public void setZoo(Zoo zoo) {
+		this.zoo = zoo;
 	}
 
 	public static long getSerialversionuid() {
@@ -42,7 +49,7 @@ public abstract class Employee extends Person {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(ssNumber);
+		result = prime * result + Objects.hash(ssNumber, zoo);
 		return result;
 	}
 
@@ -55,12 +62,9 @@ public abstract class Employee extends Person {
 		if (getClass() != obj.getClass())
 			return false;
 		Employee other = (Employee) obj;
-		return ssNumber == other.ssNumber;
+		return ssNumber == other.ssNumber && Objects.equals(zoo, other.zoo);
 	}
-
-	@Override
-	public String toString() {
-		return "Employee [ssNumber=" + ssNumber + "]";
-	}
+	
+	
 
 }

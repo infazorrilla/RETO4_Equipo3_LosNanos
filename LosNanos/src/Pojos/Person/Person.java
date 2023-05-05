@@ -6,11 +6,11 @@ import java.util.Objects;
 public abstract class Person implements Serializable {
 
 	protected static final long serialVersionUID = 3183063123012135015L;
-	protected String name;
-	protected String surname;
-	protected String id;
-	protected String user;
-	protected String password;
+	protected String name = null;
+	protected String surname = null;
+	protected String id = null;
+	protected String user = null;
+	protected String password = null;
 
 	public Person(String name, String surname, String id, String user, String password) {
 		this.name = name;
