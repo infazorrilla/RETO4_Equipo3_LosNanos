@@ -19,7 +19,7 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 		ArrayList <Aquarium> ret = null;
 
 		// SQL que queremos lanzar
-		String sql = "select * from aquariums";
+		String sql = "select * from aquarium";
 		
 		// La conexion con BBDD
 		Connection connection = null;
@@ -119,8 +119,8 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 							aquarium.getAnimalsNumber() + "', '" + 	
 							aquarium.getSpeciesNumber() + "')";
 					
-					String sql2 = "insert into Aquarium (waterTemp) VALUES ('" + 
-							aquarium.getWaterTemp() + "')";
+					String sql2 = "insert into Aquarium (zoneId, waterTemp) SELECT MAX(id), " + 
+							aquarium.getWaterTemp() + "FROM zones";
 					
 					// La ejecutamos...
 					statement.executeUpdate(sql);
@@ -163,10 +163,13 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
 					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "update Aquariums set waterTemp = ? where id = ?";
+					String sql = "update Aquariums set extension = ?, waterTemp = ?, animalsNumber = ?, speciesNumber = ? where zoneId = ?";
 					preparedStatement = connection.prepareStatement(sql);
-//					preparedStatement.setFloat (1, newWaterTemp);
-					preparedStatement.setInt (2, aquarium.getId());
+					preparedStatement.setString (1, aquarium.getExtension());
+					preparedStatement.setFloat (2, aquarium.getWaterTemp());
+					preparedStatement.setInt (3, aquarium.getAnimalsNumber());
+					preparedStatement.setInt (4, aquarium.getSpeciesNumber());
+					preparedStatement.setInt (5, aquarium.getId());
 					
 					// La ejecutamos...
 					preparedStatement.executeUpdate();

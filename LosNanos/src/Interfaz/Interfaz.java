@@ -391,6 +391,9 @@ public class Interfaz {
 		jpBoss.add(lblBossSeeAnimal);
 
 		JComboBox cbBossZones = new JComboBox();
+		cbBossZones.addItem("Aquarium");
+		cbBossZones.addItem("Swamp");
+		cbBossZones.addItem("Savannah");
 		cbBossZones.setBackground(new Color(235, 199, 150));
 		cbBossZones.setForeground(new Color(255, 255, 255));
 		cbBossZones.setBounds(367, 412, 272, 21);
@@ -435,6 +438,28 @@ public class Interfaz {
 		jpBoss.add(btBossSeeAnimal);
 
 		JButton btBossSeeZone = new JButton("Search");
+		btBossSeeZone.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				String box = (String) cbBossZones.getSelectedItem();
+				model.setRowCount(0);
+				model.setColumnCount(0);
+				switch (box) {
+				case "Aquarium":
+					dolphinModel(model);
+					controller.getTableAquarium( model, table);
+					break;
+				case "Swamp":
+					snakeModel(model);
+					controller.getTableSwamp( model, table);
+					break;
+				case "Savannah":
+					snakeModel(model);
+					controller.getTableSavannah( model, table);
+					break;
+				}
+			}
+		});
 		btBossSeeZone.setForeground(new Color(255, 255, 255));
 		btBossSeeZone.setBackground(new Color(235, 199, 150));
 		btBossSeeZone.setBounds(473, 443, 85, 21);
