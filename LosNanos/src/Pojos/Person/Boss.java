@@ -27,8 +27,10 @@ public class Boss extends Employee {
 		super();
 	}
 
-	public Boss(String text, String text2, String text3, String text4, String text5, int i) {
-		// TODO Auto-generated constructor stub
+	public Boss(String name, String surname, String id, String user, String password, int ssNumber,
+			int employeeNumCharge) {
+		super(name, surname, id, user, password, ssNumber);
+		this.employeeNumCharge = employeeNumCharge;
 	}
 
 	public int getEmployeeNumCharge() {
