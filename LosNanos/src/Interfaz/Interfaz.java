@@ -427,7 +427,6 @@ public class Interfaz {
 				case "Cheetah":
 //					cheetahModel(model);
 				}
-
 			}
 
 		});
