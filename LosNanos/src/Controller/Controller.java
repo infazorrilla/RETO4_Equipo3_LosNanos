@@ -35,6 +35,7 @@ import Pojos.Animal.Giraffe;
 import Pojos.Animal.Snake;
 import Pojos.Person.Boss;
 import Pojos.Person.Client;
+import Pojos.Person.Employee;
 import Pojos.Person.Feeder;
 import Pojos.Person.Vet;
 import Pojos.Zone.Aquarium;
@@ -42,6 +43,60 @@ import Pojos.Zone.Savannah;
 import Pojos.Zone.Swamp;
 
 public class Controller {
+	
+	public Boss searchBossId(String id) {
+		Boss ret = new Boss();
+		ManagerBoss managerBoss = new ManagerBoss();
+		try {
+			ArrayList<Boss> bosses = managerBoss.selectAll();
+			for (int i = 0 ; i < bosses.size() ; i++) {
+				if (bosses.get(i).getId().equals(id)) {
+					ret = bosses.get(i);
+				}
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return ret;
+	}
+	
+	public Client searchClientId(String id) {
+		Client ret = new Client();
+		ManagerClient managerClient = new ManagerClient();
+		try {
+			ArrayList<Client> clients = managerClient.selectAll();
+			for (int i = 0 ; i < clients.size() ; i++) {
+				if (clients.get(i).getId().equals(id)) {
+					ret = clients.get(i);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
+	public Feeder searchFeederId(String id) {
+		Feeder ret = new Feeder();
+		ManagerFeeder managerFeeder = new ManagerFeeder();
+		try {
+			ArrayList<Feeder> feeders = managerFeeder.selectAll();
+			for (int i = 0 ; i < feeders.size() ; i++) {
+				if (feeders.get(i).getId().equals(id)) {
+					ret = feeders.get(i);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ret;
+	}
 
 	public void clientRegister() {
 		JTextField name = new JTextField();
@@ -111,17 +166,28 @@ public class Controller {
 	public int checkClient(String user, String password) {
 		int ret = 0;
 		ManagerClient managerClient = new ManagerClient();
-		for (int i = 0; i < managerClient.getClient().size(); i++) {
-			String userClient = managerClient.getClient().get(i).getUser();
-			if (userClient.equalsIgnoreCase(user)) {
-				String passClient = managerClient.getClient().get(i).getPassword();
-				boolean pas = checkPassword(password, passClient);
-				if (pas == true) {
-					ret = 2;
-				} else {
-					ret = 0;
+		String userClient = null;
+		try {
+			for (int i = 0; i < managerClient.selectAll().size(); i++) {
+				try {
+					userClient = managerClient.selectAll().get(i).getUser();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (userClient.equalsIgnoreCase(user)) {
+					String passClient = managerClient.selectAll().get(i).getPassword();
+					boolean pas = checkPassword(password, passClient);
+					if (pas == true) {
+						ret = 2;
+					} else {
+						ret = 0;
+					}
 				}
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
@@ -442,20 +508,36 @@ public class Controller {
 		String[] options = { "Yes", "No" };
 		int result = JOptionPane.showOptionDialog(null, "Are you sure?", "Sure", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-		
-		
+		ManagerBoss managerBoss = new ManagerBoss();
+
+		ManagerClient managerClient = new ManagerClient();
 		if (result == 0) {
-			if (type == "Boss" && type == "Feeder" && type == "Vet") {
-				if(jbutton.getText().equals("Delete")) {
-
-					deleteEmployee(id);
+			if (type == "Boss") {
+				Boss boss = searchBossId(id);
+				try {
+					managerBoss.delete(boss);
+				} catch (Exception e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-
 			} else if (type == "Client") {
-				if(jbutton.getText().equals("Delete")) {
-					deleteClient(id);
+				Client client = searchClientId(id);
+				try {
+					managerClient.delete(client);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-
+			} else if (type == "Feeder") {
+				Feeder feeder = searchFeederId(id);
+				try {
+					managerFeeder.delete(feeder);
+				} catch (Exception e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (type == "Vet") {
+				
 			}
 		} else if (result == 1) {
 

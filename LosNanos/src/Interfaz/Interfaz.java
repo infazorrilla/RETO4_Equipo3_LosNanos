@@ -366,6 +366,7 @@ public class Interfaz {
 				controller.updateOption();
 				DefaultTableModel tm = (DefaultTableModel) table.getModel();
 				String id = String.valueOf(tm.getValueAt(table.getSelectedRow(), 2));
+				controller.questionSure(btnBossDelete, type, id);
 			}
 		});
 		btnBossUpdate.setBackground(new Color(235, 199, 150));
