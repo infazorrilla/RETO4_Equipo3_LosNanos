@@ -322,7 +322,7 @@ public class Controller {
 		}
 		for (int i = 0; i < savannahs.size(); i++) {
 			model.addRow(new Object[] {savannahs.get(i).getExtension(),
-					savannahs.get(i).getAnimalsNumber() });
+					savannahs.get(i).getAnimalsNumber()});
 		}
 	}
 
