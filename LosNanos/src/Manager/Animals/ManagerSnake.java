@@ -130,9 +130,9 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 					+ snake.getId() + "', '" + snake.getName() + "', '" + snake.getScientificName() + "', '"
 					+ snake.getHeight() + "', '" + snake.getWeight() + "', '" + sqlDateBorn + "', '"
 					+ snake.getVaccinated() + "', '" + snake.getDiet() + "', '" + sqlDateSkin + "')";
-
-			String sql2 = "insert into snake (id_snake, poisonus) VALUES ('" + snake.getId() + "', '"
-					+ snake.isPoisonus() + "')";
+			
+			String sql2 = "insert into snake (id_snake, poisonus) SELECT MAX(id), " + 
+					snake.isPoisonus() + "FROM reptile";
 
 			// La ejecutamos...
 			statement.executeUpdate(sql);

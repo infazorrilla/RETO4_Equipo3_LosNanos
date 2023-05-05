@@ -128,9 +128,9 @@ public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 					+ giraffe.getId() + "', '" + giraffe.getName() + "', '" + giraffe.getScientificName() + "', '"
 					+ giraffe.getHeight() + "', '" + giraffe.getWeight() + "', '" + sqlDate + "', '"
 					+ giraffe.getVaccinated() + "', '" + giraffe.getDiet() + "', '" + giraffe.getHairColor() + "')";
-
-			String sql2 = "insert into giraffe (id_giraffe, neckLength) VALUES ('" + giraffe.getId() + "', '"
-					+ giraffe.getNeckLength() + "')";
+			
+			String sql2 = "insert into giraffe (id_giraffe, neckLength) SELECT MAX(id), " + 
+					giraffe.getNeckLength() + "FROM terrestrialmammalian";
 
 			// La ejecutamos...
 			statement.executeUpdate(sql);

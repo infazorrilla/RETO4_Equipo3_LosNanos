@@ -131,8 +131,8 @@ public class ManagerCrocodile implements ManagerInterface<Crocodile> {
 					+ crocodile.getHeight() + "', '" + crocodile.getWeight() + "', '" + sqlDateBorn + "', '"
 					+ crocodile.getVaccinated() + "', '" + crocodile.getDiet() + "', '" + sqlDateSkin + "')";
 
-			String sql2 = "insert into crocodile (id_crocodile, teethNumber) VALUES ('" + crocodile.getId() + "', '"
-					+ crocodile.getTeethNumber() + "')";
+			String sql2 = "insert into crocodile (id_crocodile, teethNumber) SELECT MAX(id), " + 
+					crocodile.getTeethNumber() + "FROM reptile";
 
 			// La ejecutamos...
 			statement.executeUpdate(sql);
