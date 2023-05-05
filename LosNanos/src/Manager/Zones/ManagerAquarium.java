@@ -19,7 +19,7 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 		ArrayList <Aquarium> ret = null;
 
 		// SQL que queremos lanzar
-		String sql = "select * from aquarium";
+		String sql = "select * from aquariumComplete";
 		
 		// La conexion con BBDD
 		Connection connection = null;
