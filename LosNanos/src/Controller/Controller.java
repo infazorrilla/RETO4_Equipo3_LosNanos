@@ -519,7 +519,6 @@ public class Controller {
 			} else {
 				try {
 					ManagerBoss managerBoss= new ManagerBoss();
-					// (name, surname, id, user, password, clientID)
 					Boss bossToInsert = new Boss(name.getText(), surname.getText(), id.getText(), user.getText(),
 							password.getText(), 0);
 					managerBoss.insert(bossToInsert);
@@ -668,13 +667,10 @@ public class Controller {
 				System.out.println(date);
 				String vaccinatedString = vaccinated.getText();
 				int vaccinatedInt = checkBooleanTwo(vaccinatedString);
-				String zoneIdString = vaccinated.getText();
-				int zoneIdInt = Integer.valueOf(zoneIdString);
 				String durationUnderWaterString = vaccinated.getText();
 				int durationUnderWaterInt = Integer.valueOf(durationUnderWaterString);
-				int id = getDolphinId();
 
-				Dolphin dolphinToIsert = new Dolphin(id, name.getText(), scientificName.getText(), heightFloat,
+				Dolphin dolphinToIsert = new Dolphin(0, name.getText(), scientificName.getText(), heightFloat,
 						weightFloat, date, vaccinatedInt, diet.getSelectedItem().toString(), animalType.getText(),
 						durationUnderWaterInt);
 				System.out.println(dolphinToIsert);
@@ -701,19 +697,18 @@ public class Controller {
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
 		JTextField shedSkin = new JTextField();
-		JTextField zoneId = new JTextField();
 		JTextField poisonus = new JTextField();
 
 		Object[] message = { "Name: *", name, "ScientificName: *", scientificName, "Height: *", height, "Weight: *",
 				weight, "Born-Date *", bornDate, "Vacinated: *", vaccinated, "Diet: *", diet, "ShedSkin: *", shedSkin,
-				"ZoneId: *", zoneId, "Poisonus: *", poisonus };
+				"Poisonus: *", poisonus };
 
 		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Cliente", JOptionPane.OK_CANCEL_OPTION);
 
 		if (option == JOptionPane.OK_OPTION) {
 			if (name.getText().isEmpty() || scientificName.getText().isEmpty() || height.getText().isEmpty()
 					|| weight.getText().isEmpty() || bornDate.getText().isEmpty() || vaccinated.getText().isEmpty()
-					|| shedSkin.getText().isEmpty() || zoneId.getText().isEmpty() || poisonus.getText().isEmpty()) {
+					|| shedSkin.getText().isEmpty() || poisonus.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
 			} else {
 				try {
@@ -747,14 +742,5 @@ public class Controller {
 
 	}
 
-	public int getDolphinId() {
-		ManagerDolphin managerDolphin = new ManagerDolphin();
-		int id = 0;
-		for (int i = 0; i < managerDolphin.selectAll().size(); i++) {
-			id = managerDolphin.selectAll().get(i).getId();
-		}
-		id = id + 1;
-		return id;
-	}
 
 }

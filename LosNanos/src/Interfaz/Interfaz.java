@@ -170,9 +170,7 @@ public class Interfaz {
 					panelVet(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
 					break;
 				}
-				
-				controller.getDolphinId();
-				
+								
 				usrTfLogin.setText("");
 				passTfLogin.setText("");
 
