@@ -12,7 +12,10 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -31,9 +34,13 @@ public class Interfaz {
 	private JFrame frame;
 	private JTextField usrTfLogin;
 	private JPasswordField passTfLogin;
-	private JTable table;
+	public JTable table;
 	private String type;
-	private JComboBox cbBossZones;
+	private JComboBox<String> cbBossZones;
+	private JButton btnBossUpdate;
+
+	Controller controller = new Controller();
+	private JButton btnBossDelete;
 
 	/**
 	 * Launch the application.
@@ -257,20 +264,21 @@ public class Interfaz {
 		spEmployeeBoss.setViewportView(table);
 		table.setModel(model);
 
+		
 		JLabel lbBossTitle = new JLabel("Boss");
 		lbBossTitle.setForeground(new Color(255, 255, 255));
 		lbBossTitle.setFont(new Font("Arial", Font.BOLD, 39));
 		lbBossTitle.setBounds(367, 26, 107, 56);
 		jpBoss.add(lbBossTitle);
 
-		JButton btnBossDelete = new JButton("Delete");
+		btnBossDelete = new JButton("Delete");
 		btnBossDelete.setEnabled(false);
 		btnBossDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tm = (DefaultTableModel) table.getModel();
 				String id = String.valueOf(tm.getValueAt(table.getSelectedRow(), 2));
 				Controller controller = new Controller();
-				controller.questionSure(type, id);
+				controller.questionSure(btnBossDelete, type, id);
 			}
 		});
 		btnBossDelete.setBackground(new Color(235, 199, 150));
@@ -288,8 +296,9 @@ public class Interfaz {
 				model.setRowCount(0);
 				model.setColumnCount(0);
 				personModel(model);
-				controller.getTableBoss(model, table);
+				btnBossUpdate.setEnabled(true);
 				btnBossDelete.setEnabled(true);
+				controller.getTableBoss(model, table);
 				type = "Boss";
 
 			}
@@ -308,6 +317,7 @@ public class Interfaz {
 				model.setColumnCount(0);
 				personModel(model);
 				controller.getTableFeeder(model, table);
+				btnBossUpdate.setEnabled(true);
 				btnBossDelete.setEnabled(true);
 				type = "Feeder";
 			}
@@ -326,6 +336,7 @@ public class Interfaz {
 				model.setColumnCount(0);
 				personModel(model);
 				controller.getTableVet(model, table);
+				btnBossUpdate.setEnabled(true);
 				btnBossDelete.setEnabled(true);
 				type = "Vet";
 			}
@@ -347,7 +358,16 @@ public class Interfaz {
 		btnBossAdd.setBounds(696, 102, 121, 37);
 		jpBoss.add(btnBossAdd);
 
-		JButton btnBossUpdate = new JButton("Update");
+		btnBossUpdate = new JButton("Update");
+		btnBossUpdate.setEnabled(false);
+		btnBossUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				controller.updateOption();
+				DefaultTableModel tm = (DefaultTableModel) table.getModel();
+				String id = String.valueOf(tm.getValueAt(table.getSelectedRow(), 2));
+			}
+		});
 		btnBossUpdate.setBackground(new Color(235, 199, 150));
 		btnBossUpdate.setForeground(new Color(255, 255, 255));
 		btnBossUpdate.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -365,6 +385,7 @@ public class Interfaz {
 				personModel(model);
 				controller.getTableClient(model, table);
 				btnBossDelete.setEnabled(true);
+				btnBossUpdate.setEnabled(true);
 				type = "Client";
 			}
 		});

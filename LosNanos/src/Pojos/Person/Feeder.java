@@ -2,6 +2,8 @@ package Pojos.Person;
 
 import java.util.Objects;
 
+import javax.swing.JTextField;
+
 import Pojos.ZooTicket.Zoo;
 
 public class Feeder extends Employee {
@@ -18,6 +20,12 @@ public class Feeder extends Employee {
 
 	public Feeder() {
 		super();
+	}
+
+	public Feeder(String name, String surname, String id, String user, String password, int ssNumber,
+			String specializedDiet) {
+		super(name, surname, id, user, password, ssNumber);
+		SpecializedDiet = specializedDiet;
 	}
 
 	public String getSpecializedDiet() {

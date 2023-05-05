@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -437,18 +438,23 @@ public class Controller {
 		return ret;
 	}
 
-	public void questionSure(String type, String id) {
+	public void questionSure(JButton jbutton, String type, String id) {
 		String[] options = { "Yes", "No" };
 		int result = JOptionPane.showOptionDialog(null, "Are you sure?", "Sure", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		
+		
 		if (result == 0) {
-			if (type == "Boss" && type == "Fedder" && type == "Vet") {
+			if (type == "Boss" && type == "Feeder" && type == "Vet") {
+				if(jbutton.getText().equals("Delete")) {
 
-				deleteEmployee(id);
+					deleteEmployee(id);
+				}
 
 			} else if (type == "Client") {
-
-				deleteClient(id);
+				if(jbutton.getText().equals("Delete")) {
+					deleteClient(id);
+				}
 
 			}
 		} else if (result == 1) {
@@ -466,6 +472,142 @@ public class Controller {
 
 		ManagerClient managerClient = new ManagerClient();
 		managerClient.deleteClient(id);
+	}
+	
+	public void updateOption() {
+		String[] options = { "Employee", "Animal", "Zone"};
+		int result = JOptionPane.showOptionDialog(null, "What do you want to add?", "Add", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if (result == 0) {
+			updateOptionEmployee();
+		}
+//		else if (result == 1) {
+//			updateOptionAnimal();
+//		} else if (result == 2) {
+//			updateOptionZone();
+//		}
+	}
+	
+	private void updateOptionEmployee() {
+		String[] optionsEmployee = { "Boss", "Feeder", "Vet" };
+		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of employee?", "Add",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsEmployee, optionsEmployee[0]);
+		switch (resultEmployee) {
+		case 0:
+			updateBoss();
+			break;
+		case 1:
+			updateFeeder();
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		}
+	}
+	
+	public void updateBoss() {
+		JTextField name = new JTextField();
+		JTextField surname = new JTextField();
+		JTextField user = new JTextField();
+		JTextField password = new JTextField();
+
+		JTextField employeeNumCharge = new JTextField();
+		JTextField ssNumber = new JTextField();
+
+		Object[] message = { "Name: *", name, "Surname: *", surname, "User: *", user, "Password *",
+				password, "Social Security Number *", ssNumber, "employeeNumCharge *", employeeNumCharge};
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Jefe", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || surname.getText().isEmpty()	|| user.getText().isEmpty() || password.getText().isEmpty()
+					|| ssNumber.getText().isEmpty() || employeeNumCharge.getText().isEmpty() ) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					ManagerBoss managerBoss= new ManagerBoss();
+					int ssNumberInt = Integer.parseInt(ssNumber.getText());
+					int employeeNumChargeInt = Integer.parseInt(employeeNumCharge.getText());
+					Boss bossToUpdate = new Boss(name.getText(), surname.getText(), user.getText(),
+							password.getText(), ssNumberInt, employeeNumChargeInt);
+					managerBoss.update(bossToUpdate);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+
+	}
+	
+	public void updateFeeder() {
+		JTextField name = new JTextField();
+		JTextField surname = new JTextField();
+		JTextField id = new JTextField();
+		JTextField user = new JTextField();
+		JTextField password = new JTextField();
+
+		JTextField specializedDiet = new JTextField();
+		JTextField ssNumber = new JTextField();
+
+		Object[] message = { "Name: *", name, "Surname: *", surname, "Id: *", id, "User: *", user, "Password *",
+				password, "Social Security Number *", ssNumber, "employeeNumCharge *", specializedDiet};
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Jefe", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || surname.getText().isEmpty() || id.getText().isEmpty()
+					|| user.getText().isEmpty() || password.getText().isEmpty() || ssNumber.getText().isEmpty() || specializedDiet.getText().isEmpty() ) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					ManagerFeeder managerFeeder = new ManagerFeeder();
+					int ssNumberInt = Integer.parseInt(ssNumber.getText());
+					Feeder feederToInsert = new Feeder(name.getText(), surname.getText(), id.getText(), user.getText(),
+							password.getText(), ssNumberInt, specializedDiet.getText());
+					managerFeeder.insert(feederToInsert);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+
+	}
+	
+	public void updateVet() {
+		JTextField name = new JTextField();
+		JTextField surname = new JTextField();
+		JTextField id = new JTextField();
+		JTextField user = new JTextField();
+		JTextField password = new JTextField();
+
+		JTextField specializedDiet = new JTextField();
+		JTextField ssNumber = new JTextField();
+
+		Object[] message = { "Name: *", name, "Surname: *", surname, "Id: *", id, "User: *", user, "Password *",
+				password, "Social Security Number *", ssNumber, "employeeNumCharge *", specializedDiet};
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Jefe", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || surname.getText().isEmpty() || id.getText().isEmpty()
+					|| user.getText().isEmpty() || password.getText().isEmpty() || ssNumber.getText().isEmpty() || specializedDiet.getText().isEmpty() ) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					ManagerFeeder managerFeeder = new ManagerFeeder();
+					int ssNumberInt = Integer.parseInt(ssNumber.getText());
+					Feeder feederToInsert = new Feeder(name.getText(), surname.getText(), id.getText(), user.getText(),
+							password.getText(), ssNumberInt, specializedDiet.getText());
+					managerFeeder.insert(feederToInsert);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+
 	}
 
 	public void addOption() {
@@ -746,6 +888,5 @@ public class Controller {
 		}
 
 	}
-
-
+	
 }
