@@ -181,9 +181,10 @@ public class ManagerCheetah implements ManagerInterface<Cheetah> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update dophinComplete set name = ?, surname = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, animalTipe = ?, maxSpeed = ? where id = ?";
+			String sql = "update dophinComplete set name = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, animalTipe = ?, maxSpeed = ? where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, cheetah.getName());
+			preparedStatement.setString(1, cheetah.getScientificName());
 			preparedStatement.setFloat(2, cheetah.getHeight());
 			preparedStatement.setFloat(3, cheetah.getWeight());
 			preparedStatement.setDate(4, bornDate);

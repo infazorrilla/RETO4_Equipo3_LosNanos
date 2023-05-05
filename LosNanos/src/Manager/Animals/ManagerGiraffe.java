@@ -180,9 +180,10 @@ public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update dophinComplete set name = ?, surname = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, animalTipe = ?, neckLength = ? where id = ?";
+			String sql = "update dophinComplete set name = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, animalTipe = ?, neckLength = ? where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, giraffe.getName());
+			preparedStatement.setString(1, giraffe.getScientificName());
 			preparedStatement.setFloat(2, giraffe.getHeight());
 			preparedStatement.setFloat(3, giraffe.getWeight());
 			preparedStatement.setDate(4, bornDate);

@@ -185,9 +185,10 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update SnakeComplete set name = ?, surname = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, shedSkin = ?,  poisonus = ? where id = ?";
+			String sql = "update SnakeComplete set name = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, shedSkin = ?,  poisonus = ? where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, snake.getName());
+			preparedStatement.setString(1, snake.getScientificName());
 			preparedStatement.setFloat(2, snake.getHeight());
 			preparedStatement.setFloat(3, snake.getWeight());
 			preparedStatement.setDate(4, bornDate);
