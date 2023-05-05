@@ -272,14 +272,10 @@ public class Controller {
 
 	public void getSelectedSnake(String box, DefaultTableModel model, JTable table) {
 		ArrayList<Snake> snakes = null;
-
+		ManagerSnake managerSnake = new ManagerSnake();
 		try {
-			ManagerSnake managerSnake = new ManagerSnake();
 
 			snakes = managerSnake.selectAll();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -306,7 +302,9 @@ public class Controller {
 			e.printStackTrace();
 		}
 		for (int i = 0; i < aquariums.size(); i++) {
-			model.addRow(new Object[] { aquariums.get(i).getExtension(), aquariums.get(i).getAnimalsNumber() });
+			model.addRow(new Object[] { aquariums.get(i).getId(), aquariums.get(i).getExtension(),
+					aquariums.get(i).getAnimalsNumber(), aquariums.get(i).getSpeciesNumber(),
+					aquariums.get(i).getWaterTemp() });
 		}
 
 	}
@@ -325,7 +323,9 @@ public class Controller {
 			e.printStackTrace();
 		}
 		for (int i = 0; i < swamps.size(); i++) {
-			model.addRow(new Object[] { swamps.get(i).getExtension(), swamps.get(i).getAnimalsNumber() });
+			model.addRow(new Object[] { swamps.get(i).getId(), swamps.get(i).getExtension(),
+					swamps.get(i).getAnimalsNumber(), swamps.get(i).getSpeciesNumber(),
+					swamps.get(i).getWaterSurface() });
 		}
 	}
 
@@ -343,7 +343,9 @@ public class Controller {
 			e.printStackTrace();
 		}
 		for (int i = 0; i < savannahs.size(); i++) {
-			model.addRow(new Object[] { savannahs.get(i).getExtension(), savannahs.get(i).getAnimalsNumber() });
+			model.addRow(new Object[] { savannahs.get(i).getId(), savannahs.get(i).getExtension(),
+					savannahs.get(i).getAnimalsNumber(), savannahs.get(i).getSpeciesNumber(),
+					savannahs.get(i).getTreeNumber() });
 		}
 	}
 
