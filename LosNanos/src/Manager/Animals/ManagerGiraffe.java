@@ -1,4 +1,4 @@
-package Manager.People;
+package Manager.Animals;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,20 +6,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import Manager.ManagerInterface;
-import Pojos.Person.Boss;
+import Pojos.Animal.Giraffe;
 import utils.DBUtils;
 
-public class ManagerBoss implements ManagerInterface<Boss>{
-
+public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 	@Override
-	public ArrayList<Boss> selectAll() {
-		ArrayList<Boss> ret = null;
+	public ArrayList<Giraffe> selectAll() {
+		ArrayList<Giraffe> ret = null;
 
 		// SQL que queremos lanzar
-		String sql = "select * from bossComplete";
+		String sql = "select * from giraffeComplete";
 
 		// La conexion con BBDD
 		Connection connection = null;
@@ -46,32 +47,36 @@ public class ManagerBoss implements ManagerInterface<Boss>{
 
 				// Si es necesario, inicializamos la lista
 				if (null == ret)
-					ret = new ArrayList<Boss>();
+					ret = new ArrayList<Giraffe>();
 
-				Boss boss = new Boss();
+				Giraffe giraffe = new Giraffe();
 
 				// Sacamos las columnas del RS
-				String id = resultSet.getString("id");
+				int id = resultSet.getInt("id");
 				String name = resultSet.getString("name");
-				String surname = resultSet.getString("surname");
-				String user = resultSet.getString("user");
-				String password = resultSet.getString("password");
-				int ssNumber = resultSet.getInt("ssNumber");
-				// int id_zoo = resultSet.getInt("id_zoo");
-				int employeeNumCharge = resultSet.getInt("employeeNumCharge");
+				String scientificName = resultSet.getString("scientificName");
+				float height = resultSet.getFloat("height");
+				float weight = resultSet.getFloat("weight");
+				Date bornDate = resultSet.getDate("bornDate");
+				int vaccinated = resultSet.getInt("vaccinated");
+				String diet = resultSet.getString("diet");
+				String hairColor = resultSet.getString("hairColor");
+				int neckLength = resultSet.getInt("neckLength");
 
 				// Metemos los datos a Ejemplo
-				boss.setId(id);
-				boss.setName(name);
-				boss.setSurname(surname);
-				boss.setUser(user);
-				boss.setPassword(password);
-				boss.setSsNumber(ssNumber);
-				// boss.setId_zoo(id_zoo);
-				boss.setEmployeeNumCharge(employeeNumCharge);
+				giraffe.setId(id);
+				giraffe.setName(name);
+				giraffe.setScientificName(scientificName);
+				giraffe.setHeight(height);
+				giraffe.setWeight(weight);
+				giraffe.setBornDate(bornDate);
+				giraffe.setVaccinated(vaccinated);
+				giraffe.setDiet(diet);
+				giraffe.setHairColor(hairColor);
+				giraffe.setNeckLength(neckLength);
 
 				// Lo guardamos en ret
-				ret.add(boss);
+				ret.add(giraffe);
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Error con la BBDD - " + sqle.getMessage());
@@ -101,12 +106,11 @@ public class ManagerBoss implements ManagerInterface<Boss>{
 			}
 			;
 		}
-
 		return ret;
 	}
 
 	@Override
-	public void insert(Boss boss) throws SQLException, Exception {
+	public void insert(Giraffe giraffe) {
 		Connection connection = null;
 
 		Statement statement = null;
@@ -118,20 +122,22 @@ public class ManagerBoss implements ManagerInterface<Boss>{
 
 			statement = connection.createStatement();
 
-			String sql = "insert into employee (name, surname, id, user, password, ssNumber) VALUES ('"
-					+ boss.getName() + "', '" + boss.getSurname() + "', '" + boss.getId() + "', '" + boss.getUser()
-					+ "', '" + boss.getPassword() + "', '" + boss.getSsNumber() +"')";
+			java.sql.Date sqlDate = new java.sql.Date(giraffe.getBornDate().getTime());
 
-			String sql2 = "insert into boss (ssNumber, employeeNumCharge) VALUES ('" + boss.getSsNumber() + "', '"
-					+ boss.getEmployeeNumCharge() + "')";
+			String sql = "insert into terrestrialmammalian (id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe) VALUES ('"
+					+ giraffe.getId() + "', '" + giraffe.getName() + "', '" + giraffe.getScientificName() + "', '"
+					+ giraffe.getHeight() + "', '" + giraffe.getWeight() + "', '" + sqlDate + "', '"
+					+ giraffe.getVaccinated() + "', '" + giraffe.getDiet() + "', '" + giraffe.getHairColor() + "')";
+
+			String sql2 = "insert into giraffe (id_giraffe, neckLength) VALUES ('" + giraffe.getId() + "', '"
+					+ giraffe.getNeckLength() + "')";
 
 			// La ejecutamos...
 			statement.executeUpdate(sql);
 			statement.executeUpdate(sql2);
-	
-			
-		} catch (SQLException sqle) {  
 
+		} catch (SQLException sqle) {
+			System.out.println("Error con la BBDD - " + sqle.getMessage());
 		} catch (Exception e) {
 			System.out.println("Error generico - " + e.getMessage());
 		} finally {
@@ -152,59 +158,13 @@ public class ManagerBoss implements ManagerInterface<Boss>{
 			;
 		}
 	}
-	
-	@Override
-	public void update(Boss boss) throws SQLException, Exception {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void delete(Boss boss) throws SQLException, Exception {
-		// La conexion con BBDD
-		Connection connection = null;
-		
-		// Vamos a lanzar una sentencia SQL contra la BBDD
-		PreparedStatement  preparedStatement  = null;
-		
-		try {
-			// El Driver que vamos a usar
-			Class.forName(DBUtils.DRIVER);
-			
-			// Abrimos la conexion con BBDD
-			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			
-			// Montamos la SQL. Las ? se rellenan a continuacion
-			String id = boss.getId();
-			String sql = "delete from employee where id =" + id;
-			preparedStatement = connection.prepareStatement(sql);
-			
-			// La ejecutamos...
-			preparedStatement.executeUpdate();
-			
-		} catch (SQLException sqle) {  
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch(Exception e){ 
-			System.out.println("Error generico - " + e.getMessage());
-		} finally {
-			// Cerramos al reves de como las abrimos
-			try {
-				if (preparedStatement != null) 
-					preparedStatement.close(); 
-			} catch(Exception e){ 
-				// No hace falta				
-			};
-			try {
-				if (connection != null) 
-					connection.close(); 
-			} catch(Exception e){ 
-				// No hace falta
-			};					
-		}
-	}
 
+	@Override
+	public void update(Giraffe giraffe) {
 
-	public void deleteEmployee(String id) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String formattedDate = simpleDateFormat.format(giraffe.getBornDate());
+		java.sql.Date bornDate = java.sql.Date.valueOf(formattedDate);
 
 		// La conexion con BBDD
 		Connection connection = null;
@@ -220,8 +180,63 @@ public class ManagerBoss implements ManagerInterface<Boss>{
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "delete from employee where id = '" + id + "'";
+			String sql = "update dophinComplete set name = ?, surname = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, animalTipe = ?, neckLength = ? where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, giraffe.getName());
+			preparedStatement.setFloat(2, giraffe.getHeight());
+			preparedStatement.setFloat(3, giraffe.getWeight());
+			preparedStatement.setDate(4, bornDate);
+			preparedStatement.setInt(5, giraffe.getVaccinated());
+			preparedStatement.setString(6, giraffe.getDiet());
+			preparedStatement.setString(7, giraffe.getHairColor());
+			preparedStatement.setInt(8, giraffe.getNeckLength());
+			preparedStatement.setInt(9, giraffe.getId());
+
+			// La ejecutamos...
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException sqle) {
+			System.out.println("Error con la BBDD - " + sqle.getMessage());
+		} catch (Exception e) {
+			System.out.println("Error generico - " + e.getMessage());
+		} finally {
+			// Cerramos al reves de como las abrimos
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} catch (Exception e) {
+				// No hace falta
+			}
+			;
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (Exception e) {
+				// No hace falta
+			}
+			;
+		}
+	}
+
+	@Override
+	public void delete(Giraffe giraffe) throws SQLException, Exception {
+		// La conexion con BBDD
+		Connection connection = null;
+
+		// Vamos a lanzar una sentencia SQL contra la BBDD
+		PreparedStatement preparedStatement = null;
+
+		try {
+			// El Driver que vamos a usar
+			Class.forName(DBUtils.DRIVER);
+
+			// Abrimos la conexion con BBDD
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+			// Montamos la SQL. Las ? se rellenan a continuacion
+			String sql = "delete from terrestrialmammalian where id = ?";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, giraffe.getId());
 
 			// La ejecutamos...
 			preparedStatement.executeUpdate();

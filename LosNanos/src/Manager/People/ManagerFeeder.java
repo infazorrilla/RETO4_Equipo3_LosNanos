@@ -15,7 +15,7 @@ import utils.DBUtils;
 public class ManagerFeeder implements ManagerInterface<Feeder>{
 
 	@Override
-	public ArrayList<Feeder> selectAll() throws SQLException, Exception {
+	public ArrayList<Feeder> selectAll() {
 		ArrayList <Feeder> ret = null;
 		
 		// SQL que queremos lanzar

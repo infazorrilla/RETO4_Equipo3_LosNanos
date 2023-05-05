@@ -15,7 +15,7 @@ import utils.DBUtils;
 public class ManagerVet implements ManagerInterface<Vet>{
 
 	@Override
-	public ArrayList<Vet> selectAll() throws SQLException, Exception {
+	public ArrayList<Vet> selectAll() {
 		ArrayList <Vet> ret = null;
 		
 		// SQL que queremos lanzar

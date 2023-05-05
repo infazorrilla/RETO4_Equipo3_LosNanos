@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -29,7 +30,7 @@ public class Interfaz {
 
 	private JFrame frame;
 	private JTextField usrTfLogin;
-	private JTextField passTfLogin;
+	private JPasswordField passTfLogin;
 	private JTable table;
 	private String type;
 
@@ -116,12 +117,12 @@ public class Interfaz {
 		jpLogin.add(usrTfLogin);
 		usrTfLogin.setColumns(10);
 
-		passTfLogin = new JTextField();
+		passTfLogin = new JPasswordField();
 		passTfLogin.setForeground(new Color(255, 255, 255));
 		passTfLogin.setBackground(new Color(201, 190, 190));
 		passTfLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		passTfLogin.setFont(new Font("Arial", Font.PLAIN, 18));
-		passTfLogin.setText("Password");
+		passTfLogin.setText("");
 		passTfLogin.setColumns(10);
 		passTfLogin.setBounds(285, 276, 265, 31);
 		jpLogin.add(passTfLogin);
@@ -168,6 +169,12 @@ public class Interfaz {
 					panelVet(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
 					break;
 				}
+				
+				controller.getDolphinId();
+				
+				usrTfLogin.setText("");
+				passTfLogin.setText("");
+
 
 			}
 		});
@@ -176,21 +183,71 @@ public class Interfaz {
 		jpLogin.add(enterTfLogin);
 
 		JLabel backgroundLogin = new JLabel("");
-		backgroundLogin.setBounds(0, -49, 848, 503);
+		backgroundLogin.setBounds(0, 0, 848, 503);
 		jpLogin.add(backgroundLogin);
 		addImage(jpLogin, backgroundLogin, "src/Photos/panda.jpg");
 
 		JLabel lblNewLabel_3 = new JLabel("Vet");
 		lblNewLabel_3.setBounds(401, 231, 45, 13);
 		jpVet.add(lblNewLabel_3);
+		
+		JButton btnBossLogout_1 = new JButton("LogOut");
+		btnBossLogout_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				controller.questionLogOut(jpBoss, jpLogin, jpClient, jpFeeder, jpVet);
+			}
+		});
+		btnBossLogout_1.setForeground(Color.WHITE);
+		btnBossLogout_1.setBackground(Color.BLACK);
+		btnBossLogout_1.setBounds(0, 0, 89, 23);
+		jpVet.add(btnBossLogout_1);
 
 		JLabel lblNewLabel_2 = new JLabel("Feeder");
 		lblNewLabel_2.setBounds(396, 92, 45, 13);
 		jpFeeder.add(lblNewLabel_2);
+		
+		JButton btnBossLogout_2 = new JButton("LogOut");
+		btnBossLogout_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				controller.questionLogOut(jpBoss, jpLogin, jpClient, jpFeeder, jpVet);
+			}
+		});
+		btnBossLogout_2.setForeground(Color.WHITE);
+		btnBossLogout_2.setBackground(Color.BLACK);
+		btnBossLogout_2.setBounds(0, 0, 89, 23);
+		jpFeeder.add(btnBossLogout_2);
 
 		JLabel lblNewLabel_1 = new JLabel("Client");
 		lblNewLabel_1.setBounds(383, 159, 45, 13);
 		jpClient.add(lblNewLabel_1);
+		
+		JButton btnBossLogout_3 = new JButton("LogOut");
+		btnBossLogout_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				controller.questionLogOut(jpBoss, jpLogin, jpClient, jpFeeder, jpVet);
+			}
+		});
+		btnBossLogout_3.setForeground(Color.WHITE);
+		btnBossLogout_3.setBackground(Color.BLACK);
+		btnBossLogout_3.setBounds(0, 0, 89, 23);
+		jpClient.add(btnBossLogout_3);
+		
+		JButton btnBossLogout = new JButton("LogOut");
+		btnBossLogout.setForeground(new Color(255, 255, 255));
+		btnBossLogout.setBackground(new Color(0, 0, 0));
+		btnBossLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Controller controller = new Controller();
+				controller.questionLogOut(jpBoss, jpLogin, jpClient, jpFeeder, jpVet);
+				
+			}
+		});
+		btnBossLogout.setBounds(749, 11, 89, 23);
+		jpBoss.add(btnBossLogout);
 
 		JScrollPane spEmployeeBoss = new JScrollPane();
 		spEmployeeBoss.setBounds(31, 102, 640, 188);
@@ -384,21 +441,9 @@ public class Interfaz {
 		jpBoss.add(btBossSeeZone);
 
 		JLabel lbBossBackground = new JLabel("");
-		lbBossBackground.setBounds(-59, 0, 848, 501);
+		lbBossBackground.setBounds(-59, 0, 924, 501);
 		jpBoss.add(lbBossBackground);
 		addImage(jpBoss, lbBossBackground, "src/Photos/lion.png");
-		
-		JButton btnBossLogout = new JButton("LogOut");
-		btnBossLogout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				Controller controller = new Controller();
-				controller.questionLogOut(jpBoss, jpLogin);
-				
-			}
-		});
-		btnBossLogout.setBounds(749, 11, 89, 23);
-		jpBoss.add(btnBossLogout);
 
 	}
 
