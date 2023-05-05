@@ -19,7 +19,7 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 		ArrayList <Savannah> ret = null;
 
 		// SQL que queremos lanzar
-		String sql = "select * from Savannahs";
+		String sql = "select * from savannahComplete";
 		
 		// La conexion con BBDD
 		Connection connection = null;
@@ -119,8 +119,8 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 							savannah.getAnimalsNumber() + "', '" + 	
 							savannah.getSpeciesNumber() + "')";
 					
-					String sql2 = "insert into Savannah (treeNumber) VALUES ('" + 
-							savannah.getTreeNumber() + "')";
+					String sql2 = "insert into Savannah (zoneId, treeNumber) SELECT MAX(id), " + 
+							savannah.getTreeNumber() + "FROM zones";
 					
 					// La ejecutamos...
 					statement.executeUpdate(sql);

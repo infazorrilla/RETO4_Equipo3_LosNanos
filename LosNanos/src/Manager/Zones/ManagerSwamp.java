@@ -20,7 +20,7 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 		ArrayList <Swamp> ret = null;
 		
 		// SQL que queremos lanzar
-		String sql = "select * from swamps";
+		String sql = "select * from swampComplete";
 		
 		// La conexion con BBDD
 		Connection connection = null;
@@ -114,14 +114,16 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 					// Vamos a lanzar la sentencia...
 					statement = connection.createStatement();
 					
-					// Montamos la SQL 
+					// Montamos la SQL
+					
 					String sql = "insert into Zones (extension, animalsNumber, speciesNumber) VALUES ('" + 
 							swamp.getExtension() + "', '" +  
 							swamp.getAnimalsNumber() + "', '" + 	
 							swamp.getSpeciesNumber() + "')";
 					
-					String sql2 = "insert into Swamp (waterSurface) VALUES ('" + 
-							swamp.getWaterSurface() + "')";
+					String sql2 = "insert into Aquarium (zoneId, waterSurface) SELECT MAX(id), " + 
+							swamp.getWaterSurface() + "FROM zones";
+					
 					
 					// La ejecutamos...
 					statement.executeUpdate(sql);
