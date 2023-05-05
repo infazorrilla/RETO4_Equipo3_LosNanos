@@ -110,7 +110,6 @@ public class Interfaz {
 		usrTfLogin = new JTextField();
 		usrTfLogin.setForeground(new Color(255, 255, 255));
 		usrTfLogin.setBackground(new Color(201, 190, 190));
-		usrTfLogin.setText("User");
 		usrTfLogin.setToolTipText("User");
 		usrTfLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		usrTfLogin.setFont(new Font("Arial", Font.PLAIN, 20));
