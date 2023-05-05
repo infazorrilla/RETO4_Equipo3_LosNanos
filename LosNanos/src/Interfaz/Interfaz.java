@@ -446,15 +446,15 @@ public class Interfaz {
 				model.setColumnCount(0);
 				switch (box) {
 				case "Aquarium":
-					dolphinModel(model);
+					zoneModel(model);
 					controller.getTableAquarium( model, table);
 					break;
 				case "Swamp":
-					snakeModel(model);
+					zoneModel(model);
 					controller.getTableSwamp( model, table);
 					break;
 				case "Savannah":
-					snakeModel(model);
+					zoneModel(model);
 					controller.getTableSavannah( model, table);
 					break;
 				}
