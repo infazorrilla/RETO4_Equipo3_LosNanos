@@ -1,4 +1,4 @@
-package complexQueries;
+package ComplexQueries;
 
 import java.sql.Connection;
 
