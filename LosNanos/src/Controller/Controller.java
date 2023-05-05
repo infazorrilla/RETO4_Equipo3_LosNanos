@@ -469,13 +469,15 @@ public class Controller {
 	}
 
 	public void addOption() {
-		String[] options = { "Employee", "Animal" };
+		String[] options = { "Employee", "Animal", "Zone"};
 		int result = JOptionPane.showOptionDialog(null, "What do you want to add?", "Add", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		if (result == 0) {
 			addOptionEmployee();
 		} else if (result == 1) {
 			addOptionAnimal();
+		} else if (result == 2) {
+			addOptionZone();
 		}
 	}
 
@@ -504,6 +506,67 @@ public class Controller {
 			break;
 		}
 	}
+	
+	private void addOptionZone() {
+		String[] optionsZone = { "Aquarium", "Swamp", "Savannah"};
+		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of Zone?", "Add",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsZone, optionsZone[0]);
+
+		switch (resultEmployee) {
+		case 0:
+			addAquarium();
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		}
+	}
+	
+	private void addAquarium() {
+		JTextField extension = new JTextField();
+		JTextField animalsNumber= new JTextField();
+		JTextField speciesNumber = new JTextField();
+		JTextField waterTemp = new JTextField();
+		
+		Object[] message = { "Extension: *", extension, "Animals Number: *", animalsNumber, "Species Number: *", speciesNumber,
+				"Water Temperature: *", waterTemp};
+		
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Zona", JOptionPane.OK_CANCEL_OPTION);
+		
+		if (option == JOptionPane.OK_OPTION) {
+			if (extension.getText().isEmpty() || animalsNumber.getText().isEmpty() || speciesNumber.getText().isEmpty()
+					|| waterTemp.getText().isEmpty()){
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+//				try {
+				String extensionString = extension.getText();
+				String animalsNumberString = animalsNumber.getText();
+				int animalsNumberFloat = Integer.parseInt(animalsNumberString);
+				String speciesNumberString = speciesNumber.getText();
+				int speciesNumberInt = Integer.parseInt(speciesNumberString);
+				String waterTempString = waterTemp.getText();
+				int waterTempInt = Integer.parseInt(waterTempString);
+				
+				Aquarium aquariumToInsert = new Aquarium(extensionString, animalsNumberFloat, speciesNumberInt, waterTempInt);
+				
+				ManagerAquarium managerAquarium = new ManagerAquarium();
+				try {
+					managerAquarium.insert(aquariumToInsert);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+			
+	}
+	
+	
 
 	public void questionLogOut(JPanel jpBoss, JPanel jpLogin, JPanel jpClient, JPanel jpFeeder, JPanel jpVet) {
 		String[] options = { "LogOut", "No" };
