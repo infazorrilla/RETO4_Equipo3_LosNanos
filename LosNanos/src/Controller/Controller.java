@@ -482,9 +482,53 @@ public class Controller {
 	}
 
 	private void addOptionEmployee() {
-		String[] optionsEmployee = { "Boss", "Fedeer", "Vet" };
+		String[] optionsEmployee = { "Boss", "Feeder", "Vet" };
 		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of employee?", "Add",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsEmployee, optionsEmployee[0]);
+		switch (resultEmployee) {
+		case 0:
+			addBoss();
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		}
+	}
+	
+	public void addBoss() {
+		JTextField name = new JTextField();
+		JTextField surname = new JTextField();
+		JTextField id = new JTextField();
+		JTextField user = new JTextField();
+		JTextField password = new JTextField();
+
+		Object[] message = { "Name: *", name, "Surname: *", surname, "Id: *", id, "User: *", user, "Password *",
+				password };
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Cliente", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || surname.getText().isEmpty() || id.getText().isEmpty()
+					|| user.getText().isEmpty() || password.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					ManagerBoss managerBoss= new ManagerBoss();
+					// (name, surname, id, user, password, clientID)
+					Boss bossToInsert = new Boss(name.getText(), surname.getText(), id.getText(), user.getText(),
+							password.getText(), 0);
+					managerBoss.insert(bossToInsert);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+
 	}
 
 	private void addOptionAnimal() {
