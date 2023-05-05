@@ -18,7 +18,7 @@ public class ManagerZoo {
 	public ArrayList<Zoo> selectZoo(){
 		ArrayList<Zoo> ret = null;
 		
-		String sql = "";
+		String sql = "select * from zoo";
 		
 		Connection connection = null;
 		

@@ -24,7 +24,7 @@ public class ManagerTicket {
 	public ArrayList<Ticket> selectTicket(){
 		ArrayList<Ticket> ret = null;
 		
-		String sql = "";
+		String sql = "select * from ticket";
 		
 		Connection connection = null;
 		Statement statement = null;
