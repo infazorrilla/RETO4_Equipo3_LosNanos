@@ -15,7 +15,10 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import Interfaz.Interfaz;
+import Manager.Animals.ManagerCheetah;
+import Manager.Animals.ManagerCrocodile;
 import Manager.Animals.ManagerDolphin;
+import Manager.Animals.ManagerGiraffe;
 import Manager.Animals.ManagerSnake;
 import Manager.People.ManagerBoss;
 import Manager.People.ManagerClient;
@@ -24,7 +27,10 @@ import Manager.People.ManagerVet;
 import Manager.Zones.ManagerAquarium;
 import Manager.Zones.ManagerSavannah;
 import Manager.Zones.ManagerSwamp;
+import Pojos.Animal.Cheetah;
+import Pojos.Animal.Crocodile;
 import Pojos.Animal.Dolphin;
+import Pojos.Animal.Giraffe;
 import Pojos.Animal.Snake;
 import Pojos.Person.Client;
 import Pojos.Zone.Aquarium;
@@ -226,49 +232,23 @@ public class Controller {
 	}
 
 	public void getSelectedDolphin(String box, DefaultTableModel model, JTable table) {
-		ManagerDolphin managerDolphin = new ManagerDolphin();
-		for (int i = 0; i < managerDolphin.selectAll().size(); i++) {
-			int idInt = managerDolphin.selectAll().get(i).getId();
-			String id = String.valueOf(idInt);
-			float heightInt = managerDolphin.selectAll().get(i).getHeight();
-			String height = String.valueOf(heightInt);
-			float weightInt = managerDolphin.selectAll().get(i).getWeight();
-			String weight = String.valueOf(weightInt);
-			int bolean = managerDolphin.selectAll().get(i).getVaccinated();
-			String vaccinated = checkBoolean(bolean);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-			String date = sdf.format(managerDolphin.selectAll().get(i).getBornDate());
+		ArrayList<Dolphin> dolphins = null;
+		ManagerDolphin managerSnake = new ManagerDolphin();
+		try {
 
-			model.addRow(new String[] { id, managerDolphin.selectAll().get(i).getName(),
-					managerDolphin.selectAll().get(i).getScientificName(), height, weight, date, vaccinated,
-					managerDolphin.selectAll().get(i).getDiet(), managerDolphin.selectAll().get(i).getAnimalType() });
+			dolphins = managerSnake.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < dolphins.size(); i++) {
+			model.addRow(new Object[] { dolphins.get(i).getId(), dolphins.get(i).getName(),
+					dolphins.get(i).getScientificName(), dolphins.get(i).getHeight(), dolphins.get(i).getWeight(),
+					dolphins.get(i).getBornDate(), dolphins.get(i).getVaccinated(), dolphins.get(i).getDiet(),
+					dolphins.get(i).getAnimalType(), dolphins.get(i).getDurationUnderWater() });
 		}
 
 	}
-
-//	public void getSelectedSnake(String box, DefaultTableModel model, JTable table) {
-//		ManagerSnake managerSnake = new ManagerSnake();
-//		for (int i = 0; i < managerSnake.selectAll().size(); i++) {
-//			int idInt = managerSnake.selectAll().get(i).getId();
-//			String id = String.valueOf(idInt);
-//			float heightInt = managerSnake.selectAll().get(i).getHeight();
-//			String height = String.valueOf(heightInt);
-//			float weightInt = managerSnake.selectAll().get(i).getWeight();
-//			String weight = String.valueOf(weightInt);
-//			int zoneInt = managerSnake.selectAll().get(i).getId();
-//			String zoneId = String.valueOf(zoneInt);
-//			int bolean = managerSnake.selectAll().get(i).getVaccinated();
-//			String vaccinated = checkBoolean(bolean);
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-//			String dateBorn = sdf.format(managerSnake.selectAll().get(i).getBornDate());
-//			String dateSkin = sdf.format(managerSnake.selectAll().get(i).getShedSkin());
-//
-//			model.addRow(new String[] { id, managerSnake.selectAll().get(i).getName(),
-//					managerSnake.selectAll().get(i).getScientificName(), height, weight, dateBorn, vaccinated,
-//					managerSnake.selectAll().get(i).getDiet(), zoneId, dateSkin });
-//		}
-//
-//	}
 
 	public void getSelectedSnake(String box, DefaultTableModel model, JTable table) {
 		ArrayList<Snake> snakes = null;
@@ -281,9 +261,67 @@ public class Controller {
 			e.printStackTrace();
 		}
 		for (int i = 0; i < snakes.size(); i++) {
-			model.addRow(new Object[] { snakes.get(i).getId(), snakes.get(i).getName(), snakes.get(i).getScientificName(),
-					snakes.get(i).getHeight(), snakes.get(i).getWeight(), snakes.get(i).getBornDate(),
-					snakes.get(i).getVaccinated(), snakes.get(i).getDiet(), snakes.get(i).getShedSkin() });
+			model.addRow(
+					new Object[] { snakes.get(i).getId(), snakes.get(i).getName(), snakes.get(i).getScientificName(),
+							snakes.get(i).getHeight(), snakes.get(i).getWeight(), snakes.get(i).getBornDate(),
+							snakes.get(i).getVaccinated(), snakes.get(i).getDiet(), snakes.get(i).getShedSkin(), snakes.get(i).isPoisonus() });
+		}
+
+	}
+	
+	public void getSelectedCrocodile(String box, DefaultTableModel model, JTable table) {
+		ArrayList<Crocodile> crocodile = null;
+		ManagerCrocodile managerCrocodile = new ManagerCrocodile();
+		try {
+
+			crocodile = managerCrocodile.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < crocodile.size(); i++) {
+			model.addRow(
+					new Object[] { crocodile.get(i).getId(), crocodile.get(i).getName(), crocodile.get(i).getScientificName(),
+							crocodile.get(i).getHeight(), crocodile.get(i).getWeight(), crocodile.get(i).getBornDate(),
+							crocodile.get(i).getVaccinated(), crocodile.get(i).getDiet(), crocodile.get(i).getShedSkin(), crocodile.get(i).getTeethNumber() });
+		}
+
+	}
+	
+	public void getSelectedGiraffe(String box, DefaultTableModel model, JTable table) {
+		ArrayList<Giraffe> giraffe = null;
+		ManagerGiraffe managerGiraffe = new ManagerGiraffe();
+		try {
+
+			giraffe = managerGiraffe.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < giraffe.size(); i++) {
+			model.addRow(
+					new Object[] { giraffe.get(i).getId(), giraffe.get(i).getName(), giraffe.get(i).getScientificName(),
+							giraffe.get(i).getHeight(), giraffe.get(i).getWeight(), giraffe.get(i).getBornDate(),
+							giraffe.get(i).getVaccinated(), giraffe.get(i).getDiet(), giraffe.get(i).getHairColor(), giraffe.get(i).getNeckLength() });
+		}
+
+	}
+	
+	public void getSelectedCheetah(String box, DefaultTableModel model, JTable table) {
+		ArrayList<Cheetah> cheetah = null;
+		ManagerCheetah managerCheetah = new ManagerCheetah();
+		try {
+
+			cheetah = managerCheetah.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < cheetah.size(); i++) {
+			model.addRow(
+					new Object[] { cheetah.get(i).getId(), cheetah.get(i).getName(), cheetah.get(i).getScientificName(),
+							cheetah.get(i).getHeight(), cheetah.get(i).getWeight(), cheetah.get(i).getBornDate(),
+							cheetah.get(i).getVaccinated(), cheetah.get(i).getDiet(), cheetah.get(i).getHairColor(), cheetah.get(i).getMaxSpeed() });
 		}
 
 	}

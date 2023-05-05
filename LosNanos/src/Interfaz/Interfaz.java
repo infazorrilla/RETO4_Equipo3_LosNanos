@@ -336,25 +336,25 @@ public class Interfaz {
 		btnBossSeeVet.setBounds(377, 311, 121, 37);
 		jpBoss.add(btnBossSeeVet);
 
-		JButton btnBossAddEmployee = new JButton("Add");
-		btnBossAddEmployee.setBackground(new Color(235, 199, 150));
-		btnBossAddEmployee.setForeground(new Color(255, 255, 255));
-		btnBossAddEmployee.addActionListener(new ActionListener() {
+		JButton btnBossAdd = new JButton("Add");
+		btnBossAdd.setBackground(new Color(235, 199, 150));
+		btnBossAdd.setForeground(new Color(255, 255, 255));
+		btnBossAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controller controller = new Controller();
 				controller.addOption();
 			}
 		});
-		btnBossAddEmployee.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnBossAddEmployee.setBounds(696, 102, 121, 37);
-		jpBoss.add(btnBossAddEmployee);
+		btnBossAdd.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnBossAdd.setBounds(696, 102, 121, 37);
+		jpBoss.add(btnBossAdd);
 
-		JButton btnBossUpdateEmployee = new JButton("Update");
-		btnBossUpdateEmployee.setBackground(new Color(235, 199, 150));
-		btnBossUpdateEmployee.setForeground(new Color(255, 255, 255));
-		btnBossUpdateEmployee.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnBossUpdateEmployee.setBounds(696, 178, 121, 37);
-		jpBoss.add(btnBossUpdateEmployee);
+		JButton btnBossUpdate = new JButton("Update");
+		btnBossUpdate.setBackground(new Color(235, 199, 150));
+		btnBossUpdate.setForeground(new Color(255, 255, 255));
+		btnBossUpdate.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnBossUpdate.setBounds(696, 178, 121, 37);
+		jpBoss.add(btnBossUpdate);
 
 		JButton btnBossSeeClient = new JButton("Client");
 		btnBossSeeClient.setBackground(new Color(235, 199, 150));
@@ -527,6 +527,8 @@ public class Interfaz {
 		model.addColumn("Vaccinated");
 		model.addColumn("Diet");
 		model.addColumn("Animal-Tipe");
+		model.addColumn("DurationUnderWater");
+
 	}
 
 	private void snakeModel(DefaultTableModel model) {
@@ -539,6 +541,8 @@ public class Interfaz {
 		model.addColumn("Vaccinated");
 		model.addColumn("Diet");
 		model.addColumn("shed-Skin");
+		model.addColumn("Poisonus");
+
 	}
 
 	private void personModel(DefaultTableModel model) {
