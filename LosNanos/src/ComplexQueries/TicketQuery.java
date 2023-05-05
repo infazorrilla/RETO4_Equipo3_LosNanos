@@ -39,4 +39,4 @@ public class TicketQuery {
 	                               .filter(t -> t.getIdTicket() == specificTicketId)
 	                               .findFirst()
 	                               .orElse(null);
-	}
+}
