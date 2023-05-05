@@ -33,6 +33,7 @@ public class Interfaz {
 	private JPasswordField passTfLogin;
 	private JTable table;
 	private String type;
+	private JComboBox cbBossZones;
 
 	/**
 	 * Launch the application.
@@ -390,7 +391,7 @@ public class Interfaz {
 		lblBossSeeAnimal.setBounds(181, 380, 76, 21);
 		jpBoss.add(lblBossSeeAnimal);
 
-		JComboBox cbBossZones = new JComboBox();
+		cbBossZones = new JComboBox();
 		cbBossZones.addItem("Aquarium");
 		cbBossZones.addItem("Swamp");
 		cbBossZones.addItem("Savannah");
@@ -547,6 +548,20 @@ public class Interfaz {
 		model.addColumn("User");
 		model.addColumn("Password");
 		model.addColumn("Special");
+	}
+	
+	private void zoneModel(DefaultTableModel model) {
+		model.addColumn("Id");
+		model.addColumn("Extension");
+		model.addColumn("animalsNumber");
+		model.addColumn("SpeciesNumber");
+		if(cbBossZones.getSelectedItem().equals("Aquarium")) {
+			model.addColumn("waterTemp");
+		} else if (cbBossZones.getSelectedItem().equals("Swamp")) {
+			model.addColumn("waterSurface");
+		} else if (cbBossZones.getSelectedItem().equals("Savannah")) {
+			model.addColumn("Tree Number");
+		}
 	}
 
 	private void addImage(JPanel panel, JLabel label, String path) {
