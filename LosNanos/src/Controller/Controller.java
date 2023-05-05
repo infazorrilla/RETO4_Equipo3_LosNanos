@@ -15,7 +15,10 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import Interfaz.Interfaz;
+import Manager.Animals.ManagerCheetah;
+import Manager.Animals.ManagerCrocodile;
 import Manager.Animals.ManagerDolphin;
+import Manager.Animals.ManagerGiraffe;
 import Manager.Animals.ManagerSnake;
 import Manager.People.ManagerBoss;
 import Manager.People.ManagerClient;
@@ -24,9 +27,15 @@ import Manager.People.ManagerVet;
 import Manager.Zones.ManagerAquarium;
 import Manager.Zones.ManagerSavannah;
 import Manager.Zones.ManagerSwamp;
+import Pojos.Animal.Cheetah;
+import Pojos.Animal.Crocodile;
 import Pojos.Animal.Dolphin;
+import Pojos.Animal.Giraffe;
 import Pojos.Animal.Snake;
+import Pojos.Person.Boss;
 import Pojos.Person.Client;
+import Pojos.Person.Feeder;
+import Pojos.Person.Vet;
 import Pojos.Zone.Aquarium;
 import Pojos.Zone.Savannah;
 import Pojos.Zone.Swamp;
@@ -181,94 +190,95 @@ public class Controller {
 	}
 
 	public void getTableBoss(DefaultTableModel model, JTable table) {
-		ManagerBoss managerBoss = new ManagerBoss();
-		for (int i = 0; i < managerBoss.selectAll().size(); i++) {
-			int empNumCharg = managerBoss.selectAll().get(i).getEmployeeNumCharge();
-			String numCharge = String.valueOf(empNumCharg);
-			model.addRow(new String[] { managerBoss.selectAll().get(i).getName(),
-					managerBoss.selectAll().get(i).getSurname(), managerBoss.selectAll().get(i).getId(),
-					managerBoss.selectAll().get(i).getUser(), managerBoss.selectAll().get(i).getPassword(),
-					numCharge });
+		ArrayList<Boss> boss = null;
+		ManagerBoss managerFeeder = new ManagerBoss();
+		try {
+
+			boss = managerFeeder.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < boss.size(); i++) {
+			model.addRow(
+					new Object[] { boss.get(i).getName(), boss.get(i).getSurname(), boss.get(i).getId(),
+							boss.get(i).getUser(), boss.get(i).getPassword(), boss.get(i).getEmployeeNumCharge()});
 		}
 
 	}
-
+	
 	public void getTableFeeder(DefaultTableModel model, JTable table) {
+		ArrayList<Feeder> feeder = null;
 		ManagerFeeder managerFeeder = new ManagerFeeder();
-		for (int i = 0; i < managerFeeder.selectAll().size(); i++) {
-			model.addRow(new String[] { managerFeeder.selectAll().get(i).getName(),
-					managerFeeder.selectAll().get(i).getSurname(), managerFeeder.selectAll().get(i).getId(),
-					managerFeeder.selectAll().get(i).getUser(), managerFeeder.selectAll().get(i).getPassword(),
-					managerFeeder.selectAll().get(i).getSpecializedDiet() });
+		try {
+
+			feeder = managerFeeder.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < feeder.size(); i++) {
+			model.addRow(
+					new Object[] { feeder.get(i).getName(), feeder.get(i).getSurname(), feeder.get(i).getId(),
+							feeder.get(i).getUser(), feeder.get(i).getPassword(), feeder.get(i).getSpecializedDiet()});
 		}
 
 	}
-
+	
 	public void getTableVet(DefaultTableModel model, JTable table) {
+		ArrayList<Vet> vet = null;
 		ManagerVet managerVet = new ManagerVet();
-		for (int i = 0; i < managerVet.selectAll().size(); i++) {
-			model.addRow(new String[] { managerVet.selectAll().get(i).getName(),
-					managerVet.selectAll().get(i).getSurname(), managerVet.selectAll().get(i).getId(),
-					managerVet.selectAll().get(i).getUser(), managerVet.selectAll().get(i).getPassword(),
-					managerVet.selectAll().get(i).getSpecializedAnimalType() });
+		try {
+
+			vet = managerVet.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < vet.size(); i++) {
+			model.addRow(
+					new Object[] { vet.get(i).getName(), vet.get(i).getSurname(), vet.get(i).getId(),
+							vet.get(i).getUser(), vet.get(i).getPassword(), vet.get(i).getSpecializedAnimalType()});
 		}
 
 	}
 
 	public void getTableClient(DefaultTableModel model, JTable table) {
+		ArrayList<Client> client = null;
 		ManagerClient managerClient = new ManagerClient();
-		for (int i = 0; i < managerClient.getClient().size(); i++) {
-			model.addRow(new String[] { managerClient.getClient().get(i).getName(),
-					managerClient.getClient().get(i).getSurname(), managerClient.getClient().get(i).getId(),
-					managerClient.getClient().get(i).getUser(), managerClient.getClient().get(i).getPassword() });
+		try {
+
+			client = managerClient.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < client.size(); i++) {
+			model.addRow(
+					new Object[] { client.get(i).getName(), client.get(i).getSurname(), client.get(i).getId(),
+							client.get(i).getUser(), client.get(i).getPassword()});
 		}
 
 	}
 
 	public void getSelectedDolphin(String box, DefaultTableModel model, JTable table) {
-		ManagerDolphin managerDolphin = new ManagerDolphin();
-		for (int i = 0; i < managerDolphin.selectAll().size(); i++) {
-			int idInt = managerDolphin.selectAll().get(i).getId();
-			String id = String.valueOf(idInt);
-			float heightInt = managerDolphin.selectAll().get(i).getHeight();
-			String height = String.valueOf(heightInt);
-			float weightInt = managerDolphin.selectAll().get(i).getWeight();
-			String weight = String.valueOf(weightInt);
-			int bolean = managerDolphin.selectAll().get(i).getVaccinated();
-			String vaccinated = checkBoolean(bolean);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-			String date = sdf.format(managerDolphin.selectAll().get(i).getBornDate());
+		ArrayList<Dolphin> dolphins = null;
+		ManagerDolphin managerSnake = new ManagerDolphin();
+		try {
 
-			model.addRow(new String[] { id, managerDolphin.selectAll().get(i).getName(),
-					managerDolphin.selectAll().get(i).getScientificName(), height, weight, date, vaccinated,
-					managerDolphin.selectAll().get(i).getDiet(), managerDolphin.selectAll().get(i).getAnimalType() });
+			dolphins = managerSnake.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < dolphins.size(); i++) {
+			model.addRow(new Object[] { dolphins.get(i).getId(), dolphins.get(i).getName(),
+					dolphins.get(i).getScientificName(), dolphins.get(i).getHeight(), dolphins.get(i).getWeight(),
+					dolphins.get(i).getBornDate(), dolphins.get(i).getVaccinated(), dolphins.get(i).getDiet(),
+					dolphins.get(i).getAnimalType(), dolphins.get(i).getDurationUnderWater() });
 		}
 
 	}
-
-//	public void getSelectedSnake(String box, DefaultTableModel model, JTable table) {
-//		ManagerSnake managerSnake = new ManagerSnake();
-//		for (int i = 0; i < managerSnake.selectAll().size(); i++) {
-//			int idInt = managerSnake.selectAll().get(i).getId();
-//			String id = String.valueOf(idInt);
-//			float heightInt = managerSnake.selectAll().get(i).getHeight();
-//			String height = String.valueOf(heightInt);
-//			float weightInt = managerSnake.selectAll().get(i).getWeight();
-//			String weight = String.valueOf(weightInt);
-//			int zoneInt = managerSnake.selectAll().get(i).getId();
-//			String zoneId = String.valueOf(zoneInt);
-//			int bolean = managerSnake.selectAll().get(i).getVaccinated();
-//			String vaccinated = checkBoolean(bolean);
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-//			String dateBorn = sdf.format(managerSnake.selectAll().get(i).getBornDate());
-//			String dateSkin = sdf.format(managerSnake.selectAll().get(i).getShedSkin());
-//
-//			model.addRow(new String[] { id, managerSnake.selectAll().get(i).getName(),
-//					managerSnake.selectAll().get(i).getScientificName(), height, weight, dateBorn, vaccinated,
-//					managerSnake.selectAll().get(i).getDiet(), zoneId, dateSkin });
-//		}
-//
-//	}
 
 	public void getSelectedSnake(String box, DefaultTableModel model, JTable table) {
 		ArrayList<Snake> snakes = null;
@@ -281,9 +291,67 @@ public class Controller {
 			e.printStackTrace();
 		}
 		for (int i = 0; i < snakes.size(); i++) {
-			model.addRow(new Object[] { snakes.get(i).getId(), snakes.get(i).getName(), snakes.get(i).getScientificName(),
-					snakes.get(i).getHeight(), snakes.get(i).getWeight(), snakes.get(i).getBornDate(),
-					snakes.get(i).getVaccinated(), snakes.get(i).getDiet(), snakes.get(i).getShedSkin() });
+			model.addRow(
+					new Object[] { snakes.get(i).getId(), snakes.get(i).getName(), snakes.get(i).getScientificName(),
+							snakes.get(i).getHeight(), snakes.get(i).getWeight(), snakes.get(i).getBornDate(),
+							snakes.get(i).getVaccinated(), snakes.get(i).getDiet(), snakes.get(i).getShedSkin(), snakes.get(i).isPoisonus() });
+		}
+
+	}
+	
+	public void getSelectedCrocodile(String box, DefaultTableModel model, JTable table) {
+		ArrayList<Crocodile> crocodile = null;
+		ManagerCrocodile managerCrocodile = new ManagerCrocodile();
+		try {
+
+			crocodile = managerCrocodile.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < crocodile.size(); i++) {
+			model.addRow(
+					new Object[] { crocodile.get(i).getId(), crocodile.get(i).getName(), crocodile.get(i).getScientificName(),
+							crocodile.get(i).getHeight(), crocodile.get(i).getWeight(), crocodile.get(i).getBornDate(),
+							crocodile.get(i).getVaccinated(), crocodile.get(i).getDiet(), crocodile.get(i).getShedSkin(), crocodile.get(i).getTeethNumber() });
+		}
+
+	}
+	
+	public void getSelectedGiraffe(String box, DefaultTableModel model, JTable table) {
+		ArrayList<Giraffe> giraffe = null;
+		ManagerGiraffe managerGiraffe = new ManagerGiraffe();
+		try {
+
+			giraffe = managerGiraffe.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < giraffe.size(); i++) {
+			model.addRow(
+					new Object[] { giraffe.get(i).getId(), giraffe.get(i).getName(), giraffe.get(i).getScientificName(),
+							giraffe.get(i).getHeight(), giraffe.get(i).getWeight(), giraffe.get(i).getBornDate(),
+							giraffe.get(i).getVaccinated(), giraffe.get(i).getDiet(), giraffe.get(i).getHairColor(), giraffe.get(i).getNeckLength() });
+		}
+
+	}
+	
+	public void getSelectedCheetah(String box, DefaultTableModel model, JTable table) {
+		ArrayList<Cheetah> cheetah = null;
+		ManagerCheetah managerCheetah = new ManagerCheetah();
+		try {
+
+			cheetah = managerCheetah.selectAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < cheetah.size(); i++) {
+			model.addRow(
+					new Object[] { cheetah.get(i).getId(), cheetah.get(i).getName(), cheetah.get(i).getScientificName(),
+							cheetah.get(i).getHeight(), cheetah.get(i).getWeight(), cheetah.get(i).getBornDate(),
+							cheetah.get(i).getVaccinated(), cheetah.get(i).getDiet(), cheetah.get(i).getHairColor(), cheetah.get(i).getMaxSpeed() });
 		}
 
 	}
@@ -401,20 +469,65 @@ public class Controller {
 	}
 
 	public void addOption() {
-		String[] options = { "Employee", "Animal" };
+		String[] options = { "Employee", "Animal", "Zone"};
 		int result = JOptionPane.showOptionDialog(null, "What do you want to add?", "Add", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		if (result == 0) {
 			addOptionEmployee();
 		} else if (result == 1) {
 			addOptionAnimal();
+		} else if (result == 2) {
+			addOptionZone();
 		}
 	}
 
 	private void addOptionEmployee() {
-		String[] optionsEmployee = { "Boss", "Fedeer", "Vet" };
+		String[] optionsEmployee = { "Boss", "Feeder", "Vet" };
 		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of employee?", "Add",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsEmployee, optionsEmployee[0]);
+		switch (resultEmployee) {
+		case 0:
+			addBoss();
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		}
+	}
+	
+	public void addBoss() {
+		JTextField name = new JTextField();
+		JTextField surname = new JTextField();
+		JTextField id = new JTextField();
+		JTextField user = new JTextField();
+		JTextField password = new JTextField();
+
+		Object[] message = { "Name: *", name, "Surname: *", surname, "Id: *", id, "User: *", user, "Password *",
+				password };
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Cliente", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || surname.getText().isEmpty() || id.getText().isEmpty()
+					|| user.getText().isEmpty() || password.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					ManagerBoss managerBoss= new ManagerBoss();
+					Boss bossToInsert = new Boss(name.getText(), surname.getText(), id.getText(), user.getText(),
+							password.getText(), 0);
+					managerBoss.insert(bossToInsert);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+
 	}
 
 	private void addOptionAnimal() {
@@ -436,6 +549,67 @@ public class Controller {
 			break;
 		}
 	}
+	
+	private void addOptionZone() {
+		String[] optionsZone = { "Aquarium", "Swamp", "Savannah"};
+		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of Zone?", "Add",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsZone, optionsZone[0]);
+
+		switch (resultEmployee) {
+		case 0:
+			addAquarium();
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		}
+	}
+	
+	private void addAquarium() {
+		JTextField extension = new JTextField();
+		JTextField animalsNumber= new JTextField();
+		JTextField speciesNumber = new JTextField();
+		JTextField waterTemp = new JTextField();
+		
+		Object[] message = { "Extension: *", extension, "Animals Number: *", animalsNumber, "Species Number: *", speciesNumber,
+				"Water Temperature: *", waterTemp};
+		
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Zona", JOptionPane.OK_CANCEL_OPTION);
+		
+		if (option == JOptionPane.OK_OPTION) {
+			if (extension.getText().isEmpty() || animalsNumber.getText().isEmpty() || speciesNumber.getText().isEmpty()
+					|| waterTemp.getText().isEmpty()){
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+//				try {
+				String extensionString = extension.getText();
+				String animalsNumberString = animalsNumber.getText();
+				int animalsNumberFloat = Integer.parseInt(animalsNumberString);
+				String speciesNumberString = speciesNumber.getText();
+				int speciesNumberInt = Integer.parseInt(speciesNumberString);
+				String waterTempString = waterTemp.getText();
+				int waterTempInt = Integer.parseInt(waterTempString);
+				
+				Aquarium aquariumToInsert = new Aquarium(extensionString, animalsNumberFloat, speciesNumberInt, waterTempInt);
+				
+				ManagerAquarium managerAquarium = new ManagerAquarium();
+				try {
+					managerAquarium.insert(aquariumToInsert);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+			
+	}
+	
+	
 
 	public void questionLogOut(JPanel jpBoss, JPanel jpLogin, JPanel jpClient, JPanel jpFeeder, JPanel jpVet) {
 		String[] options = { "LogOut", "No" };
@@ -493,13 +667,10 @@ public class Controller {
 				System.out.println(date);
 				String vaccinatedString = vaccinated.getText();
 				int vaccinatedInt = checkBooleanTwo(vaccinatedString);
-				String zoneIdString = vaccinated.getText();
-				int zoneIdInt = Integer.valueOf(zoneIdString);
 				String durationUnderWaterString = vaccinated.getText();
 				int durationUnderWaterInt = Integer.valueOf(durationUnderWaterString);
-				int id = getDolphinId();
 
-				Dolphin dolphinToIsert = new Dolphin(id, name.getText(), scientificName.getText(), heightFloat,
+				Dolphin dolphinToIsert = new Dolphin(0, name.getText(), scientificName.getText(), heightFloat,
 						weightFloat, date, vaccinatedInt, diet.getSelectedItem().toString(), animalType.getText(),
 						durationUnderWaterInt);
 				System.out.println(dolphinToIsert);
@@ -526,19 +697,18 @@ public class Controller {
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
 		JTextField shedSkin = new JTextField();
-		JTextField zoneId = new JTextField();
 		JTextField poisonus = new JTextField();
 
 		Object[] message = { "Name: *", name, "ScientificName: *", scientificName, "Height: *", height, "Weight: *",
 				weight, "Born-Date *", bornDate, "Vacinated: *", vaccinated, "Diet: *", diet, "ShedSkin: *", shedSkin,
-				"ZoneId: *", zoneId, "Poisonus: *", poisonus };
+				"Poisonus: *", poisonus };
 
 		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Cliente", JOptionPane.OK_CANCEL_OPTION);
 
 		if (option == JOptionPane.OK_OPTION) {
 			if (name.getText().isEmpty() || scientificName.getText().isEmpty() || height.getText().isEmpty()
 					|| weight.getText().isEmpty() || bornDate.getText().isEmpty() || vaccinated.getText().isEmpty()
-					|| shedSkin.getText().isEmpty() || zoneId.getText().isEmpty() || poisonus.getText().isEmpty()) {
+					|| shedSkin.getText().isEmpty() || poisonus.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
 			} else {
 				try {
@@ -572,14 +742,5 @@ public class Controller {
 
 	}
 
-	public int getDolphinId() {
-		ManagerDolphin managerDolphin = new ManagerDolphin();
-		int id = 0;
-		for (int i = 0; i < managerDolphin.selectAll().size(); i++) {
-			id = managerDolphin.selectAll().get(i).getId();
-		}
-		id = id + 1;
-		return id;
-	}
 
 }

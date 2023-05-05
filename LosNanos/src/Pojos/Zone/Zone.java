@@ -28,6 +28,12 @@ public class Zone implements Serializable {
 		this.speciesNumber = speciesNumber;
 		this.zoo = zoo;
 	}
+	
+	public Zone(String extension, int animalsNumber, int speciesNumber) {
+		this.extension = extension;
+		this.animalsNumber = animalsNumber;
+		this.speciesNumber = speciesNumber;
+	}
 
 	public Zone() {
 		super();

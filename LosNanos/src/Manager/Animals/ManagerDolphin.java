@@ -129,9 +129,9 @@ public class ManagerDolphin implements ManagerInterface<Dolphin> {
 					+ dolphin.getId() + "', '" + dolphin.getName() + "', '" + dolphin.getScientificName() + "', '"
 					+ dolphin.getHeight() + "', '" + dolphin.getWeight() + "', '" + sqlDate + "', '"
 					+ dolphin.getVaccinated() + "', '" + dolphin.getDiet() + "', '" + dolphin.getAnimalType() + "')";
-
-			String sql2 = "insert into dolphin (id_dolphin, durationUnderWater) VALUES ('" + dolphin.getId() + "', '"
-					+ dolphin.getDurationUnderWater() + "')";
+			
+			String sql2 = "insert into dolphin (dolphin_id, DurationUnderWater) SELECT MAX(id), " + 
+					dolphin.getDurationUnderWater() + "FROM aquatic";
 
 			// La ejecutamos...
 			statement.executeUpdate(sql);

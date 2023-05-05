@@ -124,6 +124,7 @@ public class ManagerBoss implements ManagerInterface<Boss>{
 
 			String sql2 = "insert into boss (ssNumber, employeeNumCharge) VALUES ('" + boss.getSsNumber() + "', '"
 					+ boss.getEmployeeNumCharge() + "')";
+			
 
 			// La ejecutamos...
 			statement.executeUpdate(sql);
