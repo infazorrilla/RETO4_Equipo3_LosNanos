@@ -47,48 +47,24 @@ public class Controller {
 	public Boss searchBossId(String id) {
 		Boss ret = new Boss();
 		ManagerBoss managerBoss = new ManagerBoss();
-		try {
-			ArrayList<Boss> bosses = managerBoss.selectAll();
-			for (int i = 0 ; i < bosses.size() ; i++) {
-				if (bosses.get(i).getId().equals(id)) {
-					ret = bosses.get(i);
-				}
+		ArrayList<Boss> bosses = managerBoss.selectAll();
+		for (int i = 0 ; i < bosses.size() ; i++) {
+			if (bosses.get(i).getId().equals(id)) {
+				ret = bosses.get(i);
 			}
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		
-		
 		return ret;
 	}
 	
 	public Client searchClientId(String id) {
 		Client ret = new Client();
 		ManagerClient managerClient = new ManagerClient();
+		ArrayList<Client> clients;
 		try {
-			ArrayList<Client> clients = managerClient.selectAll();
+			clients = managerClient.selectAll();
 			for (int i = 0 ; i < clients.size() ; i++) {
 				if (clients.get(i).getId().equals(id)) {
 					ret = clients.get(i);
-				}
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ret;
-	}
-	
-	public Feeder searchFeederId(String id) {
-		Feeder ret = new Feeder();
-		ManagerFeeder managerFeeder = new ManagerFeeder();
-		try {
-			ArrayList<Feeder> feeders = managerFeeder.selectAll();
-			for (int i = 0 ; i < feeders.size() ; i++) {
-				if (feeders.get(i).getId().equals(id)) {
-					ret = feeders.get(i);
 				}
 			}
 		} catch (Exception e) {
@@ -509,8 +485,7 @@ public class Controller {
 		int result = JOptionPane.showOptionDialog(null, "Are you sure?", "Sure", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		ManagerBoss managerBoss = new ManagerBoss();
-
-		ManagerClient managerClient = new ManagerClient();
+		
 		if (result == 0) {
 			if (type == "Boss") {
 				Boss boss = searchBossId(id);
@@ -529,13 +504,7 @@ public class Controller {
 					e.printStackTrace();
 				}
 			} else if (type == "Feeder") {
-				Feeder feeder = searchFeederId(id);
-				try {
-					managerFeeder.delete(feeder);
-				} catch (Exception e) {
-				// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
 			} else if (type == "Vet") {
 				
 			}
