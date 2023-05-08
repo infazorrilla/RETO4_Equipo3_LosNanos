@@ -52,7 +52,7 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 				
 				// Sacamos las columnas del RS
 				int id = resultSet.getInt("id");
-                String extension = resultSet.getString("extension");
+                float extension = resultSet.getFloat("extension");
                 int animalsNumber = resultSet.getInt("animalsNumber");
                 int speciesNumber  = resultSet.getInt("speciesNumber");
                 float waterTemp  = resultSet.getFloat("waterTemp");
@@ -163,10 +163,10 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
 					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "update Aquariums set extension = ?, waterTemp = ?, animalsNumber = ?, speciesNumber = ? where zoneId = ?";
+					String sql = "update Zones, aquarium set waterTemp = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ?";
 					preparedStatement = connection.prepareStatement(sql);
-					preparedStatement.setString (1, aquarium.getExtension());
-					preparedStatement.setFloat (2, aquarium.getWaterTemp());
+					preparedStatement.setFloat (1, aquarium.getWaterTemp());
+					preparedStatement.setFloat (2, aquarium.getExtension());
 					preparedStatement.setInt (3, aquarium.getAnimalsNumber());
 					preparedStatement.setInt (4, aquarium.getSpeciesNumber());
 					preparedStatement.setInt (5, aquarium.getId());

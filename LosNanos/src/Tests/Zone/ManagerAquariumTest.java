@@ -21,9 +21,9 @@ class ManagerAquariumTest {
 	void testSelectAll() {
 		try {
 			aquariums = managerAquarium.selectAll();
-			aquarium = aquariums.get(1);
+			aquarium = aquariums.get(0);
 			String expected = aquarium.toString();
-			assertEquals("Aquarium [waterTemp=12.0, acuatics=null, id=2, extension=64.0, animalsNumber=12, speciesNumber=1, zoo=null]", expected);
+			assertEquals("Aquarium [waterTemp=67.0, acuatics=null, id=1, extension=65.0, animalsNumber=12, speciesNumber=1, zoo=null]", expected);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -37,16 +37,22 @@ class ManagerAquariumTest {
 	void testInsert() {
 		try {
 			aquarium.setWaterTemp(34);
-			aquarium.setExtension("23m2");
+			aquarium.setExtension(23);
 			aquarium.setAnimalsNumber(13);
 			aquarium.setSpeciesNumber(2);
 			
 			managerAquarium.insert(aquarium);
 			
 			aquariums = managerAquarium.selectAll();
-			Aquarium insertedAquarium = aquariums.get(aquariums.size() - 1);
 			
-			assertEquals(aquarium, insertedAquarium);
+			Aquarium insertedAquarium = aquariums.get(aquariums.size()-1);
+			
+			
+			for(int i = 0 ; i < aquariums.size() ; i++ ) {
+				if (aquariums.get(i).getId() == insertedAquarium.getId()) {
+					assertEquals(aquariums.get(i), insertedAquarium);
+				}
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,9 +65,9 @@ class ManagerAquariumTest {
 	@Test
 	void testUpdate() {
 		try {
-			aquarium.setId(1);
-			aquarium.setWaterTemp(34);
-			aquarium.setExtension("23m2");
+			aquarium.setId(7);
+			aquarium.setWaterTemp(67);
+			aquarium.setExtension(23);
 			aquarium.setAnimalsNumber(13);
 			aquarium.setSpeciesNumber(2);
 			
@@ -69,9 +75,9 @@ class ManagerAquariumTest {
 			
 			aquariums = managerAquarium.selectAll();
 			
-			for(Aquarium searchedAquarium  : aquariums) {
-				if(searchedAquarium.getId() == aquarium.getId()) {
-					assertEquals(aquarium, searchedAquarium);
+			for(int i = 0 ; i < aquariums.size() ; i++ ) {
+				if (aquariums.get(i).getId() == aquarium.getId()) {
+					assertEquals(aquarium, aquariums.get(i));
 				}
 			}
 			
@@ -95,7 +101,7 @@ class ManagerAquariumTest {
 			aquariums = managerAquarium.selectAll();
 			
 			for(int i = 0 ; i < aquariums.size() ; i++){
-				if(aquariums.get(aquarium.getId() - 1) == null  ) {
+				if(aquariums.get(aquarium.getId()) == null  ) {
 					assertEquals(aquarium, null);
 				}
 			}

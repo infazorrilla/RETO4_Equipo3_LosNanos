@@ -18,14 +18,14 @@ public class Aquarium extends Zone {
 	protected ArrayList<Aquatic> acuatics = null;
 
 
-	public Aquarium(int id, String extension, int animalsNumber, int speciesNumber, Zoo zoo, float waterTemp,
+	public Aquarium(int id, float extension, int animalsNumber, int speciesNumber, Zoo zoo, float waterTemp,
 			ArrayList<Aquatic> acuatics) {
 		super(id, extension, animalsNumber, speciesNumber, zoo);
 		this.waterTemp = waterTemp;
 		this.acuatics = acuatics;
 	}
 	
-	public Aquarium(String extension, int animalsNumber, int speciesNumber,float waterTemp) {
+	public Aquarium(float extension, int animalsNumber, int speciesNumber,float waterTemp) {
 		super(extension, animalsNumber, speciesNumber);
 		this.waterTemp = waterTemp;
 	}

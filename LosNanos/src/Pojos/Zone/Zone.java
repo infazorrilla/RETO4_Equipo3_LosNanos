@@ -9,7 +9,7 @@ public class Zone implements Serializable {
 
 	protected static final long serialVersionUID = -9022103785689291546L;
 	protected int id = 0;
-	protected String extension;
+	protected float extension;
 	protected int animalsNumber = 0;
 	protected int speciesNumber = 0;
 
@@ -21,7 +21,7 @@ public class Zone implements Serializable {
 	protected Zoo zoo = null;
 
 
-	public Zone(int id, String extension, int animalsNumber, int speciesNumber, Zoo zoo) {
+	public Zone(int id, float extension, int animalsNumber, int speciesNumber, Zoo zoo) {
 		this.id = id;
 		this.extension = extension;
 		this.animalsNumber = animalsNumber;
@@ -29,7 +29,7 @@ public class Zone implements Serializable {
 		this.zoo = zoo;
 	}
 	
-	public Zone(String extension, int animalsNumber, int speciesNumber) {
+	public Zone(float extension, int animalsNumber, int speciesNumber) {
 		this.extension = extension;
 		this.animalsNumber = animalsNumber;
 		this.speciesNumber = speciesNumber;
@@ -50,12 +50,12 @@ public class Zone implements Serializable {
 	}
 
 
-	public String getExtension() {
+	public float getExtension() {
 		return extension;
 	}
 
 
-	public void setExtension(String extension) {
+	public void setExtension(float extension) {
 		this.extension = extension;
 	}
 
