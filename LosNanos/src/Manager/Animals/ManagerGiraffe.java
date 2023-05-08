@@ -180,7 +180,7 @@ public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update terrestrialmammalian, giraffe set name = ?, scientificName = ?, height = ?, weight = ?, bornDate = ?, vaccinated = ?, diet = ?, hairColor = ?, neckLength = ? where id = ?";
+			String sql = "update terrestrialmammalian, giraffe set name = ?, scientificName = ?, height = ?, weight = ?, bornDate = ?, vaccinated = ?, diet = ?, hairColor = ?, neckLength = ? where id = ?, id_giraffe = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, giraffe.getName());
 			preparedStatement.setString(2, giraffe.getScientificName());
@@ -192,6 +192,8 @@ public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 			preparedStatement.setString(8, giraffe.getHairColor());
 			preparedStatement.setInt(9, giraffe.getNeckLength());
 			preparedStatement.setInt(10, giraffe.getId());
+			preparedStatement.setInt(11, giraffe.getId());
+
 
 			// La ejecutamos...
 			preparedStatement.executeUpdate();

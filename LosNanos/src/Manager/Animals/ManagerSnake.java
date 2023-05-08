@@ -185,7 +185,7 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update reptile, snake set name = ?, scientificName = ?, height = ?, weight = ?, bornDate = ?, vaccinated = ?, diet = ?, shedSkin = ?,  poisonus = ? where id = ?";
+			String sql = "update reptile, snake set name = ?, scientificName = ?, height = ?, weight = ?, bornDate = ?, vaccinated = ?, diet = ?, shedSkin = ?,  poisonus = ? where id = ? and id_snake = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, snake.getName());
 			preparedStatement.setString(2, snake.getScientificName());
@@ -197,6 +197,8 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 			preparedStatement.setDate(8, shedSkin);
 			preparedStatement.setBoolean(9, snake.isPoisonus());
 			preparedStatement.setInt(10, snake.getId());
+			preparedStatement.setInt(11, snake.getId());
+
 
 			// La ejecutamos...
 			preparedStatement.executeUpdate();

@@ -181,7 +181,7 @@ public class ManagerDolphin implements ManagerInterface<Dolphin> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update aquatic, dolphin set name = ?, scientificName = ?, height = ?, weight = ?, bornDate = ?, vaccinated = ?, diet = ?, animalTipe = ?, durationUnderWater = ? where id = ?";
+			String sql = "update aquatic, dolphin set name = ?, scientificName = ?, height = ?, weight = ?, bornDate = ?, vaccinated = ?, diet = ?, animalTipe = ?, durationUnderWater = ? where id = ? and id_dolphin = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, dolphin.getName());
 			preparedStatement.setString(2, dolphin.getScientificName());
@@ -193,6 +193,8 @@ public class ManagerDolphin implements ManagerInterface<Dolphin> {
 			preparedStatement.setString(8, dolphin.getAnimalType());
 			preparedStatement.setInt(9, dolphin.getDurationUnderWater());
 			preparedStatement.setInt(10, dolphin.getId());
+			preparedStatement.setInt(11, dolphin.getId());
+
 
 			// La ejecutamos...
 			preparedStatement.executeUpdate();
