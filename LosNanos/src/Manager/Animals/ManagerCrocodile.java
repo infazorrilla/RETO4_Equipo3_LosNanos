@@ -132,7 +132,7 @@ public class ManagerCrocodile implements ManagerInterface<Crocodile> {
 					+ crocodile.getVaccinated() + "', '" + crocodile.getDiet() + "', '" + sqlDateSkin + "')";
 
 			String sql2 = "insert into crocodile (id_crocodile, teethNumber) SELECT MAX(id), " + 
-					crocodile.getTeethNumber() + "FROM reptile";
+					crocodile.getTeethNumber() + " FROM reptile";
 
 			// La ejecutamos...
 			statement.executeUpdate(sql);
@@ -185,18 +185,18 @@ public class ManagerCrocodile implements ManagerInterface<Crocodile> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update CrocodileComplete set name = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, shedSkin = ?,  teethNumber = ? where id = ?";
+			String sql = "update reptile, crocodile set name = ?, scientificName = ?, height = ?, weight = ?, bornDate = ?, vaccinated = ?, diet = ?, shedSkin = ?,  teethNumber = ? where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, crocodile.getName());
-			preparedStatement.setString(1, crocodile.getScientificName());
-			preparedStatement.setFloat(2, crocodile.getHeight());
-			preparedStatement.setFloat(3, crocodile.getWeight());
-			preparedStatement.setDate(4, bornDate);
-			preparedStatement.setInt(5, crocodile.getVaccinated());
-			preparedStatement.setString(6, crocodile.getDiet());
-			preparedStatement.setDate(7, shedSkin);
-			preparedStatement.setInt(8, crocodile.getTeethNumber());
-			preparedStatement.setInt(9, crocodile.getId());
+			preparedStatement.setString(2, crocodile.getScientificName());
+			preparedStatement.setFloat(3, crocodile.getHeight());
+			preparedStatement.setFloat(4, crocodile.getWeight());
+			preparedStatement.setDate(5, bornDate);
+			preparedStatement.setInt(6, crocodile.getVaccinated());
+			preparedStatement.setString(7, crocodile.getDiet());
+			preparedStatement.setDate(8, shedSkin);
+			preparedStatement.setInt(9, crocodile.getTeethNumber());
+			preparedStatement.setInt(10, crocodile.getId());
 
 			// La ejecutamos...
 			preparedStatement.executeUpdate();

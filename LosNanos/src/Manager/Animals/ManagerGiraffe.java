@@ -124,13 +124,13 @@ public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 
 			java.sql.Date sqlDate = new java.sql.Date(giraffe.getBornDate().getTime());
 
-			String sql = "insert into terrestrialmammalian (id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe) VALUES ('"
+			String sql = "insert into terrestrialmammalian (id, name, scientificName, height, weight, bornDate, vaccinated, diet, hairColor) VALUES ('"
 					+ giraffe.getId() + "', '" + giraffe.getName() + "', '" + giraffe.getScientificName() + "', '"
 					+ giraffe.getHeight() + "', '" + giraffe.getWeight() + "', '" + sqlDate + "', '"
 					+ giraffe.getVaccinated() + "', '" + giraffe.getDiet() + "', '" + giraffe.getHairColor() + "')";
 			
 			String sql2 = "insert into giraffe (id_giraffe, neckLength) SELECT MAX(id), " + 
-					giraffe.getNeckLength() + "FROM terrestrialmammalian";
+					giraffe.getNeckLength() + " FROM terrestrialmammalian";
 
 			// La ejecutamos...
 			statement.executeUpdate(sql);
@@ -180,18 +180,18 @@ public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update dophinComplete set name = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, animalTipe = ?, neckLength = ? where id = ?";
+			String sql = "update terrestrialmammalian, giraffe set name = ?, scientificName = ?, height = ?, weight = ?, bornDate = ?, vaccinated = ?, diet = ?, hairColor = ?, neckLength = ? where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, giraffe.getName());
-			preparedStatement.setString(1, giraffe.getScientificName());
-			preparedStatement.setFloat(2, giraffe.getHeight());
-			preparedStatement.setFloat(3, giraffe.getWeight());
-			preparedStatement.setDate(4, bornDate);
-			preparedStatement.setInt(5, giraffe.getVaccinated());
-			preparedStatement.setString(6, giraffe.getDiet());
-			preparedStatement.setString(7, giraffe.getHairColor());
-			preparedStatement.setInt(8, giraffe.getNeckLength());
-			preparedStatement.setInt(9, giraffe.getId());
+			preparedStatement.setString(2, giraffe.getScientificName());
+			preparedStatement.setFloat(3, giraffe.getHeight());
+			preparedStatement.setFloat(4, giraffe.getWeight());
+			preparedStatement.setDate(5, bornDate);
+			preparedStatement.setInt(6, giraffe.getVaccinated());
+			preparedStatement.setString(7, giraffe.getDiet());
+			preparedStatement.setString(8, giraffe.getHairColor());
+			preparedStatement.setInt(9, giraffe.getNeckLength());
+			preparedStatement.setInt(10, giraffe.getId());
 
 			// La ejecutamos...
 			preparedStatement.executeUpdate();

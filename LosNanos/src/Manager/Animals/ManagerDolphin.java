@@ -125,13 +125,13 @@ public class ManagerDolphin implements ManagerInterface<Dolphin> {
 
 			java.sql.Date sqlDate = new java.sql.Date(dolphin.getBornDate().getTime());
 
-			String sql = "insert into aquatic (id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe) VALUES ('"
-					+ dolphin.getId() + "', '" + dolphin.getName() + "', '" + dolphin.getScientificName() + "', '"
+			String sql = "insert into aquatic (name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe) VALUES ('"
+					+ dolphin.getName() + "', '" + dolphin.getScientificName() + "', '"
 					+ dolphin.getHeight() + "', '" + dolphin.getWeight() + "', '" + sqlDate + "', '"
 					+ dolphin.getVaccinated() + "', '" + dolphin.getDiet() + "', '" + dolphin.getAnimalType() + "')";
 			
-			String sql2 = "insert into dolphin (dolphin_id, DurationUnderWater) SELECT MAX(id), " + 
-					dolphin.getDurationUnderWater() + "FROM aquatic";
+			String sql2 = "insert into dolphin (id_dolphin, DurationUnderWater) SELECT MAX(id), " + 
+					dolphin.getDurationUnderWater() + " FROM aquatic";
 
 			// La ejecutamos...
 			statement.executeUpdate(sql);
@@ -181,18 +181,18 @@ public class ManagerDolphin implements ManagerInterface<Dolphin> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update dolphinComplete set name = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, animalTipe = ?, durationUnderWater = ? where id = ?";
+			String sql = "update aquatic, dolphin set name = ?, scientificName = ?, height = ?, weight = ?, bornDate = ?, vaccinated = ?, diet = ?, animalTipe = ?, durationUnderWater = ? where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, dolphin.getName());
-			preparedStatement.setString(1, dolphin.getScientificName());
-			preparedStatement.setFloat(2, dolphin.getHeight());
-			preparedStatement.setFloat(3, dolphin.getWeight());
-			preparedStatement.setDate(4, bornDate);
-			preparedStatement.setInt(5, dolphin.getVaccinated());
-			preparedStatement.setString(6, dolphin.getDiet());
-			preparedStatement.setString(7, dolphin.getAnimalType());
-			preparedStatement.setInt(8, dolphin.getDurationUnderWater());
-			preparedStatement.setInt(9, dolphin.getId());
+			preparedStatement.setString(2, dolphin.getScientificName());
+			preparedStatement.setFloat(3, dolphin.getHeight());
+			preparedStatement.setFloat(4, dolphin.getWeight());
+			preparedStatement.setDate(5, bornDate);
+			preparedStatement.setInt(6, dolphin.getVaccinated());
+			preparedStatement.setString(7, dolphin.getDiet());
+			preparedStatement.setString(8, dolphin.getAnimalType());
+			preparedStatement.setInt(9, dolphin.getDurationUnderWater());
+			preparedStatement.setInt(10, dolphin.getId());
 
 			// La ejecutamos...
 			preparedStatement.executeUpdate();
