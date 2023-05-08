@@ -18,7 +18,7 @@ public class Savannah extends Zone {
 	protected ArrayList<TerrestrialMammarian> terrestrialMammarians = null;
 	
 
-	public Savannah(int id, String extension, int animalsNumber, int speciesNumber, Zoo zoo, int treeNumber,
+	public Savannah(int id, float extension, int animalsNumber, int speciesNumber, Zoo zoo, int treeNumber,
 			ArrayList<TerrestrialMammarian> terrestrialMammarians) {
 		super(id, extension, animalsNumber, speciesNumber, zoo);
 		this.treeNumber = treeNumber;

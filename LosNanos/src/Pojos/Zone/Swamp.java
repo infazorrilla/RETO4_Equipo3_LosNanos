@@ -18,7 +18,7 @@ public class Swamp extends Zone {
 	protected ArrayList<Reptile> reptiles = null;
 
 	
-	public Swamp(int id, String extension, int animalsNumber, int speciesNumber, Zoo zoo, float waterSurface,
+	public Swamp(int id, float extension, int animalsNumber, int speciesNumber, Zoo zoo, float waterSurface,
 			ArrayList<Reptile> reptiles) {
 		super(id, extension, animalsNumber, speciesNumber, zoo);
 		this.waterSurface = waterSurface;

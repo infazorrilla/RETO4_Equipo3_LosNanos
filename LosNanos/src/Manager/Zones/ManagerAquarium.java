@@ -120,7 +120,7 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 							aquarium.getSpeciesNumber() + "')";
 					
 					String sql2 = "insert into Aquarium (zoneId, waterTemp) SELECT MAX(id), " + 
-							aquarium.getWaterTemp() + "FROM zones";
+							aquarium.getWaterTemp() + " FROM zones";
 					
 					// La ejecutamos...
 					statement.executeUpdate(sql);

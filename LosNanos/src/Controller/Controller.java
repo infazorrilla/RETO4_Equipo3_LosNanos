@@ -499,7 +499,7 @@ public class Controller {
 			} else if (type == "Client") {
 				Client client = searchClientId(id);
 				try {
-					managerClient.delete(client);
+	//				managerClient.delete(client);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -523,7 +523,7 @@ public class Controller {
 	public void deleteClient(String id) {
 
 		ManagerClient managerClient = new ManagerClient();
-		managerClient.deleteClient(id);
+	//	managerClient.deleteClient(id);
 	}
 	
 	public void updateOption() {

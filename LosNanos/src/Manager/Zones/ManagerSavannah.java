@@ -52,7 +52,7 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 				
 				// Sacamos las columnas del RS
 				int id = resultSet.getInt("id");
-                String extension = resultSet.getString("extension");
+                float extension = resultSet.getFloat("extension");
                 int animalsNumber = resultSet.getInt("animalsNumber");
                 int speciesNumber  = resultSet.getInt("speciesNumber");
                 int treeNumber  = resultSet.getInt("treeNumber");
@@ -119,9 +119,9 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 							savannah.getAnimalsNumber() + "', '" + 	
 							savannah.getSpeciesNumber() + "')";
 					
-					String sql2 = "insert into Savannah (zoneId, treeNumber) SELECT MAX(id), " + 
-							savannah.getTreeNumber() + "FROM zones";
-					
+					String sql2 = "insert into Savannah (zoneId, treeNumber) SELECT MAX(id),"
+							+ savannah.getTreeNumber() + " FROM zones";
+
 					// La ejecutamos...
 					statement.executeUpdate(sql);
 					statement.executeUpdate(sql2);
@@ -163,10 +163,13 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
 					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "update Savannahs set treeNumber = ? where id = ?";
+					String sql = "update Zones, savannah set treeNumber = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ?";
 					preparedStatement = connection.prepareStatement(sql);
-//					preparedStatement.setInt (1, newTreeNumber);
-					preparedStatement.setInt (2, savannah.getId());
+					preparedStatement.setFloat (1, savannah.getTreeNumber());
+					preparedStatement.setFloat (2, savannah.getExtension());
+					preparedStatement.setInt (3, savannah.getAnimalsNumber());
+					preparedStatement.setInt (4, savannah.getSpeciesNumber());
+					preparedStatement.setInt (5, savannah.getId());
 					
 					// La ejecutamos...
 					preparedStatement.executeUpdate();
@@ -208,7 +211,7 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
 					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "delete from Savannahs where zoneId = ?";
+					String sql = "delete from Savannah where zoneId = ?";
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setInt (1, savannah.getId());
 					
