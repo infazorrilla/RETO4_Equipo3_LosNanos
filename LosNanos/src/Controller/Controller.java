@@ -49,7 +49,7 @@ public class Controller {
 		ManagerBoss managerBoss = new ManagerBoss();
 		ArrayList<Boss> bosses = managerBoss.selectAll();
 		for (int i = 0 ; i < bosses.size() ; i++) {
-			if (bosses.get(i).getId().equals(id)) {
+			if (bosses.get(i).getId() == id) {
 				ret = bosses.get(i);
 			}
 		}
@@ -63,7 +63,7 @@ public class Controller {
 		try {
 			clients = managerClient.selectAll();
 			for (int i = 0 ; i < clients.size() ; i++) {
-				if (clients.get(i).getId().equals(id)) {
+				if (clients.get(i).getId() == id) {
 					ret = clients.get(i);
 				}
 			}
@@ -786,6 +786,7 @@ public class Controller {
 			} else {
 //				try {
 				String extensionString = extension.getText();
+				float extensionFloat = Float.valueOf(extensionString);
 				String animalsNumberString = animalsNumber.getText();
 				int animalsNumberFloat = Integer.parseInt(animalsNumberString);
 				String speciesNumberString = speciesNumber.getText();
@@ -793,7 +794,7 @@ public class Controller {
 				String waterTempString = waterTemp.getText();
 				int waterTempInt = Integer.parseInt(waterTempString);
 				
-				Aquarium aquariumToInsert = new Aquarium(extensionString, animalsNumberFloat, speciesNumberInt, waterTempInt);
+				Aquarium aquariumToInsert = new Aquarium(extensionFloat, animalsNumberFloat, speciesNumberInt, waterTempInt);
 				
 				ManagerAquarium managerAquarium = new ManagerAquarium();
 				try {
@@ -805,9 +806,7 @@ public class Controller {
 			}
 		}
 			
-	}
-	
-	
+	}	
 
 	public void questionLogOut(JPanel jpBoss, JPanel jpLogin, JPanel jpClient, JPanel jpFeeder, JPanel jpVet) {
 		String[] options = { "LogOut", "No" };
