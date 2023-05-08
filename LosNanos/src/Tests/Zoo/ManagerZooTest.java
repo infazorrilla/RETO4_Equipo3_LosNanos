@@ -8,19 +8,16 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import Pojos.ZooTicket.Zoo;
+import Manager.Zoo.ManagerZoo;
 
 class ManagerZooTest {
-	
-	private void insertZoo() {
-		// TODO Auto-generated method stub
-	}
 
 	@Test
-	public ArrayList<Zoo> getZoo() {
+	public ArrayList<Zoo> testGetZoo() {
 		ManagerZooTest managerZoo = new ManagerZooTest();
-		ArrayList<Zoo> zoo = managerZoo.getZoo();
+		ArrayList<Zoo> zoo = ManagerZoo.selectZoo();
 		for (int i = 0; i < zoo.size(); i++) {
-			System.out.print(zoo.get(i).getName());
+			zoo.get(i).getName();
 		}
 		assertNotNull(zoo, "Los Nanos");
 		return zoo;

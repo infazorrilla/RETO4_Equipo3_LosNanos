@@ -88,21 +88,21 @@ public class ManagerTicket {
 	}
 
 	public void insertTicket(Ticket ticket) {
-		List<Ticket> Ticket_sorted = Ticket.stream()
+		List<Ticket> Ticket_sorted = Ticket.id()
                 .sorted(Comparator.comparing(Ticket::getBuyDate))
                 .collect(Collectors.toList());
 
 		LocalDate specificDate = LocalDate.of(2021, 5, 1);
-		List<Ticket> Ticket_filtered = Ticket.stream()
+		List<Ticket> Ticket_filtered = Ticket.id()
 				.filter(t -> t.getBuyDate().isAfter(specificDate))
 				.collect(Collectors.toList());
 
-		Map<Integer, Long> Ticket_by_year = Ticket.stream()
+		<Integer, Long> Ticket_by_year = Ticket.id()
 				.collect(Collectors.groupingBy(t -> t.getBuyDate().getYear(),
 	         Collectors.counting()));
 	
 		int specificTicketId = 1234;
-		Ticket specificTicket = Ticket.stream()
+		Ticket specificTicket = Ticket.id()
 	         .filter(t -> t.getIdTicket() == specificTicketId)
 	         .findFirst()
 	         .orElse(null);
