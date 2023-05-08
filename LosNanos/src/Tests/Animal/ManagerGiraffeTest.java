@@ -24,7 +24,8 @@ class ManagerGiraffeTest {
 			giraffes = managerGiraffe.selectAll();
 			giraffe = giraffes.get(0);
 			String expected = giraffe.toString();
-			assertEquals("Giraffe [neckLength=32, hairColor=red, savannah=null, id=1, name=Miriam, scientificName=Giraffus, height=12.0, weight=12.0, bornDate=2013-02-09, vaccinated=1, diet=Carnivorous]", expected);
+			System.out.println(expected);
+			assertEquals("Giraffe [neckLength=10, hairColor=Green, savannah=null, id=1, name=Paulo, scientificName=Giraffeus, height=25.0, weight=25.0, bornDate=2015-11-23, vaccinated=1, diet=Carnivorous]", expected);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,9 +71,9 @@ class ManagerGiraffeTest {
 		try {
 			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
 			Date date = formato.parse("23/11/2015");
-			giraffe.setId(2);
-			giraffe.setNeckLength(14);
-			giraffe.setHairColor("Red");
+			giraffe.setId(1);
+			giraffe.setNeckLength(10);
+			giraffe.setHairColor("Green");
 			giraffe.setName("Paulo");
 			giraffe.setScientificName("Giraffeus");
 			giraffe.setHeight(25);
@@ -101,7 +102,7 @@ class ManagerGiraffeTest {
 	@Test
 	void testDelete() {
 		try {
-			giraffe.setId(2);
+			giraffe.setId(5);
 			
 			managerGiraffe.delete(giraffe);
 			

@@ -305,7 +305,6 @@ public class Controller {
 	}
 
 	public void getSelectedDolphin(String box, DefaultTableModel model, JTable table) {
-		pruebaTest();
 		ArrayList<Dolphin> dolphins = null;
 		ManagerDolphin managerSnake = new ManagerDolphin();
 		try {
