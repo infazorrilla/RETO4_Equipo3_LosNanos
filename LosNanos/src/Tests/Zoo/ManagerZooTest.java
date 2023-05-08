@@ -44,7 +44,7 @@ class ManagerZooTest {
 		ManagerZooTest managerZoo = new ManagerZooTest();
 		new Zoo();
 		managerZoo.deleteZoo();
-		ArrayList<Zoo> boss = managerZoo.getZoo();
-		assertNull(boss);
+		ArrayList<Zoo> zoo = managerZoo.getZoo();
+		assertNull(zoo);
 	}
 }
