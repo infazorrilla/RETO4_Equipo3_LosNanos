@@ -19,6 +19,13 @@ public abstract class Person implements Serializable {
 		this.user = user;
 		this.password = password;
 	}
+	
+	public Person(String name, String surname, String user, String password) {
+		this.name = name;
+		this.surname = surname;
+		this.user = user;
+		this.password = password;
+	}
 
 	public Person() {
 

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,6 +35,7 @@ import Pojos.Animal.Giraffe;
 import Pojos.Animal.Snake;
 import Pojos.Person.Boss;
 import Pojos.Person.Client;
+import Pojos.Person.Employee;
 import Pojos.Person.Feeder;
 import Pojos.Person.Vet;
 import Pojos.Zone.Aquarium;
@@ -41,6 +43,36 @@ import Pojos.Zone.Savannah;
 import Pojos.Zone.Swamp;
 
 public class Controller {
+	
+	public Boss searchBossId(String id) {
+		Boss ret = new Boss();
+		ManagerBoss managerBoss = new ManagerBoss();
+		ArrayList<Boss> bosses = managerBoss.selectAll();
+		for (int i = 0 ; i < bosses.size() ; i++) {
+			if (bosses.get(i).getId().equals(id)) {
+				ret = bosses.get(i);
+			}
+		}
+		return ret;
+	}
+	
+	public Client searchClientId(String id) {
+		Client ret = new Client();
+		ManagerClient managerClient = new ManagerClient();
+		ArrayList<Client> clients;
+		try {
+			clients = managerClient.selectAll();
+			for (int i = 0 ; i < clients.size() ; i++) {
+				if (clients.get(i).getId().equals(id)) {
+					ret = clients.get(i);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ret;
+	}
 
 	public void clientRegister() {
 		JTextField name = new JTextField();
@@ -110,17 +142,28 @@ public class Controller {
 	public int checkClient(String user, String password) {
 		int ret = 0;
 		ManagerClient managerClient = new ManagerClient();
-		for (int i = 0; i < managerClient.getClient().size(); i++) {
-			String userClient = managerClient.getClient().get(i).getUser();
-			if (userClient.equalsIgnoreCase(user)) {
-				String passClient = managerClient.getClient().get(i).getPassword();
-				boolean pas = checkPassword(password, passClient);
-				if (pas == true) {
-					ret = 2;
-				} else {
-					ret = 0;
+		String userClient = null;
+		try {
+			for (int i = 0; i < managerClient.selectAll().size(); i++) {
+				try {
+					userClient = managerClient.selectAll().get(i).getUser();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (userClient.equalsIgnoreCase(user)) {
+					String passClient = managerClient.selectAll().get(i).getPassword();
+					boolean pas = checkPassword(password, passClient);
+					if (pas == true) {
+						ret = 2;
+					} else {
+						ret = 0;
+					}
 				}
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
@@ -437,19 +480,33 @@ public class Controller {
 		return ret;
 	}
 
-	public void questionSure(String type, String id) {
+	public void questionSure(JButton jbutton, String type, String id) {
 		String[] options = { "Yes", "No" };
 		int result = JOptionPane.showOptionDialog(null, "Are you sure?", "Sure", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		ManagerBoss managerBoss = new ManagerBoss();
+		
 		if (result == 0) {
-			if (type == "Boss" && type == "Fedder" && type == "Vet") {
-
-				deleteEmployee(id);
-
+			if (type == "Boss") {
+				Boss boss = searchBossId(id);
+				try {
+					managerBoss.delete(boss);
+				} catch (Exception e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else if (type == "Client") {
-
-				deleteClient(id);
-
+				Client client = searchClientId(id);
+				try {
+					managerClient.delete(client);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (type == "Feeder") {
+				
+			} else if (type == "Vet") {
+				
 			}
 		} else if (result == 1) {
 
@@ -466,6 +523,142 @@ public class Controller {
 
 		ManagerClient managerClient = new ManagerClient();
 		managerClient.deleteClient(id);
+	}
+	
+	public void updateOption() {
+		String[] options = { "Employee", "Animal", "Zone"};
+		int result = JOptionPane.showOptionDialog(null, "What do you want to add?", "Add", JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if (result == 0) {
+			updateOptionEmployee();
+		}
+//		else if (result == 1) {
+//			updateOptionAnimal();
+//		} else if (result == 2) {
+//			updateOptionZone();
+//		}
+	}
+	
+	private void updateOptionEmployee() {
+		String[] optionsEmployee = { "Boss", "Feeder", "Vet" };
+		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of employee?", "Add",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsEmployee, optionsEmployee[0]);
+		switch (resultEmployee) {
+		case 0:
+			updateBoss();
+			break;
+		case 1:
+			updateFeeder();
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		}
+	}
+	
+	public void updateBoss() {
+		JTextField name = new JTextField();
+		JTextField surname = new JTextField();
+		JTextField user = new JTextField();
+		JTextField password = new JTextField();
+
+		JTextField employeeNumCharge = new JTextField();
+		JTextField ssNumber = new JTextField();
+
+		Object[] message = { "Name: *", name, "Surname: *", surname, "User: *", user, "Password *",
+				password, "Social Security Number *", ssNumber, "employeeNumCharge *", employeeNumCharge};
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Jefe", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || surname.getText().isEmpty()	|| user.getText().isEmpty() || password.getText().isEmpty()
+					|| ssNumber.getText().isEmpty() || employeeNumCharge.getText().isEmpty() ) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					ManagerBoss managerBoss= new ManagerBoss();
+					int ssNumberInt = Integer.parseInt(ssNumber.getText());
+					int employeeNumChargeInt = Integer.parseInt(employeeNumCharge.getText());
+					Boss bossToUpdate = new Boss(name.getText(), surname.getText(), user.getText(),
+							password.getText(), ssNumberInt, employeeNumChargeInt);
+					managerBoss.update(bossToUpdate);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+
+	}
+	
+	public void updateFeeder() {
+		JTextField name = new JTextField();
+		JTextField surname = new JTextField();
+		JTextField id = new JTextField();
+		JTextField user = new JTextField();
+		JTextField password = new JTextField();
+
+		JTextField specializedDiet = new JTextField();
+		JTextField ssNumber = new JTextField();
+
+		Object[] message = { "Name: *", name, "Surname: *", surname, "Id: *", id, "User: *", user, "Password *",
+				password, "Social Security Number *", ssNumber, "employeeNumCharge *", specializedDiet};
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Jefe", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || surname.getText().isEmpty() || id.getText().isEmpty()
+					|| user.getText().isEmpty() || password.getText().isEmpty() || ssNumber.getText().isEmpty() || specializedDiet.getText().isEmpty() ) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					ManagerFeeder managerFeeder = new ManagerFeeder();
+					int ssNumberInt = Integer.parseInt(ssNumber.getText());
+					Feeder feederToInsert = new Feeder(name.getText(), surname.getText(), id.getText(), user.getText(),
+							password.getText(), ssNumberInt, specializedDiet.getText());
+					managerFeeder.insert(feederToInsert);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+
+	}
+	
+	public void updateVet() {
+		JTextField name = new JTextField();
+		JTextField surname = new JTextField();
+		JTextField id = new JTextField();
+		JTextField user = new JTextField();
+		JTextField password = new JTextField();
+
+		JTextField specializedDiet = new JTextField();
+		JTextField ssNumber = new JTextField();
+
+		Object[] message = { "Name: *", name, "Surname: *", surname, "Id: *", id, "User: *", user, "Password *",
+				password, "Social Security Number *", ssNumber, "employeeNumCharge *", specializedDiet};
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Jefe", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || surname.getText().isEmpty() || id.getText().isEmpty()
+					|| user.getText().isEmpty() || password.getText().isEmpty() || ssNumber.getText().isEmpty() || specializedDiet.getText().isEmpty() ) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					ManagerFeeder managerFeeder = new ManagerFeeder();
+					int ssNumberInt = Integer.parseInt(ssNumber.getText());
+					Feeder feederToInsert = new Feeder(name.getText(), surname.getText(), id.getText(), user.getText(),
+							password.getText(), ssNumberInt, specializedDiet.getText());
+					managerFeeder.insert(feederToInsert);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+
 	}
 
 	public void addOption() {
@@ -746,6 +939,5 @@ public class Controller {
 		}
 
 	}
-
-
+	
 }
