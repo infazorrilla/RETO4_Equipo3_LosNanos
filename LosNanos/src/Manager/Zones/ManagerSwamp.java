@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Manager.ManagerInterface;
-import Pojos.Zone.Savannah;
 import Pojos.Zone.Swamp;
 import utils.DBUtils;
 
@@ -53,7 +52,7 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 				
 				// Sacamos las columnas del RS
 				int id = resultSet.getInt("id");
-                String extension = resultSet.getString("extension");
+				float extension = resultSet.getFloat("extension");
                 int animalsNumber = resultSet.getInt("animalsNumber");
                 int speciesNumber  = resultSet.getInt("speciesNumber");
                 float waterSurface  = resultSet.getFloat("waterSurface");
@@ -121,7 +120,7 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 							swamp.getAnimalsNumber() + "', '" + 	
 							swamp.getSpeciesNumber() + "')";
 					
-					String sql2 = "insert into Aquarium (zoneId, waterSurface) SELECT MAX(id), " + 
+					String sql2 = "insert into swamp (zoneId, waterSurface) SELECT MAX(id), " + 
 							swamp.getWaterSurface() + "FROM zones";
 					
 					
@@ -166,10 +165,14 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
 					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "update Swamps set waterSurface = ? where id = ?";
+					String sql = "update Zones, swamp set waterSurface = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ?";
 					preparedStatement = connection.prepareStatement(sql);
-//					preparedStatement.setFloat (1, newWaterSurface);
-					preparedStatement.setInt (2, swamp.getId());
+					preparedStatement.setFloat (1, swamp.getWaterSurface());
+					preparedStatement.setFloat (2, swamp.getExtension());
+					preparedStatement.setInt (3, swamp.getAnimalsNumber());
+					preparedStatement.setInt (4, swamp.getSpeciesNumber());
+					preparedStatement.setInt (5, swamp.getId());
+					
 					
 					// La ejecutamos...
 					preparedStatement.executeUpdate();
@@ -211,7 +214,7 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
 					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "delete from Swamps where zoneId = ?";
+					String sql = "delete from Swamp where zoneId = ?";
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setInt (1, swamp.getId());
 					

@@ -23,7 +23,7 @@ class ManagerAquariumTest {
 			aquariums = managerAquarium.selectAll();
 			aquarium = aquariums.get(0);
 			String expected = aquarium.toString();
-			assertEquals("Aquarium [waterTemp=67.0, acuatics=null, id=1, extension=65.0, animalsNumber=12, speciesNumber=1, zoo=null]", expected);
+			assertEquals("Aquarium [waterTemp=67.0, acuatics=null, id=1, extension=78.0, animalsNumber=13, speciesNumber=2, zoo=null]", expected);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,9 +44,7 @@ class ManagerAquariumTest {
 			managerAquarium.insert(aquarium);
 			
 			aquariums = managerAquarium.selectAll();
-			
 			Aquarium insertedAquarium = aquariums.get(aquariums.size()-1);
-			
 			
 			for(int i = 0 ; i < aquariums.size() ; i++ ) {
 				if (aquariums.get(i).getId() == insertedAquarium.getId()) {
@@ -115,6 +113,4 @@ class ManagerAquariumTest {
 			e.printStackTrace();
 		}
 	}
-	
-	
 }
