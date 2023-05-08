@@ -20,7 +20,7 @@ public class ManagerBoss implements ManagerInterface<Boss>{
 		ArrayList<Boss> ret = null;
 
 		// SQL que queremos lanzar
-		String sql = "select * from bossComplete";
+		String sql = "select * from employee, boss where boss.ssNumber = employee.ssNumber";
 
 		// La conexion con BBDD
 		Connection connection = null;
@@ -58,7 +58,6 @@ public class ManagerBoss implements ManagerInterface<Boss>{
 				String user = resultSet.getString("user");
 				String password = resultSet.getString("password");
 				int ssNumber = resultSet.getInt("ssNumber");
-				// int id_zoo = resultSet.getInt("id_zoo");
 				int employeeNumCharge = resultSet.getInt("employeeNumCharge");
 
 				// Metemos los datos a Ejemplo
@@ -68,7 +67,6 @@ public class ManagerBoss implements ManagerInterface<Boss>{
 				boss.setUser(user);
 				boss.setPassword(password);
 				boss.setSsNumber(ssNumber);
-				// boss.setId_zoo(id_zoo);
 				boss.setEmployeeNumCharge(employeeNumCharge);
 
 				// Lo guardamos en ret
