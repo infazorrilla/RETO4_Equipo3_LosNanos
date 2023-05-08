@@ -21,9 +21,9 @@ class ManagerSwampTest {
 	void testSelectAll() {
 		try {
 			swamps = managerSwamp.selectAll();
-			swamp = swamps.get(1);
+			swamp = swamps.get(0);
 			String expected = swamp.toString();
-			assertEquals("Swamp [waterSurface=12.0, reptiles=null, id=23, extension=23.0, animalsNumber=13, speciesNumber=2, zoo=null]", expected);
+			assertEquals("Swamp [waterSurface=12.0, reptiles=null, id=11, extension=23.0, animalsNumber=13, speciesNumber=2, zoo=null]", expected);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -92,14 +92,14 @@ class ManagerAquariumTest {
 	@Test
 	void testDelete() {
 		try {
-			aquarium.setId(2);
+			aquarium.setId(4);
 			
 			managerAquarium.delete(aquarium);
 			
 			aquariums = managerAquarium.selectAll();
 			
 			for(int i = 0 ; i < aquariums.size() ; i++){
-				if(aquariums.get(aquarium.getId()) == null  ) {
+				if(aquariums.get(aquarium.getId()) == null) {
 					assertEquals(aquarium, null);
 				}
 			}

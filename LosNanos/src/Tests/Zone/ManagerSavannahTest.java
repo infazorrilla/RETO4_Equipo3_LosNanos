@@ -23,7 +23,7 @@ class ManagerSavannahTest {
 			savannahs = managerSavannah.selectAll();
 			savannah = savannahs.get(0);
 			String expected = savannah.toString();
-			assertEquals("Savannah [treeNumber=33, terrestrialMammarians=null, id=3, extension=21.0, animalsNumber=23, speciesNumber=2, zoo=null]", expected);
+			assertEquals("Savannah [treeNumber=67, terrestrialMammarians=null, id=7, extension=23.0, animalsNumber=13, speciesNumber=2, zoo=null]", expected);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
