@@ -163,13 +163,14 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
 					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "update Zones, savannah set treeNumber = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ?";
+					String sql = "update Zones, savannah set treeNumber = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ? and zoneId = ?";
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setFloat (1, savannah.getTreeNumber());
 					preparedStatement.setFloat (2, savannah.getExtension());
 					preparedStatement.setInt (3, savannah.getAnimalsNumber());
 					preparedStatement.setInt (4, savannah.getSpeciesNumber());
 					preparedStatement.setInt (5, savannah.getId());
+					preparedStatement.setInt (6, savannah.getId());
 					
 					// La ejecutamos...
 					preparedStatement.executeUpdate();

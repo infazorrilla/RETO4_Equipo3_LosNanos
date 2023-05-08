@@ -63,10 +63,10 @@ class ManagerSavannahTest {
 	@Test
 	void testUpdate() {
 		try {
-			savannah.setId(7);
-			savannah.setTreeNumber(67);
-			savannah.setExtension(23);
-			savannah.setAnimalsNumber(13);
+			savannah.setId(9);
+			savannah.setTreeNumber(654);
+			savannah.setExtension(123);
+			savannah.setAnimalsNumber(896);
 			savannah.setSpeciesNumber(2);
 			
 			managerSavannah.update(savannah);

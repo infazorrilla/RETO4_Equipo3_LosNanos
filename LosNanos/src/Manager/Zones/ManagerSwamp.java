@@ -165,13 +165,14 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
 					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "update Zones, swamp set waterSurface = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ?";
+					String sql = "update Zones, swamp set waterSurface = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ? and zoneId = ?";
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setFloat (1, swamp.getWaterSurface());
 					preparedStatement.setFloat (2, swamp.getExtension());
 					preparedStatement.setInt (3, swamp.getAnimalsNumber());
 					preparedStatement.setInt (4, swamp.getSpeciesNumber());
 					preparedStatement.setInt (5, swamp.getId());
+					preparedStatement.setInt (6, swamp.getId());
 					
 					
 					// La ejecutamos...
