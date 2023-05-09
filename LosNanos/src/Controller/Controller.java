@@ -1085,7 +1085,7 @@ public class Controller {
 
 	}
 
-	private void addOptionAnimal() throws ParseException {
+	public void addOptionAnimal() throws ParseException {
 		String[] optionsAnimal = { "Dolphin", "Crocodile", "Snake", "Giraffe", "Cheetah" };
 		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of Animal?", "Add",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsAnimal, optionsAnimal[0]);

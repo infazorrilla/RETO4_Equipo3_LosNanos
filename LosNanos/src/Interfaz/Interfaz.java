@@ -40,6 +40,8 @@ public class Interfaz {
 
 	Controller controller = new Controller();
 	private JButton btnBossDelete;
+	private JTable tableVet;
+	private JTable table;
 	private JTable tableFeeder;
 
 	/**
@@ -78,7 +80,6 @@ public class Interfaz {
 		model = new DefaultTableModel();
 		personModel(model);
 
-
 		JPanel jpLogin = new JPanel();
 		jpLogin.setBounds(0, 0, 848, 501);
 		frame.getContentPane().add(jpLogin);
@@ -91,23 +92,23 @@ public class Interfaz {
 		jpClient.setLayout(null);
 		jpClient.setVisible(false);
 
-		JPanel jpVet = new JPanel();
-		jpVet.setBounds(0, 0, 848, 501);
-		frame.getContentPane().add(jpVet);
-		jpVet.setLayout(null);
-		jpVet.setVisible(false);
-		
-		JPanel jpFeeder = new JPanel();
-		jpFeeder.setBounds(0, 0, 848, 501);
-		frame.getContentPane().add(jpFeeder);
-		jpFeeder.setVisible(false);
-		jpFeeder.setLayout(null);
-
 		JPanel jpBoss = new JPanel();
 		jpBoss.setBounds(0, 0, 848, 501);
 		frame.getContentPane().add(jpBoss);
 		jpBoss.setLayout(null);
 		jpBoss.setVisible(false);
+
+		JPanel jpVet = new JPanel();
+		jpVet.setBounds(0, 0, 848, 501);
+		frame.getContentPane().add(jpVet);
+		jpVet.setLayout(null);
+		jpVet.setVisible(false);
+
+		JPanel jpFeeder = new JPanel();
+		jpFeeder.setBounds(0, 0, 848, 501);
+		frame.getContentPane().add(jpFeeder);
+		jpFeeder.setVisible(false);
+		jpFeeder.setLayout(null);
 
 		JButton btnBossLogout = new JButton("LogOut");
 		btnBossLogout.setForeground(new Color(255, 255, 255));
@@ -407,86 +408,6 @@ public class Interfaz {
 		jpBoss.add(lbBossBackground);
 		addImage(jpBoss, lbBossBackground, "src/Photos/lion.png");
 
-		JLabel lbFeeder = new JLabel("Feeder");
-		lbFeeder.setBounds(349, 28, 129, 46);
-		lbFeeder.setFont(new Font("Arial", Font.BOLD, 39));
-		jpFeeder.add(lbFeeder);
-
-		JButton btnFeeder = new JButton("LogOut");
-		btnFeeder.setBounds(0, 0, 89, 23);
-		btnFeeder.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Controller controller = new Controller();
-				controller.questionLogOut(jpBoss, jpLogin, jpClient, jpFeeder, jpVet);
-			}
-		});
-		btnFeeder.setForeground(Color.WHITE);
-		btnFeeder.setBackground(Color.BLACK);
-		jpFeeder.add(btnFeeder);
-
-		JScrollPane spFeeder = new JScrollPane();
-		spFeeder.setBounds(40, 111, 769, 291);
-		jpFeeder.add(spFeeder);
-
-		tableFeeder = new JTable();
-		spFeeder.setColumnHeaderView(tableFeeder);
-		tableFeeder.setFillsViewportHeight(true);
-		tableFeeder.setModel(model);
-
-		JComboBox cbFeederSeeAnimals = new JComboBox();
-		cbFeederSeeAnimals.addItem("Dolphin");
-		cbFeederSeeAnimals.addItem("Snake");
-		cbFeederSeeAnimals.addItem("Crocodile");
-		cbFeederSeeAnimals.addItem("Giraffe");
-		cbFeederSeeAnimals.addItem("Cheetah");
-
-		cbFeederSeeAnimals.setBounds(235, 413, 370, 31);
-		jpFeeder.add(cbFeederSeeAnimals);
-
-		JButton btnFeederSearch = new JButton("Search");
-		btnFeederSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Controller controller = new Controller();
-				String box = (String) cbFeederSeeAnimals.getSelectedItem();
-				model.setRowCount(0);
-				model.setColumnCount(0);
-				switch (box) {
-				case "Dolphin":
-					dolphinModel(model);
-					controller.getSelectedDolphin(model, tableFeeder);
-					type = "Dolphin";
-					break;
-				case "Snake":
-					snakeModel(model);
-					controller.getSelectedSnake(model, tableFeeder);
-					type = "Snake";
-					break;
-				case "Crocodile":
-					crocodileModel(model);
-					controller.getSelectedCrocodile(model, tableFeeder);
-					type = "Crocodile";
-					break;
-				case "Giraffe":
-					giraffeModel(model);
-					controller.getSelectedGiraffe(model, tableFeeder);
-					type = "Giraffe";
-					break;
-				case "Cheetah":
-					cheetahModel(model);
-					controller.getSelectedCheetah(model, tableFeeder);
-					type = "Cheetah";
-					break;
-				}
-			}
-		});
-		btnFeederSearch.setBounds(377, 455, 89, 23);
-		jpFeeder.add(btnFeederSearch);
-
-		JLabel lblFeederBackground = new JLabel("");
-		lblFeederBackground.setBounds(819, 11, -798, 479);
-		jpFeeder.add(lblFeederBackground);
-		addImage(jpFeeder, lblFeederBackground, "src/Photos/zebra.png");
-
 		JLabel Title = new JLabel("Zoo");
 		Title.setForeground(new Color(255, 255, 255));
 		Title.setFont(new Font("Tahoma", Font.BOLD, 60));
@@ -570,22 +491,6 @@ public class Interfaz {
 		jpLogin.add(backgroundLogin);
 		addImage(jpLogin, backgroundLogin, "src/Photos/panda.jpg");
 
-		JLabel lblNewLabel_3 = new JLabel("Vet");
-		lblNewLabel_3.setBounds(401, 231, 45, 13);
-		jpVet.add(lblNewLabel_3);
-
-		JButton btnBossLogout_1 = new JButton("LogOut");
-		btnBossLogout_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Controller controller = new Controller();
-				controller.questionLogOut(jpBoss, jpLogin, jpClient, jpFeeder, jpVet);
-			}
-		});
-		btnBossLogout_1.setForeground(Color.WHITE);
-		btnBossLogout_1.setBackground(Color.BLACK);
-		btnBossLogout_1.setBounds(0, 0, 89, 23);
-		jpVet.add(btnBossLogout_1);
-
 		JLabel lblNewLabel_1 = new JLabel("Client");
 		lblNewLabel_1.setBounds(383, 159, 45, 13);
 		jpClient.add(lblNewLabel_1);
@@ -601,7 +506,204 @@ public class Interfaz {
 		btnBossLogout_3.setBackground(Color.BLACK);
 		btnBossLogout_3.setBounds(0, 0, 89, 23);
 		jpClient.add(btnBossLogout_3);
-		addImage(jpFeeder, lblFeederBackground, "src/Photos/zebra.png");
+
+		JLabel lbVet = new JLabel("Vet");
+		lbVet.setFont(new Font("Arial", Font.BOLD, 39));
+		lbVet.setBounds(365, 23, 97, 34);
+		jpVet.add(lbVet);
+
+		JButton btnVetLogout = new JButton("LogOut");
+		btnVetLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				controller.questionLogOut(jpBoss, jpLogin, jpClient, jpFeeder, jpVet);
+			}
+		});
+		btnVetLogout.setForeground(Color.WHITE);
+		btnVetLogout.setBackground(Color.BLACK);
+		btnVetLogout.setBounds(0, 0, 89, 23);
+		jpVet.add(btnVetLogout);
+
+		JScrollPane spVet = new JScrollPane();
+		spVet.setBounds(10, 87, 668, 280);
+		jpVet.add(spVet);
+
+		tableVet = new JTable();
+		spVet.setViewportView(tableVet);
+		tableVet.setModel(model);
+
+		JComboBox cbVetSeeAnimals = new JComboBox();
+		cbVetSeeAnimals.addItem("Dolphin");
+		cbVetSeeAnimals.addItem("Snake");
+		cbVetSeeAnimals.addItem("Crocodile");
+		cbVetSeeAnimals.addItem("Giraffe");
+		cbVetSeeAnimals.addItem("Cheetah");
+		cbVetSeeAnimals.setBounds(688, 183, 150, 23);
+		jpVet.add(cbVetSeeAnimals);
+
+		JButton btnVetSearch = new JButton("Search");
+		btnVetSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				String box = (String) cbVetSeeAnimals.getSelectedItem();
+				model.setRowCount(0);
+				model.setColumnCount(0);
+				switch (box) {
+				case "Dolphin":
+					dolphinModel(model);
+					controller.getSelectedDolphin(model, tableVet);
+					type = "Dolphin";
+					break;
+				case "Snake":
+					snakeModel(model);
+					controller.getSelectedSnake(model, tableVet);
+					type = "Snake";
+					break;
+				case "Crocodile":
+					crocodileModel(model);
+					controller.getSelectedCrocodile(model, tableVet);
+					type = "Crocodile";
+					break;
+				case "Giraffe":
+					giraffeModel(model);
+					controller.getSelectedGiraffe(model, tableVet);
+					type = "Giraffe";
+					break;
+				case "Cheetah":
+					cheetahModel(model);
+					controller.getSelectedCheetah(model, tableVet);
+					type = "Cheetah";
+					break;
+				}
+			}
+
+		});
+		btnVetSearch.setBounds(718, 233, 89, 23);
+		jpVet.add(btnVetSearch);
+
+		JButton btnVetAdd = new JButton("ADD");
+		btnVetAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				try {
+					controller.addOptionAnimal();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		btnVetAdd.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnVetAdd.setBounds(89, 412, 121, 37);
+		jpVet.add(btnVetAdd);
+
+		JButton btnVetUpdate = new JButton("UPDATE");
+		btnVetUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				DefaultTableModel tm = (DefaultTableModel) tableVet.getModel();
+				String id = String.valueOf(tm.getValueAt(tableVet.getSelectedRow(), 0));
+				try {
+					controller.updateOption(type, id);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				controller.questionSure(btnBossDelete, type, id);
+			}
+
+		});
+		btnVetUpdate.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnVetUpdate.setBounds(266, 412, 121, 37);
+		jpVet.add(btnVetUpdate);
+
+		JButton btnVetDelete = new JButton("DELETE");
+		btnVetDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnVetDelete.setBounds(450, 412, 121, 37);
+		jpVet.add(btnVetDelete);
+
+		JLabel lbFeeder = new JLabel("Feeder");
+		lbFeeder.setBounds(349, 28, 129, 46);
+		lbFeeder.setFont(new Font("Arial", Font.BOLD, 39));
+		jpFeeder.add(lbFeeder);
+
+		JButton btnFeeder = new JButton("LogOut");
+		btnFeeder.setBounds(0, 0, 89, 23);
+		btnFeeder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				controller.questionLogOut(jpBoss, jpLogin, jpClient, jpFeeder, jpVet);
+			}
+		});
+		btnFeeder.setForeground(Color.WHITE);
+		btnFeeder.setBackground(Color.BLACK);
+		jpFeeder.add(btnFeeder);
+
+		JScrollPane spFeeder = new JScrollPane();
+		spFeeder.setBounds(40, 111, 769, 291);
+		jpFeeder.add(spFeeder);
+
+		tableFeeder = new JTable();
+		spFeeder.setViewportView(tableFeeder);
+		tableFeeder.setModel(model);
+
+		JComboBox cbFeederSeeAnimals = new JComboBox();
+		cbFeederSeeAnimals.addItem("Dolphin");
+		cbFeederSeeAnimals.addItem("Snake");
+		cbFeederSeeAnimals.addItem("Crocodile");
+		cbFeederSeeAnimals.addItem("Giraffe");
+		cbFeederSeeAnimals.addItem("Cheetah");
+
+		cbFeederSeeAnimals.setBounds(235, 413, 370, 31);
+		jpFeeder.add(cbFeederSeeAnimals);
+
+		JButton btnFeederSearch = new JButton("Search");
+		btnFeederSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				String box = (String) cbFeederSeeAnimals.getSelectedItem();
+				model.setRowCount(0);
+				model.setColumnCount(0);
+				switch (box) {
+				case "Dolphin":
+					dolphinModel(model);
+					controller.getSelectedDolphin(model, tableFeeder);
+					type = "Dolphin";
+					break;
+				case "Snake":
+					snakeModel(model);
+					controller.getSelectedSnake(model, tableFeeder);
+					type = "Snake";
+					break;
+				case "Crocodile":
+					crocodileModel(model);
+					controller.getSelectedCrocodile(model, tableFeeder);
+					type = "Crocodile";
+					break;
+				case "Giraffe":
+					giraffeModel(model);
+					controller.getSelectedGiraffe(model, tableFeeder);
+					type = "Giraffe";
+					break;
+				case "Cheetah":
+					cheetahModel(model);
+					controller.getSelectedCheetah(model, tableFeeder);
+					type = "Cheetah";
+					break;
+				}
+			}
+		});
+		btnFeederSearch.setBounds(377, 455, 89, 23);
+		jpFeeder.add(btnFeederSearch);
+		
+				JLabel lblFeederBackground = new JLabel("");
+				lblFeederBackground.setBounds(819, 11, -798, 479);
+				jpFeeder.add(lblFeederBackground);
+				addImage(jpFeeder, lblFeederBackground, "src/Photos/lion.png");
 
 	}
 
