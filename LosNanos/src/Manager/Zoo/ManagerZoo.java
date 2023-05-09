@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 
-import Pojos.ZooTicket.Ticket;
+import Manager.ManagerInterface;
 import Pojos.ZooTicket.Zoo;
 import utils.DBUtils;
 
@@ -197,7 +197,10 @@ public class ManagerZoo implements ManagerInterface<Zoo>{
 						// Montamos la SQL. Las ? se rellenan a continuacion
 						String sql = "delete from Ticket where IdTicket = ?";
 						preparedStatement = connection.prepareStatement(sql);
-						preparedStatement.setInt (1, ticket.getIdTicket());
+						preparedStatement.setInt (1, zoo.getId());
+						preparedStatement.setString (2, zoo.getName());
+						preparedStatement.setString (2, zoo.getLocation());
+
 						
 						// La ejecutamos...
 						preparedStatement.executeUpdate();
