@@ -534,24 +534,29 @@ public class Controller {
 		
 		Object[] message = { "Extension: *", extension, "Animals Number: *", animalsNumber, "Species Number: *", speciesNumber,
 				"Water Temperature: *", waterTemp};
-		if (extension.getText().isEmpty() || animalsNumber.getText().isEmpty() || speciesNumber.getText().isEmpty()
-				|| waterTemp.getText().isEmpty()){
-			JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
-		} else {
+		
+		int option = JOptionPane.showConfirmDialog(null, message, "Actualizar Zona", JOptionPane.OK_CANCEL_OPTION);
+		
+		if (option == JOptionPane.OK_OPTION) {
+			if (extension.getText().isEmpty() || animalsNumber.getText().isEmpty() || speciesNumber.getText().isEmpty()
+					|| waterTemp.getText().isEmpty()){
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
 //				try {
-			String extensionString = extension.getText();
-			float extensionFloat = Float.valueOf(extensionString);
-			String animalsNumberString = animalsNumber.getText();
-			int animalsNumberFloat = Integer.parseInt(animalsNumberString);
-			String speciesNumberString = speciesNumber.getText();
-			int speciesNumberInt = Integer.parseInt(speciesNumberString);
-			String waterTempString = waterTemp.getText();
-			int waterTempInt = Integer.parseInt(waterTempString);
-			
-			Aquarium aquariumToUpdate = new Aquarium(idInt, extensionFloat, animalsNumberFloat, speciesNumberInt, waterTempInt);
-			
-			ManagerAquarium managerAquarium = new ManagerAquarium();
-			managerAquarium.update(aquariumToUpdate);
+				String extensionString = extension.getText();
+				float extensionFloat = Float.valueOf(extensionString);
+				String animalsNumberString = animalsNumber.getText();
+				int animalsNumberFloat = Integer.parseInt(animalsNumberString);
+				String speciesNumberString = speciesNumber.getText();
+				int speciesNumberInt = Integer.parseInt(speciesNumberString);
+				String waterTempString = waterTemp.getText();
+				int waterTempInt = Integer.parseInt(waterTempString);
+				
+				Aquarium aquariumToUpdate = new Aquarium(idInt, extensionFloat, animalsNumberFloat, speciesNumberInt, waterTempInt);
+				
+				ManagerAquarium managerAquarium = new ManagerAquarium();
+				managerAquarium.update(aquariumToUpdate);
+			}
 		}
 	}
 	
