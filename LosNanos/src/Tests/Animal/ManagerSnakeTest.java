@@ -26,6 +26,7 @@ class ManagerSnakeTest {
 			snakes = managerSnake.selectAll();
 			snake = snakes.get(0);
 			String expected = snake.toString();
+			System.out.println(expected);
 			assertEquals("Snake [poisonus=true, shedSkin=2022-04-14, swamp=null, id=4, name=Carlos, scientificName=Indian Snake, height=20.0, weight=20.0, bornDate=2016-01-04, vaccinated=1, diet=Carnivorous]", expected);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -46,7 +47,7 @@ class ManagerSnakeTest {
 			snake.setHeight(25);
 			snake.setWeight(25);
 			snake.setBornDate(date);
-			snake.setVaccinated(1);
+			snake.setVaccinated(true);
 			snake.setDiet("Carnivorous");
 			
 			managerSnake.insert(snake);
@@ -80,7 +81,7 @@ class ManagerSnakeTest {
 			snake.setHeight(25);
 			snake.setWeight(25);
 			snake.setBornDate(date);
-			snake.setVaccinated(1);
+			snake.setVaccinated(false);
 			snake.setDiet("Carnivorous");
 			
 			managerSnake.update(snake);

@@ -58,7 +58,7 @@ public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 				float height = resultSet.getFloat("height");
 				float weight = resultSet.getFloat("weight");
 				Date bornDate = resultSet.getDate("bornDate");
-				Boolean vaccinated = resultSet.getBoolean("vaccinated");
+				int vaccinated = resultSet.getInt("vaccinated");
 				String diet = resultSet.getString("diet");
 				String hairColor = resultSet.getString("hairColor");
 				int neckLength = resultSet.getInt("neckLength");
@@ -127,7 +127,7 @@ public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 			String sql = "insert into terrestrialmammalian (id, name, scientificName, height, weight, bornDate, vaccinated, diet, hairColor) VALUES ('"
 					+ giraffe.getId() + "', '" + giraffe.getName() + "', '" + giraffe.getScientificName() + "', '"
 					+ giraffe.getHeight() + "', '" + giraffe.getWeight() + "', '" + sqlDate + "', '"
-					+ giraffe.isVaccinated() + "', '" + giraffe.getDiet() + "', '" + giraffe.getHairColor() + "')";
+					+ giraffe.getVaccinated() + "', '" + giraffe.getDiet() + "', '" + giraffe.getHairColor() + "')";
 			
 			String sql2 = "insert into giraffe (id_giraffe, neckLength) SELECT MAX(id), " + 
 					giraffe.getNeckLength() + " FROM terrestrialmammalian";
@@ -187,7 +187,7 @@ public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 			preparedStatement.setFloat(3, giraffe.getHeight());
 			preparedStatement.setFloat(4, giraffe.getWeight());
 			preparedStatement.setDate(5, bornDate);
-			preparedStatement.setBoolean(6, giraffe.isVaccinated());
+			preparedStatement.setInt(6, giraffe.getVaccinated());
 			preparedStatement.setString(7, giraffe.getDiet());
 			preparedStatement.setString(8, giraffe.getHairColor());
 			preparedStatement.setInt(9, giraffe.getNeckLength());

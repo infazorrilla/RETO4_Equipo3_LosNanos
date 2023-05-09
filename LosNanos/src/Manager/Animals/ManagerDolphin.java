@@ -59,7 +59,7 @@ public class ManagerDolphin implements ManagerInterface<Dolphin> {
 				float height = resultSet.getFloat("height");
 				float weight = resultSet.getFloat("weight");
 				Date bornDate = resultSet.getDate("bornDate");
-				Boolean vaccinated = resultSet.getBoolean("vaccinated");
+				int vaccinated = resultSet.getInt("vaccinated");
 				String diet = resultSet.getString("diet");
 				String animalTipe = resultSet.getString("animalTipe");
 				int durationUnderWater = resultSet.getInt("durationUnderWater");
@@ -128,7 +128,7 @@ public class ManagerDolphin implements ManagerInterface<Dolphin> {
 			String sql = "insert into aquatic (name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe) VALUES ('"
 					+ dolphin.getName() + "', '" + dolphin.getScientificName() + "', '"
 					+ dolphin.getHeight() + "', '" + dolphin.getWeight() + "', '" + sqlDate + "', '"
-					+ dolphin.isVaccinated() + "', '" + dolphin.getDiet() + "', '" + dolphin.getAnimalType() + "')";
+					+ dolphin.getVaccinated() + "', '" + dolphin.getDiet() + "', '" + dolphin.getAnimalType() + "')";
 			
 			String sql2 = "insert into dolphin (id_dolphin, DurationUnderWater) SELECT MAX(id), " + 
 					dolphin.getDurationUnderWater() + " FROM aquatic";
@@ -188,7 +188,7 @@ public class ManagerDolphin implements ManagerInterface<Dolphin> {
 			preparedStatement.setFloat(3, dolphin.getHeight());
 			preparedStatement.setFloat(4, dolphin.getWeight());
 			preparedStatement.setDate(5, bornDate);
-			preparedStatement.setBoolean(6, dolphin.isVaccinated());
+			preparedStatement.setInt(6, dolphin.getVaccinated());
 			preparedStatement.setString(7, dolphin.getDiet());
 			preparedStatement.setString(8, dolphin.getAnimalType());
 			preparedStatement.setInt(9, dolphin.getDurationUnderWater());

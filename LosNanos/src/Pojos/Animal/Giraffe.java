@@ -12,8 +12,14 @@ public class Giraffe extends TerrestrialMammarian {
 	private int neckLength = 0;
 
 	public Giraffe(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			boolean vaccinated, String diet, String hairColor, Savannah savannah, int neckLength) {
+			int vaccinated, String diet, String hairColor, Savannah savannah, int neckLength) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, hairColor, savannah);
+		this.neckLength = neckLength;
+	}
+	
+	public Giraffe(int id, String name, String scientificName, float height, float weight, Date bornDate,
+			int vaccinated, String diet, String hairColor, int neckLength) {
+		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, hairColor);
 		this.neckLength = neckLength;
 	}
 

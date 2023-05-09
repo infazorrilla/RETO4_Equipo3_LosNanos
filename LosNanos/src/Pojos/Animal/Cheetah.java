@@ -15,8 +15,14 @@ public class Cheetah extends TerrestrialMammarian {
 	private int maxSpeed = 0;
 
 	public Cheetah(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			boolean vaccinated, String diet, String hairColor, Savannah savannah, int maxSpeed) {
+			int vaccinated, String diet, String hairColor, Savannah savannah, int maxSpeed) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, hairColor, savannah);
+		this.maxSpeed = maxSpeed;
+	}
+	
+	public Cheetah(int id, String name, String scientificName, float height, float weight, Date bornDate,
+			int vaccinated, String diet, String hairColor,  int maxSpeed) {
+		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, hairColor);
 		this.maxSpeed = maxSpeed;
 	}
 

@@ -12,8 +12,14 @@ public class Crocodile extends Reptile {
 	private int teethNumber = 0;
 
 	public Crocodile(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			boolean vaccinated, String diet, Date shedSkin, Swamp swamp, int teethNumber) {
+			int vaccinated, String diet, Date shedSkin, Swamp swamp, int teethNumber) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin, swamp);
+		this.teethNumber = teethNumber;
+	}
+	
+	public Crocodile(int id, String name, String scientificName, float height, float weight, Date bornDate,
+			int vaccinated, String diet, Date shedSkin, int teethNumber) {
+		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin);
 		this.teethNumber = teethNumber;
 	}
 

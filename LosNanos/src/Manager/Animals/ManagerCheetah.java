@@ -59,7 +59,7 @@ public class ManagerCheetah implements ManagerInterface<Cheetah> {
 				float height = resultSet.getFloat("height");
 				float weight = resultSet.getFloat("weight");
 				Date bornDate = resultSet.getDate("bornDate");
-				Boolean vaccinated = resultSet.getBoolean("vaccinated");
+				int vaccinated = resultSet.getInt("vaccinated");
 				String diet = resultSet.getString("diet");
 				String hairColor = resultSet.getString("hairColor");
 				int maxSpeed = resultSet.getInt("maxSpeed");
@@ -128,7 +128,7 @@ public class ManagerCheetah implements ManagerInterface<Cheetah> {
 			String sql = "insert into terrestrialmammalian (id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe) VALUES ('"
 					+ cheetah.getId() + "', '" + cheetah.getName() + "', '" + cheetah.getScientificName() + "', '"
 					+ cheetah.getHeight() + "', '" + cheetah.getWeight() + "', '" + sqlDate + "', '"
-					+ cheetah.isVaccinated() + "', '" + cheetah.getDiet() + "', '" + cheetah.getHairColor() + "')";
+					+ cheetah.getVaccinated() + "', '" + cheetah.getDiet() + "', '" + cheetah.getHairColor() + "')";
 
 			String sql2 = "insert into cheetah (id_cheetah, maxSpeed) SELECT MAX(id), " + 
 					cheetah.getMaxSpeed() + "FROM terrestrialmammalian";
@@ -188,7 +188,7 @@ public class ManagerCheetah implements ManagerInterface<Cheetah> {
 			preparedStatement.setFloat(2, cheetah.getHeight());
 			preparedStatement.setFloat(3, cheetah.getWeight());
 			preparedStatement.setDate(4, bornDate);
-			preparedStatement.setBoolean(5, cheetah.isVaccinated());
+			preparedStatement.setInt(5, cheetah.getVaccinated());
 			preparedStatement.setString(6, cheetah.getDiet());
 			preparedStatement.setString(7, cheetah.getHairColor());
 			preparedStatement.setInt(8, cheetah.getMaxSpeed());

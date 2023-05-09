@@ -13,10 +13,10 @@ public abstract class Animal implements Serializable {
 	protected float height = 0;
 	protected float weight = 0;
 	protected Date bornDate;
-	protected boolean vaccinated = false;
+	protected int vaccinated = 0;;
 	protected String diet = null;
 
-	public Animal(int id, String name, String scientificName, float height, float weight, Date bornDate, boolean vaccinated,
+	public Animal(int id, String name, String scientificName, float height, float weight, Date bornDate, int vaccinated,
 			String diet) {
 		super();
 		this.id = id;
@@ -81,12 +81,11 @@ public abstract class Animal implements Serializable {
 		this.bornDate = bornDate;
 	}
 
-
-	public boolean isVaccinated() {
+	public int getVaccinated() {
 		return vaccinated;
 	}
 
-	public void setVaccinated(boolean vaccinated) {
+	public void setVaccinated(int vaccinated) {
 		this.vaccinated = vaccinated;
 	}
 

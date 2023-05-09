@@ -59,7 +59,7 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 				float height = resultSet.getFloat("height");
 				float weight = resultSet.getFloat("weight");
 				Date bornDate = resultSet.getDate("bornDate");
-				Boolean vaccinated = resultSet.getBoolean("vaccinated");
+				int vaccinated = resultSet.getInt("vaccinated");
 				String diet = resultSet.getString("diet");
 				Date shedSkin = resultSet.getDate("shedSkin");
 				Boolean poisonus = resultSet.getBoolean("poisonus");
@@ -129,7 +129,7 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 			String sql = "insert into reptile (id, name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin) VALUES ('"
 					+ snake.getId() + "', '" + snake.getName() + "', '" + snake.getScientificName() + "', '"
 					+ snake.getHeight() + "', '" + snake.getWeight() + "', '" + sqlDateBorn + "', '"
-					+ snake.isVaccinated() + "', '" + snake.getDiet() + "', '" + sqlDateSkin + "')";
+					+ snake.getVaccinated() + "', '" + snake.getDiet() + "', '" + sqlDateSkin + "')";
 			
 			String sql2 = "insert into snake (id_snake, poisonus) SELECT MAX(id), " + 
 					snake.isPoisonus() + " FROM reptile";
@@ -192,7 +192,7 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 			preparedStatement.setFloat(3, snake.getHeight());
 			preparedStatement.setFloat(4, snake.getWeight());
 			preparedStatement.setDate(5, bornDate);
-			preparedStatement.setBoolean(6, snake.isVaccinated());
+			preparedStatement.setInt(6, snake.getVaccinated());
 			preparedStatement.setString(7, snake.getDiet());
 			preparedStatement.setDate(8, shedSkin);
 			preparedStatement.setBoolean(9, snake.isPoisonus());
