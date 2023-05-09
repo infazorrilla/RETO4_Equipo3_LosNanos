@@ -5,15 +5,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.sql.DriverManager;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import Manager.ManagerInterface;
 import Pojos.ZooTicket.Ticket;
 import utils.DBUtils;
