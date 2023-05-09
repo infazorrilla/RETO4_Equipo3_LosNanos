@@ -19,7 +19,7 @@ public class ManagerBoss implements ManagerInterface<Boss>{
 		ArrayList<Boss> ret = null;
 
 		// SQL que queremos lanzar
-		String sql = "select * from employee, boss where boss.ssNumber = employee.ssNumber";
+		String sql = "select * from bossComplete";
 
 		// La conexion con BBDD
 		Connection connection = null;
