@@ -23,6 +23,7 @@ public class ManagerTicket implements ManagerInterface<Ticket> {
 		String sql = "select * from ticket";
 		
 		Connection connection = null;
+		
 		Statement statement = null;
 
 		ResultSet resultSet = null;
