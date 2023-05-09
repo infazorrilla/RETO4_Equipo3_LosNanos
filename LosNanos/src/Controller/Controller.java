@@ -36,7 +36,6 @@ import Pojos.Animal.Giraffe;
 import Pojos.Animal.Snake;
 import Pojos.Person.Boss;
 import Pojos.Person.Client;
-import Pojos.Person.Employee;
 import Pojos.Person.Feeder;
 import Pojos.Person.Vet;
 import Pojos.Zone.Aquarium;
@@ -245,7 +244,7 @@ public class Controller {
 		}
 		for (int i = 0; i < boss.size(); i++) {
 			model.addRow(
-					new Object[] { boss.get(i).getName(), boss.get(i).getSurname(), boss.get(i).getId(),
+					new Object[] {boss.get(i).getId(), boss.get(i).getName(), boss.get(i).getSurname(), 
 							boss.get(i).getUser(), boss.get(i).getPassword(), boss.get(i).getEmployeeNumCharge()});
 		}
 
@@ -263,7 +262,7 @@ public class Controller {
 		}
 		for (int i = 0; i < feeder.size(); i++) {
 			model.addRow(
-					new Object[] { feeder.get(i).getName(), feeder.get(i).getSurname(), feeder.get(i).getId(),
+					new Object[] { feeder.get(i).getId(), feeder.get(i).getName(), feeder.get(i).getSurname(),
 							feeder.get(i).getUser(), feeder.get(i).getPassword(), feeder.get(i).getSpecializedDiet()});
 		}
 
@@ -281,7 +280,7 @@ public class Controller {
 		}
 		for (int i = 0; i < vet.size(); i++) {
 			model.addRow(
-					new Object[] { vet.get(i).getName(), vet.get(i).getSurname(), vet.get(i).getId(),
+					new Object[] { vet.get(i).getId(), vet.get(i).getName(), vet.get(i).getSurname(), 
 							vet.get(i).getUser(), vet.get(i).getPassword(), vet.get(i).getSpecializedAnimalType()});
 		}
 
@@ -299,7 +298,7 @@ public class Controller {
 		}
 		for (int i = 0; i < client.size(); i++) {
 			model.addRow(
-					new Object[] { client.get(i).getName(), client.get(i).getSurname(), client.get(i).getId(),
+					new Object[] { client.get(i).getId(), client.get(i).getName(), client.get(i).getSurname(),
 							client.get(i).getUser(), client.get(i).getPassword()});
 		}
 
@@ -400,19 +399,10 @@ public class Controller {
 
 	}
 
-	public void getTableAquarium(DefaultTableModel model, JTable table) {
+	public void getTableAquarium(DefaultTableModel model, JTable table) throws SQLException, Exception {
 		ArrayList<Aquarium> aquariums = null;
-		try {
-			ManagerAquarium managerAquarium = new ManagerAquarium();
-
-			aquariums = managerAquarium.selectAll();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ManagerAquarium managerAquarium = new ManagerAquarium();
+		aquariums = managerAquarium.selectAll();
 		for (int i = 0; i < aquariums.size(); i++) {
 			model.addRow(new Object[] { aquariums.get(i).getId(), aquariums.get(i).getExtension(),
 					aquariums.get(i).getAnimalsNumber(), aquariums.get(i).getSpeciesNumber(),
@@ -421,19 +411,10 @@ public class Controller {
 
 	}
 
-	public void getTableSwamp(DefaultTableModel model, JTable table) {
+	public void getTableSwamp(DefaultTableModel model, JTable table) throws SQLException, Exception {
 		ArrayList<Swamp> swamps = null;
 		ManagerSwamp managerSwamp = new ManagerSwamp();
-		try {
-
-			swamps = managerSwamp.selectAll();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		swamps = managerSwamp.selectAll();
 		for (int i = 0; i < swamps.size(); i++) {
 			model.addRow(new Object[] { swamps.get(i).getId(), swamps.get(i).getExtension(),
 					swamps.get(i).getAnimalsNumber(), swamps.get(i).getSpeciesNumber(),
@@ -441,19 +422,10 @@ public class Controller {
 		}
 	}
 
-	public void getTableSavannah(DefaultTableModel model, JTable table) {
+	public void getTableSavannah(DefaultTableModel model, JTable table) throws SQLException, Exception {
 		ArrayList<Savannah> savannahs = null;
 		ManagerSavannah managerSavannah = new ManagerSavannah();
-		try {
-
-			savannahs = managerSavannah.selectAll();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		savannahs = managerSavannah.selectAll();
 		for (int i = 0; i < savannahs.size(); i++) {
 			model.addRow(new Object[] { savannahs.get(i).getId(), savannahs.get(i).getExtension(),
 					savannahs.get(i).getAnimalsNumber(), savannahs.get(i).getSpeciesNumber(),
@@ -538,18 +510,119 @@ public class Controller {
 	//	managerClient.deleteClient(id);
 	}
 	
-	public void updateOption() {
-		String[] options = { "Employee", "Animal", "Zone"};
-		int result = JOptionPane.showOptionDialog(null, "What do you want to add?", "Add", JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-		if (result == 0) {
-			updateOptionEmployee();
+	public void updateOption(String type, String id) throws SQLException, Exception {
+		if (type.equals("Aquarium")) {
+			updateAquarium(id);
+		} else if (type.equals("Swamp")) {
+			updateSwamp(id);
+		} else if (type.equals("Savannah")) {
+			updateSavannah(id);
 		}
 //		else if (result == 1) {
 //			updateOptionAnimal();
 //		} else if (result == 2) {
 //			updateOptionZone();
 //		}
+	}
+	
+	private void updateAquarium(String id) throws SQLException, Exception {
+		int idInt = Integer.parseInt(id);
+		JTextField extension = new JTextField();
+		JTextField animalsNumber= new JTextField();
+		JTextField speciesNumber = new JTextField();
+		JTextField waterTemp = new JTextField();
+		
+		Object[] message = { "Extension: *", extension, "Animals Number: *", animalsNumber, "Species Number: *", speciesNumber,
+				"Water Temperature: *", waterTemp};
+		if (extension.getText().isEmpty() || animalsNumber.getText().isEmpty() || speciesNumber.getText().isEmpty()
+				|| waterTemp.getText().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+		} else {
+//				try {
+			String extensionString = extension.getText();
+			float extensionFloat = Float.valueOf(extensionString);
+			String animalsNumberString = animalsNumber.getText();
+			int animalsNumberFloat = Integer.parseInt(animalsNumberString);
+			String speciesNumberString = speciesNumber.getText();
+			int speciesNumberInt = Integer.parseInt(speciesNumberString);
+			String waterTempString = waterTemp.getText();
+			int waterTempInt = Integer.parseInt(waterTempString);
+			
+			Aquarium aquariumToUpdate = new Aquarium(idInt, extensionFloat, animalsNumberFloat, speciesNumberInt, waterTempInt);
+			
+			ManagerAquarium managerAquarium = new ManagerAquarium();
+			managerAquarium.update(aquariumToUpdate);
+		}
+	}
+	
+	private void updateSwamp(String id) throws SQLException, Exception {
+		int idInt = Integer.parseInt(id);
+		JTextField extension = new JTextField();
+		JTextField animalsNumber= new JTextField();
+		JTextField speciesNumber = new JTextField();
+		JTextField waterSurface = new JTextField();
+		
+		Object[] message = { "Extension: *", extension, "Animals Number: *", animalsNumber, "Species Number: *", speciesNumber,
+				"Water Surface: *", waterSurface};
+		
+		int option = JOptionPane.showConfirmDialog(null, message, "Actualizar Zona", JOptionPane.OK_CANCEL_OPTION);
+		
+		if (option == JOptionPane.OK_OPTION) {
+			if (extension.getText().isEmpty() || animalsNumber.getText().isEmpty() || speciesNumber.getText().isEmpty()
+					|| waterSurface.getText().isEmpty()){
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+//				try {
+				String extensionString = extension.getText();
+				float extensionFloat = Float.valueOf(extensionString);
+				String animalsNumberString = animalsNumber.getText();
+				int animalsNumberInt= Integer.parseInt(animalsNumberString);
+				String speciesNumberString = speciesNumber.getText();
+				int speciesNumberInt = Integer.parseInt(speciesNumberString);
+				String waterSurfaceString = waterSurface.getText();
+				int waterSurfaceInt = Integer.parseInt(waterSurfaceString);
+				
+				Swamp swampToUpdate = new Swamp(idInt, extensionFloat, animalsNumberInt, speciesNumberInt, waterSurfaceInt);
+				
+				ManagerSwamp managerSwamp = new ManagerSwamp();
+				managerSwamp.update(swampToUpdate);
+			}
+		}
+	}
+	
+	private void updateSavannah(String id) throws SQLException, Exception {
+		int idInt = Integer.parseInt(id);
+		JTextField extension = new JTextField();
+		JTextField animalsNumber= new JTextField();
+		JTextField speciesNumber = new JTextField();
+		JTextField treeNumber = new JTextField();
+		
+		Object[] message = { "Extension: *", extension, "Animals Number: *", animalsNumber, "Species Number: *", speciesNumber,
+				"Tree Number: *", treeNumber};
+		
+		int option = JOptionPane.showConfirmDialog(null, message, "Actualizar Zona", JOptionPane.OK_CANCEL_OPTION);
+		
+		if (option == JOptionPane.OK_OPTION) {
+			if (extension.getText().isEmpty() || animalsNumber.getText().isEmpty() || speciesNumber.getText().isEmpty()
+					|| treeNumber.getText().isEmpty()){
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+//				try {
+				String extensionString = extension.getText();
+				float extensionFloat = Float.valueOf(extensionString);
+				String animalsNumberString = animalsNumber.getText();
+				int animalsNumberInt= Integer.parseInt(animalsNumberString);
+				String speciesNumberString = speciesNumber.getText();
+				int speciesNumberInt = Integer.parseInt(speciesNumberString);
+				String treeNumberString = treeNumber.getText();
+				int treeNumberInt = Integer.parseInt(treeNumberString);
+				
+				Savannah savannahToUpdate = new Savannah(idInt, extensionFloat, animalsNumberInt, speciesNumberInt, treeNumberInt);
+				
+				ManagerSavannah managerSavannah = new ManagerSavannah();
+				managerSavannah.update(savannahToUpdate);
+			}
+		}
 	}
 	
 	private void updateOptionEmployee() {

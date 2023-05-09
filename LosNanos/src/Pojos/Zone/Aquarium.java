@@ -34,6 +34,11 @@ public class Aquarium extends Zone {
 		super();
 	}
 
+	public Aquarium(int id, float extension, int animalsNumber, int speciesNumber, int waterTemp) {
+		super(id, extension, animalsNumber, speciesNumber);
+		this.waterTemp = waterTemp;
+	}
+
 	public float getWaterTemp() {
 		return waterTemp;
 	}

@@ -12,11 +12,8 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Object;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -277,7 +274,7 @@ public class Interfaz {
 		btnBossDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tm = (DefaultTableModel) table.getModel();
-				String id = String.valueOf(tm.getValueAt(table.getSelectedRow(), 2));
+				String id = String.valueOf(tm.getValueAt(table.getSelectedRow(), 0));
 				Controller controller = new Controller();
 				controller.questionSure(btnBossDelete, type, id);
 			}
@@ -368,13 +365,21 @@ public class Interfaz {
 		jpBoss.add(btnBossAdd);
 
 		btnBossUpdate = new JButton("Update");
-		btnBossUpdate.setEnabled(false);
+		btnBossUpdate.setEnabled(true);
 		btnBossUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controller controller = new Controller();
-				controller.updateOption();
 				DefaultTableModel tm = (DefaultTableModel) table.getModel();
-				String id = String.valueOf(tm.getValueAt(table.getSelectedRow(), 2));
+				String id = String.valueOf(tm.getValueAt(table.getSelectedRow(), 0));
+				try {
+					controller.updateOption(type, id);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				controller.questionSure(btnBossDelete, type, id);
 			}
 		});
@@ -476,15 +481,42 @@ public class Interfaz {
 				switch (box) {
 				case "Aquarium":
 					zoneModel(model);
-					controller.getTableAquarium( model, table);
+					try {
+						controller.getTableAquarium( model, table);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					type = "Aquarium";
 					break;
 				case "Swamp":
 					zoneModel(model);
-					controller.getTableSwamp( model, table);
+					try {
+						controller.getTableSwamp( model, table);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					type = "Swamp";
 					break;
 				case "Savannah":
 					zoneModel(model);
-					controller.getTableSavannah( model, table);
+					try {
+						controller.getTableSavannah( model, table);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					type = "Savannah";
 					break;
 				}
 			}
@@ -574,9 +606,9 @@ public class Interfaz {
 	}
 
 	private void personModel(DefaultTableModel model) {
+		model.addColumn("Id");
 		model.addColumn("Name");
 		model.addColumn("Surname");
-		model.addColumn("Id");
 		model.addColumn("User");
 		model.addColumn("Password");
 		model.addColumn("Special");

@@ -34,6 +34,11 @@ public class Swamp extends Zone {
 	this.waterSurface = waterSurface;
 	}
 
+	public Swamp(int id, float extension, int animalsNumber, int speciesNumber, int waterSurface) {
+		super(id, extension, animalsNumber, speciesNumber);
+		this.waterSurface = waterSurface;
+	}
+
 	public float getWaterSurface() {
 		return waterSurface;
 	}

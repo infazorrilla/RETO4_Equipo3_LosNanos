@@ -40,6 +40,13 @@ public abstract class Zone implements Serializable {
 	}
 
 
+	public Zone(int id, float extension, int animalsNumber, int speciesNumber) {
+		this.id = id;
+		this.extension = extension;
+		this.animalsNumber = animalsNumber;
+		this.speciesNumber = speciesNumber;
+	}
+
 	public int getId() {
 		return id;
 	}
