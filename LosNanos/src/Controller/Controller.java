@@ -526,11 +526,11 @@ public class Controller {
 		}
 	}
 
-	public void deleteEmployee(String id) {
-
-		ManagerBoss managerBoss = new ManagerBoss();
-		managerBoss.deleteEmployee(id);
-	}
+//	public void deleteEmployee(String id) {
+//
+//		ManagerBoss managerBoss = new ManagerBoss();
+//		managerBoss.deleteEmployee(id);
+//	}
 
 	public void deleteClient(String id) {
 
@@ -674,7 +674,7 @@ public class Controller {
 
 	}
 
-	public void addOption() throws ParseException {
+	public void addOption() throws SQLException, Exception {
 		String[] options = { "Employee", "Animal", "Zone"};
 		int result = JOptionPane.showOptionDialog(null, "What do you want to add?", "Add", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -763,27 +763,20 @@ public class Controller {
 		}
 	}
 	
-	private void addOptionZone() {
+	private void addOptionZone() throws SQLException, Exception {
 		String[] optionsZone = { "Aquarium", "Swamp", "Savannah"};
-		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of Zone?", "Add",
+		int resultZone = JOptionPane.showOptionDialog(null, "What kind of Zone?", "Add",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsZone, optionsZone[0]);
-
-		switch (resultEmployee) {
-		case 0:
+		if (resultZone == 0) {
 			addAquarium();
-			break;
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			break;
+		} else if (resultZone == 1) {
+			addSwamp();
+		} else if (resultZone == 2) {
+			addSavannah();
 		}
 	}
 	
-	private void addAquarium() {
+	private void addAquarium() throws SQLException, Exception {
 		JTextField extension = new JTextField();
 		JTextField animalsNumber= new JTextField();
 		JTextField speciesNumber = new JTextField();
@@ -812,12 +805,76 @@ public class Controller {
 				Aquarium aquariumToInsert = new Aquarium(extensionFloat, animalsNumberFloat, speciesNumberInt, waterTempInt);
 				
 				ManagerAquarium managerAquarium = new ManagerAquarium();
-				try {
-					managerAquarium.insert(aquariumToInsert);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				managerAquarium.insert(aquariumToInsert);
+			}
+		}
+			
+	}	
+	
+	private void addSwamp() throws SQLException, Exception {
+		JTextField extension = new JTextField();
+		JTextField animalsNumber= new JTextField();
+		JTextField speciesNumber = new JTextField();
+		JTextField waterSurface = new JTextField();
+		
+		Object[] message = { "Extension: *", extension, "Animals Number: *", animalsNumber, "Species Number: *", speciesNumber,
+				"Water Surface: *", waterSurface};
+		
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Zona", JOptionPane.OK_CANCEL_OPTION);
+		
+		if (option == JOptionPane.OK_OPTION) {
+			if (extension.getText().isEmpty() || animalsNumber.getText().isEmpty() || speciesNumber.getText().isEmpty()
+					|| waterSurface.getText().isEmpty()){
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+//				try {
+				String extensionString = extension.getText();
+				float extensionFloat = Float.valueOf(extensionString);
+				String animalsNumberString = animalsNumber.getText();
+				int animalsNumberInt= Integer.parseInt(animalsNumberString);
+				String speciesNumberString = speciesNumber.getText();
+				int speciesNumberInt = Integer.parseInt(speciesNumberString);
+				String waterSurfaceString = waterSurface.getText();
+				int waterSurfaceInt = Integer.parseInt(waterSurfaceString);
+				
+				Swamp swampToInsert = new Swamp(extensionFloat, animalsNumberInt, speciesNumberInt, waterSurfaceInt);
+				
+				ManagerSwamp managerSwamp = new ManagerSwamp();
+				managerSwamp.insert(swampToInsert);
+			}
+		}
+	}	
+	
+	private void addSavannah() throws SQLException, Exception {
+		JTextField extension = new JTextField();
+		JTextField animalsNumber= new JTextField();
+		JTextField speciesNumber = new JTextField();
+		JTextField treeNumber = new JTextField();
+		
+		Object[] message = { "Extension: *", extension, "Animals Number: *", animalsNumber, "Species Number: *", speciesNumber,
+				"Tree Number: *", treeNumber};
+		
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Zona", JOptionPane.OK_CANCEL_OPTION);
+		
+		if (option == JOptionPane.OK_OPTION) {
+			if (extension.getText().isEmpty() || animalsNumber.getText().isEmpty() || speciesNumber.getText().isEmpty()
+					|| treeNumber.getText().isEmpty()){
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+//				try {
+				String extensionString = extension.getText();
+				float extensionFloat = Float.valueOf(extensionString);
+				String animalsNumberString = animalsNumber.getText();
+				int animalsNumberInt= Integer.parseInt(animalsNumberString);
+				String speciesNumberString = speciesNumber.getText();
+				int speciesNumberInt = Integer.parseInt(speciesNumberString);
+				String treeNumberString = treeNumber.getText();
+				int treeNumberInt = Integer.parseInt(treeNumberString);
+				
+				Savannah savannahToInsert = new Savannah(extensionFloat, animalsNumberInt, speciesNumberInt, treeNumberInt);
+				
+				ManagerSavannah managerSavannah = new ManagerSavannah();
+				managerSavannah.insert(savannahToInsert);
 			}
 		}
 			

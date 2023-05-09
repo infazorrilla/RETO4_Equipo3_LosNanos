@@ -29,6 +29,11 @@ public class Savannah extends Zone {
 		super();
 	}
 
+	public Savannah(float extension, int animalsNumber, int speciesNumber, int treeNumber) {
+		super(extension, animalsNumber, speciesNumber);
+		this.treeNumber = treeNumber;
+	}
+
 	public int getTreeNumber() {
 		return treeNumber;
 	}
