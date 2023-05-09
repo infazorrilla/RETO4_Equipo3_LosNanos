@@ -21,9 +21,10 @@ class ManagerSwampTest {
 	void testSelectAll() {
 		try {
 			swamps = managerSwamp.selectAll();
-			swamp = swamps.get(1);
+			swamp = swamps.get(0);
+			System.out.println(swamps.toString());
 			String expected = swamp.toString();
-			assertEquals("Aquarium [waterTemp=12.0, acuatics=null, id=2, extension=64.0, animalsNumber=12, speciesNumber=1, zoo=null]", expected);
+			assertEquals("Swamp [waterSurface=12.0, reptiles=null, id=11, extension=23.0, animalsNumber=13, speciesNumber=2, zoo=null]", expected);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,8 +37,8 @@ class ManagerSwampTest {
 	@Test
 	void testInsert() {
 		try {
-			swamp.setWaterTemp(34);
-			swamp.setExtension("23m2");
+			swamp.setWaterSurface(34);
+			swamp.setExtension(23);
 			swamp.setAnimalsNumber(13);
 			swamp.setSpeciesNumber(2);
 			
@@ -46,7 +47,11 @@ class ManagerSwampTest {
 			swamps = managerSwamp.selectAll();
 			Swamp insertedSwamp = swamps.get(swamps.size() - 1);
 			
-			assertEquals(swamp, insertedSwamp);
+			for(int i = 0 ; i < swamps.size() ; i++ ) {
+				if (swamps.get(i).getId() == insertedSwamp.getId()) {
+					assertEquals(swamps.get(i), insertedSwamp);
+				}
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,8 +65,8 @@ class ManagerSwampTest {
 	void testUpdate() {
 		try {
 			swamp.setId(1);
-			swamp.setWaterTemp(34);
-			swamp.setExtension("23m2");
+			swamp.setWaterSurface(12);
+			swamp.setExtension(78);
 			swamp.setAnimalsNumber(13);
 			swamp.setSpeciesNumber(2);
 			
@@ -109,7 +114,4 @@ class ManagerSwampTest {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
 }

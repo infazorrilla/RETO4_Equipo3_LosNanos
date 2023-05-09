@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import Pojos.ZooTicket.Zoo;
 
-public class Zone implements Serializable {
+public abstract class Zone implements Serializable {
 
 	protected static final long serialVersionUID = -9022103785689291546L;
 	protected int id = 0;

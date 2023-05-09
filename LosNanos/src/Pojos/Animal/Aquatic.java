@@ -19,14 +19,14 @@ public class Aquatic extends Animal {
 
 	
 	public Aquatic(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			int vaccinated, String diet, String animalType, Aquarium aquarium) {
+			boolean vaccinated, String diet, String animalType, Aquarium aquarium) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet);
 		this.animalType = animalType;
 		this.aquarium = aquarium;
 	}
 	
 	public Aquatic(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			int vaccinated, String diet, String animalType) {
+			boolean vaccinated, String diet, String animalType) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet);
 		this.animalType = animalType;
 		this.aquarium = aquarium;

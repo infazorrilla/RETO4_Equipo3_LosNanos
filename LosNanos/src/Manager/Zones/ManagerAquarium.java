@@ -120,7 +120,7 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 							aquarium.getSpeciesNumber() + "')";
 					
 					String sql2 = "insert into Aquarium (zoneId, waterTemp) SELECT MAX(id), " + 
-							aquarium.getWaterTemp() + "FROM zones";
+							aquarium.getWaterTemp() + " FROM zones";
 					
 					// La ejecutamos...
 					statement.executeUpdate(sql);
@@ -163,13 +163,14 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
 					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "update Zones, aquarium set waterTemp = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ?";
+					String sql = "update Zones, aquarium set waterTemp = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ? and zoneId = ?";
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setFloat (1, aquarium.getWaterTemp());
 					preparedStatement.setFloat (2, aquarium.getExtension());
 					preparedStatement.setInt (3, aquarium.getAnimalsNumber());
 					preparedStatement.setInt (4, aquarium.getSpeciesNumber());
 					preparedStatement.setInt (5, aquarium.getId());
+					preparedStatement.setInt (6, aquarium.getId());
 					
 					// La ejecutamos...
 					preparedStatement.executeUpdate();

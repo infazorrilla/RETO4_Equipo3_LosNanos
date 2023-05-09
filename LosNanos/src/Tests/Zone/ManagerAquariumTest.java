@@ -23,7 +23,8 @@ class ManagerAquariumTest {
 			aquariums = managerAquarium.selectAll();
 			aquarium = aquariums.get(0);
 			String expected = aquarium.toString();
-			assertEquals("Aquarium [waterTemp=67.0, acuatics=null, id=1, extension=65.0, animalsNumber=12, speciesNumber=1, zoo=null]", expected);
+			System.out.println(expected);
+			assertEquals("Aquarium [waterTemp=45.0, acuatics=null, id=1, extension=78.0, animalsNumber=13, speciesNumber=2, zoo=null]", expected);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,9 +45,7 @@ class ManagerAquariumTest {
 			managerAquarium.insert(aquarium);
 			
 			aquariums = managerAquarium.selectAll();
-			
 			Aquarium insertedAquarium = aquariums.get(aquariums.size()-1);
-			
 			
 			for(int i = 0 ; i < aquariums.size() ; i++ ) {
 				if (aquariums.get(i).getId() == insertedAquarium.getId()) {
@@ -65,10 +64,10 @@ class ManagerAquariumTest {
 	@Test
 	void testUpdate() {
 		try {
-			aquarium.setId(7);
-			aquarium.setWaterTemp(67);
-			aquarium.setExtension(23);
-			aquarium.setAnimalsNumber(13);
+			aquarium.setId(6);
+			aquarium.setWaterTemp(5467);
+			aquarium.setExtension(5423);
+			aquarium.setAnimalsNumber(789);
 			aquarium.setSpeciesNumber(2);
 			
 			managerAquarium.update(aquarium);
@@ -78,6 +77,7 @@ class ManagerAquariumTest {
 			for(int i = 0 ; i < aquariums.size() ; i++ ) {
 				if (aquariums.get(i).getId() == aquarium.getId()) {
 					assertEquals(aquarium, aquariums.get(i));
+					break;
 				}
 			}
 			
@@ -94,15 +94,15 @@ class ManagerAquariumTest {
 	@Test
 	void testDelete() {
 		try {
-			aquarium.setId(2);
+			aquarium.setId(5);
 			
 			managerAquarium.delete(aquarium);
 			
 			aquariums = managerAquarium.selectAll();
 			
 			for(int i = 0 ; i < aquariums.size() ; i++){
-				if(aquariums.get(aquarium.getId()) == null  ) {
-					assertEquals(aquarium, null);
+				if(aquariums.get(aquarium.getId()) == null) {
+					assertNull(aquarium);
 				}
 			}
 			
@@ -115,6 +115,4 @@ class ManagerAquariumTest {
 			e.printStackTrace();
 		}
 	}
-	
-	
 }

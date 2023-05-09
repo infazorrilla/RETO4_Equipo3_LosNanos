@@ -21,7 +21,7 @@ public abstract class Reptile extends Animal {
 	
 	
 	public Reptile(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			int vaccinated, String diet, Date shedSkin, Swamp swamp) {
+			boolean vaccinated, String diet, Date shedSkin, Swamp swamp) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet);
 		this.shedSkin = shedSkin;
 		this.swamp = swamp;

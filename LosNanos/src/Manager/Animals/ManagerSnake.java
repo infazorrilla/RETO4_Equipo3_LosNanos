@@ -59,7 +59,7 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 				float height = resultSet.getFloat("height");
 				float weight = resultSet.getFloat("weight");
 				Date bornDate = resultSet.getDate("bornDate");
-				int vaccinated = resultSet.getInt("vaccinated");
+				Boolean vaccinated = resultSet.getBoolean("vaccinated");
 				String diet = resultSet.getString("diet");
 				Date shedSkin = resultSet.getDate("shedSkin");
 				Boolean poisonus = resultSet.getBoolean("poisonus");
@@ -129,10 +129,10 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 			String sql = "insert into reptile (id, name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin) VALUES ('"
 					+ snake.getId() + "', '" + snake.getName() + "', '" + snake.getScientificName() + "', '"
 					+ snake.getHeight() + "', '" + snake.getWeight() + "', '" + sqlDateBorn + "', '"
-					+ snake.getVaccinated() + "', '" + snake.getDiet() + "', '" + sqlDateSkin + "')";
+					+ snake.isVaccinated() + "', '" + snake.getDiet() + "', '" + sqlDateSkin + "')";
 			
 			String sql2 = "insert into snake (id_snake, poisonus) SELECT MAX(id), " + 
-					snake.isPoisonus() + "FROM reptile";
+					snake.isPoisonus() + " FROM reptile";
 
 			// La ejecutamos...
 			statement.executeUpdate(sql);
@@ -185,18 +185,20 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update SnakeComplete set name = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, shedSkin = ?,  poisonus = ? where id = ?";
+			String sql = "update reptile, snake set name = ?, scientificName = ?, height = ?, weight = ?, bornDate = ?, vaccinated = ?, diet = ?, shedSkin = ?,  poisonus = ? where id = ? and id_snake = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, snake.getName());
-			preparedStatement.setString(1, snake.getScientificName());
-			preparedStatement.setFloat(2, snake.getHeight());
-			preparedStatement.setFloat(3, snake.getWeight());
-			preparedStatement.setDate(4, bornDate);
-			preparedStatement.setInt(5, snake.getVaccinated());
-			preparedStatement.setString(6, snake.getDiet());
-			preparedStatement.setDate(7, shedSkin);
-			preparedStatement.setBoolean(8, snake.isPoisonus());
-			preparedStatement.setInt(9, snake.getId());
+			preparedStatement.setString(2, snake.getScientificName());
+			preparedStatement.setFloat(3, snake.getHeight());
+			preparedStatement.setFloat(4, snake.getWeight());
+			preparedStatement.setDate(5, bornDate);
+			preparedStatement.setBoolean(6, snake.isVaccinated());
+			preparedStatement.setString(7, snake.getDiet());
+			preparedStatement.setDate(8, shedSkin);
+			preparedStatement.setBoolean(9, snake.isPoisonus());
+			preparedStatement.setInt(10, snake.getId());
+			preparedStatement.setInt(11, snake.getId());
+
 
 			// La ejecutamos...
 			preparedStatement.executeUpdate();
