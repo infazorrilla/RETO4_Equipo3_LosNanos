@@ -294,7 +294,6 @@ public class Interfaz {
 				model.setRowCount(0);
 				model.setColumnCount(0);
 				personModel(model);
-				btnBossUpdate.setEnabled(true);
 				btnBossDelete.setEnabled(true);
 				controller.getTableBoss(model, table);
 				type = "Boss";
@@ -315,7 +314,6 @@ public class Interfaz {
 				model.setColumnCount(0);
 				personModel(model);
 				controller.getTableFeeder(model, table);
-				btnBossUpdate.setEnabled(true);
 				btnBossDelete.setEnabled(true);
 				type = "Feeder";
 			}
@@ -334,7 +332,6 @@ public class Interfaz {
 				model.setColumnCount(0);
 				personModel(model);
 				controller.getTableVet(model, table);
-				btnBossUpdate.setEnabled(true);
 				btnBossDelete.setEnabled(true);
 				type = "Vet";
 			}
@@ -400,7 +397,6 @@ public class Interfaz {
 				personModel(model);
 				controller.getTableClient(model, table);
 				btnBossDelete.setEnabled(true);
-				btnBossUpdate.setEnabled(true);
 				type = "Client";
 			}
 		});
@@ -475,10 +471,10 @@ public class Interfaz {
 		btBossSeeZone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controller controller = new Controller();
-				String box = (String) cbBossZones.getSelectedItem();
+				String selectedZone = (String) cbBossZones.getSelectedItem();
 				model.setRowCount(0);
 				model.setColumnCount(0);
-				switch (box) {
+				switch (selectedZone) {
 				case "Aquarium":
 					zoneModel(model);
 					try {
