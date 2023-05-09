@@ -304,7 +304,7 @@ public class Controller {
 
 	}
 
-	public void getSelectedDolphin(String box, DefaultTableModel model, JTable table) {
+	public void getSelectedDolphin(DefaultTableModel model, JTable table) {
 		ArrayList<Dolphin> dolphins = null;
 		ManagerDolphin managerSnake = new ManagerDolphin();
 		try {
@@ -323,7 +323,7 @@ public class Controller {
 
 	}
 
-	public void getSelectedSnake(String box, DefaultTableModel model, JTable table) {
+	public void getSelectedSnake(DefaultTableModel model, JTable table) {
 		ArrayList<Snake> snakes = null;
 		ManagerSnake managerSnake = new ManagerSnake();
 		try {
@@ -342,7 +342,7 @@ public class Controller {
 
 	}
 	
-	public void getSelectedCrocodile(String box, DefaultTableModel model, JTable table) {
+	public void getSelectedCrocodile(DefaultTableModel model, JTable table) {
 		ArrayList<Crocodile> crocodile = null;
 		ManagerCrocodile managerCrocodile = new ManagerCrocodile();
 		try {
@@ -361,7 +361,7 @@ public class Controller {
 
 	}
 	
-	public void getSelectedGiraffe(String box, DefaultTableModel model, JTable table) {
+	public void getSelectedGiraffe(DefaultTableModel model, JTable table) {
 		ArrayList<Giraffe> giraffe = null;
 		ManagerGiraffe managerGiraffe = new ManagerGiraffe();
 		try {
@@ -380,7 +380,7 @@ public class Controller {
 
 	}
 	
-	public void getSelectedCheetah(String box, DefaultTableModel model, JTable table) {
+	public void getSelectedCheetah(DefaultTableModel model, JTable table) {
 		ArrayList<Cheetah> cheetah = null;
 		ManagerCheetah managerCheetah = new ManagerCheetah();
 		try {
@@ -517,6 +517,8 @@ public class Controller {
 			updateSwamp(id);
 		} else if (type.equals("Savannah")) {
 			updateSavannah(id);
+		} else if (type.equals("Dolphin")) {
+			updateDolphin(id);
 		}
 //		else if (result == 1) {
 //			updateOptionAnimal();
@@ -751,6 +753,270 @@ public class Controller {
 		}
 
 	}
+	
+	
+	public void updateDolphin(String id) throws ParseException {
+		int idInt = Integer.valueOf(id);
+		JTextField name = new JTextField();
+		JTextField scientificName = new JTextField();
+		JTextField height = new JTextField();
+		JTextField weight = new JTextField();
+		JTextField bornDate = new JTextField();
+		JCheckBox vaccinated = new JCheckBox();
+		JComboBox diet = new JComboBox();
+		diet.addItem("Carnivorous");
+		diet.addItem("Herbivorous");
+		JTextField animalType = new JTextField();
+		JTextField durationUnderWater = new JTextField();
+
+		Object[] message = { "Name: *", name, "ScientificName: *", scientificName, "Height: *", height, "Weight: *",
+				weight, "Born-Date *", bornDate, "Vacinated: *", vaccinated, "Diet: *", diet, "Animal-Tipe: *",
+				animalType, "Duration Under Water: *", durationUnderWater };
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Actualizar Delfin", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || scientificName.getText().isEmpty() || height.getText().isEmpty()
+					|| weight.getText().isEmpty() || bornDate.getText().isEmpty()
+					|| animalType.getText().isEmpty() || durationUnderWater.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+				ManagerDolphin managerDolphin = new ManagerDolphin();
+				String heightString = height.getText();
+				float heightFloat = Float.valueOf(heightString);
+				String weightString = weight.getText();
+				float weightFloat = Float.valueOf(weightString);
+				String dateString = bornDate.getText();
+				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+				Date date = formato.parse(dateString);
+				int vaccinatedBoolean = checkBooleanVaccinated(vaccinated);
+				String durationUnderWaterString = durationUnderWater.getText();
+				int durationUnderWaterInt = Integer.valueOf(durationUnderWaterString);
+
+				Dolphin dolphinToIsert = new Dolphin(idInt, name.getText(), scientificName.getText(), heightFloat,
+						weightFloat, date, vaccinatedBoolean, diet.getSelectedItem().toString(), animalType.getText(),
+						durationUnderWaterInt);
+				managerDolphin.update(dolphinToIsert);
+				} 
+					catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+		}
+	
+	public void updateSnake(String id) {
+		int idInt = Integer.valueOf(id);
+		JTextField name = new JTextField();
+		JTextField scientificName = new JTextField();
+		JTextField height = new JTextField();
+		JTextField weight = new JTextField();
+		JTextField bornDate = new JTextField();
+		JCheckBox vaccinated = new JCheckBox();
+		JComboBox diet = new JComboBox();
+		diet.addItem("Carnivorous");
+		diet.addItem("Herbivorous");
+		JTextField shedSkin = new JTextField();
+		JCheckBox poisonus = new JCheckBox();
+
+		Object[] message = { "Name: *", name, "ScientificName: *", scientificName, "Height: *", height, "Weight: *",
+				weight, "Born-Date *", bornDate, "Vacinated: *", vaccinated, "Diet: *", diet, "ShedSkin: *",
+				shedSkin, "Poisonus: *", poisonus };
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Actualizar Serpiente", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || scientificName.getText().isEmpty() || height.getText().isEmpty()
+					|| weight.getText().isEmpty() || bornDate.getText().isEmpty()
+					|| shedSkin.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+				ManagerSnake managerSnake = new ManagerSnake();
+				String heightString = height.getText();
+				float heightFloat = Float.valueOf(heightString);
+				String weightString = weight.getText();
+				float weightFloat = Float.valueOf(weightString);
+				String dateString = bornDate.getText();
+				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+				Date date = formato.parse(dateString);
+				int vaccinatedBoolean = checkBooleanVaccinated(vaccinated);
+				String shedSkinString = shedSkin.getText();
+				Date dateShedSkin = formato.parse(shedSkinString);
+				boolean PoisonusBoolean = checkBooleanPoisonus(poisonus);
+
+
+				Snake snakeToInsert = new Snake(idInt, name.getText(), scientificName.getText(), heightFloat,
+						weightFloat, date, vaccinatedBoolean, diet.getSelectedItem().toString(), dateShedSkin,
+						PoisonusBoolean);
+				managerSnake.update(snakeToInsert);
+				} 
+					catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+	
+}
+	
+	public void updateCrocodile(String id) {
+		int idInt = Integer.valueOf(id);
+		JTextField name = new JTextField();
+		JTextField scientificName = new JTextField();
+		JTextField height = new JTextField();
+		JTextField weight = new JTextField();
+		JTextField bornDate = new JTextField();
+		JCheckBox vaccinated = new JCheckBox();
+		JComboBox diet = new JComboBox();
+		diet.addItem("Carnivorous");
+		diet.addItem("Herbivorous");
+		JTextField shedSkin = new JTextField();
+		JTextField teethNumber = new JTextField();
+
+		Object[] message = { "Name: *", name, "ScientificName: *", scientificName, "Height: *", height, "Weight: *",
+				weight, "Born-Date *", bornDate, "Vacinated: *", vaccinated, "Diet: *", diet, "ShedSkin: *",
+				shedSkin, "teethNumber: *", teethNumber };
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Actualizar Cocodrilo", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || scientificName.getText().isEmpty() || height.getText().isEmpty()
+					|| weight.getText().isEmpty() || bornDate.getText().isEmpty()
+					|| shedSkin.getText().isEmpty()|| teethNumber.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+				ManagerCrocodile managerCrocodile = new ManagerCrocodile();
+				String heightString = height.getText();
+				float heightFloat = Float.valueOf(heightString);
+				String weightString = weight.getText();
+				float weightFloat = Float.valueOf(weightString);
+				String dateString = bornDate.getText();
+				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+				Date date = formato.parse(dateString);
+				int vaccinatedBoolean = checkBooleanVaccinated(vaccinated);
+				String shedSkinString = shedSkin.getText();
+				Date dateShedSkin = formato.parse(shedSkinString);
+				String teethNumberString = teethNumber.getText();
+				int teethNumberInt = Integer.valueOf(teethNumberString);
+
+				Crocodile crocodileToInsert = new Crocodile(idInt, name.getText(), scientificName.getText(), heightFloat,
+						weightFloat, date, vaccinatedBoolean, diet.getSelectedItem().toString(), dateShedSkin,
+						teethNumberInt);
+				managerCrocodile.update(crocodileToInsert);
+				} 
+					catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+	
+}
+	
+	public void UpdateGiraffe(String id) throws ParseException {
+		int idInt = Integer.valueOf(id);
+		JTextField name = new JTextField();
+		JTextField scientificName = new JTextField();
+		JTextField height = new JTextField();
+		JTextField weight = new JTextField();
+		JTextField bornDate = new JTextField();
+		JCheckBox vaccinated = new JCheckBox();
+		JComboBox diet = new JComboBox();
+		diet.addItem("Carnivorous");
+		diet.addItem("Herbivorous");
+		JTextField hairColor = new JTextField();
+		JTextField neckLegnth = new JTextField();
+
+		Object[] message = { "Name: *", name, "ScientificName: *", scientificName, "Height: *", height, "Weight: *",
+				weight, "Born-Date *", bornDate, "Vacinated: *", vaccinated, "Diet: *", diet, "Hair Color: *",
+				hairColor, "Neck-Legnth: *", neckLegnth };
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Girafa", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || scientificName.getText().isEmpty() || height.getText().isEmpty()
+					|| weight.getText().isEmpty() || bornDate.getText().isEmpty()
+					|| hairColor.getText().isEmpty() || neckLegnth.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+				ManagerGiraffe managerGiraffe = new ManagerGiraffe();
+				String heightString = height.getText();
+				float heightFloat = Float.valueOf(heightString);
+				String weightString = weight.getText();
+				float weightFloat = Float.valueOf(weightString);
+				String dateString = bornDate.getText();
+				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+				Date date = formato.parse(dateString);
+				int vaccinatedBoolean = checkBooleanVaccinated(vaccinated);
+				String neckLegnthString = neckLegnth.getText();
+				int neckLegnthInt = Integer.valueOf(neckLegnthString);
+
+				Giraffe giraffeToIsert = new Giraffe(idInt, name.getText(), scientificName.getText(), heightFloat,
+						weightFloat, date, vaccinatedBoolean, diet.getSelectedItem().toString(), hairColor.getText(),
+						neckLegnthInt);
+				managerGiraffe.update(giraffeToIsert);
+				} 
+					catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+
+	}
+	
+	public void updateCheeta(String id) throws ParseException {
+		int idInt = Integer.valueOf(id);
+		JTextField name = new JTextField();
+		JTextField scientificName = new JTextField();
+		JTextField height = new JTextField();
+		JTextField weight = new JTextField();
+		JTextField bornDate = new JTextField();
+		JCheckBox vaccinated = new JCheckBox();
+		JComboBox diet = new JComboBox();
+		diet.addItem("Carnivorous");
+		diet.addItem("Herbivorous");
+		JTextField hairColor = new JTextField();
+		JTextField maxSpeed = new JTextField();
+
+		Object[] message = { "Name: *", name, "ScientificName: *", scientificName, "Height: *", height, "Weight: *",
+				weight, "Born-Date *", bornDate, "Vacinated: *", vaccinated, "Diet: *", diet, "Hair Color: *",
+				hairColor, "Max-Speed: *", maxSpeed };
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Guepardo", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || scientificName.getText().isEmpty() || height.getText().isEmpty()
+					|| weight.getText().isEmpty() || bornDate.getText().isEmpty()
+					|| hairColor.getText().isEmpty() || maxSpeed.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+				ManagerCheetah managerCheetah = new ManagerCheetah();
+				String heightString = height.getText();
+				float heightFloat = Float.valueOf(heightString);
+				String weightString = weight.getText();
+				float weightFloat = Float.valueOf(weightString);
+				String dateString = bornDate.getText();
+				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+				Date date = formato.parse(dateString);
+				int vaccinatedBoolean = checkBooleanVaccinated(vaccinated);
+				String maxSpeedString = maxSpeed.getText();
+				int maxSpeedInt = Integer.valueOf(maxSpeedString);
+
+				Cheetah cheetahToIsert = new Cheetah(idInt, name.getText(), scientificName.getText(), heightFloat,
+						weightFloat, date, vaccinatedBoolean, diet.getSelectedItem().toString(), hairColor.getText(),
+						maxSpeedInt);
+				managerCheetah.update(cheetahToIsert);
+				} 
+					catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+
+	}
 
 	public void addOption() throws SQLException, Exception {
 		String[] options = { "Employee", "Animal", "Zone"};
@@ -835,8 +1101,10 @@ public class Controller {
 			addSnake();
 			break;
 		case 3:
+			addGiraffe();
 			break;
 		case 4:
+			addCheetah();
 			break;
 		}
 	}
@@ -1182,7 +1450,7 @@ public class Controller {
 
 	}
 	
-	public void addCheeta() throws ParseException {
+	public void addCheetah() throws ParseException {
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
 		JTextField height = new JTextField();

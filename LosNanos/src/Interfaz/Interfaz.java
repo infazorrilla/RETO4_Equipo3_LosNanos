@@ -407,7 +407,7 @@ public class Interfaz {
 		JComboBox cbBossAnimals = new JComboBox();
 		cbBossAnimals.addItem("Dolphin");
 		cbBossAnimals.addItem("Snake");
-		cbBossAnimals.addItem("Cocodrile");
+		cbBossAnimals.addItem("Crocodile");
 		cbBossAnimals.addItem("Giraffe");
 		cbBossAnimals.addItem("Cheetah");
 		cbBossAnimals.setBackground(new Color(235, 199, 150));
@@ -446,18 +446,29 @@ public class Interfaz {
 				switch (box) {
 				case "Dolphin":
 					dolphinModel(model);
-					controller.getSelectedDolphin(box, model, table);
+					controller.getSelectedDolphin(model, table);
+					type = "Dolphin";
 					break;
 				case "Snake":
 					snakeModel(model);
-					controller.getSelectedSnake(box, model, table);
+					controller.getSelectedSnake(model, table);
+					type = "Snake";
 					break;
 				case "Crocodile":
-//					crocodileModel(model);
+					crocodileModel(model);
+					controller.getSelectedCrocodile(model, table);
+					type = "Crocodile";
+					break;
 				case "Giraffe":
-//					giraffeModel(model);
+					giraffeModel(model);
+					controller.getSelectedGiraffe(model, table);
+					type = "Giraffe";
+					break;
 				case "Cheetah":
-//					cheetahModel(model);
+					cheetahModel(model);
+					controller.getSelectedCheetah(model, table);
+					type = "Cheetah";
+					break;
 				}
 			}
 
@@ -598,6 +609,48 @@ public class Interfaz {
 		model.addColumn("Diet");
 		model.addColumn("shed-Skin");
 		model.addColumn("Poisonus");
+
+	}
+	
+	private void crocodileModel(DefaultTableModel model) {
+		model.addColumn("Id");
+		model.addColumn("Name");
+		model.addColumn("ScientificName");
+		model.addColumn("Height");
+		model.addColumn("Weight");
+		model.addColumn("Born-Date");
+		model.addColumn("Vaccinated");
+		model.addColumn("Diet");
+		model.addColumn("shed-Skin");
+		model.addColumn("teethNumber");
+
+	}
+	
+	private void giraffeModel(DefaultTableModel model) {
+		model.addColumn("Id");
+		model.addColumn("Name");
+		model.addColumn("ScientificName");
+		model.addColumn("Height");
+		model.addColumn("Weight");
+		model.addColumn("Born-Date");
+		model.addColumn("Vaccinated");
+		model.addColumn("Diet");
+		model.addColumn("shed-Skin");
+		model.addColumn("Neck-Legnth");
+
+	}
+	
+	private void cheetahModel(DefaultTableModel model) {
+		model.addColumn("Id");
+		model.addColumn("Name");
+		model.addColumn("ScientificName");
+		model.addColumn("Height");
+		model.addColumn("Weight");
+		model.addColumn("Born-Date");
+		model.addColumn("Vaccinated");
+		model.addColumn("Diet");
+		model.addColumn("shed-Skin");
+		model.addColumn("Max-Speed");
 
 	}
 
