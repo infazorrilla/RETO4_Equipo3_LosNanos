@@ -350,7 +350,7 @@ public class Interfaz {
 		btnBossAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controller controller = new Controller();
-				controller.addOption();
+				
 			}
 		});
 		btnBossAdd.setFont(new Font("Tahoma", Font.PLAIN, 20));

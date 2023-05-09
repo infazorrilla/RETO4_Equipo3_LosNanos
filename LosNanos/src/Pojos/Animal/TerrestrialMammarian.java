@@ -20,7 +20,7 @@ public abstract class TerrestrialMammarian extends Animal {
 
 	
 	public TerrestrialMammarian(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			int vaccinated, String diet, String hairColor, Savannah savannah) {
+			boolean vaccinated, String diet, String hairColor, Savannah savannah) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet);
 		this.hairColor = hairColor;
 		this.savannah = savannah;

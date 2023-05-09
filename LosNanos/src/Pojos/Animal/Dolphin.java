@@ -13,13 +13,13 @@ public class Dolphin extends Aquatic{
 	private int durationUnderWater = 0;
 
 	public Dolphin(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			int vaccinated, String diet, String animalType, Aquarium aquarium, int durationUnderWater) {
+			boolean vaccinated, String diet, String animalType, Aquarium aquarium, int durationUnderWater) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalType, aquarium);
 		this.durationUnderWater = durationUnderWater;
 	}
 	
 	public Dolphin(int id, String name, String scientificName, float height, float weight, Date bornDate,
-			int vaccinated, String diet, String animalType, int durationUnderWater) {
+			boolean vaccinated, String diet, String animalType, int durationUnderWater) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalType);
 		this.durationUnderWater = durationUnderWater;
 	}

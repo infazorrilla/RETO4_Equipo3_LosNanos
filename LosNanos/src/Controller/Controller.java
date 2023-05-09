@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -317,7 +318,7 @@ public class Controller {
 		for (int i = 0; i < dolphins.size(); i++) {
 			model.addRow(new Object[] { dolphins.get(i).getId(), dolphins.get(i).getName(),
 					dolphins.get(i).getScientificName(), dolphins.get(i).getHeight(), dolphins.get(i).getWeight(),
-					dolphins.get(i).getBornDate(), dolphins.get(i).getVaccinated(), dolphins.get(i).getDiet(),
+					dolphins.get(i).getBornDate(), dolphins.get(i).isVaccinated(), dolphins.get(i).getDiet(),
 					dolphins.get(i).getAnimalType(), dolphins.get(i).getDurationUnderWater() });
 		}
 
@@ -337,7 +338,7 @@ public class Controller {
 			model.addRow(
 					new Object[] { snakes.get(i).getId(), snakes.get(i).getName(), snakes.get(i).getScientificName(),
 							snakes.get(i).getHeight(), snakes.get(i).getWeight(), snakes.get(i).getBornDate(),
-							snakes.get(i).getVaccinated(), snakes.get(i).getDiet(), snakes.get(i).getShedSkin(), snakes.get(i).isPoisonus() });
+							snakes.get(i).isVaccinated(), snakes.get(i).getDiet(), snakes.get(i).getShedSkin(), snakes.get(i).isPoisonus() });
 		}
 
 	}
@@ -356,7 +357,7 @@ public class Controller {
 			model.addRow(
 					new Object[] { crocodile.get(i).getId(), crocodile.get(i).getName(), crocodile.get(i).getScientificName(),
 							crocodile.get(i).getHeight(), crocodile.get(i).getWeight(), crocodile.get(i).getBornDate(),
-							crocodile.get(i).getVaccinated(), crocodile.get(i).getDiet(), crocodile.get(i).getShedSkin(), crocodile.get(i).getTeethNumber() });
+							crocodile.get(i).isVaccinated(), crocodile.get(i).getDiet(), crocodile.get(i).getShedSkin(), crocodile.get(i).getTeethNumber() });
 		}
 
 	}
@@ -375,7 +376,7 @@ public class Controller {
 			model.addRow(
 					new Object[] { giraffe.get(i).getId(), giraffe.get(i).getName(), giraffe.get(i).getScientificName(),
 							giraffe.get(i).getHeight(), giraffe.get(i).getWeight(), giraffe.get(i).getBornDate(),
-							giraffe.get(i).getVaccinated(), giraffe.get(i).getDiet(), giraffe.get(i).getHairColor(), giraffe.get(i).getNeckLength() });
+							giraffe.get(i).isVaccinated(), giraffe.get(i).getDiet(), giraffe.get(i).getHairColor(), giraffe.get(i).getNeckLength() });
 		}
 
 	}
@@ -394,7 +395,7 @@ public class Controller {
 			model.addRow(
 					new Object[] { cheetah.get(i).getId(), cheetah.get(i).getName(), cheetah.get(i).getScientificName(),
 							cheetah.get(i).getHeight(), cheetah.get(i).getWeight(), cheetah.get(i).getBornDate(),
-							cheetah.get(i).getVaccinated(), cheetah.get(i).getDiet(), cheetah.get(i).getHairColor(), cheetah.get(i).getMaxSpeed() });
+							cheetah.get(i).isVaccinated(), cheetah.get(i).getDiet(), cheetah.get(i).getHairColor(), cheetah.get(i).getMaxSpeed() });
 		}
 
 	}
@@ -470,12 +471,14 @@ public class Controller {
 		return ret;
 	}
 
-	private int checkBooleanTwo(String vaccinatedString) {
-		int ret;
-		if (vaccinatedString == "Yes") {
-			ret = 1;
+
+	
+	private boolean checkBooleanTwo(JCheckBox vaccinated) {
+		boolean ret;
+		if (vaccinated.isSelected()) {
+			ret = true;
 		} else {
-			ret = 0;
+			ret = false;
 		}
 		return ret;
 	}
@@ -661,7 +664,7 @@ public class Controller {
 
 	}
 
-	public void addOption() {
+	public void addOption() throws ParseException {
 		String[] options = { "Employee", "Animal", "Zone"};
 		int result = JOptionPane.showOptionDialog(null, "What do you want to add?", "Add", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -728,7 +731,7 @@ public class Controller {
 
 	}
 
-	private void addOptionAnimal() {
+	private void addOptionAnimal() throws ParseException {
 		String[] optionsAnimal = { "Dolphin", "Crocodile", "Snake", "Giraffe", "Cheetah" };
 		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of Animal?", "Add",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsAnimal, optionsAnimal[0]);
@@ -824,13 +827,13 @@ public class Controller {
 
 	}
 
-	public void addDolphin() {
+	public void addDolphin() throws ParseException {
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
 		JTextField height = new JTextField();
 		JTextField weight = new JTextField();
 		JTextField bornDate = new JTextField();
-		JTextField vaccinated = new JTextField();
+		JCheckBox vaccinated = new JCheckBox();
 		JComboBox diet = new JComboBox();
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
@@ -845,7 +848,7 @@ public class Controller {
 
 		if (option == JOptionPane.OK_OPTION) {
 			if (name.getText().isEmpty() || scientificName.getText().isEmpty() || height.getText().isEmpty()
-					|| weight.getText().isEmpty() || bornDate.getText().isEmpty() || vaccinated.getText().isEmpty()
+					|| weight.getText().isEmpty() || bornDate.getText().isEmpty()
 					|| animalType.getText().isEmpty() || durationUnderWater.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
 			} else {
@@ -856,19 +859,15 @@ public class Controller {
 				String weightString = weight.getText();
 				float weightFloat = Float.valueOf(weightString);
 				String dateString = bornDate.getText();
-				Date date = new Date(dateString);
-//					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//			        String formattedDate = simpleDateFormat.format(DateString);
-//			        System.out.println(formattedDate);
-//			        java.sql.Date date = java.sql.Date.valueOf(formattedDate);
+				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+				Date date = formato.parse(dateString);
 				System.out.println(date);
-				String vaccinatedString = vaccinated.getText();
-				int vaccinatedInt = checkBooleanTwo(vaccinatedString);
-				String durationUnderWaterString = vaccinated.getText();
+				boolean vaccinatedBoolean = checkBooleanTwo(vaccinated);
+				String durationUnderWaterString = durationUnderWater.getText();
 				int durationUnderWaterInt = Integer.valueOf(durationUnderWaterString);
 
 				Dolphin dolphinToIsert = new Dolphin(0, name.getText(), scientificName.getText(), heightFloat,
-						weightFloat, date, vaccinatedInt, diet.getSelectedItem().toString(), animalType.getText(),
+						weightFloat, date, vaccinatedBoolean, diet.getSelectedItem().toString(), animalType.getText(),
 						durationUnderWaterInt);
 				System.out.println(dolphinToIsert);
 				System.out.println("Fin");

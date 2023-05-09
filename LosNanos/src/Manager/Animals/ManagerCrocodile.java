@@ -59,7 +59,7 @@ public class ManagerCrocodile implements ManagerInterface<Crocodile> {
 				float height = resultSet.getFloat("height");
 				float weight = resultSet.getFloat("weight");
 				Date bornDate = resultSet.getDate("bornDate");
-				int vaccinated = resultSet.getInt("vaccinated");
+				Boolean vaccinated = resultSet.getBoolean("vaccinated");
 				String diet = resultSet.getString("diet");
 				Date shedSkin = resultSet.getDate("shedSkin");
 				int teethNumber = resultSet.getInt("teethNumber");
@@ -129,7 +129,7 @@ public class ManagerCrocodile implements ManagerInterface<Crocodile> {
 			String sql = "insert into reptile (id, name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin) VALUES ('"
 					+ crocodile.getId() + "', '" + crocodile.getName() + "', '" + crocodile.getScientificName() + "', '"
 					+ crocodile.getHeight() + "', '" + crocodile.getWeight() + "', '" + sqlDateBorn + "', '"
-					+ crocodile.getVaccinated() + "', '" + crocodile.getDiet() + "', '" + sqlDateSkin + "')";
+					+ crocodile.isVaccinated() + "', '" + crocodile.getDiet() + "', '" + sqlDateSkin + "')";
 
 			String sql2 = "insert into crocodile (id_crocodile, teethNumber) SELECT MAX(id), " + 
 					crocodile.getTeethNumber() + " FROM reptile";
@@ -192,7 +192,7 @@ public class ManagerCrocodile implements ManagerInterface<Crocodile> {
 			preparedStatement.setFloat(3, crocodile.getHeight());
 			preparedStatement.setFloat(4, crocodile.getWeight());
 			preparedStatement.setDate(5, bornDate);
-			preparedStatement.setInt(6, crocodile.getVaccinated());
+			preparedStatement.setBoolean(6, crocodile.isVaccinated());
 			preparedStatement.setString(7, crocodile.getDiet());
 			preparedStatement.setDate(8, shedSkin);
 			preparedStatement.setInt(9, crocodile.getTeethNumber());

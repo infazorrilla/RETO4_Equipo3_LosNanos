@@ -11,7 +11,7 @@ public class Snake extends Reptile {
 
 	private boolean poisonus = false;
 
-	public Snake(int id, String name, String scientificName, float height, float weight, Date bornDate, int vaccinated,
+	public Snake(int id, String name, String scientificName, float height, float weight, Date bornDate, boolean vaccinated,
 			String diet, Date shedSkin, Swamp swamp, boolean poisonus) {
 		super(id, name, scientificName, height, weight, bornDate, vaccinated, diet, shedSkin, swamp);
 		this.poisonus = poisonus;
