@@ -506,7 +506,19 @@ public class Controller {
 				int idInt = Integer.valueOf(id);
 				aquarium.setId(idInt);
 				managerAquarium.delete(aquarium);
-			}
+			} else if (type == "Swamp") {
+				ManagerSwamp managerSwamp = new ManagerSwamp();
+				Swamp swamp = new Swamp();
+				int idInt = Integer.valueOf(id);
+				swamp.setId(idInt);
+				managerSwamp.delete(swamp);
+			} else if (type == "Savannah") {
+				ManagerSavannah managerSavannah = new ManagerSavannah();
+				Savannah savannah= new Savannah();
+				int idInt = Integer.valueOf(id);
+				savannah.setId(idInt);
+				managerSavannah.delete(savannah);
+			} 
 
 		} else if (result == 1) {
 			
