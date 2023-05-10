@@ -42,6 +42,7 @@ public class Interfaz {
 	private JButton btnBossDelete;
 	private JTable tableVet;
 	private JTable tableFeeder;
+	private JTable tableClient;
 
 	/**
 	 * Launch the application.
@@ -74,6 +75,7 @@ public class Interfaz {
 		frame.setBounds(100, 100, 862, 538);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setResizable(false);
 
 		final DefaultTableModel model;
 		model = new DefaultTableModel();
@@ -83,12 +85,6 @@ public class Interfaz {
 		frame.getContentPane().add(jpLogin);
 		jpLogin.setLayout(null);
 		jpLogin.setVisible(true);
-
-		JPanel jpClient = new JPanel();
-		jpClient.setBounds(0, 0, 848, 501);
-		frame.getContentPane().add(jpClient);
-		jpClient.setLayout(null);
-		jpClient.setVisible(false);
 
 		JPanel jpBoss = new JPanel();
 		jpBoss.setBounds(0, 0, 848, 501);
@@ -107,6 +103,186 @@ public class Interfaz {
 		frame.getContentPane().add(jpFeeder);
 		jpFeeder.setVisible(false);
 		jpFeeder.setLayout(null);
+
+		JPanel jpClient = new JPanel();
+		jpClient.setBounds(0, 0, 848, 501);
+		frame.getContentPane().add(jpClient);
+		jpClient.setLayout(null);
+		jpClient.setVisible(false);
+
+		JLabel Title = new JLabel("Zoo");
+		Title.setForeground(new Color(255, 255, 255));
+		Title.setFont(new Font("Tahoma", Font.BOLD, 60));
+		Title.setBounds(352, 23, 118, 84);
+		jpLogin.add(Title);
+
+		usrTfLogin = new JTextField();
+		usrTfLogin.setForeground(new Color(255, 255, 255));
+		usrTfLogin.setBackground(new Color(201, 190, 190));
+		usrTfLogin.setToolTipText("User");
+		usrTfLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		usrTfLogin.setFont(new Font("Arial", Font.PLAIN, 20));
+		usrTfLogin.setBounds(285, 194, 265, 31);
+		jpLogin.add(usrTfLogin);
+		usrTfLogin.setColumns(10);
+
+		passTfLogin = new JPasswordField();
+		passTfLogin.setForeground(new Color(255, 255, 255));
+		passTfLogin.setBackground(new Color(201, 190, 190));
+		passTfLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		passTfLogin.setFont(new Font("Arial", Font.PLAIN, 18));
+		passTfLogin.setText("");
+		passTfLogin.setColumns(10);
+		passTfLogin.setBounds(285, 276, 265, 31);
+		jpLogin.add(passTfLogin);
+
+		JButton regTfLogin = new JButton("Register");
+		regTfLogin.setForeground(new Color(255, 255, 255));
+		regTfLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				controller.clientRegister();
+			}
+		});
+		regTfLogin.setBackground(new Color(201, 190, 190));
+		regTfLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		regTfLogin.setBounds(227, 376, 118, 42);
+		jpLogin.add(regTfLogin);
+
+		JButton enterTfLogin = new JButton("Enter");
+		enterTfLogin.setForeground(new Color(255, 255, 255));
+		enterTfLogin.setBackground(new Color(201, 190, 190));
+		enterTfLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				String user = usrTfLogin.getText();
+				String password = passTfLogin.getText();
+				int finalUser = controller.checkUser(user, password);
+
+				switch (finalUser) {
+				case 0:
+					panelLogin(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+					JOptionPane.showMessageDialog(null, "Contraseña Erronea", null, JOptionPane.ERROR_MESSAGE);
+					break;
+				case 1:
+					panelBoss(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+					personModel(model);
+					controller.getTableEmployee(model, tableBoss);
+					break;
+				case 2:
+					panelClient(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+					break;
+				case 3:
+					panelFeeder(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+					break;
+				case 4:
+					panelVet(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+					break;
+				}
+
+				usrTfLogin.setText("");
+				passTfLogin.setText("");
+
+			}
+		});
+		enterTfLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		enterTfLogin.setBounds(475, 376, 118, 42);
+		jpLogin.add(enterTfLogin);
+
+		JLabel backgroundLogin = new JLabel("");
+		backgroundLogin.setBounds(0, 0, 848, 503);
+		jpLogin.add(backgroundLogin);
+		addImage(jpLogin, backgroundLogin, "src/Photos/panda.jpg");
+
+		JLabel lbClient = new JLabel("Client");
+		lbClient.setFont(new Font("Arial", Font.BOLD, 39));
+		lbClient.setBounds(343, 39, 114, 34);
+		jpClient.add(lbClient);
+
+		JButton btnClientLogout = new JButton("LogOut");
+		btnClientLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				controller.questionLogOut(jpBoss, jpLogin, jpClient, jpFeeder, jpVet);
+			}
+		});
+		btnClientLogout.setForeground(Color.WHITE);
+		btnClientLogout.setBackground(Color.BLACK);
+		btnClientLogout.setBounds(0, 0, 89, 23);
+		jpClient.add(btnClientLogout);
+
+		JScrollPane spClient = new JScrollPane();
+		spClient.setBounds(45, 107, 755, 261);
+		spClient.setOpaque(false);
+		jpClient.add(spClient);
+
+		tableClient = new JTable();
+		spClient.setViewportView(tableClient);
+		spClient.setViewportView(tableClient);
+		tableClient.setEnabled(false);
+		tableClient.setOpaque(false);
+		tableClient.setModel(model);
+
+		JComboBox cbClientSeeAnimals = new JComboBox();
+		cbClientSeeAnimals.addItem("Dolphin");
+		cbClientSeeAnimals.addItem("Snake");
+		cbClientSeeAnimals.addItem("Crocodile");
+		cbClientSeeAnimals.addItem("Giraffe");
+		cbClientSeeAnimals.addItem("Cheetah");
+		cbClientSeeAnimals.setForeground(Color.WHITE);
+		cbClientSeeAnimals.setBackground(new Color(66, 111, 51));
+		cbClientSeeAnimals.setBounds(45, 393, 370, 31);
+		jpClient.add(cbClientSeeAnimals);
+
+		JButton btnClientSearch = new JButton("Search");
+		btnClientSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controller controller = new Controller();
+				String box = (String) cbClientSeeAnimals.getSelectedItem();
+				model.setRowCount(0);
+				model.setColumnCount(0);
+				switch (box) {
+				case "Dolphin":
+					dolphinModel(model);
+					controller.getSelectedDolphin(model, tableClient);
+					type = "Dolphin";
+					break;
+				case "Snake":
+					snakeModel(model);
+					controller.getSelectedSnake(model, tableClient);
+					type = "Snake";
+					break;
+				case "Crocodile":
+					crocodileModel(model);
+					controller.getSelectedCrocodile(model, tableClient);
+					type = "Crocodile";
+					break;
+				case "Giraffe":
+					giraffeModel(model);
+					controller.getSelectedGiraffe(model, tableClient);
+					type = "Giraffe";
+					break;
+				case "Cheetah":
+					cheetahModel(model);
+					controller.getSelectedCheetah(model, tableClient);
+					type = "Cheetah";
+					break;
+				}
+			}
+		});
+		btnClientSearch.setForeground(Color.WHITE);
+		btnClientSearch.setBackground(new Color(66, 111, 51));
+		btnClientSearch.setBounds(184, 434, 89, 23);
+		jpClient.add(btnClientSearch);
+
+		JButton btnClientBuy = new JButton("Buy Tickets");
+		btnClientBuy.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnClientBuy.setBounds(495, 393, 244, 64);
+		jpClient.add(btnClientBuy);
+
+		JLabel lbClientBackground = new JLabel("");
+		lbClientBackground.setBounds(0, 0, 848, 501);
+		jpClient.add(lbClientBackground);
 
 		JButton btnBossLogout = new JButton("LogOut");
 		btnBossLogout.setForeground(new Color(255, 255, 255));
@@ -243,15 +419,6 @@ public class Interfaz {
 				String id = String.valueOf(tm.getValueAt(tableBoss.getSelectedRow(), 0));
 				try {
 					controller.updateOption(type, id);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					controller.questionSure(type, id);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -418,106 +585,6 @@ public class Interfaz {
 		jpBoss.add(lbBossBackground);
 		addImage(jpBoss, lbBossBackground, "src/Photos/lion.png");
 
-		JLabel Title = new JLabel("Zoo");
-		Title.setForeground(new Color(255, 255, 255));
-		Title.setFont(new Font("Tahoma", Font.BOLD, 60));
-		Title.setBounds(352, 23, 118, 84);
-		jpLogin.add(Title);
-
-		usrTfLogin = new JTextField();
-		usrTfLogin.setForeground(new Color(255, 255, 255));
-		usrTfLogin.setBackground(new Color(201, 190, 190));
-		usrTfLogin.setToolTipText("User");
-		usrTfLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		usrTfLogin.setFont(new Font("Arial", Font.PLAIN, 20));
-		usrTfLogin.setBounds(285, 194, 265, 31);
-		jpLogin.add(usrTfLogin);
-		usrTfLogin.setColumns(10);
-
-		passTfLogin = new JPasswordField();
-		passTfLogin.setForeground(new Color(255, 255, 255));
-		passTfLogin.setBackground(new Color(201, 190, 190));
-		passTfLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		passTfLogin.setFont(new Font("Arial", Font.PLAIN, 18));
-		passTfLogin.setText("");
-		passTfLogin.setColumns(10);
-		passTfLogin.setBounds(285, 276, 265, 31);
-		jpLogin.add(passTfLogin);
-
-		JButton regTfLogin = new JButton("Register");
-		regTfLogin.setForeground(new Color(255, 255, 255));
-		regTfLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Controller controller = new Controller();
-				controller.clientRegister();
-			}
-		});
-		regTfLogin.setBackground(new Color(201, 190, 190));
-		regTfLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		regTfLogin.setBounds(227, 376, 118, 42);
-		jpLogin.add(regTfLogin);
-
-		JButton enterTfLogin = new JButton("Enter");
-		enterTfLogin.setForeground(new Color(255, 255, 255));
-		enterTfLogin.setBackground(new Color(201, 190, 190));
-		enterTfLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Controller controller = new Controller();
-				String user = usrTfLogin.getText();
-				String password = passTfLogin.getText();
-				int finalUser = controller.checkUser(user, password);
-
-				switch (finalUser) {
-				case 0:
-					panelLogin(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
-					JOptionPane.showMessageDialog(null, "Contraseña Erronea", null, JOptionPane.ERROR_MESSAGE);
-					break;
-				case 1:
-					panelBoss(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
-					personModel(model);
-					controller.getTableEmployee(model, tableBoss);
-					break;
-				case 2:
-					panelClient(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
-					break;
-				case 3:
-					panelFeeder(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
-					break;
-				case 4:
-					panelVet(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
-					break;
-				}
-
-				usrTfLogin.setText("");
-				passTfLogin.setText("");
-
-			}
-		});
-		enterTfLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		enterTfLogin.setBounds(475, 376, 118, 42);
-		jpLogin.add(enterTfLogin);
-
-		JLabel backgroundLogin = new JLabel("");
-		backgroundLogin.setBounds(0, 0, 848, 503);
-		jpLogin.add(backgroundLogin);
-		addImage(jpLogin, backgroundLogin, "src/Photos/panda.jpg");
-
-		JLabel lblNewLabel_1 = new JLabel("Client");
-		lblNewLabel_1.setBounds(383, 159, 45, 13);
-		jpClient.add(lblNewLabel_1);
-
-		JButton btnBossLogout_3 = new JButton("LogOut");
-		btnBossLogout_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Controller controller = new Controller();
-				controller.questionLogOut(jpBoss, jpLogin, jpClient, jpFeeder, jpVet);
-			}
-		});
-		btnBossLogout_3.setForeground(Color.WHITE);
-		btnBossLogout_3.setBackground(Color.BLACK);
-		btnBossLogout_3.setBounds(0, 0, 89, 23);
-		jpClient.add(btnBossLogout_3);
-
 		JLabel lbVet = new JLabel("Vet");
 		lbVet.setFont(new Font("Arial", Font.BOLD, 39));
 		lbVet.setBounds(365, 23, 97, 34);
@@ -662,7 +729,12 @@ public class Interfaz {
 		btnVetDelete.setBounds(450, 412, 121, 37);
 		jpVet.add(btnVetDelete);
 
+		JLabel lbVetBackground = new JLabel("");
+		lbVetBackground.setBounds(0, 0, 848, 501);
+		jpVet.add(lbVetBackground);
+
 		JLabel lbFeeder = new JLabel("Feeder");
+		lbFeeder.setForeground(new Color(255, 255, 255));
 		lbFeeder.setBounds(349, 28, 129, 46);
 		lbFeeder.setFont(new Font("Arial", Font.BOLD, 39));
 		jpFeeder.add(lbFeeder);
@@ -681,13 +753,19 @@ public class Interfaz {
 
 		JScrollPane spFeeder = new JScrollPane();
 		spFeeder.setBounds(40, 111, 769, 291);
+		spFeeder.setOpaque(false);
 		jpFeeder.add(spFeeder);
 
 		tableFeeder = new JTable();
+		tableFeeder.setForeground(new Color(255, 255, 255));
+		tableFeeder.setBackground(new Color(0, 128, 0));
 		spFeeder.setViewportView(tableFeeder);
+		tableFeeder.setEnabled(false);
 		tableFeeder.setModel(model);
 
 		JComboBox cbFeederSeeAnimals = new JComboBox();
+		cbFeederSeeAnimals.setBackground(new Color(66, 111, 51));
+		cbFeederSeeAnimals.setForeground(new Color(255, 255, 255));
 		cbFeederSeeAnimals.addItem("Dolphin");
 		cbFeederSeeAnimals.addItem("Snake");
 		cbFeederSeeAnimals.addItem("Crocodile");
@@ -698,6 +776,8 @@ public class Interfaz {
 		jpFeeder.add(cbFeederSeeAnimals);
 
 		JButton btnFeederSearch = new JButton("Search");
+		btnFeederSearch.setBackground(new Color(66, 111, 51));
+		btnFeederSearch.setForeground(new Color(255, 255, 255));
 		btnFeederSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controller controller = new Controller();
@@ -735,11 +815,14 @@ public class Interfaz {
 		});
 		btnFeederSearch.setBounds(377, 455, 89, 23);
 		jpFeeder.add(btnFeederSearch);
-		
-				JLabel lblFeederBackground = new JLabel("");
-				lblFeederBackground.setBounds(819, 11, -798, 479);
-				jpFeeder.add(lblFeederBackground);
-				addImage(jpFeeder, lblFeederBackground, "src/Photos/lion.png");
+
+		JLabel lbFeederBackground = new JLabel("");
+		lbFeederBackground.setBounds(0, 0, 848, 501);
+		jpFeeder.add(lbFeederBackground);
+		addImage(jpFeeder, lbFeederBackground, "src/Photos/zebra.png");
+		addImage(jpClient, lbClientBackground, "src/Photos/Elephant.png");
+		addImage(jpVet, lbVetBackground, "src/Photos/Giraff.png");
+
 
 	}
 
