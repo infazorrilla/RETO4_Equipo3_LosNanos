@@ -16,7 +16,7 @@ class ManagerTicketTest {
 	@Test
 	public void getIdTicket() {
 		ManagerTicket managerTicket = new ManagerTicket();
-		ArrayList<Ticket> ticket = managerTicket.selectTicket();
+		ArrayList<Ticket> ticket = managerTicket.selectAll();
 		for (int i = 0; i < ticket.size(); i++) {
 			System.out.print(ticket.get(i).getIdTicket());
 		}
@@ -27,7 +27,7 @@ class ManagerTicketTest {
 	public void inserTicket() throws ParseException {
 		ManagerTicket managerTicket = new ManagerTicket();
 		Ticket ticket = new Ticket();
-		managerTicket.insertTicket(ticket);
+		managerTicket.insert(ticket);
 		Date buyDate = (Date) ticket.get(0).getBuyDate();
 		equals(ticket);
 	}

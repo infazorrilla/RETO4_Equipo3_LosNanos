@@ -3,7 +3,6 @@ package Tests.Zone;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
