@@ -459,7 +459,7 @@ public class Controller {
 		return ret;
 	}
 
-	public void questionSure(String type, String id) {
+	public void questionSure(String type, String id) throws SQLException, Exception {
 		String[] options = { "Yes", "No" };
 		int result = JOptionPane.showOptionDialog(null, "Are you sure?", "Sure", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -467,93 +467,61 @@ public class Controller {
 
 		if (result == 0) {
 			if (type == "Boss") {
-				Boss boss = searchBossId(id);
-				try {
-					managerBoss.delete(boss);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			} else if (type == "Client") {
-				Client client = searchClientId(id);
-				try {
-					// managerClient.delete(client);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			} else if (type == "Feeder") {
-
 			} else if (type == "Vet") {
-
 			} else if (type == "Dolphin") {
-				try {
-					ManagerDolphin managerDolphin = new ManagerDolphin();
-					Dolphin dolphin = new Dolphin();
-					int idInt = Integer.valueOf(id);
-					dolphin.setId(idInt);
-					managerDolphin.delete(dolphin);
-
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+				ManagerDolphin managerDolphin = new ManagerDolphin();
+				Dolphin dolphin = new Dolphin();
+				int idInt = Integer.valueOf(id);
+				dolphin.setId(idInt);
+				managerDolphin.delete(dolphin);
 			} else if (type == "Snake") {
-				try {
-					ManagerSnake managerSnake = new ManagerSnake();
-					Snake snake = new Snake();
-					int idInt = Integer.valueOf(id);
-					snake.setId(idInt);
-					managerSnake.delete(snake);
-
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				ManagerSnake managerSnake = new ManagerSnake();
+				Snake snake = new Snake();
+				int idInt = Integer.valueOf(id);
+				snake.setId(idInt);
+				managerSnake.delete(snake);
 			} else if (type == "Crocodile") {
-				try {
-					ManagerCrocodile managerCrocodile = new ManagerCrocodile();
-					Crocodile crocodile = new Crocodile();
-					int idInt = Integer.valueOf(id);
-					crocodile.setId(idInt);
-					managerCrocodile.delete(crocodile);
-
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				ManagerCrocodile managerCrocodile = new ManagerCrocodile();
+				Crocodile crocodile = new Crocodile();
+				int idInt = Integer.valueOf(id);
+				crocodile.setId(idInt);
+				managerCrocodile.delete(crocodile);
 			} else if (type == "Giraffe") {
-				try {
-					ManagerGiraffe managerGiraffe = new ManagerGiraffe();
-					Giraffe giraffe = new Giraffe();
-					int idInt = Integer.valueOf(id);
-					giraffe.setId(idInt);
-					managerGiraffe.delete(giraffe);
-
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				ManagerGiraffe managerGiraffe = new ManagerGiraffe();
+				Giraffe giraffe = new Giraffe();
+				int idInt = Integer.valueOf(id);
+				giraffe.setId(idInt);
+				managerGiraffe.delete(giraffe);		
 			} else if (type == "Cheetah") {
-				try {
-					ManagerCheetah managerCheetah = new ManagerCheetah();
-					Cheetah cheetah = new Cheetah();
-					int idInt = Integer.valueOf(id);
-					cheetah.setId(idInt);
-					managerCheetah.delete(cheetah);
+				ManagerCheetah managerCheetah = new ManagerCheetah();
+				Cheetah cheetah = new Cheetah();
+				int idInt = Integer.valueOf(id);
+				cheetah.setId(idInt);
+				managerCheetah.delete(cheetah);
+			} else if (type == "Aquarium") {
+				ManagerAquarium managerAquarium = new ManagerAquarium();
+				Aquarium aquarium = new Aquarium();
+				int idInt = Integer.valueOf(id);
+				aquarium.setId(idInt);
+				managerAquarium.delete(aquarium);
+			} else if (type == "Swamp") {
+				ManagerSwamp managerSwamp = new ManagerSwamp();
+				Swamp swamp = new Swamp();
+				int idInt = Integer.valueOf(id);
+				swamp.setId(idInt);
+				managerSwamp.delete(swamp);
+			} else if (type == "Savannah") {
+				ManagerSavannah managerSavannah = new ManagerSavannah();
+				Savannah savannah= new Savannah();
+				int idInt = Integer.valueOf(id);
+				savannah.setId(idInt);
+				managerSavannah.delete(savannah);
+			} 
 
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			} else if (result == 1) {
-
-			}
+		} else if (result == 1) {
+			
 		}
 	}
 
@@ -579,11 +547,6 @@ public class Controller {
 		} else if (type.equals("Dolphin")) {
 			updateDolphin(id);
 		}
-//		else if (result == 1) {
-//			updateOptionAnimal();
-//		} else if (result == 2) {
-//			updateOptionZone();
-//		}
 	}
 
 	private void updateAquarium(String id) throws SQLException, Exception {
@@ -694,25 +657,6 @@ public class Controller {
 		}
 	}
 
-	private void updateOptionEmployee() {
-		String[] optionsEmployee = { "Boss", "Feeder", "Vet" };
-		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of employee?", "Add",
-				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsEmployee, optionsEmployee[0]);
-		switch (resultEmployee) {
-		case 0:
-			updateBoss();
-			break;
-		case 1:
-			updateFeeder();
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			break;
-		}
-	}
 
 	public void updateBoss() {
 		JTextField name = new JTextField();
