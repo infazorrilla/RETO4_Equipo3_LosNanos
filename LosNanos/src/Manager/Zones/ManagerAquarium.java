@@ -202,41 +202,23 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 				Connection connection = null;
 				
 				// Vamos a lanzar una sentencia SQL contra la BBDD
-				PreparedStatement  preparedStatement  = null;
+			PreparedStatement  preparedStatement  = null;
+				// El Driver que vamos a usar
+				Class.forName(DBUtils.DRIVER);
 				
-				try {
-					// El Driver que vamos a usar
-					Class.forName(DBUtils.DRIVER);
-					
-					// Abrimos la conexion con BBDD
-					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-					
-					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "delete from Aquarium where zoneId = ?";
-					preparedStatement = connection.prepareStatement(sql);
-					preparedStatement.setInt (1, aquarium.getId());
-					
-					// La ejecutamos...
-					preparedStatement.executeUpdate();
-					
-				} catch (SQLException sqle) {  
-					System.out.println("Error con la BBDD - " + sqle.getMessage());
-				} catch(Exception e){ 
-					System.out.println("Error generico - " + e.getMessage());
-				} finally {
-					// Cerramos al reves de como las abrimos
-					try {
-						if (preparedStatement != null) 
-							preparedStatement.close(); 
-					} catch(Exception e){ 
-						// No hace falta				
-					};
-					try {
-						if (connection != null) 
-							connection.close(); 
-					} catch(Exception e){ 
-						// No hace falta
-					};					
-				}
+				// Abrimos la conexion con BBDD
+				connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+				
+				// Montamos la SQL. Las ? se rellenan a continuacion
+				String sql = "delete from Aquarium where zoneId = ?";
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setInt (1, aquarium.getId());
+				
+				// La ejecutamos...
+				preparedStatement.executeUpdate();
+				if (preparedStatement != null) 
+					preparedStatement.close(); 
+				if (connection != null) 
+					connection.close(); 
 	}
 }

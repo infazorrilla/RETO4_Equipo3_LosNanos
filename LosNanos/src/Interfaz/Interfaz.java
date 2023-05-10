@@ -538,8 +538,7 @@ public class Interfaz {
 					try {
 						controller.getTableAquarium(model, tableBoss);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -554,8 +553,7 @@ public class Interfaz {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
 					}
 					type = "Swamp";
 					break;
