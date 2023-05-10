@@ -546,6 +546,14 @@ public class Controller {
 			updateSavannah(id);
 		} else if (type.equals("Dolphin")) {
 			updateDolphin(id);
+		} else if (type.equals("Snake")) {
+			updateSnake(id);
+		} else if (type.equals("Crocodile")) {
+			updateCrocodile(id);
+		} else if (type.equals("Giraffe")) {
+			updateGiraffe(id);
+		} else if (type.equals("Cheeta")) {
+			updateCheeta(id);
 		} else if (type.equals("Boss")) {
 			updateBoss(id);
 		}
@@ -660,7 +668,7 @@ public class Controller {
 	}
 
 
-	public void updateBoss(String id) {
+	public void updateBoss(String id) throws SQLException, Exception {
 		JTextField name = new JTextField();
 		JTextField surname = new JTextField();
 		JTextField user = new JTextField();
@@ -680,16 +688,12 @@ public class Controller {
 					|| employeeNumCharge.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
 			} else {
-				try {
 					ManagerBoss managerBoss = new ManagerBoss();
 					int ssNumberInt = Integer.parseInt(ssNumber.getText());
 					int employeeNumChargeInt = Integer.parseInt(employeeNumCharge.getText());
-					Boss bossToUpdate = new Boss(id, name.getText(), surname.getText(), user.getText(), password.getText(),
-							ssNumberInt, employeeNumChargeInt);
+					Boss bossToUpdate = new Boss(name.getText(), surname.getText(), user.getText(), password.getText(),
+							id, ssNumberInt, employeeNumChargeInt);
 					managerBoss.update(bossToUpdate);
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
-				}
 			}
 		}
 
@@ -765,7 +769,7 @@ public class Controller {
 
 	}
 
-	public void updateDolphin(String id) throws ParseException {
+	public void updateDolphin(String id) {
 		int idInt = Integer.valueOf(id);
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
@@ -919,7 +923,7 @@ public class Controller {
 
 	}
 
-	public void UpdateGiraffe(String id) throws ParseException {
+	public void updateGiraffe(String id) throws ParseException {
 		int idInt = Integer.valueOf(id);
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
@@ -1063,7 +1067,7 @@ public class Controller {
 		JTextField employeeNumCharge = new JTextField();
 		JTextField ssNumber = new JTextField();
 
-		Object[] message = { "Name: *", name, "Surname: *", surname, "Id: *", id, "User: *", user, "Password *",
+		Object[] message = { "Id: *", id, "Name: *", name, "Surname: *", surname, "User: *", user, "Password *",
 				password, "Social Security Number *", ssNumber, "employeeNumCharge *", employeeNumCharge };
 
 		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Jefe", JOptionPane.OK_CANCEL_OPTION);
