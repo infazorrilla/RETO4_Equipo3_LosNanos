@@ -41,7 +41,6 @@ public class Interfaz {
 	Controller controller = new Controller();
 	private JButton btnBossDelete;
 	private JTable tableVet;
-	private JTable table;
 	private JTable tableFeeder;
 
 	/**
@@ -139,13 +138,21 @@ public class Interfaz {
 		jpBoss.add(lbBossTitle);
 
 		btnBossDelete = new JButton("Delete");
-		btnBossDelete.setEnabled(false);
+		btnBossDelete.setEnabled(true);
 		btnBossDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tm = (DefaultTableModel) tableBoss.getModel();
 				String id = String.valueOf(tm.getValueAt(tableBoss.getSelectedRow(), 0));
 				Controller controller = new Controller();
-				controller.questionSure(type, id);
+				try {
+					controller.questionSure(type, id);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnBossDelete.setBackground(new Color(235, 199, 150));
@@ -163,7 +170,6 @@ public class Interfaz {
 				model.setRowCount(0);
 				model.setColumnCount(0);
 				personModel(model);
-				btnBossDelete.setEnabled(true);
 				controller.getTableBoss(model, tableBoss);
 				type = "Boss";
 
@@ -183,7 +189,6 @@ public class Interfaz {
 				model.setColumnCount(0);
 				personModel(model);
 				controller.getTableFeeder(model, tableBoss);
-				btnBossDelete.setEnabled(true);
 				type = "Feeder";
 			}
 		});
@@ -201,7 +206,6 @@ public class Interfaz {
 				model.setColumnCount(0);
 				personModel(model);
 				controller.getTableVet(model, tableBoss);
-				btnBossDelete.setEnabled(true);
 				type = "Vet";
 			}
 		});
@@ -246,7 +250,15 @@ public class Interfaz {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				controller.questionSure(type, id);
+				try {
+					controller.questionSure(type, id);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnBossUpdate.setBackground(new Color(235, 199, 150));
@@ -265,7 +277,6 @@ public class Interfaz {
 				model.setColumnCount(0);
 				personModel(model);
 				controller.getTableClient(model, tableBoss);
-				btnBossDelete.setEnabled(true);
 				type = "Client";
 			}
 		});
@@ -613,7 +624,15 @@ public class Interfaz {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				controller.questionSure(type, id);
+				try {
+					controller.questionSure(type, id);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 
 		});
@@ -622,12 +641,21 @@ public class Interfaz {
 		jpVet.add(btnVetUpdate);
 
 		JButton btnVetDelete = new JButton("DELETE");
+		btnVetDelete.setEnabled(true);
 		btnVetDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel tm = (DefaultTableModel) tableVet.getModel();
 				String id = String.valueOf(tm.getValueAt(tableVet.getSelectedRow(), 0));
 				Controller controller = new Controller();
-				controller.questionSure(type, id);
+				try {
+					controller.questionSure(type, id);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnVetDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
