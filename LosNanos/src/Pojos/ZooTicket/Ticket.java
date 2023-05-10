@@ -10,6 +10,7 @@ public class Ticket implements Serializable{
 	private static final long serialVersionUID = 2537052963906824962L;
 	private int idTicket = 0;
 	private Date buyDate = null;
+	
 	public int getIdTicket() {
 		return idTicket;
 	}
@@ -22,6 +23,4 @@ public class Ticket implements Serializable{
 	public void setBuyDate(Date buyDate) {
 		this.buyDate = buyDate;
 	}
-	
-	
 }
