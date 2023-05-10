@@ -250,15 +250,6 @@ public class Interfaz {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				try {
-					controller.questionSure(type, id);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 			}
 		});
 		btnBossUpdate.setBackground(new Color(235, 199, 150));
