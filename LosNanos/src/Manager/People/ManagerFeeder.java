@@ -167,14 +167,15 @@ public class ManagerFeeder implements ManagerInterface<Feeder> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update employee, feeder set name = ?, surname = ?, user = ?, password = ?, specializedDiet = ? where id = ?";
+			String sql = "update employee, feeder set name = ?, surname = ?, user = ?, password = ?, specializedDiet = ? where ssNumber = ?, id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, feeder.getName());
 			preparedStatement.setString(2, feeder.getSurname());
 			preparedStatement.setString(3, feeder.getUser());
 			preparedStatement.setString(4, feeder.getPassword());
 			preparedStatement.setString(5, feeder.getSpecializedDiet());
-			preparedStatement.setString(6, feeder.getId());
+			preparedStatement.setInt(6, feeder.getSsNumber());
+			preparedStatement.setString(7, feeder.getId());
 
 			// La ejecutamos...
 			preparedStatement.executeUpdate();

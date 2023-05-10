@@ -546,6 +546,8 @@ public class Controller {
 			updateSavannah(id);
 		} else if (type.equals("Dolphin")) {
 			updateDolphin(id);
+		} else if (type.equals("Boss")) {
+			updateBoss(id);
 		}
 	}
 
@@ -658,7 +660,7 @@ public class Controller {
 	}
 
 
-	public void updateBoss() {
+	public void updateBoss(String id) {
 		JTextField name = new JTextField();
 		JTextField surname = new JTextField();
 		JTextField user = new JTextField();
@@ -682,7 +684,7 @@ public class Controller {
 					ManagerBoss managerBoss = new ManagerBoss();
 					int ssNumberInt = Integer.parseInt(ssNumber.getText());
 					int employeeNumChargeInt = Integer.parseInt(employeeNumCharge.getText());
-					Boss bossToUpdate = new Boss(name.getText(), surname.getText(), user.getText(), password.getText(),
+					Boss bossToUpdate = new Boss(id, name.getText(), surname.getText(), user.getText(), password.getText(),
 							ssNumberInt, employeeNumChargeInt);
 					managerBoss.update(bossToUpdate);
 				} catch (Exception e) {

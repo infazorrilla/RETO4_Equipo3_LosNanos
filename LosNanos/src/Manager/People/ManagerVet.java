@@ -166,14 +166,15 @@ public class ManagerVet implements ManagerInterface<Vet> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update employee, feeder set name = ?, surname = ?, user = ?, password = ?, specializedDiet = ? where id = ?";
+			String sql = "update employee, feeder set name = ?, surname = ?, user = ?, password = ?, specializedDiet = ? where ssNumber = ?, id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, vet.getName());
 			preparedStatement.setString(2, vet.getSurname());
 			preparedStatement.setString(3, vet.getUser());
 			preparedStatement.setString(4, vet.getPassword());
 			preparedStatement.setString(5, vet.getSpecializedAnimalType());
-			preparedStatement.setString(6, vet.getId());
+			preparedStatement.setInt(6, vet.getSsNumber());
+			preparedStatement.setString(7, vet.getId());
 
 			// La ejecutamos...
 			preparedStatement.executeUpdate();
