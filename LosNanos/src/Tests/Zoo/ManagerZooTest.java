@@ -23,7 +23,7 @@ class ManagerZooTest {
 			zoo = zoos.get(0);
 			String expected = zoo.toString();
 			System.out.println(expected);
-			assertEquals("Zoo [id=1, location=null, zoo=null]", expected);
+			assertEquals("Zoo [id=1, location=null, name=null]", expected);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

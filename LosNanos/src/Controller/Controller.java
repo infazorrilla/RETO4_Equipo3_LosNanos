@@ -547,11 +547,6 @@ public class Controller {
 		} else if (type.equals("Dolphin")) {
 			updateDolphin(id);
 		}
-//		else if (result == 1) {
-//			updateOptionAnimal();
-//		} else if (result == 2) {
-//			updateOptionZone();
-//		}
 	}
 
 	private void updateAquarium(String id) throws SQLException, Exception {
