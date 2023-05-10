@@ -663,6 +663,7 @@ public class Interfaz {
 		jpVet.add(btnVetDelete);
 
 		JLabel lbFeeder = new JLabel("Feeder");
+		lbFeeder.setForeground(new Color(255, 255, 255));
 		lbFeeder.setBounds(349, 28, 129, 46);
 		lbFeeder.setFont(new Font("Arial", Font.BOLD, 39));
 		jpFeeder.add(lbFeeder);
@@ -684,10 +685,14 @@ public class Interfaz {
 		jpFeeder.add(spFeeder);
 
 		tableFeeder = new JTable();
+		tableFeeder.setForeground(new Color(255, 255, 255));
+		tableFeeder.setBackground(new Color(0, 128, 0));
 		spFeeder.setViewportView(tableFeeder);
 		tableFeeder.setModel(model);
 
 		JComboBox cbFeederSeeAnimals = new JComboBox();
+		cbFeederSeeAnimals.setBackground(new Color(66, 111, 51));
+		cbFeederSeeAnimals.setForeground(new Color(255, 255, 255));
 		cbFeederSeeAnimals.addItem("Dolphin");
 		cbFeederSeeAnimals.addItem("Snake");
 		cbFeederSeeAnimals.addItem("Crocodile");
@@ -698,6 +703,8 @@ public class Interfaz {
 		jpFeeder.add(cbFeederSeeAnimals);
 
 		JButton btnFeederSearch = new JButton("Search");
+		btnFeederSearch.setBackground(new Color(66, 111, 51));
+		btnFeederSearch.setForeground(new Color(255, 255, 255));
 		btnFeederSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controller controller = new Controller();
@@ -735,11 +742,11 @@ public class Interfaz {
 		});
 		btnFeederSearch.setBounds(377, 455, 89, 23);
 		jpFeeder.add(btnFeederSearch);
-		
-				JLabel lblFeederBackground = new JLabel("");
-				lblFeederBackground.setBounds(819, 11, -798, 479);
-				jpFeeder.add(lblFeederBackground);
-				addImage(jpFeeder, lblFeederBackground, "src/Photos/lion.png");
+				
+				JLabel lbFeederBackground = new JLabel("");
+				lbFeederBackground.setBounds(0, 0, 848, 501);
+				jpFeeder.add(lbFeederBackground);
+				addImage(jpFeeder, lbFeederBackground, "src/Photos/zebra.png");
 
 	}
 
