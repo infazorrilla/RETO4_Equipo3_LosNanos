@@ -78,7 +78,6 @@ public class Interfaz {
 
 		final DefaultTableModel model;
 		model = new DefaultTableModel();
-		personModel(model);
 
 		JPanel jpLogin = new JPanel();
 		jpLogin.setBounds(0, 0, 848, 501);
@@ -146,7 +145,7 @@ public class Interfaz {
 				DefaultTableModel tm = (DefaultTableModel) tableBoss.getModel();
 				String id = String.valueOf(tm.getValueAt(tableBoss.getSelectedRow(), 0));
 				Controller controller = new Controller();
-				controller.questionSure(btnBossDelete, type, id);
+				controller.questionSure(type, id);
 			}
 		});
 		btnBossDelete.setBackground(new Color(235, 199, 150));
@@ -247,7 +246,7 @@ public class Interfaz {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				controller.questionSure(btnBossDelete, type, id);
+				controller.questionSure(type, id);
 			}
 		});
 		btnBossUpdate.setBackground(new Color(235, 199, 150));
@@ -464,6 +463,7 @@ public class Interfaz {
 					break;
 				case 1:
 					panelBoss(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+					personModel(model);
 					controller.getTableEmployee(model, tableBoss);
 					break;
 				case 2:
@@ -613,7 +613,7 @@ public class Interfaz {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				controller.questionSure(btnBossDelete, type, id);
+				controller.questionSure(type, id);
 			}
 
 		});
@@ -622,6 +622,14 @@ public class Interfaz {
 		jpVet.add(btnVetUpdate);
 
 		JButton btnVetDelete = new JButton("DELETE");
+		btnVetDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel tm = (DefaultTableModel) tableVet.getModel();
+				String id = String.valueOf(tm.getValueAt(tableVet.getSelectedRow(), 0));
+				Controller controller = new Controller();
+				controller.questionSure(type, id);
+			}
+		});
 		btnVetDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnVetDelete.setBounds(450, 412, 121, 37);
 		jpVet.add(btnVetDelete);
