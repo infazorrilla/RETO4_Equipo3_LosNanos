@@ -33,7 +33,7 @@ public class Boss extends Employee {
 		this.employeeNumCharge = employeeNumCharge;
 	}
 	
-	public Boss(String name, String surname, String user, String password, String id, int ssNumber,
+	public Boss(String name, String surname, String id, String user, String password, int ssNumber,
 			int employeeNumCharge) {
 		super(name, surname, user, password, ssNumber);
 		this.id = id;
