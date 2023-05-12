@@ -68,9 +68,9 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
                 ret.add(swamp);
 			}
 		} catch (SQLException sqle) {  
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
+			throw sqle;
 		} catch(Exception e){ 
-			System.out.println("Error generico - " + e.getMessage());
+			throw e;
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
@@ -215,7 +215,7 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
 					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "delete from Swamp where zoneId = ?";
+					String sql = "delete from zones where Id = ?";
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setInt (1, swamp.getId());
 					

@@ -323,11 +323,9 @@ public class Interfaz {
 				try {
 					controller.questionSure(type, id);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "No se ha podido borrar", null, JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -420,11 +418,9 @@ public class Interfaz {
 				try {
 					controller.updateOption(type, id);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "No se ha podido actualizar", null, JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -540,8 +536,7 @@ public class Interfaz {
 					} catch (SQLException e1) {
 						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
 					}
 					type = "Aquarium";
 					break;
@@ -550,10 +545,9 @@ public class Interfaz {
 					try {
 						controller.getTableSwamp(model, tableBoss);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
 					}
 					type = "Swamp";
 					break;
@@ -562,11 +556,10 @@ public class Interfaz {
 					try {
 						controller.getTableSavannah(model, tableBoss);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
 					}
 					type = "Savannah";
 					break;

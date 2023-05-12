@@ -212,7 +212,7 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
 					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "delete from Savannah where zoneId = ?";
+					String sql = "delete from zones where Id = ?";
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setInt (1, savannah.getId());
 					
