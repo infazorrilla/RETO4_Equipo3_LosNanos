@@ -44,7 +44,7 @@ public class ManagerZoo implements ManagerInterface<Zoo>{
 				if (null == ret)
 					ret = new ArrayList<Zoo>();
 
-				Zoo zoo= new Zoo();
+				Zoo zoo = new Zoo(sql, sql, sql);
 
 				String location = resultSet.getString("location");
 				int id = resultSet.getInt("id");
