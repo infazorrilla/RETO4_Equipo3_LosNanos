@@ -395,7 +395,7 @@ public class Controller {
 
 	}
 
-	public void getTableAquarium(DefaultTableModel model, JTable table) throws SQLException, Exception {
+	public void getTableAquarium(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Aquarium> aquariums = null;
 		ManagerAquarium managerAquarium = new ManagerAquarium();
 		aquariums = managerAquarium.selectAll();
@@ -407,7 +407,7 @@ public class Controller {
 
 	}
 
-	public void getTableSwamp(DefaultTableModel model, JTable table) throws SQLException, Exception {
+	public void getTableSwamp(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Swamp> swamps = null;
 		ManagerSwamp managerSwamp = new ManagerSwamp();
 		swamps = managerSwamp.selectAll();
@@ -418,7 +418,7 @@ public class Controller {
 		}
 	}
 
-	public void getTableSavannah(DefaultTableModel model, JTable table) throws SQLException, Exception {
+	public void getTableSavannah(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Savannah> savannahs = null;
 		ManagerSavannah managerSavannah = new ManagerSavannah();
 		savannahs = managerSavannah.selectAll();
@@ -459,7 +459,7 @@ public class Controller {
 		return ret;
 	}
 
-	public void questionSure(String type, String id) throws SQLException, Exception {
+	public void questionSure(String type, String id) throws SQLException, ClassNotFoundException, Exception {
 		String[] options = { "Yes", "No" };
 		int result = JOptionPane.showOptionDialog(null, "Are you sure?", "Sure", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -537,7 +537,7 @@ public class Controller {
 		// managerClient.deleteClient(id);
 	}
 
-	public void updateOption(String type, String id) throws SQLException, Exception {
+	public void updateOption(String type, String id) throws SQLException, ClassNotFoundException, Exception {
 		if (type.equals("Aquarium")) {
 			updateAquarium(id);
 		} else if (type.equals("Swamp")) {
@@ -559,7 +559,7 @@ public class Controller {
 		}
 	}
 
-	private void updateAquarium(String id) throws SQLException, Exception {
+	private void updateAquarium(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.parseInt(id);
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
@@ -595,7 +595,7 @@ public class Controller {
 		}
 	}
 
-	private void updateSwamp(String id) throws SQLException, Exception {
+	private void updateSwamp(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.parseInt(id);
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
@@ -631,7 +631,7 @@ public class Controller {
 		}
 	}
 
-	private void updateSavannah(String id) throws SQLException, Exception {
+	private void updateSavannah(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.parseInt(id);
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
@@ -1025,7 +1025,7 @@ public class Controller {
 
 	}
 
-	public void addOption() throws SQLException, Exception {
+	public void addOption() throws SQLException, ClassNotFoundException , Exception{
 		String[] options = { "Employee", "Animal", "Zone" };
 		int result = JOptionPane.showOptionDialog(null, "What do you want to add?", "Add", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -1117,7 +1117,7 @@ public class Controller {
 		}
 	}
 
-	private void addOptionZone() throws SQLException, Exception {
+	private void addOptionZone() throws SQLException, ClassNotFoundException {
 		String[] optionsZone = { "Aquarium", "Swamp", "Savannah" };
 		int resultZone = JOptionPane.showOptionDialog(null, "What kind of Zone?", "Add", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, optionsZone, optionsZone[0]);
@@ -1130,7 +1130,7 @@ public class Controller {
 		}
 	}
 
-	private void addAquarium() throws SQLException, Exception {
+	private void addAquarium() throws SQLException, ClassNotFoundException {
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
 		JTextField speciesNumber = new JTextField();
@@ -1166,7 +1166,7 @@ public class Controller {
 
 	}
 
-	private void addSwamp() throws SQLException, Exception {
+	private void addSwamp() throws SQLException, ClassNotFoundException {
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
 		JTextField speciesNumber = new JTextField();
@@ -1200,7 +1200,7 @@ public class Controller {
 		}
 	}
 
-	private void addSavannah() throws SQLException, Exception {
+	private void addSavannah() throws SQLException, ClassNotFoundException {
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
 		JTextField speciesNumber = new JTextField();

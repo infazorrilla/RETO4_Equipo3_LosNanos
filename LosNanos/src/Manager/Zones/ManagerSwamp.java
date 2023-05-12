@@ -15,7 +15,7 @@ import utils.DBUtils;
 public class ManagerSwamp implements ManagerInterface<Swamp> {
 
 	@Override
-	public ArrayList<Swamp> selectAll() throws SQLException, Exception {
+	public ArrayList<Swamp> selectAll() throws SQLException, ClassNotFoundException {
 		ArrayList <Swamp> ret = null;
 		
 		// SQL que queremos lanzar
@@ -68,9 +68,9 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
                 ret.add(swamp);
 			}
 		} catch (SQLException sqle) {  
-			throw sqle;
-		} catch(Exception e){ 
-			throw e;
+			throw new SQLException ();
+		} catch(ClassNotFoundException e){ 
+			throw new ClassNotFoundException();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
@@ -96,151 +96,151 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 	}
 
 	@Override
-	public void insert(Swamp swamp) throws SQLException, Exception {
+	public void insert(Swamp swamp) throws SQLException, ClassNotFoundException {
 		// La conexion con BBDD
-				Connection connection = null;
-				
-				// Vamos a lanzar una sentencia SQL contra la BBDD
-				Statement statement = null;
-				
-				try {
-					// El Driver que vamos a usar
-					Class.forName(DBUtils.DRIVER);
-					
-					// Abrimos la conexion con BBDD
-					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-					
-					// Vamos a lanzar la sentencia...
-					statement = connection.createStatement();
-					
-					// Montamos la SQL
-					
-					String sql = "insert into Zones (extension, animalsNumber, speciesNumber) VALUES ('" + 
-							swamp.getExtension() + "', '" +  
-							swamp.getAnimalsNumber() + "', '" + 	
-							swamp.getSpeciesNumber() + "')";
-					
-					String sql2 = "insert into swamp (zoneId, waterSurface) SELECT MAX(id), " + 
-							swamp.getWaterSurface() + "FROM zones";
-					
-					
-					// La ejecutamos...
-					statement.executeUpdate(sql);
-					statement.executeUpdate(sql2);
-					
-				} catch (SQLException sqle) {  
-					System.out.println("Error con la BBDD - " + sqle.getMessage());
-				} catch(Exception e){ 
-					System.out.println("Error generico - " + e.getMessage());
-				} finally {
-					// Cerramos al reves de como las abrimos
-					try {
-						if (statement != null) 
-							statement.close(); 
-					} catch(Exception e){ 
-						// No hace falta				
-					};
-					try {
-						if (connection != null) 
-							connection.close(); 
-					} catch(Exception e){ 
-						// No hace falta
-					};					
-				}
+		Connection connection = null;
+		
+		// Vamos a lanzar una sentencia SQL contra la BBDD
+		Statement statement = null;
+		
+		try {
+			// El Driver que vamos a usar
+			Class.forName(DBUtils.DRIVER);
+			
+			// Abrimos la conexion con BBDD
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			
+			// Vamos a lanzar la sentencia...
+			statement = connection.createStatement();
+			
+			// Montamos la SQL
+			
+			String sql = "insert into Zones (extension, animalsNumber, speciesNumber) VALUES ('" + 
+					swamp.getExtension() + "', '" +  
+					swamp.getAnimalsNumber() + "', '" + 	
+					swamp.getSpeciesNumber() + "')";
+			
+			String sql2 = "insert into swamp (zoneId, waterSurface) SELECT MAX(id), " + 
+					swamp.getWaterSurface() + "FROM zones";
+			
+			
+			// La ejecutamos...
+			statement.executeUpdate(sql);
+			statement.executeUpdate(sql2);
+			
+		} catch (SQLException sqle) {  
+			throw new SQLException ();
+		} catch(ClassNotFoundException e){ 
+			throw new ClassNotFoundException();
+		} finally {
+			// Cerramos al reves de como las abrimos
+			try {
+				if (statement != null) 
+					statement.close(); 
+			} catch(Exception e){ 
+				// No hace falta				
+			};
+			try {
+				if (connection != null) 
+					connection.close(); 
+			} catch(Exception e){ 
+				// No hace falta
+			};					
+		}
 	}
 
 	@Override
-	public void update(Swamp swamp) throws SQLException, Exception {
+	public void update(Swamp swamp) throws SQLException, ClassNotFoundException {
 		// La conexion con BBDD
-				Connection connection = null;
-				
-				// Vamos a lanzar una sentencia SQL contra la BBDD
-				PreparedStatement  preparedStatement  = null;
-				
-				try {
-					// El Driver que vamos a usar
-					Class.forName(DBUtils.DRIVER);
-					
-					// Abrimos la conexion con BBDD
-					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-					
-					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "update Zones, swamp set waterSurface = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ? and zoneId = ?";
-					preparedStatement = connection.prepareStatement(sql);
-					preparedStatement.setFloat (1, swamp.getWaterSurface());
-					preparedStatement.setFloat (2, swamp.getExtension());
-					preparedStatement.setInt (3, swamp.getAnimalsNumber());
-					preparedStatement.setInt (4, swamp.getSpeciesNumber());
-					preparedStatement.setInt (5, swamp.getId());
-					preparedStatement.setInt (6, swamp.getId());
-					
-					
-					// La ejecutamos...
-					preparedStatement.executeUpdate();
-					
-				} catch (SQLException sqle) {  
-					System.out.println("Error con la BBDD - " + sqle.getMessage());
-				} catch(Exception e){ 
-					System.out.println("Error generico - " + e.getMessage());
-				} finally {
-					// Cerramos al reves de como las abrimos
-					try {
-						if (preparedStatement != null) 
-							preparedStatement.close(); 
-					} catch(Exception e){ 
-						// No hace falta				
-					};
-					try {
-						if (connection != null) 
-							connection.close(); 
-					} catch(Exception e){ 
-						// No hace falta
-					};					
-				}
+		Connection connection = null;
+		
+		// Vamos a lanzar una sentencia SQL contra la BBDD
+		PreparedStatement  preparedStatement  = null;
+		
+		try {
+			// El Driver que vamos a usar
+			Class.forName(DBUtils.DRIVER);
+			
+			// Abrimos la conexion con BBDD
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			
+			// Montamos la SQL. Las ? se rellenan a continuacion
+			String sql = "update Zones, swamp set waterSurface = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ? and zoneId = ?";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setFloat (1, swamp.getWaterSurface());
+			preparedStatement.setFloat (2, swamp.getExtension());
+			preparedStatement.setInt (3, swamp.getAnimalsNumber());
+			preparedStatement.setInt (4, swamp.getSpeciesNumber());
+			preparedStatement.setInt (5, swamp.getId());
+			preparedStatement.setInt (6, swamp.getId());
+			
+			
+			// La ejecutamos...
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException sqle) {  
+			throw new SQLException ();
+		} catch(ClassNotFoundException e){ 
+			throw new ClassNotFoundException();
+		} finally {
+			// Cerramos al reves de como las abrimos
+			try {
+				if (preparedStatement != null) 
+					preparedStatement.close(); 
+			} catch(Exception e){ 
+				// No hace falta				
+			};
+			try {
+				if (connection != null) 
+					connection.close(); 
+			} catch(Exception e){ 
+				// No hace falta
+			};					
+		}
 	}
 
 	@Override
-	public void delete(Swamp swamp) throws SQLException, Exception {
+	public void delete(Swamp swamp) throws SQLException, ClassNotFoundException {
 		// La conexion con BBDD
-				Connection connection = null;
-				
-				// Vamos a lanzar una sentencia SQL contra la BBDD
-				PreparedStatement  preparedStatement  = null;
-				
-				try {
-					// El Driver que vamos a usar
-					Class.forName(DBUtils.DRIVER);
-					
-					// Abrimos la conexion con BBDD
-					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-					
-					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "delete from zones where Id = ?";
-					preparedStatement = connection.prepareStatement(sql);
-					preparedStatement.setInt (1, swamp.getId());
-					
-					// La ejecutamos...
-					preparedStatement.executeUpdate();
-					
-				} catch (SQLException sqle) {  
-					System.out.println("Error con la BBDD - " + sqle.getMessage());
-				} catch(Exception e){ 
-					System.out.println("Error generico - " + e.getMessage());
-				} finally {
-					// Cerramos al reves de como las abrimos
-					try {
-						if (preparedStatement != null) 
-							preparedStatement.close(); 
-					} catch(Exception e){ 
-						// No hace falta				
-					};
-					try {
-						if (connection != null) 
-							connection.close(); 
-					} catch(Exception e){ 
-						// No hace falta
-					};					
-				}
+		Connection connection = null;
+		
+		// Vamos a lanzar una sentencia SQL contra la BBDD
+		PreparedStatement  preparedStatement  = null;
+		
+		try {
+			// El Driver que vamos a usar
+			Class.forName(DBUtils.DRIVER);
+			
+			// Abrimos la conexion con BBDD
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			
+			// Montamos la SQL. Las ? se rellenan a continuacion
+			String sql = "delete from zones where Id = ?";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt (1, swamp.getId());
+			
+			// La ejecutamos...
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException sqle) {  
+			throw new SQLException ();
+		} catch(ClassNotFoundException e){ 
+			throw new ClassNotFoundException();
+		} finally {
+			// Cerramos al reves de como las abrimos
+			try {
+				if (preparedStatement != null) 
+					preparedStatement.close(); 
+			} catch(Exception e){ 
+				// No hace falta				
+			};
+			try {
+				if (connection != null) 
+					connection.close(); 
+			} catch(Exception e){ 
+				// No hace falta
+			};					
+		}
 	}
 
 }

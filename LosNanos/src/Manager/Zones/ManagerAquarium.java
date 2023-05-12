@@ -15,7 +15,7 @@ import utils.DBUtils;
 public class ManagerAquarium implements ManagerInterface<Aquarium>{
 
 	@Override
-	public ArrayList<Aquarium> selectAll() throws SQLException, Exception {
+	public ArrayList<Aquarium> selectAll() throws SQLException, ClassNotFoundException {
 		ArrayList <Aquarium> ret = null;
 
 		// SQL que queremos lanzar
@@ -68,9 +68,9 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
                 ret.add(aquarium);
 			}
 		} catch (SQLException sqle) {  
-			System.out.println("Error con la BBDD - " + sqle.getMessage());
-		} catch(Exception e){ 
-			System.out.println("Error generico - " + e.getMessage());
+			throw new SQLException ();
+		} catch(ClassNotFoundException e){ 
+			throw new ClassNotFoundException();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
@@ -96,129 +96,146 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 	}
 
 	@Override
-	public void insert(Aquarium aquarium) throws SQLException, Exception {
+	public void insert(Aquarium aquarium) throws SQLException, ClassNotFoundException {
 		// La conexion con BBDD
-				Connection connection = null;
-				
-				// Vamos a lanzar una sentencia SQL contra la BBDD
-				Statement statement = null;
-				
-				try {
-					// El Driver que vamos a usar
-					Class.forName(DBUtils.DRIVER);
-					
-					// Abrimos la conexion con BBDD
-					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-					
-					// Vamos a lanzar la sentencia...
-					statement = connection.createStatement();
-					
-					// Montamos la SQL 
-					String sql = "insert into Zones (extension, animalsNumber, speciesNumber) VALUES ('" + 
-							aquarium.getExtension() + "', '" +  
-							aquarium.getAnimalsNumber() + "', '" + 	
-							aquarium.getSpeciesNumber() + "')";
-					
-					String sql2 = "insert into Aquarium (zoneId, waterTemp) SELECT MAX(id), " + 
-							aquarium.getWaterTemp() + " FROM zones";
-					
-					// La ejecutamos...
-					statement.executeUpdate(sql);
-					statement.executeUpdate(sql2);
-					
-				} catch (SQLException sqle) {  
-					System.out.println("Error con la BBDD - " + sqle.getMessage());
-				} catch(Exception e){ 
-					System.out.println("Error generico - " + e.getMessage());
-				} finally {
-					// Cerramos al reves de como las abrimos
-					try {
-						if (statement != null) 
-							statement.close(); 
-					} catch(Exception e){ 
-						// No hace falta				
-					};
-					try {
-						if (connection != null) 
-							connection.close(); 
-					} catch(Exception e){ 
-						// No hace falta
-					};					
-				}
-	}
-
-	@Override
-	public void update(Aquarium aquarium) throws SQLException, Exception {
-		// La conexion con BBDD
-				Connection connection = null;
-				
-				// Vamos a lanzar una sentencia SQL contra la BBDD
-				PreparedStatement  preparedStatement  = null;
-				
-				try {
-					// El Driver que vamos a usar
-					Class.forName(DBUtils.DRIVER);
-					
-					// Abrimos la conexion con BBDD
-					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-					
-					// Montamos la SQL. Las ? se rellenan a continuacion
-					String sql = "update Zones, aquarium set waterTemp = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ? and zoneId = ?";
-					preparedStatement = connection.prepareStatement(sql);
-					preparedStatement.setFloat (1, aquarium.getWaterTemp());
-					preparedStatement.setFloat (2, aquarium.getExtension());
-					preparedStatement.setInt (3, aquarium.getAnimalsNumber());
-					preparedStatement.setInt (4, aquarium.getSpeciesNumber());
-					preparedStatement.setInt (5, aquarium.getId());
-					preparedStatement.setInt (6, aquarium.getId());
-					
-					// La ejecutamos...
-					preparedStatement.executeUpdate();
-					
-				} catch (SQLException sqle) {  
-					System.out.println("Error con la BBDD - " + sqle.getMessage());
-				} catch(Exception e){ 
-					System.out.println("Error generico - " + e.getMessage());
-				} finally {
-					// Cerramos al reves de como las abrimos
-					try {
-						if (preparedStatement != null) 
-							preparedStatement.close(); 
-					} catch(Exception e){ 
-						// No hace falta				
-					};
-					try {
-						if (connection != null) 
-							connection.close(); 
-					} catch(Exception e){ 
-						// No hace falta
-					};					
-				}
-	}
-
-	@Override
-	public void delete(Aquarium aquarium) throws SQLException, Exception {
-		// La conexion con BBDD
-				Connection connection = null;
-				
-				// Vamos a lanzar una sentencia SQL contra la BBDD
-			PreparedStatement  preparedStatement  = null;
-				// El Driver que vamos a usar
-				Class.forName(DBUtils.DRIVER);
-				
-				// Abrimos la conexion con BBDD
-				connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-				
-				// Montamos la SQL. Las ? se rellenan a continuacion
-				String sql = "delete from zones where Id = ?";
-				preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setInt (1, aquarium.getId());
-				
-				// La ejecutamos...
-				preparedStatement.executeUpdate();
-				if (preparedStatement != null) 
-					preparedStatement.close(); 
+		Connection connection = null;
+		
+		// Vamos a lanzar una sentencia SQL contra la BBDD
+		Statement statement = null;
+		
+		try {
+			// El Driver que vamos a usar
+			Class.forName(DBUtils.DRIVER);
+			
+			// Abrimos la conexion con BBDD
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			
+			// Vamos a lanzar la sentencia...
+			statement = connection.createStatement();
+			
+			// Montamos la SQL 
+			String sql = "insert into Zones (extension, animalsNumber, speciesNumber) VALUES ('" + 
+					aquarium.getExtension() + "', '" +  
+					aquarium.getAnimalsNumber() + "', '" + 	
+					aquarium.getSpeciesNumber() + "')";
+			
+			String sql2 = "insert into Aquarium (zoneId, waterTemp) SELECT MAX(id), " + 
+					aquarium.getWaterTemp() + " FROM zones";
+			
+			// La ejecutamos...
+			statement.executeUpdate(sql);
+			statement.executeUpdate(sql2);
+			
+		} catch (SQLException sqle) {  
+			throw new SQLException ();
+		} catch(ClassNotFoundException e){ 
+			throw new ClassNotFoundException();
+		} finally {
+			// Cerramos al reves de como las abrimos
+			try {
+				if (statement != null) 
+					statement.close(); 
+			} catch(Exception e){ 
+				// No hace falta				
+			};
+			try {
 				if (connection != null) 
 					connection.close(); 
+			} catch(Exception e){ 
+				// No hace falta
+			};					
+		}
+	}
+
+	@Override
+	public void update(Aquarium aquarium) throws SQLException, ClassNotFoundException {
+		// La conexion con BBDD
+		Connection connection = null;
+		
+		// Vamos a lanzar una sentencia SQL contra la BBDD
+		PreparedStatement  preparedStatement  = null;
+		
+		try {
+			// El Driver que vamos a usar
+			Class.forName(DBUtils.DRIVER);
+			
+			// Abrimos la conexion con BBDD
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			
+			// Montamos la SQL. Las ? se rellenan a continuacion
+			String sql = "update Zones, aquarium set waterTemp = ?, extension = ?, animalsNumber = ?, speciesNumber = ? where Id = ? and zoneId = ?";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setFloat (1, aquarium.getWaterTemp());
+			preparedStatement.setFloat (2, aquarium.getExtension());
+			preparedStatement.setInt (3, aquarium.getAnimalsNumber());
+			preparedStatement.setInt (4, aquarium.getSpeciesNumber());
+			preparedStatement.setInt (5, aquarium.getId());
+			preparedStatement.setInt (6, aquarium.getId());
+			
+			// La ejecutamos...
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException sqle) {  
+			throw new SQLException ();
+		} catch(ClassNotFoundException e){ 
+			throw new ClassNotFoundException();
+		} finally {
+			// Cerramos al reves de como las abrimos
+			try {
+				if (preparedStatement != null) 
+					preparedStatement.close(); 
+			} catch(Exception e){ 
+				// No hace falta				
+			};
+			try {
+				if (connection != null) 
+					connection.close(); 
+			} catch(Exception e){ 
+				// No hace falta
+			};					
+		}
+	}
+
+	@Override
+	public void delete(Aquarium aquarium) throws SQLException, ClassNotFoundException {
+		// La conexion con BBDD
+		Connection connection = null;
+		
+		// Vamos a lanzar una sentencia SQL contra la BBDD
+		PreparedStatement  preparedStatement  = null;
+		try {
+			// El Driver que vamos a usar
+			Class.forName(DBUtils.DRIVER);
+			
+			// Abrimos la conexion con BBDD
+			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			
+			// Montamos la SQL. Las ? se rellenan a continuacion
+			String sql = "delete from zones where Id = ?";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt (1, aquarium.getId());
+			
+			// La ejecutamos...
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException sqle) {  
+			throw new SQLException ();
+		} catch(ClassNotFoundException e){ 
+			throw new ClassNotFoundException();
+		} finally {
+			// Cerramos al reves de como las abrimos
+			try {
+				if (preparedStatement != null) 
+					preparedStatement.close(); 
+			} catch(Exception e){ 
+				// No hace falta				
+			};
+			try {
+				if (connection != null) 
+					connection.close(); 
+			} catch(Exception e){ 
+				// No hace falta
+			};					
+		}
 	}
 }
