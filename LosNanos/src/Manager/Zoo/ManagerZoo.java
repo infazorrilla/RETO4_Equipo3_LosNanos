@@ -44,7 +44,7 @@ public class ManagerZoo implements ManagerInterface<Zoo>{
 				if (null == ret)
 					ret = new ArrayList<Zoo>();
 
-				Zoo zoo = new Zoo(sql, sql, sql);
+				Zoo zoo = new Zoo();
 
 				String location = resultSet.getString("location");
 				int id = resultSet.getInt("id");
@@ -104,10 +104,9 @@ public class ManagerZoo implements ManagerInterface<Zoo>{
 						statement = connection.createStatement();
 						
 						// Montamos la SQL 
-						String sql = "insert into Zoo (Location, Name, Id) VALUES ('" + 
-								zoo.getLocation() + "', '" +  
-								zoo.getId() + "', '" +  
-								zoo.getName() + "')";
+						String sql = "insert into Zoo (Name, Location ) VALUES ('" + 
+								zoo.getName() + "', '" + 
+								zoo.getLocation() + "')";
 						
 						// La ejecutamos...
 						statement.executeUpdate(sql);

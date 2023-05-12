@@ -1512,20 +1512,19 @@ public class Controller {
 	private void addOptionZoo() {
 		JTextField name = new JTextField();
 		JTextField location = new JTextField();
-		JTextField id = new JTextField();
 
 
-		Object[] message = { "Id : *", id, "Name: *", name, "Location: *", location };
+		Object[] message = {"Name: *", name, "Location: *", location };
 
 		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Zoo", JOptionPane.OK_CANCEL_OPTION);
 
 		if (option == JOptionPane.OK_OPTION) {
-			if (name.getText().isEmpty() || location.getText().isEmpty() || id.getText().isEmpty()) {
+			if (name.getText().isEmpty() || location.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
 			} else {
 				try {
 					ManagerZoo managerZoo = new ManagerZoo();
-					Zoo zooToInsert = new Zoo(name.getText(), location.getText(), id.getText());
+					Zoo zooToInsert = new Zoo(name.getText(), location.getText());
 							managerZoo.insert(zooToInsert);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
