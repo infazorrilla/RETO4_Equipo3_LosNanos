@@ -1026,7 +1026,7 @@ public class Controller {
 	}
 
 	public void addOption() throws SQLException, Exception {
-		String[] options = { "Employee", "Animal", "Zone" };
+		String[] options = { "Employee", "Animal", "Zone", "Zoo" };
 		int result = JOptionPane.showOptionDialog(null, "What do you want to add?", "Add", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		if (result == 0) {
@@ -1035,6 +1035,8 @@ public class Controller {
 			addOptionAnimal();
 		} else if (result == 2) {
 			addOptionZone();
+		} else if (result ==3) {
+			addOptionZoo();
 		}
 	}
 
@@ -1503,5 +1505,38 @@ public class Controller {
 		}
 
 	}
+	private void addOptionZoo() {
+		JTextField name = new JTextField();
+		JTextField country = new JTextField();
+		JTextField id = new JTextField();
+		JTextField user = new JTextField();
+		JTextField password = new JTextField();
 
+		JTextField employeeNumCharge = new JTextField();
+		JTextField ssNumber = new JTextField();
+
+		Object[] message = { "Id : *", id, "Name: *", name, "Surname: *", country, "User: *", user, "Password *",
+				password, "Social Security Number *", ssNumber, "employeeNumCharge *", employeeNumCharge };
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Jefe", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || country.getText().isEmpty() || id.getText().isEmpty()
+					|| user.getText().isEmpty() || password.getText().isEmpty() || ssNumber.getText().isEmpty()
+					|| employeeNumCharge.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					ManagerBoss managerBoss = new ManagerBoss();
+					int ssNumberInt = Integer.parseInt(ssNumber.getText());
+					int employeeNumChargeInt = Integer.parseInt(employeeNumCharge.getText());
+					Boss bossToInsert = new Boss(name.getText(), country.getText(), id.getText(), user.getText(),
+							password.getText(), ssNumberInt, employeeNumChargeInt);
+					managerBoss.insert(bossToInsert);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+	}
 }
