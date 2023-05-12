@@ -217,7 +217,7 @@ public class ManagerTicket implements ManagerInterface<Ticket> {
 							connection.close(); 
 					} catch(Exception e){ 
 						// No hace falta
-					};					
+					};	
 		}
 	}
 }

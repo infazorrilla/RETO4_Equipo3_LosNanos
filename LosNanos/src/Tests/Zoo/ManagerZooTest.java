@@ -13,7 +13,7 @@ import Manager.Zoo.ManagerZoo;
 class ManagerZooTest {
 	
 	private ManagerZoo managerZoo = new ManagerZoo();
-	private Zoo zoo = new Zoo (null, null, null);
+	private Zoo zoo = new Zoo ();
 	private ArrayList<Zoo> zoos = null;
 
 	@Test

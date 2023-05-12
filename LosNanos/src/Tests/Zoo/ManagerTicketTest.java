@@ -13,7 +13,7 @@ import Manager.Zoo.ManagerTicket;
 class ManagerTicketTest {
 	
 	private ManagerTicket managerTicket = new ManagerTicket();
-	private Ticket ticket = new Ticket ();
+	private Ticket ticket = new Ticket (dfds);
 	private ArrayList<Ticket> tickets = null;
 
 	@Test
