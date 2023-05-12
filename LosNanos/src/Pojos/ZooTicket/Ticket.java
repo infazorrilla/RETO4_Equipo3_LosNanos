@@ -1,16 +1,22 @@
 package Pojos.ZooTicket;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
-public class Ticket implements Serializable{
+import Pojos.Person.Client;
 
+public class Ticket implements Serializable{
 
 	private static final long serialVersionUID = 2537052963906824962L;
 	private int idTicket = 0;
 	private int id_Zoo = 0;
 	private int id_Client= 0;
 	private Date buyDate = null;
+	
+	protected ArrayList<Zoo> zoo = null;
+	
+	protected ArrayList<Client> client = null;
 	
 	public int getIdTicket() {
 		return idTicket;

@@ -29,6 +29,8 @@ import Manager.People.ManagerVet;
 import Manager.Zones.ManagerAquarium;
 import Manager.Zones.ManagerSavannah;
 import Manager.Zones.ManagerSwamp;
+import Manager.Zoo.ManagerTicket;
+import Manager.Zoo.ManagerZoo;
 import Pojos.Animal.Cheetah;
 import Pojos.Animal.Crocodile;
 import Pojos.Animal.Dolphin;
@@ -41,6 +43,8 @@ import Pojos.Person.Vet;
 import Pojos.Zone.Aquarium;
 import Pojos.Zone.Savannah;
 import Pojos.Zone.Swamp;
+import Pojos.ZooTicket.Ticket;
+import Pojos.ZooTicket.Zoo;
 
 public class Controller {
 
@@ -1025,8 +1029,8 @@ public class Controller {
 
 	}
 
-	public void addOption() throws SQLException, ClassNotFoundException , Exception{
-		String[] options = { "Employee", "Animal", "Zone" };
+	public void addOption() throws SQLException, Exception {
+		String[] options = { "Employee", "Animal", "Zone", "Zoo" };
 		int result = JOptionPane.showOptionDialog(null, "What do you want to add?", "Add", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		if (result == 0) {
@@ -1035,6 +1039,8 @@ public class Controller {
 			addOptionAnimal();
 		} else if (result == 2) {
 			addOptionZone();
+		} else if (result ==3) {
+			addOptionZoo();
 		}
 	}
 
@@ -1503,5 +1509,28 @@ public class Controller {
 		}
 
 	}
+	private void addOptionZoo() {
+		JTextField name = new JTextField();
+		JTextField location = new JTextField();
+		JTextField id = new JTextField();
 
+
+		Object[] message = { "Id : *", id, "Name: *", name, "Location: *", location };
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Zoo", JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			if (name.getText().isEmpty() || location.getText().isEmpty() || id.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					ManagerZoo managerZoo = new ManagerZoo();
+					Zoo zooToInsert = new Zoo(name.getText(), location.getText(), id.getText());
+							managerZoo.insert(zooToInsert);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+	}
 }

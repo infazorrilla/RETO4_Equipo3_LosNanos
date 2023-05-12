@@ -1,6 +1,10 @@
 package Pojos.ZooTicket;
 
+import java.util.ArrayList;
 import java.util.Objects;
+
+import Pojos.Person.Employee;
+import Pojos.Zone.Zone;
 
 public class Zoo{
 
@@ -9,6 +13,12 @@ public class Zoo{
 	private String name;
 	private String location;
 	
+	protected Zone zone = null;
+	protected ArrayList<Ticket> ticket = null;
+	protected Employee employee = null;
+	
+	public Zoo(String name, String id, String location) {
+	}
 	public int getId() {
 		return Id;
 	}
@@ -54,9 +64,4 @@ public class Zoo{
 	public String toString() {
 		return "Zoo [id=" + Id + ", name=" + name + ", location=" + location + "]";
 	}
-	
-	
-	
-	
-	
-	}
+}
