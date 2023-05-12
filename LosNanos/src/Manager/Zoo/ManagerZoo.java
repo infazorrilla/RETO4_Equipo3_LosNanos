@@ -104,10 +104,9 @@ public class ManagerZoo implements ManagerInterface<Zoo>{
 						statement = connection.createStatement();
 						
 						// Montamos la SQL 
-						String sql = "insert into Zoo (Location, Name, Id) VALUES ('" + 
-								zoo.getLocation() + "', '" +  
-								zoo.getId() + "', '" +  
-								zoo.getName() + "')";
+						String sql = "insert into Zoo (Name, Location ) VALUES ('" + 
+								zoo.getName() + "', '" + 
+								zoo.getLocation() + "')";
 						
 						// La ejecutamos...
 						statement.executeUpdate(sql);

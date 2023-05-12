@@ -17,8 +17,21 @@ public class Zoo{
 	protected ArrayList<Ticket> ticket = null;
 	protected Employee employee = null;
 	
-	public Zoo(String name, String id, String location) {
+	public Zoo(int id, String name, String location) {
+		this.Id = id;
+		this.name = name;
+		this.location = location;
 	}
+	
+	public Zoo() {
+		
+	}
+	
+	public Zoo(String name, String location) {
+		this.name = name;
+		this.location = location;
+	}
+
 	public int getId() {
 		return Id;
 	}
