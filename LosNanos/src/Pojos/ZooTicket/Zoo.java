@@ -17,6 +17,8 @@ public class Zoo{
 	protected ArrayList<Ticket> ticket = null;
 	protected Employee employee = null;
 	
+	public Zoo(String name, String id, String location) {
+	}
 	public int getId() {
 		return Id;
 	}
@@ -62,9 +64,4 @@ public class Zoo{
 	public String toString() {
 		return "Zoo [id=" + Id + ", name=" + name + ", location=" + location + "]";
 	}
-	
-	
-	
-	
-	
-	}
+}

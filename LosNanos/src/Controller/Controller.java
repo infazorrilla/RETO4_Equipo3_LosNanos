@@ -29,6 +29,8 @@ import Manager.People.ManagerVet;
 import Manager.Zones.ManagerAquarium;
 import Manager.Zones.ManagerSavannah;
 import Manager.Zones.ManagerSwamp;
+import Manager.Zoo.ManagerTicket;
+import Manager.Zoo.ManagerZoo;
 import Pojos.Animal.Cheetah;
 import Pojos.Animal.Crocodile;
 import Pojos.Animal.Dolphin;
@@ -41,6 +43,8 @@ import Pojos.Person.Vet;
 import Pojos.Zone.Aquarium;
 import Pojos.Zone.Savannah;
 import Pojos.Zone.Swamp;
+import Pojos.ZooTicket.Ticket;
+import Pojos.ZooTicket.Zoo;
 
 public class Controller {
 
@@ -1507,32 +1511,22 @@ public class Controller {
 	}
 	private void addOptionZoo() {
 		JTextField name = new JTextField();
-		JTextField country = new JTextField();
+		JTextField location = new JTextField();
 		JTextField id = new JTextField();
-		JTextField user = new JTextField();
-		JTextField password = new JTextField();
 
-		JTextField employeeNumCharge = new JTextField();
-		JTextField ssNumber = new JTextField();
 
-		Object[] message = { "Id : *", id, "Name: *", name, "Surname: *", country, "User: *", user, "Password *",
-				password, "Social Security Number *", ssNumber, "employeeNumCharge *", employeeNumCharge };
+		Object[] message = { "Id : *", id, "Name: *", name, "Location: *", location };
 
-		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Jefe", JOptionPane.OK_CANCEL_OPTION);
+		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Zoo", JOptionPane.OK_CANCEL_OPTION);
 
 		if (option == JOptionPane.OK_OPTION) {
-			if (name.getText().isEmpty() || country.getText().isEmpty() || id.getText().isEmpty()
-					|| user.getText().isEmpty() || password.getText().isEmpty() || ssNumber.getText().isEmpty()
-					|| employeeNumCharge.getText().isEmpty()) {
+			if (name.getText().isEmpty() || location.getText().isEmpty() || id.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
 			} else {
 				try {
-					ManagerBoss managerBoss = new ManagerBoss();
-					int ssNumberInt = Integer.parseInt(ssNumber.getText());
-					int employeeNumChargeInt = Integer.parseInt(employeeNumCharge.getText());
-					Boss bossToInsert = new Boss(name.getText(), country.getText(), id.getText(), user.getText(),
-							password.getText(), ssNumberInt, employeeNumChargeInt);
-					managerBoss.insert(bossToInsert);
+					ManagerZoo managerZoo = new ManagerZoo();
+					Zoo zooToInsert = new Zoo(name.getText(), location.getText(), id.getText());
+							managerZoo.insert(zooToInsert);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
 				}
