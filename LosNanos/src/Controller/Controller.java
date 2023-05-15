@@ -277,7 +277,12 @@ public class Controller {
 	}
 
 	/**
+	 * 
+	 * @param model
+	 * @param table
+	 * 
 	 * Logging as a boss you will see all employees' table
+	 * 
 	 */
 
 	public void getTableEmployee(DefaultTableModel model, JTable table) {
@@ -289,7 +294,12 @@ public class Controller {
 	}
 
 	/**
-	 * Shows all bosses
+	 * 
+	 * @param model
+	 * @param table
+	 * 
+	 * 								Put's in a table all the bosse's that gets  from database
+	 * 
 	 */
 
 	public void getTableBoss(DefaultTableModel model, JTable table) {
@@ -310,7 +320,12 @@ public class Controller {
 	}
 
 	/**
-	 * Shows all feeders
+	 * 
+	 * @param model
+	 * @param table
+	 * 
+	 * 								Put's in a table all the feeder's that gets  from database
+	 * 
 	 */
 
 	public void getTableFeeder(DefaultTableModel model, JTable table) {
@@ -331,7 +346,12 @@ public class Controller {
 	}
 
 	/**
-	 * Shows all vets
+	 * 
+	 * @param model
+	 * @param table
+	 * 
+	 * 								Put's in a table all the vet's that gets  from database
+	 * 
 	 */
 
 	public void getTableVet(DefaultTableModel model, JTable table) {
@@ -352,7 +372,12 @@ public class Controller {
 	}
 
 	/**
-	 * Shows all clients
+	 * 
+	 * @param model
+	 * @param table
+	 * 
+	 * 
+	 * 								Put's in a table all the client's that gets  from database
 	 */
 
 	public void getTableClient(DefaultTableModel model, JTable table) {
@@ -373,7 +398,13 @@ public class Controller {
 	}
 
 	/**
-	 * Shows all dolphins
+	 * 
+	 * @param model
+	 * @param table
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * 								Put's in a table the dolphins that gets  from database
 	 */
 
 	public void getSelectedDolphin(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
@@ -396,7 +427,13 @@ public class Controller {
 	}
 
 	/**
-	 * Shows all snakes
+	 * 
+	 * @param model
+	 * @param table
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * 								Put's in a table the snakes that gets  from database
 	 */
 
 	public void getSelectedSnake(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
@@ -418,16 +455,19 @@ public class Controller {
 
 	}
 
-public void getSelectedCrocodile(DefaultTableModel model, JTable table)
-			throws SQLException, ClassNotFoundException {
-	
-}
 
 	/**
-	 * Shows all crocodiles
+	 * 
+	 * @param model
+	 * @param table
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * 								Put's in a table the crocodiles that gets  from database
+	 * 
 	 */
 
-	public void getSelectedCrocodile1(DefaultTableModel model, JTable table)
+	public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 			throws SQLException, ClassNotFoundException {
 		ArrayList<Crocodile> crocodile = null;
 		ManagerCrocodile managerCrocodile = new ManagerCrocodile();
@@ -448,7 +488,14 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 	}
 
 	/**
-	 * Shows all giraffes
+	 * 
+	 * @param model
+	 * @param table
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * 								Put's in a table the giraffes that gets  from database
+	 * 
 	 */
 
 	public void getSelectedGiraffe(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
@@ -471,7 +518,14 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 	}
 
 	/**
-	 * Shows all cheetahs
+	 * 
+	 * @param model
+	 * @param table
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * 								Put's in a table the cheetah's that gets  from database
+	 * 
 	 */
 
 	public void getSelectedCheetah(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
@@ -494,7 +548,15 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 	}
 
 	/**
-	 * Shows all aquariums
+	 * 
+	 * @param model
+	 * @param table
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * 								Put's in a table all the aquarium's that gets  from database
+
+	 * 
 	 */
 
 	public void getTableAquarium(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
@@ -510,7 +572,15 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 	}
 
 	/**
-	 * Shows all swamps
+	 * 
+	 * @param model
+	 * @param table
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * 								Put's in a table all the swamp's that gets  from database
+
+	 * 
 	 */
 
 	public void getTableSwamp(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
@@ -525,10 +595,17 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 	}
 
 	/**
-	 * Shows all savannahs
+	 * 
+	 * @param model
+	 * @param table
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * 								Put's in a table all the savannah's that gets  from database
+	 * 
 	 */
 
-	public void getTableSavannah(DefaultTableModel model, JTable table){
+	public void getTableSavannah(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Savannah> savannahs = null;
 		ManagerSavannah managerSavannah = new ManagerSavannah();
 		try {
@@ -660,17 +737,6 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 	}
 
-//	public void deleteEmployee(String id) {
-//
-//		ManagerBoss managerBoss = new ManagerBoss();
-//		managerBoss.deleteEmployee(id);
-//	}
-
-//	public void deleteClient(String id) {
-//
-//		ManagerClient managerClient = new ManagerClient();
-//		 managerClient.delete();
-//	}
 
 	/**
 	 * 
@@ -679,6 +745,8 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 * @throws Exception
+	 * 
+	 *                                Choose what object is going to be updated
 	 * 
 	 * 
 	 */
@@ -847,6 +915,18 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws Exception
+	 * 
+	 * 								  Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and updates
+	 *                                Bosses with the id passed from parameter
+	 * 	
+	 */
 
 	public void updateBoss(String id) throws SQLException, Exception {
 		JTextField name = new JTextField();
@@ -878,6 +958,18 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws Exception
+	 * 
+	 * 								  Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and updates
+	 *                                Feeders with the id passed from parameter
+	 * 	
+	 */
 
 	public void updateFeeder() {
 		JTextField name = new JTextField();
@@ -913,6 +1005,18 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws Exception
+	 * 
+	 * 								  Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and updates
+	 *                                Vet's with the id passed from parameter
+	 * 	
+	 */
 
 	public void updateVet() {
 		JTextField name = new JTextField();
@@ -948,6 +1052,17 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *  							  Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and updates
+	 *                                Dolphin's with the id passed from parameter
+	 */
 
 	public void updateDolphin(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.valueOf(id);
@@ -998,6 +1113,17 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *  							  Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and updates
+	 *                                Snakes with the id passed from parameter
+	 */
 
 	public void updateSnake(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.valueOf(id);
@@ -1049,6 +1175,17 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *  							  Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and updates
+	 *                                Crocodiles with the id passed from parameter
+	 */
 
 	public void updateCrocodile(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.valueOf(id);
@@ -1102,6 +1239,17 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *  							  Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and updates
+	 *                                Giraffe's with the id passed from parameter
+	 */
 
 	public void updateGiraffe(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.valueOf(id);
@@ -1153,6 +1301,17 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *  							  Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and updates
+	 *                                Cheetah's with the id passed from parameter
+	 */
 
 	public void updateCheeta(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.valueOf(id);
@@ -1204,6 +1363,15 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @throws SQLException
+	 * @throws Exception
+	 *								  Shows a JOptionPane which gives the option to 
+	 *								  add a zoo, a company, an area or an animal.
+	 * 
+	 */
 
 	public void addOption() throws SQLException, Exception {
 		String[] options = { "Employee", "Animal", "Zone", "Zoo" };
@@ -1220,6 +1388,11 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 	}
 
+	
+	/**
+	 * Shows a JOptionPane witch gives the option to add boss, feeder, vet.
+	 */
+	
 	private void addOptionEmployee() {
 		String[] optionsEmployee = { "Boss", "Feeder", "Vet" };
 		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of employee?", "Add",
@@ -1286,6 +1459,16 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @throws ParseException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * 
+	 * Shows a JOptionPane witch gives the option to add Dolphin, Crocodile, Snake, Giraffe, Cheetah.
+	 * 
+	 */
 
 	public void addOptionAnimal() throws ParseException, ClassNotFoundException, SQLException {
 		String[] optionsAnimal = { "Dolphin", "Crocodile", "Snake", "Giraffe", "Cheetah" };
@@ -1477,6 +1660,18 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param jpBoss
+	 * @param jpLogin
+	 * @param jpClient
+	 * @param jpFeeder
+	 * @param jpVet
+	 * 
+	 *                                Shows a JOptionPane asking if you are sure to logOut.
+	 * 
+	 */
 
 	public void questionLogOut(JPanel jpBoss, JPanel jpLogin, JPanel jpClient, JPanel jpFeeder, JPanel jpVet) {
 		String[] options = { "LogOut", "No" };
@@ -1493,6 +1688,18 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and inserts
+	 *                                a dolphin into the database
+	 * 
+	 */
 
 	public void addDolphin() throws SQLException, ClassNotFoundException {
 		JTextField name = new JTextField();
@@ -1543,6 +1750,18 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and inserts
+	 *                                a snake into the database
+	 * 
+	 */
 
 	public void addSnake() throws SQLException, ClassNotFoundException {
 		JTextField name = new JTextField();
@@ -1593,6 +1812,18 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and inserts
+	 *                                a crocodile into the database
+	 * 
+	 */
 
 	public void addCrocodile() throws SQLException, ClassNotFoundException {
 		JTextField name = new JTextField();
@@ -1645,6 +1876,18 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and inserts
+	 *                                a giraffe into the database
+	 * 
+	 */
 
 	public void addGiraffe() throws SQLException, ClassNotFoundException {
 		JTextField name = new JTextField();
@@ -1695,6 +1938,18 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and inserts
+	 *                                a cheetah into the database
+	 * 
+	 */
 
 	public void addCheetah() throws SQLException, ClassNotFoundException {
 		JTextField name = new JTextField();
@@ -1746,6 +2001,14 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 
 	}
 
+	/**
+	 * 
+	 * 								  Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and inserts
+	 *                                a zoo into the database
+	 * 
+	 */
+	
 	private void addOptionZoo() {
 		JTextField name = new JTextField();
 		JTextField location = new JTextField();
