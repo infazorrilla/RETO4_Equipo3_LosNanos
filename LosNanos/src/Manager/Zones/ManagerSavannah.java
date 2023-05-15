@@ -15,7 +15,7 @@ import utils.DBUtils;
 public class ManagerSavannah implements ManagerInterface<Savannah> {
 
 	@Override
-	public ArrayList<Savannah> selectAll() throws SQLException, ClassNotFoundException {
+	public ArrayList<Savannah> selectAll() throws SQLException, Exception {
 		ArrayList <Savannah> ret = null;
 
 		// SQL que queremos lanzar
@@ -69,8 +69,8 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 			}
 		} catch (SQLException sqle) {  
 			throw new SQLException ();
-		} catch(ClassNotFoundException e){ 
-			throw new ClassNotFoundException();
+		} catch(Exception  e){ 
+			throw new Exception ();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
@@ -96,7 +96,7 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 	}
 
 	@Override
-	public void insert(Savannah savannah) throws SQLException, ClassNotFoundException {
+	public void insert(Savannah savannah) throws SQLException, Exception  {
 		// La conexion con BBDD
 		Connection connection = null;
 		
@@ -128,8 +128,8 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 			
 		} catch (SQLException sqle) {  
 			throw new SQLException ();
-		} catch(ClassNotFoundException e){ 
-			throw new ClassNotFoundException();
+		} catch(Exception  e){ 
+			throw new Exception ();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
@@ -148,7 +148,7 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 	}
 
 	@Override
-	public void update(Savannah savannah) throws SQLException, ClassNotFoundException {
+	public void update(Savannah savannah) throws SQLException, Exception  {
 		// La conexion con BBDD
 		Connection connection = null;
 		
@@ -177,8 +177,8 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 			
 		} catch (SQLException sqle) {  
 			throw new SQLException ();
-		} catch(ClassNotFoundException e){ 
-			throw new ClassNotFoundException();
+		} catch(Exception  e){ 
+			throw new Exception ();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
@@ -197,7 +197,7 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 	}
 
 	@Override
-	public void delete(Savannah savannah) throws SQLException, ClassNotFoundException {
+	public void delete(Savannah savannah) throws SQLException, Exception  {
 		// La conexion con BBDD
 		Connection connection = null;
 		
@@ -221,8 +221,8 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 			
 		} catch (SQLException sqle) {  
 			throw new SQLException ();
-		} catch(ClassNotFoundException e){ 
-			throw new ClassNotFoundException();
+		} catch(Exception e){ 
+			throw new Exception();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {

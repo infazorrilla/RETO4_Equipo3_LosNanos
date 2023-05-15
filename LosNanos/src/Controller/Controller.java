@@ -531,14 +531,23 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 	 * Shows all savannahs
 	 */
 
-	public void getTableSavannah(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
+	public void getTableSavannah(DefaultTableModel model, JTable table){
 		ArrayList<Savannah> savannahs = null;
 		ManagerSavannah managerSavannah = new ManagerSavannah();
-		savannahs = managerSavannah.selectAll();
-		for (int i = 0; i < savannahs.size(); i++) {
-			model.addRow(new Object[] { savannahs.get(i).getId(), savannahs.get(i).getExtension(),
-					savannahs.get(i).getAnimalsNumber(), savannahs.get(i).getSpeciesNumber(),
-					savannahs.get(i).getTreeNumber() });
+		try {
+			savannahs = managerSavannah.selectAll();
+			for (int i = 0; i < savannahs.size(); i++) {
+				model.addRow(new Object[] { savannahs.get(i).getId(), savannahs.get(i).getExtension(),
+						savannahs.get(i).getAnimalsNumber(), savannahs.get(i).getSpeciesNumber(),
+						savannahs.get(i).getTreeNumber() });
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		}
 	}
 //	private String checkBoolean(int bolean) {
