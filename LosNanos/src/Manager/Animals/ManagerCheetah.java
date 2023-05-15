@@ -17,7 +17,7 @@ import utils.DBUtils;
 public class ManagerCheetah implements ManagerInterface<Cheetah> {
 	
 	@Override
-	public ArrayList<Cheetah> selectAll() {
+	public ArrayList<Cheetah> selectAll() throws SQLException, ClassNotFoundException {
 		ArrayList<Cheetah> ret = null;
 
 		// SQL que queremos lanzar
@@ -111,7 +111,7 @@ public class ManagerCheetah implements ManagerInterface<Cheetah> {
 	}
 
 	@Override
-	public void insert(Cheetah cheetah) {
+	public void insert(Cheetah cheetah) throws SQLException, ClassNotFoundException {
 		Connection connection = null;
 
 		Statement statement = null;
@@ -161,7 +161,7 @@ public class ManagerCheetah implements ManagerInterface<Cheetah> {
 	}
 
 	@Override
-	public void update(Cheetah cheetah) {
+	public void update(Cheetah cheetah) throws SQLException, ClassNotFoundException {
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String formattedDate = simpleDateFormat.format(cheetah.getBornDate());
@@ -221,7 +221,7 @@ public class ManagerCheetah implements ManagerInterface<Cheetah> {
 	}
 
 	@Override
-	public void delete(Cheetah cheetah) throws SQLException, Exception {
+	public void delete(Cheetah cheetah) throws SQLException, ClassNotFoundException {
 		// La conexion con BBDD
 		Connection connection = null;
 

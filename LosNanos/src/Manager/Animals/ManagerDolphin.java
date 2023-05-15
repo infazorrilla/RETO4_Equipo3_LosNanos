@@ -17,7 +17,7 @@ import utils.DBUtils;
 public class ManagerDolphin implements ManagerInterface<Dolphin> {
 
 	@Override
-	public ArrayList<Dolphin> selectAll() {
+	public ArrayList<Dolphin> selectAll() throws SQLException, ClassNotFoundException {
 		ArrayList<Dolphin> ret = null;
 
 		// SQL que queremos lanzar
@@ -111,7 +111,7 @@ public class ManagerDolphin implements ManagerInterface<Dolphin> {
 	}
 
 	@Override
-	public void insert(Dolphin dolphin) {
+	public void insert(Dolphin dolphin) throws SQLException, ClassNotFoundException {
 		Connection connection = null;
 
 		Statement statement = null;
@@ -161,7 +161,7 @@ public class ManagerDolphin implements ManagerInterface<Dolphin> {
 	}
 
 	@Override
-	public void update(Dolphin dolphin) {
+	public void update(Dolphin dolphin) throws SQLException, ClassNotFoundException {
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String formattedDate = simpleDateFormat.format(dolphin.getBornDate());
@@ -223,7 +223,7 @@ public class ManagerDolphin implements ManagerInterface<Dolphin> {
 	}
 
 	@Override
-	public void delete(Dolphin dolphin) throws SQLException, Exception {
+	public void delete(Dolphin dolphin) throws SQLException, ClassNotFoundException {
 		// La conexion con BBDD
 		Connection connection = null;
 

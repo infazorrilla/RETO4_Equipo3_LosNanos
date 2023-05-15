@@ -365,7 +365,7 @@ public class Controller {
 	 * Shows all dolphins
 	 */
 
-	public void getSelectedDolphin(DefaultTableModel model, JTable table) {
+	public void getSelectedDolphin(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Dolphin> dolphins = null;
 		ManagerDolphin managerSnake = new ManagerDolphin();
 		try {
@@ -388,7 +388,7 @@ public class Controller {
 	 * Shows all snakes
 	 */
 
-	public void getSelectedSnake(DefaultTableModel model, JTable table) {
+	public void getSelectedSnake(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Snake> snakes = null;
 		ManagerSnake managerSnake = new ManagerSnake();
 		try {
@@ -406,12 +406,12 @@ public class Controller {
 		}
 
 	}
-
+	
 	/**
 	 * Shows all crocodiles
 	 */
 	
-	public void getSelectedCrocodile(DefaultTableModel model, JTable table) {
+	public void getSelectedCrocodile(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Crocodile> crocodile = null;
 		ManagerCrocodile managerCrocodile = new ManagerCrocodile();
 		try {
@@ -434,7 +434,7 @@ public class Controller {
 	 * Shows all giraffes
 	 */
 
-	public void getSelectedGiraffe(DefaultTableModel model, JTable table) {
+	public void getSelectedGiraffe(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Giraffe> giraffe = null;
 		ManagerGiraffe managerGiraffe = new ManagerGiraffe();
 		try {
@@ -457,7 +457,7 @@ public class Controller {
 	 * Shows all cheetahs
 	 */
 	
-	public void getSelectedCheetah(DefaultTableModel model, JTable table) {
+	public void getSelectedCheetah(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Cheetah> cheetah = null;
 		ManagerCheetah managerCheetah = new ManagerCheetah();
 		try {
@@ -650,11 +650,11 @@ public class Controller {
 //		managerBoss.deleteEmployee(id);
 //	}
 
-	public void deleteClient(String id) {
-
-		ManagerClient managerClient = new ManagerClient();
-		 managerClient.delete();
-	}
+//	public void deleteClient(String id) {
+//
+//		ManagerClient managerClient = new ManagerClient();
+//		 managerClient.delete();
+//	}
 	
 	/**
 	 * 
@@ -932,7 +932,7 @@ public class Controller {
 
 	}
 
-	public void updateDolphin(String id) {
+	public void updateDolphin(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.valueOf(id);
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
@@ -982,7 +982,7 @@ public class Controller {
 		}
 	}
 
-	public void updateSnake(String id) {
+	public void updateSnake(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.valueOf(id);
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
@@ -1033,7 +1033,7 @@ public class Controller {
 
 	}
 
-	public void updateCrocodile(String id) {
+	public void updateCrocodile(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.valueOf(id);
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
@@ -1086,7 +1086,7 @@ public class Controller {
 
 	}
 
-	public void updateGiraffe(String id) throws ParseException {
+	public void updateGiraffe(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.valueOf(id);
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
@@ -1137,7 +1137,7 @@ public class Controller {
 
 	}
 
-	public void updateCheeta(String id) throws ParseException {
+	public void updateCheeta(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.valueOf(id);
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
@@ -1269,7 +1269,7 @@ public class Controller {
 
 	}
 
-	public void addOptionAnimal() throws ParseException {
+	public void addOptionAnimal() throws ParseException, ClassNotFoundException, SQLException {
 		String[] optionsAnimal = { "Dolphin", "Crocodile", "Snake", "Giraffe", "Cheetah" };
 		int resultEmployee = JOptionPane.showOptionDialog(null, "What kind of Animal?", "Add",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, optionsAnimal, optionsAnimal[0]);
@@ -1472,7 +1472,7 @@ public class Controller {
 
 	}
 
-	public void addDolphin() throws ParseException {
+	public void addDolphin() throws SQLException, ClassNotFoundException {
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
 		JTextField height = new JTextField();
@@ -1522,7 +1522,7 @@ public class Controller {
 
 	}
 
-	public void addSnake() {
+	public void addSnake() throws SQLException, ClassNotFoundException {
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
 		JTextField height = new JTextField();
@@ -1572,7 +1572,7 @@ public class Controller {
 
 	}
 
-	public void addCrocodile() {
+	public void addCrocodile() throws SQLException, ClassNotFoundException {
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
 		JTextField height = new JTextField();
@@ -1624,7 +1624,7 @@ public class Controller {
 
 	}
 
-	public void addGiraffe() throws ParseException {
+	public void addGiraffe() throws SQLException, ClassNotFoundException {
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
 		JTextField height = new JTextField();
@@ -1674,7 +1674,7 @@ public class Controller {
 
 	}
 
-	public void addCheetah() throws ParseException {
+	public void addCheetah() throws SQLException, ClassNotFoundException {
 		JTextField name = new JTextField();
 		JTextField scientificName = new JTextField();
 		JTextField height = new JTextField();
