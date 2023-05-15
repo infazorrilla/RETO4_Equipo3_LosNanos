@@ -156,7 +156,7 @@ public class Interfaz {
 					switch (finalUser) {
 					case 0:
 						panelLogin(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
-						JOptionPane.showMessageDialog(null, "Contraseña Erronea", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Login incorrecto", null, JOptionPane.ERROR_MESSAGE);
 						break;
 					case 1:
 						panelBoss(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
@@ -215,7 +215,7 @@ public class Interfaz {
 				switch (finalUser) {
 				case 0:
 					panelLogin(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
-					JOptionPane.showMessageDialog(null, "Contraseña Erronea", null, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Login Incorrecto", null, JOptionPane.ERROR_MESSAGE);
 					break;
 				case 1:
 					panelBoss(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);

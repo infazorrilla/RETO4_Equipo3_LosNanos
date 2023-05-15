@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -29,7 +28,6 @@ import Manager.People.ManagerVet;
 import Manager.Zones.ManagerAquarium;
 import Manager.Zones.ManagerSavannah;
 import Manager.Zones.ManagerSwamp;
-import Manager.Zoo.ManagerTicket;
 import Manager.Zoo.ManagerZoo;
 import Pojos.Animal.Cheetah;
 import Pojos.Animal.Crocodile;
@@ -961,7 +959,7 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		JTextField weight = new JTextField();
 		JTextField bornDate = new JTextField();
 		JCheckBox vaccinated = new JCheckBox();
-		JComboBox diet = new JComboBox();
+		JComboBox<String> diet = new JComboBox<String>();
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
 		JTextField animalType = new JTextField();
@@ -1011,7 +1009,7 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		JTextField weight = new JTextField();
 		JTextField bornDate = new JTextField();
 		JCheckBox vaccinated = new JCheckBox();
-		JComboBox diet = new JComboBox();
+		JComboBox<String> diet = new JComboBox<String>();
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
 		JTextField shedSkin = new JTextField();
@@ -1062,7 +1060,7 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		JTextField weight = new JTextField();
 		JTextField bornDate = new JTextField();
 		JCheckBox vaccinated = new JCheckBox();
-		JComboBox diet = new JComboBox();
+		JComboBox<String> diet = new JComboBox<String>();
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
 		JTextField shedSkin = new JTextField();
@@ -1115,7 +1113,7 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		JTextField weight = new JTextField();
 		JTextField bornDate = new JTextField();
 		JCheckBox vaccinated = new JCheckBox();
-		JComboBox diet = new JComboBox();
+		JComboBox<String> diet = new JComboBox<String>();
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
 		JTextField hairColor = new JTextField();
@@ -1166,7 +1164,7 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		JTextField weight = new JTextField();
 		JTextField bornDate = new JTextField();
 		JCheckBox vaccinated = new JCheckBox();
-		JComboBox diet = new JComboBox();
+		JComboBox<String> diet = new JComboBox<String>();
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
 		JTextField hairColor = new JTextField();
@@ -1505,7 +1503,7 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		JTextField weight = new JTextField();
 		JTextField bornDate = new JTextField();
 		JCheckBox vaccinated = new JCheckBox();
-		JComboBox diet = new JComboBox();
+		JComboBox<String> diet = new JComboBox<String>();
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
 		JTextField animalType = new JTextField();
@@ -1555,7 +1553,7 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		JTextField weight = new JTextField();
 		JTextField bornDate = new JTextField();
 		JCheckBox vaccinated = new JCheckBox();
-		JComboBox diet = new JComboBox();
+		JComboBox<String> diet = new JComboBox<String>();
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
 		JTextField shedSkin = new JTextField();
@@ -1605,7 +1603,7 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		JTextField weight = new JTextField();
 		JTextField bornDate = new JTextField();
 		JCheckBox vaccinated = new JCheckBox();
-		JComboBox diet = new JComboBox();
+		JComboBox<String> diet = new JComboBox<String>();
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
 		JTextField shedSkin = new JTextField();
@@ -1657,7 +1655,7 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		JTextField weight = new JTextField();
 		JTextField bornDate = new JTextField();
 		JCheckBox vaccinated = new JCheckBox();
-		JComboBox diet = new JComboBox();
+		JComboBox<String> diet = new JComboBox<String>();
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
 		JTextField hairColor = new JTextField();
@@ -1707,7 +1705,7 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 		JTextField weight = new JTextField();
 		JTextField bornDate = new JTextField();
 		JCheckBox vaccinated = new JCheckBox();
-		JComboBox diet = new JComboBox();
+		JComboBox<String> diet = new JComboBox<String>();
 		diet.addItem("Carnivorous");
 		diet.addItem("Herbivorous");
 		JTextField hairColor = new JTextField();
