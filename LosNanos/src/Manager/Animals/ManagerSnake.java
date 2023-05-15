@@ -17,7 +17,7 @@ import utils.DBUtils;
 public class ManagerSnake implements ManagerInterface<Snake> {
 
 	@Override
-	public ArrayList<Snake> selectAll() {
+	public ArrayList<Snake> selectAll() throws SQLException, ClassNotFoundException {
 		ArrayList<Snake> ret = null;
 
 		// SQL que queremos lanzar
@@ -111,7 +111,7 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 	}
 
 	@Override
-	public void insert(Snake snake) {
+	public void insert(Snake snake) throws SQLException, ClassNotFoundException {
 		Connection connection = null;
 
 		Statement statement = null;
@@ -162,7 +162,7 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 	}
 
 	@Override
-	public void update(Snake snake) {
+	public void update(Snake snake) throws SQLException, ClassNotFoundException {
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String formattedDateBorn = simpleDateFormat.format(snake.getBornDate());
@@ -227,7 +227,7 @@ public class ManagerSnake implements ManagerInterface<Snake> {
 	}
 
 	@Override
-	public void delete(Snake snake) throws SQLException, Exception {
+	public void delete(Snake snake) throws SQLException, ClassNotFoundException {
 		// La conexion con BBDD
 		Connection connection = null;
 

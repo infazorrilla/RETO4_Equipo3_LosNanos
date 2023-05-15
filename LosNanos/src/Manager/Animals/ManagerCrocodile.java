@@ -17,7 +17,7 @@ import utils.DBUtils;
 public class ManagerCrocodile implements ManagerInterface<Crocodile> {
 	
 	@Override
-	public ArrayList<Crocodile> selectAll() {
+	public ArrayList<Crocodile> selectAll() throws SQLException, ClassNotFoundException {
 		ArrayList<Crocodile> ret = null;
 
 		// SQL que queremos lanzar
@@ -111,7 +111,7 @@ public class ManagerCrocodile implements ManagerInterface<Crocodile> {
 	}
 
 	@Override
-	public void insert(Crocodile crocodile) {
+	public void insert(Crocodile crocodile) throws SQLException, ClassNotFoundException {
 		Connection connection = null;
 
 		Statement statement = null;
@@ -162,7 +162,7 @@ public class ManagerCrocodile implements ManagerInterface<Crocodile> {
 	}
 
 	@Override
-	public void update(Crocodile crocodile) {
+	public void update(Crocodile crocodile) throws SQLException, ClassNotFoundException {
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String formattedDateBorn = simpleDateFormat.format(crocodile.getBornDate());
@@ -225,7 +225,7 @@ public class ManagerCrocodile implements ManagerInterface<Crocodile> {
 	}
 
 	@Override
-	public void delete(Crocodile crocodile) throws SQLException, Exception {
+	public void delete(Crocodile crocodile) throws SQLException, ClassNotFoundException {
 		// La conexion con BBDD
 		Connection connection = null;
 

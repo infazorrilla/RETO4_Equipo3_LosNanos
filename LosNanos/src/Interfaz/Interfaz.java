@@ -244,27 +244,62 @@ public class Interfaz {
 				switch (box) {
 				case "Dolphin":
 					dolphinModel(model);
+					try {
 					controller.getSelectedDolphin(model, tableClient);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Dolphin";
 					break;
 				case "Snake":
 					snakeModel(model);
+					try {
 					controller.getSelectedSnake(model, tableClient);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Snake";
 					break;
 				case "Crocodile":
 					crocodileModel(model);
+					try {
 					controller.getSelectedCrocodile(model, tableClient);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Crocodile";
 					break;
 				case "Giraffe":
 					giraffeModel(model);
+					try {
 					controller.getSelectedGiraffe(model, tableClient);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Giraffe";
 					break;
 				case "Cheetah":
 					cheetahModel(model);
+					try {
 					controller.getSelectedCheetah(model, tableClient);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Cheetah";
 					break;
 				}
@@ -317,10 +352,10 @@ public class Interfaz {
 		btnBossDelete.setEnabled(true);
 		btnBossDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
 				DefaultTableModel tm = (DefaultTableModel) tableBoss.getModel();
 				String id = String.valueOf(tm.getValueAt(tableBoss.getSelectedRow(), 0));
 				Controller controller = new Controller();
-				try {
 					controller.questionSure(type, id);
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null, "No se ha podido borrar", null, JOptionPane.ERROR_MESSAGE);
@@ -413,9 +448,9 @@ public class Interfaz {
 		btnBossUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controller controller = new Controller();
+				try {
 				DefaultTableModel tm = (DefaultTableModel) tableBoss.getModel();
 				String id = String.valueOf(tm.getValueAt(tableBoss.getSelectedRow(), 0));
-				try {
 					controller.updateOption(type, id);
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null, "No se ha podido actualizar", null, JOptionPane.ERROR_MESSAGE);
@@ -489,27 +524,62 @@ public class Interfaz {
 				switch (box) {
 				case "Dolphin":
 					dolphinModel(model);
+					try {
 					controller.getSelectedDolphin(model, tableBoss);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Dolphin";
 					break;
 				case "Snake":
 					snakeModel(model);
+					try {
 					controller.getSelectedSnake(model, tableBoss);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Snake";
 					break;
 				case "Crocodile":
 					crocodileModel(model);
+					try {
 					controller.getSelectedCrocodile(model, tableBoss);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Crocodile";
 					break;
 				case "Giraffe":
 					giraffeModel(model);
+					try {
 					controller.getSelectedGiraffe(model, tableBoss);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Giraffe";
 					break;
 				case "Cheetah":
 					cheetahModel(model);
+					try {
 					controller.getSelectedCheetah(model, tableBoss);
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+				}
 					type = "Cheetah";
 					break;
 				}
@@ -620,27 +690,62 @@ public class Interfaz {
 				switch (box) {
 				case "Dolphin":
 					dolphinModel(model);
+					try {
 					controller.getSelectedDolphin(model, tableVet);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Dolphin";
 					break;
 				case "Snake":
 					snakeModel(model);
+					try {
 					controller.getSelectedSnake(model, tableVet);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Snake";
 					break;
 				case "Crocodile":
 					crocodileModel(model);
+					try {
 					controller.getSelectedCrocodile(model, tableVet);
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+				}
 					type = "Crocodile";
 					break;
 				case "Giraffe":
 					giraffeModel(model);
+					try {
 					controller.getSelectedGiraffe(model, tableVet);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Giraffe";
 					break;
 				case "Cheetah":
 					cheetahModel(model);
+					try {
 					controller.getSelectedCheetah(model, tableVet);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Cheetah";
 					break;
 				}
@@ -676,20 +781,9 @@ public class Interfaz {
 				try {
 					controller.updateOption(type, id);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					controller.questionSure(type, id);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 
@@ -708,11 +802,9 @@ public class Interfaz {
 				try {
 					controller.questionSure(type, id);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -778,27 +870,62 @@ public class Interfaz {
 				switch (box) {
 				case "Dolphin":
 					dolphinModel(model);
+					try {
 					controller.getSelectedDolphin(model, tableFeeder);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Dolphin";
 					break;
 				case "Snake":
 					snakeModel(model);
+					try {
 					controller.getSelectedSnake(model, tableFeeder);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Snake";
 					break;
 				case "Crocodile":
 					crocodileModel(model);
+					try {
 					controller.getSelectedCrocodile(model, tableFeeder);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Crocodile";
 					break;
 				case "Giraffe":
 					giraffeModel(model);
+					try {
 					controller.getSelectedGiraffe(model, tableFeeder);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Giraffe";
 					break;
 				case "Cheetah":
 					cheetahModel(model);
+					try {
 					controller.getSelectedCheetah(model, tableFeeder);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Cheetah";
 					break;
 				}
