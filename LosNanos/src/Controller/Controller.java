@@ -127,7 +127,7 @@ public class Controller {
 			if (null != bossess) {
 				for (int i = 0; i < bossess.size(); i++) {
 					String userBoss = managerBoss.selectAll().get(i).getUser();
-					if (userBoss.equalsIgnoreCase(user)) {
+					if (userBoss.equals(user)) {
 						String passBoss = managerBoss.selectAll().get(i).getPassword();
 						boolean pas = checkPassword(password, passBoss);
 						if (pas == true) {
@@ -170,7 +170,7 @@ public class Controller {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					if (userClient.equalsIgnoreCase(user)) {
+					if (userClient.equals(user)) {
 						String passClient = managerClient.selectAll().get(i).getPassword();
 						boolean pas = checkPassword(password, passClient);
 						if (pas == true) {
@@ -204,7 +204,7 @@ public class Controller {
 		ManagerFeeder managerFeeder = new ManagerFeeder();
 		for (int i = 0; i < managerFeeder.selectAll().size(); i++) {
 			String userFeeder = managerFeeder.selectAll().get(i).getUser();
-			if (userFeeder.equalsIgnoreCase(user)) {
+			if (userFeeder.equals(user)) {
 				String passFeeder = managerFeeder.selectAll().get(i).getPassword();
 				boolean pas = checkPassword(password, passFeeder);
 				if (pas == true) {
@@ -231,7 +231,7 @@ public class Controller {
 		ManagerVet managerVet = new ManagerVet();
 		for (int i = 0; i < managerVet.selectAll().size(); i++) {
 			String userVet = managerVet.selectAll().get(i).getUser();
-			if (userVet.equalsIgnoreCase(user)) {
+			if (userVet.equals(user)) {
 				String passVet = managerVet.selectAll().get(i).getPassword();
 				boolean pas = checkPassword(password, passVet);
 				if (pas == true) {
@@ -255,7 +255,7 @@ public class Controller {
 
 	public boolean checkPassword(String password, String passBoss) {
 		boolean ret = false;
-		if (passBoss.equalsIgnoreCase(password)) {
+		if (passBoss.equals(password)) {
 			ret = true;
 		}
 		return ret;
