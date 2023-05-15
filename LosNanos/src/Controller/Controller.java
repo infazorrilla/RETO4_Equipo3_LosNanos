@@ -43,41 +43,16 @@ import Pojos.Person.Vet;
 import Pojos.Zone.Aquarium;
 import Pojos.Zone.Savannah;
 import Pojos.Zone.Swamp;
-import Pojos.ZooTicket.Ticket;
 import Pojos.ZooTicket.Zoo;
 
 public class Controller {
 
-	public Boss searchBossId(String id) {
-		Boss ret = new Boss();
-		ManagerBoss managerBoss = new ManagerBoss();
-		ArrayList<Boss> bosses = managerBoss.selectAll();
-		for (int i = 0; i < bosses.size(); i++) {
-			if (bosses.get(i).getId() == id) {
-				ret = bosses.get(i);
-			}
-		}
-		return ret;
-	}
-
-	public Client searchClientId(String id) {
-		Client ret = new Client();
-		ManagerClient managerClient = new ManagerClient();
-		ArrayList<Client> clients;
-		try {
-			clients = managerClient.selectAll();
-			for (int i = 0; i < clients.size(); i++) {
-				if (clients.get(i).getId() == id) {
-					ret = clients.get(i);
-				}
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ret;
-	}
-
+	/**
+	 * Registers a client
+	 * 
+	 * Shows an optionPane with TextFields, instances a Client and inserts to the
+	 * database
+	 */
 	public void clientRegister() {
 		JTextField name = new JTextField();
 		JTextField surname = new JTextField();
@@ -109,6 +84,15 @@ public class Controller {
 
 	}
 
+	/**
+	 * @param String user
+	 * @param String password
+	 * 
+	 *               Compares both parameters using methods
+	 * 
+	 * @return int
+	 */
+
 	public int checkUser(String user, String password) {
 		int ret = 0;
 		ret = checkBoss(user, password);
@@ -125,45 +109,35 @@ public class Controller {
 		return ret;
 	}
 
+	/**
+	 * @param String user
+	 * @param String password
+	 * 
+	 *               Compares both with the bosses' on the database
+	 * 
+	 * @return int
+	 */
+
 	public int checkBoss(String user, String password) {
 		int ret = 0;
 		ManagerBoss managerBoss = new ManagerBoss();
-		for (int i = 0; i < managerBoss.selectAll().size(); i++) {
-			String userBoss = managerBoss.selectAll().get(i).getUser();
-			if (userBoss.equalsIgnoreCase(user)) {
-				String passBoss = managerBoss.selectAll().get(i).getPassword();
-				boolean pas = checkPassword(password, passBoss);
-				if (pas == true) {
-					ret = 1;
-				} else {
-					ret = 0;
-				}
-			}
-		}
-		return ret;
-	}
-
-	public int checkClient(String user, String password) {
-		int ret = 0;
-		ManagerClient managerClient = new ManagerClient();
-		String userClient = null;
 		try {
-			for (int i = 0; i < managerClient.selectAll().size(); i++) {
-				try {
-					userClient = managerClient.selectAll().get(i).getUser();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (userClient.equalsIgnoreCase(user)) {
-					String passClient = managerClient.selectAll().get(i).getPassword();
-					boolean pas = checkPassword(password, passClient);
-					if (pas == true) {
-						ret = 2;
-					} else {
-						ret = 0;
+			ArrayList<Boss> bossess = managerBoss.selectAll();
+			if (null != bossess) {
+				for (int i = 0; i < bossess.size(); i++) {
+					String userBoss = managerBoss.selectAll().get(i).getUser();
+					if (userBoss.equals(user)) {
+						String passBoss = managerBoss.selectAll().get(i).getPassword();
+						boolean pas = checkPassword(password, passBoss);
+						if (pas == true) {
+							ret = 1;
+						} else {
+							ret = 0;
+						}
 					}
 				}
+			} else {
+				System.out.println("El cliente no existe");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -172,12 +146,64 @@ public class Controller {
 		return ret;
 	}
 
+	/**
+	 * @param String user
+	 * @param String password
+	 * 
+	 *               Compares both with the clients' on the database
+	 * 
+	 * @return int
+	 */
+
+	public int checkClient(String user, String password) {
+		int ret = 0;
+		ManagerClient managerClient = new ManagerClient();
+		String userClient = null;
+		try {
+			ArrayList<Client> clientes = managerClient.selectAll();
+			if (null != clientes) {
+				for (int i = 0; i < clientes.size(); i++) {
+					try {
+						userClient = managerClient.selectAll().get(i).getUser();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (userClient.equals(user)) {
+						String passClient = managerClient.selectAll().get(i).getPassword();
+						boolean pas = checkPassword(password, passClient);
+						if (pas == true) {
+							ret = 2;
+						} else {
+							ret = 0;
+						}
+					}
+				}
+			} else {
+				System.out.println("El cliente no existe");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ret;
+	}
+
+	/**
+	 * @param String user
+	 * @param String password
+	 * 
+	 *               Compares both with the feeders' on the database
+	 * 
+	 * @return int
+	 */
+
 	public int checkFeeder(String user, String password) {
 		int ret = 0;
 		ManagerFeeder managerFeeder = new ManagerFeeder();
 		for (int i = 0; i < managerFeeder.selectAll().size(); i++) {
 			String userFeeder = managerFeeder.selectAll().get(i).getUser();
-			if (userFeeder.equalsIgnoreCase(user)) {
+			if (userFeeder.equals(user)) {
 				String passFeeder = managerFeeder.selectAll().get(i).getPassword();
 				boolean pas = checkPassword(password, passFeeder);
 				if (pas == true) {
@@ -190,12 +216,21 @@ public class Controller {
 		return ret;
 	}
 
+	/**
+	 * @param String user
+	 * @param String password
+	 * 
+	 *               Compares both with the vets' on the database
+	 * 
+	 * @returns int
+	 */
+
 	public int checkVet(String user, String password) {
 		int ret = 0;
 		ManagerVet managerVet = new ManagerVet();
 		for (int i = 0; i < managerVet.selectAll().size(); i++) {
 			String userVet = managerVet.selectAll().get(i).getUser();
-			if (userVet.equalsIgnoreCase(user)) {
+			if (userVet.equals(user)) {
 				String passVet = managerVet.selectAll().get(i).getPassword();
 				boolean pas = checkPassword(password, passVet);
 				if (pas == true) {
@@ -208,14 +243,30 @@ public class Controller {
 		return ret;
 	}
 
+	/**
+	 * @param String password
+	 * @param String passBoss
+	 * 
+	 *               Compares each other If they're equals returns true
+	 * 
+	 * @return boolean
+	 */
+
 	public boolean checkPassword(String password, String passBoss) {
 		boolean ret = false;
-		if (passBoss.equalsIgnoreCase(password)) {
+		if (passBoss.equals(password)) {
 			ret = true;
 		}
 		return ret;
 
 	}
+
+	/**
+	 * @param String user
+	 * @param String password
+	 * 
+	 *               Gets user's password
+	 */
 
 	public void takeUserPass(String user, String password) {
 		ManagerBoss managerBoss = new ManagerBoss();
@@ -228,6 +279,10 @@ public class Controller {
 
 	}
 
+	/**
+	 * Logging as a boss you will see all employees' table
+	 */
+
 	public void getTableEmployee(DefaultTableModel model, JTable table) {
 		getTableBoss(model, table);
 		getTableFeeder(model, table);
@@ -235,6 +290,10 @@ public class Controller {
 		getTableClient(model, table);
 
 	}
+
+	/**
+	 * Shows all bosses
+	 */
 
 	public void getTableBoss(DefaultTableModel model, JTable table) {
 		ArrayList<Boss> boss = null;
@@ -253,6 +312,10 @@ public class Controller {
 
 	}
 
+	/**
+	 * Shows all feeders
+	 */
+
 	public void getTableFeeder(DefaultTableModel model, JTable table) {
 		ArrayList<Feeder> feeder = null;
 		ManagerFeeder managerFeeder = new ManagerFeeder();
@@ -269,6 +332,10 @@ public class Controller {
 		}
 
 	}
+
+	/**
+	 * Shows all vets
+	 */
 
 	public void getTableVet(DefaultTableModel model, JTable table) {
 		ArrayList<Vet> vet = null;
@@ -287,6 +354,10 @@ public class Controller {
 
 	}
 
+	/**
+	 * Shows all clients
+	 */
+
 	public void getTableClient(DefaultTableModel model, JTable table) {
 		ArrayList<Client> client = null;
 		ManagerClient managerClient = new ManagerClient();
@@ -303,6 +374,10 @@ public class Controller {
 		}
 
 	}
+
+	/**
+	 * Shows all dolphins
+	 */
 
 	public void getSelectedDolphin(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Dolphin> dolphins = null;
@@ -323,6 +398,10 @@ public class Controller {
 
 	}
 
+	/**
+	 * Shows all snakes
+	 */
+
 	public void getSelectedSnake(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Snake> snakes = null;
 		ManagerSnake managerSnake = new ManagerSnake();
@@ -342,7 +421,17 @@ public class Controller {
 
 	}
 
-	public void getSelectedCrocodile(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
+public void getSelectedCrocodile(DefaultTableModel model, JTable table)
+			throws SQLException, ClassNotFoundException {
+	
+}
+
+	/**
+	 * Shows all crocodiles
+	 */
+
+	public void getSelectedCrocodile1(DefaultTableModel model, JTable table)
+			throws SQLException, ClassNotFoundException {
 		ArrayList<Crocodile> crocodile = null;
 		ManagerCrocodile managerCrocodile = new ManagerCrocodile();
 		try {
@@ -360,6 +449,10 @@ public class Controller {
 		}
 
 	}
+
+	/**
+	 * Shows all giraffes
+	 */
 
 	public void getSelectedGiraffe(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Giraffe> giraffe = null;
@@ -380,6 +473,10 @@ public class Controller {
 
 	}
 
+	/**
+	 * Shows all cheetahs
+	 */
+
 	public void getSelectedCheetah(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Cheetah> cheetah = null;
 		ManagerCheetah managerCheetah = new ManagerCheetah();
@@ -399,6 +496,10 @@ public class Controller {
 
 	}
 
+	/**
+	 * Shows all aquariums
+	 */
+
 	public void getTableAquarium(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Aquarium> aquariums = null;
 		ManagerAquarium managerAquarium = new ManagerAquarium();
@@ -411,6 +512,10 @@ public class Controller {
 
 	}
 
+	/**
+	 * Shows all swamps
+	 */
+
 	public void getTableSwamp(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Swamp> swamps = null;
 		ManagerSwamp managerSwamp = new ManagerSwamp();
@@ -422,6 +527,10 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Shows all savannahs
+	 */
+
 	public void getTableSavannah(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Savannah> savannahs = null;
 		ManagerSavannah managerSavannah = new ManagerSavannah();
@@ -432,7 +541,23 @@ public class Controller {
 					savannahs.get(i).getTreeNumber() });
 		}
 	}
+//	private String checkBoolean(int bolean) {
+//		String ret;
+//		if (bolean >= 1) {
+//			ret = "Yes";
+//		} else {
+//			ret = "No";
+//		}
+//		return ret;
+//	}
 
+	/**
+	 * @param JCheckBox vaccinated
+	 * 
+	 *                  Checks if the checkbox is selected or not
+	 * 
+	 * @returns int
+	 */
 
 	private int checkBooleanVaccinated(JCheckBox vaccinated) {
 		int ret;
@@ -444,6 +569,14 @@ public class Controller {
 		return ret;
 	}
 
+	/**
+	 * @param JCheckBox poisonous
+	 * 
+	 *                  Checks if the checkbox is selected or not
+	 * 
+	 * @returns int
+	 */
+
 	private boolean checkBooleanPoisonus(JCheckBox poisonus) {
 		boolean ret;
 		if (poisonus.isSelected()) {
@@ -453,6 +586,17 @@ public class Controller {
 		}
 		return ret;
 	}
+
+	/**
+	 * 
+	 * @param type
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * @throws Exception
+	 * 
+	 *                                Asks you if you are sure for deleting
+	 */
 
 	public void questionSure(String type, String id) throws SQLException, ClassNotFoundException, Exception {
 		String[] options = { "Yes", "No" };
@@ -487,7 +631,7 @@ public class Controller {
 				Giraffe giraffe = new Giraffe();
 				int idInt = Integer.valueOf(id);
 				giraffe.setId(idInt);
-				managerGiraffe.delete(giraffe);		
+				managerGiraffe.delete(giraffe);
 			} else if (type == "Cheetah") {
 				ManagerCheetah managerCheetah = new ManagerCheetah();
 				Cheetah cheetah = new Cheetah();
@@ -508,14 +652,14 @@ public class Controller {
 				managerSwamp.delete(swamp);
 			} else if (type == "Savannah") {
 				ManagerSavannah managerSavannah = new ManagerSavannah();
-				Savannah savannah= new Savannah();
+				Savannah savannah = new Savannah();
 				int idInt = Integer.valueOf(id);
 				savannah.setId(idInt);
 				managerSavannah.delete(savannah);
-			} 
+			}
 
 		} else if (result == 1) {
-			
+
 		}
 	}
 
@@ -525,7 +669,22 @@ public class Controller {
 //		managerBoss.deleteEmployee(id);
 //	}
 
-	
+//	public void deleteClient(String id) {
+//
+//		ManagerClient managerClient = new ManagerClient();
+//		 managerClient.delete();
+//	}
+
+	/**
+	 * 
+	 * @param type
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * @throws Exception
+	 * 
+	 * 
+	 */
 
 	public void updateOption(String type, String id) throws SQLException, ClassNotFoundException, Exception {
 		if (type.equals("Aquarium")) {
@@ -548,6 +707,18 @@ public class Controller {
 			updateBoss(id);
 		}
 	}
+
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and updates
+	 *                                the aquarium with the id passed from parameter
+	 * 
+	 */
 
 	private void updateAquarium(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.parseInt(id);
@@ -585,6 +756,18 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and updates
+	 *                                the swamp with the id passed from parameter
+	 * 
+	 */
+
 	private void updateSwamp(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.parseInt(id);
 		JTextField extension = new JTextField();
@@ -620,6 +803,18 @@ public class Controller {
 			}
 		}
 	}
+
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and updates
+	 *                                the savannah with the id passed from parameter
+	 * 
+	 */
 
 	private void updateSavannah(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.parseInt(id);
@@ -657,7 +852,6 @@ public class Controller {
 		}
 	}
 
-
 	public void updateBoss(String id) throws SQLException, Exception {
 		JTextField name = new JTextField();
 		JTextField surname = new JTextField();
@@ -678,12 +872,12 @@ public class Controller {
 					|| employeeNumCharge.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
 			} else {
-					ManagerBoss managerBoss = new ManagerBoss();
-					int ssNumberInt = Integer.parseInt(ssNumber.getText());
-					int employeeNumChargeInt = Integer.parseInt(employeeNumCharge.getText());
-					Boss bossToUpdate = new Boss(name.getText(), surname.getText(), user.getText(), password.getText(),
-							id, ssNumberInt, employeeNumChargeInt);
-					managerBoss.update(bossToUpdate);
+				ManagerBoss managerBoss = new ManagerBoss();
+				int ssNumberInt = Integer.parseInt(ssNumber.getText());
+				int employeeNumChargeInt = Integer.parseInt(employeeNumCharge.getText());
+				Boss bossToUpdate = new Boss(name.getText(), surname.getText(), user.getText(), password.getText(), id,
+						ssNumberInt, employeeNumChargeInt);
+				managerBoss.update(bossToUpdate);
 			}
 		}
 
@@ -1025,7 +1219,7 @@ public class Controller {
 			addOptionAnimal();
 		} else if (result == 2) {
 			addOptionZone();
-		} else if (result ==3) {
+		} else if (result == 3) {
 			addOptionZoo();
 		}
 	}
@@ -1048,6 +1242,18 @@ public class Controller {
 			break;
 		}
 	}
+
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and inserts
+	 *                                the boss into the database
+	 * 
+	 */
 
 	public void addBoss() {
 		JTextField name = new JTextField();
@@ -1109,6 +1315,18 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with the Zones options,
+	 *                                depending on which zone you select, a
+	 *                                different JOptionPane will appear
+	 * 
+	 */
+
 	private void addOptionZone() throws SQLException, ClassNotFoundException {
 		String[] optionsZone = { "Aquarium", "Swamp", "Savannah" };
 		int resultZone = JOptionPane.showOptionDialog(null, "What kind of Zone?", "Add", JOptionPane.YES_NO_OPTION,
@@ -1121,6 +1339,18 @@ public class Controller {
 			addSavannah();
 		}
 	}
+
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and inserts
+	 *                                the aquarium into the database
+	 * 
+	 */
 
 	private void addAquarium() throws SQLException, ClassNotFoundException {
 		JTextField extension = new JTextField();
@@ -1158,6 +1388,18 @@ public class Controller {
 
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and inserts
+	 *                                the swamp into the database
+	 * 
+	 */
+
 	private void addSwamp() throws SQLException, ClassNotFoundException {
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
@@ -1191,6 +1433,18 @@ public class Controller {
 			}
 		}
 	}
+
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 *                                Shows a JOptionPane with JTextFields, gets the
+	 *                                information from those JTextFields and inserts
+	 *                                the savannah into the database
+	 * 
+	 */
 
 	private void addSavannah() throws SQLException, ClassNotFoundException {
 		JTextField extension = new JTextField();
@@ -1495,12 +1749,12 @@ public class Controller {
 		}
 
 	}
+
 	private void addOptionZoo() {
 		JTextField name = new JTextField();
 		JTextField location = new JTextField();
 
-
-		Object[] message = {"Name: *", name, "Location: *", location };
+		Object[] message = { "Name: *", name, "Location: *", location };
 
 		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Zoo", JOptionPane.OK_CANCEL_OPTION);
 
@@ -1511,7 +1765,7 @@ public class Controller {
 				try {
 					ManagerZoo managerZoo = new ManagerZoo();
 					Zoo zooToInsert = new Zoo(name.getText(), location.getText());
-							managerZoo.insert(zooToInsert);
+					managerZoo.insert(zooToInsert);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
 				}

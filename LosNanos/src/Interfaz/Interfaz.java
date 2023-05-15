@@ -27,6 +27,8 @@ import Controller.Controller;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Interfaz {
 
@@ -117,6 +119,14 @@ public class Interfaz {
 		jpLogin.add(Title);
 
 		usrTfLogin = new JTextField();
+		usrTfLogin.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (usrTfLogin.getText().length() >= 10) {
+					e.consume();
+				}
+			}
+		});
 		usrTfLogin.setForeground(new Color(255, 255, 255));
 		usrTfLogin.setBackground(new Color(201, 190, 190));
 		usrTfLogin.setToolTipText("User");
@@ -127,6 +137,49 @@ public class Interfaz {
 		usrTfLogin.setColumns(10);
 
 		passTfLogin = new JPasswordField();
+		passTfLogin.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (passTfLogin.getText().length() >= 10) {
+					e.consume();
+				}
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					Controller controller = new Controller();
+					String user = usrTfLogin.getText();
+					String password = passTfLogin.getText();
+					int finalUser = controller.checkUser(user, password);
+
+					switch (finalUser) {
+					case 0:
+						panelLogin(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+						JOptionPane.showMessageDialog(null, "Contraseña Erronea", null, JOptionPane.ERROR_MESSAGE);
+						break;
+					case 1:
+						panelBoss(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+						personModel(model);
+						controller.getTableEmployee(model, tableBoss);
+						break;
+					case 2:
+						panelClient(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+						break;
+					case 3:
+						panelFeeder(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+						break;
+					case 4:
+						panelVet(jpLogin, jpClient, jpBoss, jpFeeder, jpVet);
+						break;
+					}
+
+					usrTfLogin.setText("");
+					passTfLogin.setText("");
+
+				}
+			}
+		});
 		passTfLogin.setForeground(new Color(255, 255, 255));
 		passTfLogin.setBackground(new Color(201, 190, 190));
 		passTfLogin.setHorizontalAlignment(SwingConstants.CENTER);
@@ -223,14 +276,14 @@ public class Interfaz {
 		tableClient.setOpaque(false);
 		tableClient.setModel(model);
 
-		JComboBox cbClientSeeAnimals = new JComboBox();
+		JComboBox<String> cbClientSeeAnimals = new JComboBox<String>();
 		cbClientSeeAnimals.addItem("Dolphin");
 		cbClientSeeAnimals.addItem("Snake");
 		cbClientSeeAnimals.addItem("Crocodile");
 		cbClientSeeAnimals.addItem("Giraffe");
 		cbClientSeeAnimals.addItem("Cheetah");
 		cbClientSeeAnimals.setForeground(Color.WHITE);
-		cbClientSeeAnimals.setBackground(new Color(66, 111, 51));
+		cbClientSeeAnimals.setBackground(new Color(225, 238, 166));
 		cbClientSeeAnimals.setBounds(45, 393, 370, 31);
 		jpClient.add(cbClientSeeAnimals);
 
@@ -245,9 +298,10 @@ public class Interfaz {
 				case "Dolphin":
 					dolphinModel(model);
 					try {
-					controller.getSelectedDolphin(model, tableClient);
+						controller.getSelectedDolphin(model, tableClient);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -257,9 +311,10 @@ public class Interfaz {
 				case "Snake":
 					snakeModel(model);
 					try {
-					controller.getSelectedSnake(model, tableClient);
+						controller.getSelectedSnake(model, tableClient);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -269,9 +324,10 @@ public class Interfaz {
 				case "Crocodile":
 					crocodileModel(model);
 					try {
-					controller.getSelectedCrocodile(model, tableClient);
+						controller.getSelectedCrocodile(model, tableClient);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -281,9 +337,10 @@ public class Interfaz {
 				case "Giraffe":
 					giraffeModel(model);
 					try {
-					controller.getSelectedGiraffe(model, tableClient);
+						controller.getSelectedGiraffe(model, tableClient);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -293,9 +350,10 @@ public class Interfaz {
 				case "Cheetah":
 					cheetahModel(model);
 					try {
-					controller.getSelectedCheetah(model, tableClient);
+						controller.getSelectedCheetah(model, tableClient);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -306,11 +364,12 @@ public class Interfaz {
 			}
 		});
 		btnClientSearch.setForeground(Color.WHITE);
-		btnClientSearch.setBackground(new Color(66, 111, 51));
+		btnClientSearch.setBackground(new Color(225, 238, 166));
 		btnClientSearch.setBounds(184, 434, 89, 23);
 		jpClient.add(btnClientSearch);
 
 		JButton btnClientBuy = new JButton("Buy Tickets");
+		btnClientBuy.setBackground(new Color(225, 238, 166));
 		btnClientBuy.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnClientBuy.setBounds(495, 393, 244, 64);
 		jpClient.add(btnClientBuy);
@@ -353,9 +412,9 @@ public class Interfaz {
 		btnBossDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-				DefaultTableModel tm = (DefaultTableModel) tableBoss.getModel();
-				String id = String.valueOf(tm.getValueAt(tableBoss.getSelectedRow(), 0));
-				Controller controller = new Controller();
+					DefaultTableModel tm = (DefaultTableModel) tableBoss.getModel();
+					String id = String.valueOf(tm.getValueAt(tableBoss.getSelectedRow(), 0));
+					Controller controller = new Controller();
 					controller.questionSure(type, id);
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null, "No se ha podido borrar", null, JOptionPane.ERROR_MESSAGE);
@@ -449,8 +508,8 @@ public class Interfaz {
 			public void actionPerformed(ActionEvent e) {
 				Controller controller = new Controller();
 				try {
-				DefaultTableModel tm = (DefaultTableModel) tableBoss.getModel();
-				String id = String.valueOf(tm.getValueAt(tableBoss.getSelectedRow(), 0));
+					DefaultTableModel tm = (DefaultTableModel) tableBoss.getModel();
+					String id = String.valueOf(tm.getValueAt(tableBoss.getSelectedRow(), 0));
 					controller.updateOption(type, id);
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(null, "No se ha podido actualizar", null, JOptionPane.ERROR_MESSAGE);
@@ -482,7 +541,7 @@ public class Interfaz {
 		btnBossSeeClient.setBounds(524, 311, 121, 37);
 		jpBoss.add(btnBossSeeClient);
 
-		JComboBox cbBossAnimals = new JComboBox();
+		JComboBox<String> cbBossAnimals = new JComboBox<String>();
 		cbBossAnimals.addItem("Dolphin");
 		cbBossAnimals.addItem("Snake");
 		cbBossAnimals.addItem("Crocodile");
@@ -499,7 +558,7 @@ public class Interfaz {
 		lblBossSeeAnimal.setBounds(181, 380, 76, 21);
 		jpBoss.add(lblBossSeeAnimal);
 
-		cbBossZones = new JComboBox();
+		cbBossZones = new JComboBox<String>();
 		cbBossZones.addItem("Aquarium");
 		cbBossZones.addItem("Swamp");
 		cbBossZones.addItem("Savannah");
@@ -525,9 +584,10 @@ public class Interfaz {
 				case "Dolphin":
 					dolphinModel(model);
 					try {
-					controller.getSelectedDolphin(model, tableBoss);
+						controller.getSelectedDolphin(model, tableBoss);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -537,9 +597,10 @@ public class Interfaz {
 				case "Snake":
 					snakeModel(model);
 					try {
-					controller.getSelectedSnake(model, tableBoss);
+						controller.getSelectedSnake(model, tableBoss);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -549,9 +610,10 @@ public class Interfaz {
 				case "Crocodile":
 					crocodileModel(model);
 					try {
-					controller.getSelectedCrocodile(model, tableBoss);
+						controller.getSelectedCrocodile(model, tableBoss);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -561,9 +623,10 @@ public class Interfaz {
 				case "Giraffe":
 					giraffeModel(model);
 					try {
-					controller.getSelectedGiraffe(model, tableBoss);
+						controller.getSelectedGiraffe(model, tableBoss);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -573,13 +636,14 @@ public class Interfaz {
 				case "Cheetah":
 					cheetahModel(model);
 					try {
-					controller.getSelectedCheetah(model, tableBoss);
-				} catch (SQLException e1) {
-					JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
-				}
+						controller.getSelectedCheetah(model, tableBoss);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Cheetah";
 					break;
 				}
@@ -604,7 +668,8 @@ public class Interfaz {
 					try {
 						controller.getTableAquarium(model, tableBoss);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
 					}
@@ -615,7 +680,8 @@ public class Interfaz {
 					try {
 						controller.getTableSwamp(model, tableBoss);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
 					}
@@ -626,7 +692,8 @@ public class Interfaz {
 					try {
 						controller.getTableSavannah(model, tableBoss);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -671,16 +738,22 @@ public class Interfaz {
 		spVet.setViewportView(tableVet);
 		tableVet.setModel(model);
 
-		JComboBox cbVetSeeAnimals = new JComboBox();
+		JComboBox<String> cbVetSeeAnimals = new JComboBox<String>();
+		cbVetSeeAnimals.setForeground(new Color(255, 255, 255));
+		cbVetSeeAnimals.setBackground(new Color(243, 225, 201));
 		cbVetSeeAnimals.addItem("Dolphin");
 		cbVetSeeAnimals.addItem("Snake");
 		cbVetSeeAnimals.addItem("Crocodile");
 		cbVetSeeAnimals.addItem("Giraffe");
 		cbVetSeeAnimals.addItem("Cheetah");
 		cbVetSeeAnimals.setBounds(688, 183, 150, 23);
+		cbVetSeeAnimals.setOpaque(false);
 		jpVet.add(cbVetSeeAnimals);
 
 		JButton btnVetSearch = new JButton("Search");
+		btnVetSearch.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnVetSearch.setForeground(new Color(255, 255, 255));
+		btnVetSearch.setBackground(new Color(243, 225, 201));
 		btnVetSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controller controller = new Controller();
@@ -691,9 +764,10 @@ public class Interfaz {
 				case "Dolphin":
 					dolphinModel(model);
 					try {
-					controller.getSelectedDolphin(model, tableVet);
+						controller.getSelectedDolphin(model, tableVet);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -703,9 +777,10 @@ public class Interfaz {
 				case "Snake":
 					snakeModel(model);
 					try {
-					controller.getSelectedSnake(model, tableVet);
+						controller.getSelectedSnake(model, tableVet);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -715,21 +790,23 @@ public class Interfaz {
 				case "Crocodile":
 					crocodileModel(model);
 					try {
-					controller.getSelectedCrocodile(model, tableVet);
-				} catch (SQLException e1) {
-					JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
-				}
+						controller.getSelectedCrocodile(model, tableVet);
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
+					}
 					type = "Crocodile";
 					break;
 				case "Giraffe":
 					giraffeModel(model);
 					try {
-					controller.getSelectedGiraffe(model, tableVet);
+						controller.getSelectedGiraffe(model, tableVet);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -739,9 +816,10 @@ public class Interfaz {
 				case "Cheetah":
 					cheetahModel(model);
 					try {
-					controller.getSelectedCheetah(model, tableVet);
+						controller.getSelectedCheetah(model, tableVet);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -756,6 +834,8 @@ public class Interfaz {
 		jpVet.add(btnVetSearch);
 
 		JButton btnVetAdd = new JButton("ADD");
+		btnVetAdd.setForeground(new Color(255, 255, 255));
+		btnVetAdd.setBackground(new Color(243, 225, 201));
 		btnVetAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controller controller = new Controller();
@@ -768,11 +848,13 @@ public class Interfaz {
 
 			}
 		});
-		btnVetAdd.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnVetAdd.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnVetAdd.setBounds(89, 412, 121, 37);
 		jpVet.add(btnVetAdd);
 
 		JButton btnVetUpdate = new JButton("UPDATE");
+		btnVetUpdate.setForeground(new Color(255, 255, 255));
+		btnVetUpdate.setBackground(new Color(243, 225, 201));
 		btnVetUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Controller controller = new Controller();
@@ -788,11 +870,13 @@ public class Interfaz {
 			}
 
 		});
-		btnVetUpdate.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnVetUpdate.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnVetUpdate.setBounds(266, 412, 121, 37);
 		jpVet.add(btnVetUpdate);
 
 		JButton btnVetDelete = new JButton("DELETE");
+		btnVetDelete.setForeground(new Color(255, 255, 255));
+		btnVetDelete.setBackground(new Color(243, 225, 201));
 		btnVetDelete.setEnabled(true);
 		btnVetDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -808,7 +892,7 @@ public class Interfaz {
 				}
 			}
 		});
-		btnVetDelete.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnVetDelete.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnVetDelete.setBounds(450, 412, 121, 37);
 		jpVet.add(btnVetDelete);
 
@@ -841,12 +925,12 @@ public class Interfaz {
 
 		tableFeeder = new JTable();
 		tableFeeder.setForeground(new Color(255, 255, 255));
-		tableFeeder.setBackground(new Color(0, 128, 0));
+		tableFeeder.setBackground(new Color(255, 255, 255));
 		spFeeder.setViewportView(tableFeeder);
 		tableFeeder.setEnabled(false);
 		tableFeeder.setModel(model);
 
-		JComboBox cbFeederSeeAnimals = new JComboBox();
+		JComboBox<String> cbFeederSeeAnimals = new JComboBox<String>();
 		cbFeederSeeAnimals.setBackground(new Color(66, 111, 51));
 		cbFeederSeeAnimals.setForeground(new Color(255, 255, 255));
 		cbFeederSeeAnimals.addItem("Dolphin");
@@ -871,9 +955,10 @@ public class Interfaz {
 				case "Dolphin":
 					dolphinModel(model);
 					try {
-					controller.getSelectedDolphin(model, tableFeeder);
+						controller.getSelectedDolphin(model, tableFeeder);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -883,9 +968,10 @@ public class Interfaz {
 				case "Snake":
 					snakeModel(model);
 					try {
-					controller.getSelectedSnake(model, tableFeeder);
+						controller.getSelectedSnake(model, tableFeeder);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -895,9 +981,10 @@ public class Interfaz {
 				case "Crocodile":
 					crocodileModel(model);
 					try {
-					controller.getSelectedCrocodile(model, tableFeeder);
+						controller.getSelectedCrocodile(model, tableFeeder);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -907,9 +994,10 @@ public class Interfaz {
 				case "Giraffe":
 					giraffeModel(model);
 					try {
-					controller.getSelectedGiraffe(model, tableFeeder);
+						controller.getSelectedGiraffe(model, tableFeeder);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -919,9 +1007,10 @@ public class Interfaz {
 				case "Cheetah":
 					cheetahModel(model);
 					try {
-					controller.getSelectedCheetah(model, tableFeeder);
+						controller.getSelectedCheetah(model, tableFeeder);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
+								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
@@ -940,7 +1029,6 @@ public class Interfaz {
 		addImage(jpFeeder, lbFeederBackground, "src/Photos/zebra.png");
 		addImage(jpClient, lbClientBackground, "src/Photos/Elephant.png");
 		addImage(jpVet, lbVetBackground, "src/Photos/Giraff.png");
-
 
 	}
 
