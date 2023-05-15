@@ -101,6 +101,10 @@ public class ManagerVet implements ManagerInterface<Vet> {
 		}
 		return ret;
 	}
+	
+	/**
+	 * 
+	 **/
 
 	@Override
 	public void insert(Vet vet) throws SQLException, Exception {

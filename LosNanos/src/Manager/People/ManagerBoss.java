@@ -170,14 +170,14 @@ public class ManagerBoss implements ManagerInterface<Boss>{
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update employee, boss set name = ?, surname = ?, user = ?, password = ?, employeeNumCharge = ? where id = ?";
+			String sql = "update employee, boss set name = ?, surname = ?, user = ?, password = ?, employeeNumCharge = ?";
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, boss.getName());
-			preparedStatement.setString(2, boss.getSurname());
-			preparedStatement.setString(3, boss.getUser());
-			preparedStatement.setString(4, boss.getPassword());
-			preparedStatement.setInt(5, boss.getEmployeeNumCharge());
-			preparedStatement.setString(6, boss.getId());
+			preparedStatement.setString(0, boss.getName());
+			preparedStatement.setString(1, boss.getSurname());
+			preparedStatement.setString(2, boss.getUser());
+			preparedStatement.setString(3, boss.getPassword());
+			preparedStatement.setInt(4, boss.getEmployeeNumCharge());
+			preparedStatement.setInt(6, boss.getSsNumber());
 
 			// La ejecutamos...
 			preparedStatement.executeUpdate();

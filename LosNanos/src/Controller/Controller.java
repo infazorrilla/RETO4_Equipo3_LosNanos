@@ -128,17 +128,27 @@ public class Controller {
 	public int checkBoss(String user, String password) {
 		int ret = 0;
 		ManagerBoss managerBoss = new ManagerBoss();
-		for (int i = 0; i < managerBoss.selectAll().size(); i++) {
-			String userBoss = managerBoss.selectAll().get(i).getUser();
-			if (userBoss.equalsIgnoreCase(user)) {
-				String passBoss = managerBoss.selectAll().get(i).getPassword();
-				boolean pas = checkPassword(password, passBoss);
-				if (pas == true) {
-					ret = 1;
-				} else {
-					ret = 0;
+		try {
+			ArrayList<Boss> bossess = managerBoss.selectAll();
+			if (null != bossess) {
+				for (int i = 0; i < bossess.size(); i++) {
+					String userBoss = managerBoss.selectAll().get(i).getUser();
+					if (userBoss.equalsIgnoreCase(user)) {
+						String passBoss = managerBoss.selectAll().get(i).getPassword();
+						boolean pas = checkPassword(password, passBoss);
+						if (pas == true) {
+							ret = 1;
+						} else {
+							ret = 0;
+						}
+					}
 				}
+			} else {
+				System.out.println("El cliente no existe");
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return ret;
 	}
@@ -148,22 +158,27 @@ public class Controller {
 		ManagerClient managerClient = new ManagerClient();
 		String userClient = null;
 		try {
-			for (int i = 0; i < managerClient.selectAll().size(); i++) {
-				try {
-					userClient = managerClient.selectAll().get(i).getUser();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				if (userClient.equalsIgnoreCase(user)) {
-					String passClient = managerClient.selectAll().get(i).getPassword();
-					boolean pas = checkPassword(password, passClient);
-					if (pas == true) {
-						ret = 2;
-					} else {
-						ret = 0;
+			ArrayList<Client> clientes = managerClient.selectAll();
+			if (null != clientes) {
+				for (int i = 0; i < clientes.size(); i++) {
+					try {
+						userClient = managerClient.selectAll().get(i).getUser();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (userClient.equalsIgnoreCase(user)) {
+						String passClient = managerClient.selectAll().get(i).getPassword();
+						boolean pas = checkPassword(password, passClient);
+						if (pas == true) {
+							ret = 2;
+						} else {
+							ret = 0;
+						}
 					}
 				}
+			} else {
+				System.out.println("El cliente no existe");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -342,7 +357,8 @@ public class Controller {
 
 	}
 
-	public void getSelectedCrocodile(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
+	public void getSelectedCrocodile(DefaultTableModel model, JTable table)
+			throws SQLException, ClassNotFoundException {
 		ArrayList<Crocodile> crocodile = null;
 		ManagerCrocodile managerCrocodile = new ManagerCrocodile();
 		try {
@@ -433,7 +449,6 @@ public class Controller {
 		}
 	}
 
-
 	private int checkBooleanVaccinated(JCheckBox vaccinated) {
 		int ret;
 		if (vaccinated.isSelected()) {
@@ -487,7 +502,7 @@ public class Controller {
 				Giraffe giraffe = new Giraffe();
 				int idInt = Integer.valueOf(id);
 				giraffe.setId(idInt);
-				managerGiraffe.delete(giraffe);		
+				managerGiraffe.delete(giraffe);
 			} else if (type == "Cheetah") {
 				ManagerCheetah managerCheetah = new ManagerCheetah();
 				Cheetah cheetah = new Cheetah();
@@ -508,14 +523,14 @@ public class Controller {
 				managerSwamp.delete(swamp);
 			} else if (type == "Savannah") {
 				ManagerSavannah managerSavannah = new ManagerSavannah();
-				Savannah savannah= new Savannah();
+				Savannah savannah = new Savannah();
 				int idInt = Integer.valueOf(id);
 				savannah.setId(idInt);
 				managerSavannah.delete(savannah);
-			} 
+			}
 
 		} else if (result == 1) {
-			
+
 		}
 	}
 
@@ -524,8 +539,6 @@ public class Controller {
 //		ManagerBoss managerBoss = new ManagerBoss();
 //		managerBoss.deleteEmployee(id);
 //	}
-
-	
 
 	public void updateOption(String type, String id) throws SQLException, ClassNotFoundException, Exception {
 		if (type.equals("Aquarium")) {
@@ -657,7 +670,6 @@ public class Controller {
 		}
 	}
 
-
 	public void updateBoss(String id) throws SQLException, Exception {
 		JTextField name = new JTextField();
 		JTextField surname = new JTextField();
@@ -678,12 +690,12 @@ public class Controller {
 					|| employeeNumCharge.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
 			} else {
-					ManagerBoss managerBoss = new ManagerBoss();
-					int ssNumberInt = Integer.parseInt(ssNumber.getText());
-					int employeeNumChargeInt = Integer.parseInt(employeeNumCharge.getText());
-					Boss bossToUpdate = new Boss(name.getText(), surname.getText(), user.getText(), password.getText(),
-							id, ssNumberInt, employeeNumChargeInt);
-					managerBoss.update(bossToUpdate);
+				ManagerBoss managerBoss = new ManagerBoss();
+				int ssNumberInt = Integer.parseInt(ssNumber.getText());
+				int employeeNumChargeInt = Integer.parseInt(employeeNumCharge.getText());
+				Boss bossToUpdate = new Boss(name.getText(), surname.getText(), user.getText(), password.getText(), id,
+						ssNumberInt, employeeNumChargeInt);
+				managerBoss.update(bossToUpdate);
 			}
 		}
 
@@ -1025,7 +1037,7 @@ public class Controller {
 			addOptionAnimal();
 		} else if (result == 2) {
 			addOptionZone();
-		} else if (result ==3) {
+		} else if (result == 3) {
 			addOptionZoo();
 		}
 	}
@@ -1495,12 +1507,12 @@ public class Controller {
 		}
 
 	}
+
 	private void addOptionZoo() {
 		JTextField name = new JTextField();
 		JTextField location = new JTextField();
 
-
-		Object[] message = {"Name: *", name, "Location: *", location };
+		Object[] message = { "Name: *", name, "Location: *", location };
 
 		int option = JOptionPane.showConfirmDialog(null, message, "Registrar Zoo", JOptionPane.OK_CANCEL_OPTION);
 
@@ -1511,7 +1523,7 @@ public class Controller {
 				try {
 					ManagerZoo managerZoo = new ManagerZoo();
 					Zoo zooToInsert = new Zoo(name.getText(), location.getText());
-							managerZoo.insert(zooToInsert);
+					managerZoo.insert(zooToInsert);
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Datos Erroneos", null, JOptionPane.ERROR_MESSAGE);
 				}
