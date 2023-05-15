@@ -1,6 +1,5 @@
 package Controller;
 
-//import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -539,15 +538,6 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 					savannahs.get(i).getTreeNumber() });
 		}
 	}
-//	private String checkBoolean(int bolean) {
-//		String ret;
-//		if (bolean >= 1) {
-//			ret = "Yes";
-//		} else {
-//			ret = "No";
-//		}
-//		return ret;
-//	}
 
 	/**
 	 * @param JCheckBox vaccinated
@@ -831,7 +821,6 @@ public void getSelectedCrocodile(DefaultTableModel model, JTable table)
 					|| treeNumber.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Faltan datos", null, JOptionPane.ERROR_MESSAGE);
 			} else {
-//				try {
 				String extensionString = extension.getText();
 				float extensionFloat = Float.valueOf(extensionString);
 				String animalsNumberString = animalsNumber.getText();
