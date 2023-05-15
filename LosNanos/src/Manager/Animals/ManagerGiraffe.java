@@ -16,7 +16,7 @@ import utils.DBUtils;
 
 public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 	@Override
-	public ArrayList<Giraffe> selectAll() {
+	public ArrayList<Giraffe> selectAll() throws SQLException, ClassNotFoundException {
 		ArrayList<Giraffe> ret = null;
 
 		// SQL que queremos lanzar
@@ -110,7 +110,7 @@ public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 	}
 
 	@Override
-	public void insert(Giraffe giraffe) {
+	public void insert(Giraffe giraffe) throws SQLException, ClassNotFoundException {
 		Connection connection = null;
 
 		Statement statement = null;
@@ -160,7 +160,7 @@ public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 	}
 
 	@Override
-	public void update(Giraffe giraffe) {
+	public void update(Giraffe giraffe) throws SQLException, ClassNotFoundException {
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String formattedDate = simpleDateFormat.format(giraffe.getBornDate());
@@ -222,7 +222,7 @@ public class ManagerGiraffe implements ManagerInterface<Giraffe> {
 	}
 
 	@Override
-	public void delete(Giraffe giraffe) throws SQLException, Exception {
+	public void delete(Giraffe giraffe) throws SQLException, ClassNotFoundException {
 		// La conexion con BBDD
 		Connection connection = null;
 
