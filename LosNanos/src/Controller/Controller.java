@@ -48,36 +48,11 @@ import Pojos.ZooTicket.Zoo;
 
 public class Controller {
 
-	public Boss searchBossId(String id) {
-		Boss ret = new Boss();
-		ManagerBoss managerBoss = new ManagerBoss();
-		ArrayList<Boss> bosses = managerBoss.selectAll();
-		for (int i = 0; i < bosses.size(); i++) {
-			if (bosses.get(i).getId() == id) {
-				ret = bosses.get(i);
-			}
-		}
-		return ret;
-	}
-
-	public Client searchClientId(String id) {
-		Client ret = new Client();
-		ManagerClient managerClient = new ManagerClient();
-		ArrayList<Client> clients;
-		try {
-			clients = managerClient.selectAll();
-			for (int i = 0; i < clients.size(); i++) {
-				if (clients.get(i).getId() == id) {
-					ret = clients.get(i);
-				}
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ret;
-	}
-
+	/**
+	 * Registers a client
+	 * 
+	 * Shows an optionPane with TextFields, instances a Client and inserts to the database
+	 */
 	public void clientRegister() {
 		JTextField name = new JTextField();
 		JTextField surname = new JTextField();
@@ -108,6 +83,15 @@ public class Controller {
 		}
 
 	}
+	
+	/**
+	 * @param String user
+	 * @param String password
+	 * 
+	 * Compares both parameters using methods
+	 * 
+	 * @return int
+	 */
 
 	public int checkUser(String user, String password) {
 		int ret = 0;
@@ -125,6 +109,15 @@ public class Controller {
 		return ret;
 	}
 
+	/**
+	 * @param String user
+	 * @param String password
+	 * 
+	 * Compares both with the bosses' on the database
+	 * 
+	 * @return int
+	 */
+	
 	public int checkBoss(String user, String password) {
 		int ret = 0;
 		ManagerBoss managerBoss = new ManagerBoss();
@@ -142,6 +135,15 @@ public class Controller {
 		}
 		return ret;
 	}
+	
+	/**
+	 * @param String user
+	 * @param String password
+	 * 
+	 * Compares both with the clients' on the database
+	 * 
+	 * @return int
+	 */
 
 	public int checkClient(String user, String password) {
 		int ret = 0;
@@ -171,6 +173,15 @@ public class Controller {
 		}
 		return ret;
 	}
+	
+	/**
+	 * @param String user
+	 * @param String password
+	 * 
+	 * Compares both with the feeders' on the database
+	 * 
+	 * @return int
+	 */
 
 	public int checkFeeder(String user, String password) {
 		int ret = 0;
@@ -189,6 +200,15 @@ public class Controller {
 		}
 		return ret;
 	}
+	
+	/**
+	 * @param String user
+	 * @param String password
+	 * 
+	 * Compares both with the vets' on the database
+	 * 
+	 * @returns int
+	 */
 
 	public int checkVet(String user, String password) {
 		int ret = 0;
@@ -207,6 +227,16 @@ public class Controller {
 		}
 		return ret;
 	}
+	
+	/**
+	 * @param String password
+	 * @param String passBoss
+	 * 
+	 * Compares each other
+	 * If they're equals returns true
+	 *  
+	 * @return boolean
+	 */
 
 	public boolean checkPassword(String password, String passBoss) {
 		boolean ret = false;
@@ -216,6 +246,13 @@ public class Controller {
 		return ret;
 
 	}
+	
+	/**
+	 * @param String user
+	 * @param String password
+	 * 
+	 * Gets user's password 
+	 */
 
 	public void takeUserPass(String user, String password) {
 		ManagerBoss managerBoss = new ManagerBoss();
@@ -227,6 +264,10 @@ public class Controller {
 		}
 
 	}
+	
+	/**
+	 * Logging as a boss you will see all employees' table
+	 */
 
 	public void getTableEmployee(DefaultTableModel model, JTable table) {
 		getTableBoss(model, table);
@@ -235,6 +276,10 @@ public class Controller {
 		getTableClient(model, table);
 
 	}
+	
+	/**
+	 * Shows all bosses
+	 */
 
 	public void getTableBoss(DefaultTableModel model, JTable table) {
 		ArrayList<Boss> boss = null;
@@ -252,6 +297,10 @@ public class Controller {
 		}
 
 	}
+	
+	/**
+	 * Shows all feeders
+	 */
 
 	public void getTableFeeder(DefaultTableModel model, JTable table) {
 		ArrayList<Feeder> feeder = null;
@@ -269,6 +318,10 @@ public class Controller {
 		}
 
 	}
+	
+	/**
+	 * Shows all vets
+	 */
 
 	public void getTableVet(DefaultTableModel model, JTable table) {
 		ArrayList<Vet> vet = null;
@@ -286,6 +339,10 @@ public class Controller {
 		}
 
 	}
+	
+	/**
+	 * Shows all clients
+	 */
 
 	public void getTableClient(DefaultTableModel model, JTable table) {
 		ArrayList<Client> client = null;
@@ -303,6 +360,10 @@ public class Controller {
 		}
 
 	}
+	
+	/**
+	 * Shows all dolphins
+	 */
 
 	public void getSelectedDolphin(DefaultTableModel model, JTable table) {
 		ArrayList<Dolphin> dolphins = null;
@@ -322,6 +383,10 @@ public class Controller {
 		}
 
 	}
+	
+	/**
+	 * Shows all snakes
+	 */
 
 	public void getSelectedSnake(DefaultTableModel model, JTable table) {
 		ArrayList<Snake> snakes = null;
@@ -342,6 +407,10 @@ public class Controller {
 
 	}
 
+	/**
+	 * Shows all crocodiles
+	 */
+	
 	public void getSelectedCrocodile(DefaultTableModel model, JTable table) {
 		ArrayList<Crocodile> crocodile = null;
 		ManagerCrocodile managerCrocodile = new ManagerCrocodile();
@@ -360,6 +429,10 @@ public class Controller {
 		}
 
 	}
+	
+	/**
+	 * Shows all giraffes
+	 */
 
 	public void getSelectedGiraffe(DefaultTableModel model, JTable table) {
 		ArrayList<Giraffe> giraffe = null;
@@ -380,6 +453,10 @@ public class Controller {
 
 	}
 
+	/**
+	 * Shows all cheetahs
+	 */
+	
 	public void getSelectedCheetah(DefaultTableModel model, JTable table) {
 		ArrayList<Cheetah> cheetah = null;
 		ManagerCheetah managerCheetah = new ManagerCheetah();
@@ -398,6 +475,10 @@ public class Controller {
 		}
 
 	}
+	
+	/**
+	 * Shows all aquariums
+	 */
 
 	public void getTableAquarium(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Aquarium> aquariums = null;
@@ -410,6 +491,10 @@ public class Controller {
 		}
 
 	}
+	
+	/**
+	 * Shows all swamps
+	 */
 
 	public void getTableSwamp(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Swamp> swamps = null;
@@ -421,6 +506,10 @@ public class Controller {
 					swamps.get(i).getWaterSurface() });
 		}
 	}
+	
+	/**
+	 * Shows all savannahs
+	 */
 
 	public void getTableSavannah(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
 		ArrayList<Savannah> savannahs = null;
@@ -433,15 +522,23 @@ public class Controller {
 		}
 	}
 
-	private String checkBoolean(int bolean) {
-		String ret;
-		if (bolean >= 1) {
-			ret = "Yes";
-		} else {
-			ret = "No";
-		}
-		return ret;
-	}
+//	private String checkBoolean(int bolean) {
+//		String ret;
+//		if (bolean >= 1) {
+//			ret = "Yes";
+//		} else {
+//			ret = "No";
+//		}
+//		return ret;
+//	}
+	
+	/**
+	 * @param JCheckBox vaccinated
+	 * 
+	 * Checks if the checkbox is selected or not
+	 * 
+	 * @returns int
+	 */
 
 	private int checkBooleanVaccinated(JCheckBox vaccinated) {
 		int ret;
@@ -452,6 +549,14 @@ public class Controller {
 		}
 		return ret;
 	}
+	
+	/**
+	 * @param JCheckBox poisonous
+	 * 
+	 * Checks if the checkbox is selected or not
+	 * 
+	 * @returns int
+	 */
 
 	private boolean checkBooleanPoisonus(JCheckBox poisonus) {
 		boolean ret;
@@ -462,12 +567,22 @@ public class Controller {
 		}
 		return ret;
 	}
+	
+	/**
+	 * 
+	 * @param type
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * @throws Exception
+	 * 
+	 * Asks you if you are sure for deleting
+	 */
 
 	public void questionSure(String type, String id) throws SQLException, ClassNotFoundException, Exception {
 		String[] options = { "Yes", "No" };
 		int result = JOptionPane.showOptionDialog(null, "Are you sure?", "Sure", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-		ManagerBoss managerBoss = new ManagerBoss();
 
 		if (result == 0) {
 			if (type == "Boss") {
@@ -538,8 +653,19 @@ public class Controller {
 	public void deleteClient(String id) {
 
 		ManagerClient managerClient = new ManagerClient();
-		// managerClient.deleteClient(id);
+		 managerClient.delete();
 	}
+	
+	/**
+	 * 
+	 * @param type
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * @throws Exception
+	 * 
+	 * 
+	 */
 
 	public void updateOption(String type, String id) throws SQLException, ClassNotFoundException, Exception {
 		if (type.equals("Aquarium")) {
@@ -562,6 +688,17 @@ public class Controller {
 			updateBoss(id);
 		}
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * Shows a JOptionPane with JTextFields, gets the information from those
+	 * JTextFields and updates the aquarium with the id passed from parameter
+	 * 
+	 */
 
 	private void updateAquarium(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.parseInt(id);
@@ -598,6 +735,17 @@ public class Controller {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * Shows a JOptionPane with JTextFields, gets the information from those
+	 * JTextFields and updates the swamp with the id passed from parameter
+	 * 
+	 */
 
 	private void updateSwamp(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.parseInt(id);
@@ -635,6 +783,17 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * Shows a JOptionPane with JTextFields, gets the information from those
+	 * JTextFields and updates the savannah with the id passed from parameter
+	 * 
+	 */
+	
 	private void updateSavannah(String id) throws SQLException, ClassNotFoundException {
 		int idInt = Integer.parseInt(id);
 		JTextField extension = new JTextField();
@@ -1062,6 +1221,17 @@ public class Controller {
 			break;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * Shows a JOptionPane with JTextFields, gets the information from those
+	 * JTextFields and inserts the boss into the database
+	 * 
+	 */
 
 	public void addBoss() {
 		JTextField name = new JTextField();
@@ -1122,6 +1292,17 @@ public class Controller {
 			break;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * Shows a JOptionPane with the Zones options, depending on
+	 * which zone you select, a different JOptionPane will appear
+	 * 
+	 */
 
 	private void addOptionZone() throws SQLException, ClassNotFoundException {
 		String[] optionsZone = { "Aquarium", "Swamp", "Savannah" };
@@ -1135,6 +1316,17 @@ public class Controller {
 			addSavannah();
 		}
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * Shows a JOptionPane with JTextFields, gets the information from those
+	 * JTextFields and inserts the aquarium into the database
+	 * 
+	 */
 
 	private void addAquarium() throws SQLException, ClassNotFoundException {
 		JTextField extension = new JTextField();
@@ -1172,6 +1364,17 @@ public class Controller {
 
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * Shows a JOptionPane with JTextFields, gets the information from those
+	 * JTextFields and inserts the swamp into the database
+	 * 
+	 */
+	
 	private void addSwamp() throws SQLException, ClassNotFoundException {
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
@@ -1205,6 +1408,17 @@ public class Controller {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * 
+	 * Shows a JOptionPane with JTextFields, gets the information from those
+	 * JTextFields and inserts the savannah into the database
+	 * 
+	 */
 
 	private void addSavannah() throws SQLException, ClassNotFoundException {
 		JTextField extension = new JTextField();
