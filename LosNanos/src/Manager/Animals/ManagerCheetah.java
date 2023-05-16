@@ -125,8 +125,8 @@ public class ManagerCheetah implements ManagerInterface<Cheetah> {
 
 			java.sql.Date sqlDate = new java.sql.Date(cheetah.getBornDate().getTime());
 
-			String sql = "insert into terrestrialmammalian (id, name, scientificName, height, weight, bornDate, vaccinated, diet, animalTipe) VALUES ('"
-					+ cheetah.getId() + "', '" + cheetah.getName() + "', '" + cheetah.getScientificName() + "', '"
+			String sql = "insert into terrestrialmammalian (name, scientificName, height, weight, bornDate, vaccinated, diet, hairColor) VALUES ('"
+					+ cheetah.getName() + "', '" + cheetah.getScientificName() + "', '"
 					+ cheetah.getHeight() + "', '" + cheetah.getWeight() + "', '" + sqlDate + "', '"
 					+ cheetah.getVaccinated() + "', '" + cheetah.getDiet() + "', '" + cheetah.getHairColor() + "')";
 
@@ -181,7 +181,7 @@ public class ManagerCheetah implements ManagerInterface<Cheetah> {
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 			// Montamos la SQL. Las ? se rellenan a continuacion
-			String sql = "update dophinComplete set name = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, animalTipe = ?, maxSpeed = ? where id = ?";
+			String sql = "update terrestrialmammalian, cheetah set name = ?, scientificName = ?, height = ?, weight = ?, height = ?, bornDate = ?, vaccianted = ?, diet = ?, hairColor = ?, maxSpeed = ? where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, cheetah.getName());
 			preparedStatement.setString(1, cheetah.getScientificName());
