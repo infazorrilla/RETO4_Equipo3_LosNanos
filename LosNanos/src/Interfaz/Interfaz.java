@@ -138,6 +138,7 @@ public class Interfaz {
 
 		passTfLogin = new JPasswordField();
 		passTfLogin.addKeyListener(new KeyAdapter() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if (passTfLogin.getText().length() >= 10) {
@@ -150,6 +151,7 @@ public class Interfaz {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					Controller controller = new Controller();
 					String user = usrTfLogin.getText();
+					@SuppressWarnings("deprecation")
 					String password = passTfLogin.getText();
 					int finalUser = controller.checkUser(user, password);
 
@@ -209,6 +211,7 @@ public class Interfaz {
 			public void actionPerformed(ActionEvent e) {
 				Controller controller = new Controller();
 				String user = usrTfLogin.getText();
+				@SuppressWarnings("deprecation")
 				String password = passTfLogin.getText();
 				int finalUser = controller.checkUser(user, password);
 
