@@ -667,10 +667,9 @@ public class Interfaz {
 					zoneModel(model);
 					try {
 						controller.getTableAquarium(model, tableBoss);
-					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
-								JOptionPane.ERROR_MESSAGE);
-					} catch (Exception e1) {
+					} catch (SQLException e2) {
+						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null, JOptionPane.ERROR_MESSAGE);
+					} catch (Exception e2) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
 					}
 					type = "Aquarium";
@@ -694,7 +693,6 @@ public class Interfaz {
 					} catch (SQLException e1) {
 						JOptionPane.showMessageDialog(null, "No hay datos que mostrar", null,
 								JOptionPane.ERROR_MESSAGE);
-						e1.printStackTrace();
 					} catch (Exception e1) {
 						JOptionPane.showMessageDialog(null, "Error inesperado", null, JOptionPane.ERROR_MESSAGE);
 					}

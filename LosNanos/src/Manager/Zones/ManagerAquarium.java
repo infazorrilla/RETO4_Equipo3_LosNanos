@@ -15,7 +15,7 @@ import utils.DBUtils;
 public class ManagerAquarium implements ManagerInterface<Aquarium>{
 
 	@Override
-	public ArrayList<Aquarium> selectAll() throws SQLException, ClassNotFoundException {
+	public ArrayList<Aquarium> selectAll() throws SQLException, Exception {
 		ArrayList <Aquarium> ret = null;
 
 		// SQL que queremos lanzar
@@ -69,8 +69,8 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 			}
 		} catch (SQLException sqle) {  
 			throw new SQLException ();
-		} catch(ClassNotFoundException e){ 
-			throw new ClassNotFoundException();
+		} catch(Exception e){ 
+			throw new Exception();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
@@ -96,7 +96,7 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 	}
 
 	@Override
-	public void insert(Aquarium aquarium) throws SQLException, ClassNotFoundException {
+	public void insert(Aquarium aquarium) throws SQLException, Exception {
 		// La conexion con BBDD
 		Connection connection = null;
 		
@@ -128,8 +128,8 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 			
 		} catch (SQLException sqle) {  
 			throw new SQLException ();
-		} catch(ClassNotFoundException e){ 
-			throw new ClassNotFoundException();
+		} catch(Exception e){ 
+			throw new Exception();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
@@ -148,7 +148,7 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 	}
 
 	@Override
-	public void update(Aquarium aquarium) throws SQLException, ClassNotFoundException {
+	public void update(Aquarium aquarium) throws SQLException, Exception {
 		// La conexion con BBDD
 		Connection connection = null;
 		
@@ -177,8 +177,8 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 			
 		} catch (SQLException sqle) {  
 			throw new SQLException ();
-		} catch(ClassNotFoundException e){ 
-			throw new ClassNotFoundException();
+		} catch(Exception e){ 
+			throw new Exception();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
@@ -197,7 +197,7 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 	}
 
 	@Override
-	public void delete(Aquarium aquarium) throws SQLException, ClassNotFoundException {
+	public void delete(Aquarium aquarium) throws SQLException, Exception {
 		// La conexion con BBDD
 		Connection connection = null;
 		
@@ -220,8 +220,8 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 			
 		} catch (SQLException sqle) {  
 			throw new SQLException ();
-		} catch(ClassNotFoundException e){ 
-			throw new ClassNotFoundException();
+		} catch(Exception e){ 
+			throw new Exception();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {

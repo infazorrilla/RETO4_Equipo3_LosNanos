@@ -15,7 +15,7 @@ import utils.DBUtils;
 public class ManagerSwamp implements ManagerInterface<Swamp> {
 
 	@Override
-	public ArrayList<Swamp> selectAll() throws SQLException, ClassNotFoundException {
+	public ArrayList<Swamp> selectAll() throws SQLException, Exception  {
 		ArrayList <Swamp> ret = null;
 		
 		// SQL que queremos lanzar
@@ -69,8 +69,8 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 			}
 		} catch (SQLException sqle) {  
 			throw new SQLException ();
-		} catch(ClassNotFoundException e){ 
-			throw new ClassNotFoundException();
+		} catch(Exception  e){ 
+			throw new Exception ();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
@@ -96,7 +96,7 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 	}
 
 	@Override
-	public void insert(Swamp swamp) throws SQLException, ClassNotFoundException {
+	public void insert(Swamp swamp) throws SQLException, Exception  {
 		// La conexion con BBDD
 		Connection connection = null;
 		
@@ -130,8 +130,8 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 			
 		} catch (SQLException sqle) {  
 			throw new SQLException ();
-		} catch(ClassNotFoundException e){ 
-			throw new ClassNotFoundException();
+		} catch(Exception  e){ 
+			throw new Exception ();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
@@ -150,7 +150,7 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 	}
 
 	@Override
-	public void update(Swamp swamp) throws SQLException, ClassNotFoundException {
+	public void update(Swamp swamp) throws SQLException, Exception  {
 		// La conexion con BBDD
 		Connection connection = null;
 		
@@ -180,8 +180,8 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 			
 		} catch (SQLException sqle) {  
 			throw new SQLException ();
-		} catch(ClassNotFoundException e){ 
-			throw new ClassNotFoundException();
+		} catch(Exception  e){ 
+			throw new Exception ();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
@@ -200,7 +200,7 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 	}
 
 	@Override
-	public void delete(Swamp swamp) throws SQLException, ClassNotFoundException {
+	public void delete(Swamp swamp) throws SQLException, Exception  {
 		// La conexion con BBDD
 		Connection connection = null;
 		
@@ -224,8 +224,8 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 			
 		} catch (SQLException sqle) {  
 			throw new SQLException ();
-		} catch(ClassNotFoundException e){ 
-			throw new ClassNotFoundException();
+		} catch(Exception  e){ 
+			throw new Exception ();
 		} finally {
 			// Cerramos al reves de como las abrimos
 			try {
