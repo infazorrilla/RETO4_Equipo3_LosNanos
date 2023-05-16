@@ -20,7 +20,6 @@ public class ManagerSavannah implements ManagerInterface<Savannah> {
 
 		String sql = "select * from savannahComplete";
 		
-		// La conexion con BBDD
 		Connection connection = null;
 		
 		Statement statement = null;

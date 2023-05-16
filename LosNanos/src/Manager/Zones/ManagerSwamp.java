@@ -30,7 +30,6 @@ public class ManagerSwamp implements ManagerInterface<Swamp> {
 			
 			connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			
-			// Vamos a lanzar la sentencia...
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
 			
