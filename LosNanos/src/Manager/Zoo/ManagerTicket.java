@@ -20,15 +20,13 @@ public class ManagerTicket implements ManagerInterface<Ticket> {
 	@Override
 	public ArrayList<Ticket> selectAll(){
 		ArrayList<Ticket> ret = null;
-		
+
 		String sql = "select * from ticket";
 		
 		Connection connection = null;
 		
 		Statement statement = null;
-
 		ResultSet resultSet = null;
-		
 		PreparedStatement preparedStatement = null;
 		
 		try {
@@ -64,21 +62,18 @@ public class ManagerTicket implements ManagerInterface<Ticket> {
 					if (resultSet != null)
 						resultSet.close();
 				} catch (Exception e) {
-
 				}
 				;
 				try {
 					if (statement != null)
 						statement.close();
 				} catch (Exception e) {
-				
 				}
 				;
 				try {
 					if (connection != null)
 						connection.close();
 				} catch (Exception e) {
-				
 				}
 				;
 			}
@@ -87,28 +82,21 @@ public class ManagerTicket implements ManagerInterface<Ticket> {
 	
 	@Override
 	public void insert(Ticket ticket) throws SQLException, Exception {
-		// La conexion con BBDD
 				Connection connection = null;
 				
-				// Vamos a lanzar una sentencia SQL contra la BBDD
 				Statement statement = null;
 				
 				try {
-					// El Driver que vamos a usar
 					Class.forName(DBUtils.DRIVER);
 					
-					// Abrimos la conexion con BBDD
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
-					// Vamos a lanzar la sentencia...
 					statement = connection.createStatement();
 					
-					// Montamos la SQL 
 					String sql = "insert into Ticket (BuyDate, IdTicket) VALUES ('" + 
 							ticket.getIdTicket() + "', '" +  
 							ticket.getIdTicket() + "')";
 					
-					// La ejecutamos...
 					statement.executeUpdate(sql);
 					
 				} catch (SQLException sqle) {  
@@ -116,44 +104,35 @@ public class ManagerTicket implements ManagerInterface<Ticket> {
 				} catch(Exception e){ 
 					System.out.println("Error generico - " + e.getMessage());
 				} finally {
-					// Cerramos al reves de como las abrimos
 					try {
 						if (statement != null) 
 							statement.close(); 
 					} catch(Exception e){ 
-						// No hace falta				
 					};
 					try {
 						if (connection != null) 
 							connection.close(); 
 					} catch(Exception e){ 
-						// No hace falta
 					};					
 				}
 	}
 	
 	@Override
 	public void update(Ticket ticket) throws SQLException, Exception {
-		// La conexion con BBDD
 				Connection connection = null;
 				
-				// Vamos a lanzar una sentencia SQL contra la BBDD
 				PreparedStatement  preparedStatement  = null;
 				
 				try {
-					// El Driver que vamos a usar
 					Class.forName(DBUtils.DRIVER);
 					
-					// Abrimos la conexion con BBDD
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
-					// Montamos la SQL. Las ? se rellenan a continuacion
 					String sql = "update Ticket set BuyDate = ? where IdTicket = ?";
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setDate (1, (java.sql.Date) ticket.getBuyDate());
 					preparedStatement.setInt (2, ticket.getIdTicket());
 					
-					// La ejecutamos...
 					preparedStatement.executeUpdate();
 					
 				} catch (SQLException sqle) {  
@@ -161,43 +140,34 @@ public class ManagerTicket implements ManagerInterface<Ticket> {
 				} catch(Exception e){ 
 					System.out.println("Error generico - " + e.getMessage());
 				} finally {
-					// Cerramos al reves de como las abrimos
 					try {
 						if (preparedStatement != null) 
 							preparedStatement.close(); 
 					} catch(Exception e){ 
-						// No hace falta				
 					};
 					try {
 						if (connection != null) 
 							connection.close(); 
 					} catch(Exception e){ 
-						// No hace falta
 					};					
 				}
 	}
 	
 	@Override
 	public void delete(Ticket ticket) throws SQLException, Exception {
-		// La conexion con BBDD
 				Connection connection = null;
 				
-				// Vamos a lanzar una sentencia SQL contra la BBDD
 				PreparedStatement  preparedStatement  = null;
 				
 				try {
-					// El Driver que vamos a usar
 					Class.forName(DBUtils.DRIVER);
 					
-					// Abrimos la conexion con BBDD
 					connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 					
-					// Montamos la SQL. Las ? se rellenan a continuacion
 					String sql = "delete from Ticket where IdTicket = ?";
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setInt (1, ticket.getIdTicket());
 					
-					// La ejecutamos...
 					preparedStatement.executeUpdate();
 					
 				} catch (SQLException sqle) {  
@@ -205,18 +175,15 @@ public class ManagerTicket implements ManagerInterface<Ticket> {
 				} catch(Exception e){ 
 					System.out.println("Error generico - " + e.getMessage());
 				} finally {
-					// Cerramos al reves de como las abrimos
 					try {
 						if (preparedStatement != null) 
 							preparedStatement.close(); 
 					} catch(Exception e){ 
-						// No hace falta				
 					};
 					try {
 						if (connection != null) 
 							connection.close(); 
 					} catch(Exception e){ 
-						// No hace falta
 					};	
 		}
 	}
