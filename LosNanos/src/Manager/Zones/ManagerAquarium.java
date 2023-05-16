@@ -39,7 +39,6 @@ public class ManagerAquarium implements ManagerInterface<Aquarium>{
 				
 				Aquarium aquarium = new Aquarium();
 				
-				// Sacamos las columnas del RS
 				int id = resultSet.getInt("id");
                 float extension = resultSet.getFloat("extension");
                 int animalsNumber = resultSet.getInt("animalsNumber");
