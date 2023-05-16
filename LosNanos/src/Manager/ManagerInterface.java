@@ -7,9 +7,9 @@ public interface ManagerInterface<T> {
 	
 	/**
 	 * 
-	 * @return ArrayList
-	 * @throws SQLException
-	 * @throws Exception
+	 * @return ArrayList of selected table
+	 * @throws SQLException If database has an error
+	 * @throws Exception If a generic error occurs
 	 * 
 	 * Selects all the items in the table and returns an ArrayList of them
 	 */
@@ -18,8 +18,8 @@ public interface ManagerInterface<T> {
 	
 	/**
 	 * 
-	 * @throws SQLException
-	 * @throws Exception
+	 * @throws SQLException If database has an error
+	 * @throws Exception If a generic error occurs
 	 * 
 	 * Inserts the item passed from parameter into the database
 	 */
@@ -29,8 +29,8 @@ public interface ManagerInterface<T> {
 	/**
 	 * 
 	 * @return
-	 * @throws SQLException
-	 * @throws Exception
+	 * @throws SQLException If database has an error
+	 * @throws Exception If a generic error occurs
 	 * 
 	 * Updates the item passed from parameter into the database
 	 */
@@ -39,8 +39,8 @@ public interface ManagerInterface<T> {
 	
 	/**
 	 * 
-	 * @throws SQLException
-	 * @throws Exception
+	 * @throws SQLException If database has an error
+	 * @throws Exception If a generic error occurs
 	 * 
 	 * Deletes the item passed from parameter from the database
 	 */
