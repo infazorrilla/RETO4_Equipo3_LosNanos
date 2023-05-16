@@ -392,7 +392,7 @@ public class Interfaz {
 
 			}
 		});
-		btnBossLogout.setBounds(749, 11, 89, 23);
+		btnBossLogout.setBounds(0, 0, 77, 21);
 		jpBoss.add(btnBossLogout);
 
 		JScrollPane spBoss = new JScrollPane();
