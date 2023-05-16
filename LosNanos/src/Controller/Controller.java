@@ -559,10 +559,16 @@ public class Controller {
 	 * 
 	 */
 
-	public void getTableAquarium(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
+	public void getTableAquarium(DefaultTableModel model, JTable table) throws SQLException, Exception {
 		ArrayList<Aquarium> aquariums = null;
 		ManagerAquarium managerAquarium = new ManagerAquarium();
-		aquariums = managerAquarium.selectAll();
+		try {
+			aquariums = managerAquarium.selectAll();
+		} catch (SQLException e) {
+			throw new SQLException ();
+		} catch(Exception e){ 
+			throw new Exception();
+		}
 		for (int i = 0; i < aquariums.size(); i++) {
 			model.addRow(new Object[] { aquariums.get(i).getId(), aquariums.get(i).getExtension(),
 					aquariums.get(i).getAnimalsNumber(), aquariums.get(i).getSpeciesNumber(),
@@ -583,10 +589,16 @@ public class Controller {
 	 * 
 	 */
 
-	public void getTableSwamp(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
+	public void getTableSwamp(DefaultTableModel model, JTable table) throws SQLException, Exception {
 		ArrayList<Swamp> swamps = null;
 		ManagerSwamp managerSwamp = new ManagerSwamp();
-		swamps = managerSwamp.selectAll();
+		try {
+			swamps = managerSwamp.selectAll();
+		} catch (SQLException e) {
+			throw new SQLException ();
+		} catch(Exception e){ 
+			throw new Exception();
+		}
 		for (int i = 0; i < swamps.size(); i++) {
 			model.addRow(new Object[] { swamps.get(i).getId(), swamps.get(i).getExtension(),
 					swamps.get(i).getAnimalsNumber(), swamps.get(i).getSpeciesNumber(),
@@ -605,23 +617,20 @@ public class Controller {
 	 * 
 	 */
 
-	public void getTableSavannah(DefaultTableModel model, JTable table) throws SQLException, ClassNotFoundException {
+	public void getTableSavannah(DefaultTableModel model, JTable table) throws SQLException, Exception{
 		ArrayList<Savannah> savannahs = null;
 		ManagerSavannah managerSavannah = new ManagerSavannah();
 		try {
 			savannahs = managerSavannah.selectAll();
-			for (int i = 0; i < savannahs.size(); i++) {
-				model.addRow(new Object[] { savannahs.get(i).getId(), savannahs.get(i).getExtension(),
-						savannahs.get(i).getAnimalsNumber(), savannahs.get(i).getSpeciesNumber(),
-						savannahs.get(i).getTreeNumber() });
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SQLException ();
+		} catch(Exception e){ 
+			throw new Exception();
 		}
-		
+		for (int i = 0; i < savannahs.size(); i++) {
+			model.addRow(new Object[] { savannahs.get(i).getId(), savannahs.get(i).getExtension(),
+					savannahs.get(i).getAnimalsNumber(), savannahs.get(i).getSpeciesNumber(),
+					savannahs.get(i).getTreeNumber()});
 		}
 	}
 
@@ -785,7 +794,7 @@ public class Controller {
 	 * 
 	 */
 
-	private void updateAquarium(String id) throws SQLException, ClassNotFoundException {
+	private void updateAquarium(String id) throws SQLException, Exception {
 		int idInt = Integer.parseInt(id);
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
@@ -816,7 +825,13 @@ public class Controller {
 						waterTempInt);
 
 				ManagerAquarium managerAquarium = new ManagerAquarium();
-				managerAquarium.update(aquariumToUpdate);
+				try {
+					managerAquarium.update(aquariumToUpdate);
+				} catch (SQLException e) {
+					throw new SQLException ();
+				} catch(Exception e){ 
+					throw new Exception();
+				}
 			}
 		}
 	}
@@ -833,7 +848,7 @@ public class Controller {
 	 * 
 	 */
 
-	private void updateSwamp(String id) throws SQLException, ClassNotFoundException {
+	private void updateSwamp(String id) throws SQLException, Exception {
 		int idInt = Integer.parseInt(id);
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
@@ -864,7 +879,13 @@ public class Controller {
 						waterSurfaceInt);
 
 				ManagerSwamp managerSwamp = new ManagerSwamp();
-				managerSwamp.update(swampToUpdate);
+				try {
+					managerSwamp.update(swampToUpdate);
+				} catch (SQLException e) {
+					throw new SQLException ();
+				} catch(Exception e){ 
+					throw new Exception();
+				}
 			}
 		}
 	}
@@ -881,7 +902,7 @@ public class Controller {
 	 * 
 	 */
 
-	private void updateSavannah(String id) throws SQLException, ClassNotFoundException {
+	private void updateSavannah(String id) throws SQLException, Exception {
 		int idInt = Integer.parseInt(id);
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
@@ -911,7 +932,13 @@ public class Controller {
 						treeNumberInt);
 
 				ManagerSavannah managerSavannah = new ManagerSavannah();
-				managerSavannah.update(savannahToUpdate);
+				try {
+					managerSavannah.update(savannahToUpdate);
+				} catch (SQLException e) {
+					throw new SQLException ();
+				} catch(Exception e){ 
+					throw new Exception();
+				}
 			}
 		}
 	}
@@ -1506,7 +1533,7 @@ public class Controller {
 	 * 
 	 */
 
-	private void addOptionZone() throws SQLException, ClassNotFoundException {
+	private void addOptionZone() throws SQLException, Exception {
 		String[] optionsZone = { "Aquarium", "Swamp", "Savannah" };
 		int resultZone = JOptionPane.showOptionDialog(null, "What kind of Zone?", "Add", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, optionsZone, optionsZone[0]);
@@ -1531,7 +1558,7 @@ public class Controller {
 	 * 
 	 */
 
-	private void addAquarium() throws SQLException, ClassNotFoundException {
+	private void addAquarium() throws SQLException, Exception {
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
 		JTextField speciesNumber = new JTextField();
@@ -1561,7 +1588,13 @@ public class Controller {
 						waterTempInt);
 
 				ManagerAquarium managerAquarium = new ManagerAquarium();
-				managerAquarium.insert(aquariumToInsert);
+				try {
+					managerAquarium.insert(aquariumToInsert);
+				} catch (SQLException e) {
+					throw new SQLException ();
+				} catch(Exception e){ 
+					throw new Exception();
+				}
 			}
 		}
 
@@ -1579,7 +1612,7 @@ public class Controller {
 	 * 
 	 */
 
-	private void addSwamp() throws SQLException, ClassNotFoundException {
+	private void addSwamp() throws SQLException, Exception {
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
 		JTextField speciesNumber = new JTextField();
@@ -1608,7 +1641,13 @@ public class Controller {
 				Swamp swampToInsert = new Swamp(extensionFloat, animalsNumberInt, speciesNumberInt, waterSurfaceInt);
 
 				ManagerSwamp managerSwamp = new ManagerSwamp();
-				managerSwamp.insert(swampToInsert);
+				try {
+					managerSwamp.insert(swampToInsert);
+				} catch (SQLException e) {
+					throw new SQLException ();
+				} catch(Exception e){ 
+					throw new Exception();
+				}
 			}
 		}
 	}
@@ -1625,7 +1664,7 @@ public class Controller {
 	 * 
 	 */
 
-	private void addSavannah() throws SQLException, ClassNotFoundException {
+	private void addSavannah() throws SQLException, Exception {
 		JTextField extension = new JTextField();
 		JTextField animalsNumber = new JTextField();
 		JTextField speciesNumber = new JTextField();
@@ -1655,7 +1694,13 @@ public class Controller {
 						treeNumberInt);
 
 				ManagerSavannah managerSavannah = new ManagerSavannah();
-				managerSavannah.insert(savannahToInsert);
+				try {
+					managerSavannah.insert(savannahToInsert);
+				} catch (SQLException e) {
+					throw new SQLException ();
+				} catch(Exception e){ 
+					throw new Exception();
+				}
 			}
 		}
 
