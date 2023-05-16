@@ -131,7 +131,7 @@ public class ManagerCheetah implements ManagerInterface<Cheetah> {
 					+ cheetah.getVaccinated() + "', '" + cheetah.getDiet() + "', '" + cheetah.getHairColor() + "')";
 
 			String sql2 = "insert into cheetah (id_cheetah, maxSpeed) SELECT MAX(id), " + 
-					cheetah.getMaxSpeed() + "FROM terrestrialmammalian";
+					cheetah.getMaxSpeed() + " FROM terrestrialmammalian";
 			
 			// La ejecutamos...
 			statement.executeUpdate(sql);
