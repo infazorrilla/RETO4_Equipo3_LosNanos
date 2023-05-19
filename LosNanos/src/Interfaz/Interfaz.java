@@ -380,6 +380,11 @@ public class Interfaz {
 		JLabel lbClientBackground = new JLabel("");
 		lbClientBackground.setBounds(0, 0, 848, 501);
 		jpClient.add(lbClientBackground);
+		
+		
+		
+		
+		
 
 		JButton btnBossLogout = new JButton("LogOut");
 		btnBossLogout.setForeground(new Color(255, 255, 255));
